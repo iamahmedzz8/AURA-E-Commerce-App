@@ -1,15 +1,15 @@
-# Flutter / Dart generated files
 .dart_tool/
 .packages
 .pub/
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
-
-# IDE
 .idea/
 .vscode/
-
-# Secrets and local environment
+*.iml
+.DS_Store
 .env
 .env.*
+android/local.properties
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
