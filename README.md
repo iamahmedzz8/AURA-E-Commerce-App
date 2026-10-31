@@ -20,7 +20,7 @@ The design process uses AI-assisted design tools to accelerate prototyping and i
 - **Design direction:** Modern, clean, and user-friendly
 - **Design goals:** Consistent components, intuitive navigation, responsive layouts, and light/dark mode support
 
-**Figma Design:** [https://www.figma.com/design/hkS25fBOhwvKQ1RkBqG6xr/E-Commerce-Mobile-App?node-id=0-1&t=OW9iVO6dUBzSUFeT-1]
+**Figma Design:** [https://www.figma.com/design/SG7POXWtQ8GXq9TTfMqsw5/E-Commerce-Mobile-App?node-id=0-1&t=hRzVYI4y1d0JeMXv-1]
 
 ## 🚀 Planned Features
 
