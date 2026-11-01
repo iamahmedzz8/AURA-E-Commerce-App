@@ -4,6 +4,7 @@ class AppStrings {
   static const String brandTitleInline = 'AURA MAISON';
   static const String collectionsTitle = 'Collections';
   static const String searchTitle = 'Search';
+  static const String workshopCurationTitle = 'Workshop Curation';
   static const String headerDividerPipe = '|';
 
   // Search Suite
@@ -65,6 +66,99 @@ class AppStrings {
   static const String confidentialSearchSubtitle =
       'Ask your private curator about embargoed pieces';
   static const String contactButton = 'CONTACT';
+
+  // Search Results
+  static const String searchResultsCountBanner =
+      '14 PIECES FOUND • ARCHIVES & SALONS';
+  static const String auraCertified = 'AURA CERTIFIED';
+  static const String refinementSortPriceHighToLow = 'PRICE: HIGH TO LOW';
+  static const String refinementActiveFilters = 'FILTERS (3 ACTIVE)';
+  static const String refinementActiveCount = '3';
+  static const String refinementImmediate = 'IMMEDIATE';
+  static const String refinementPlatinumWhiteGold = 'PLATINUM & WHITE GOLD';
+
+  // Search Results Haute Horlogerie Grid
+  static const String searchProduct1Badge = 'VENDÔME';
+  static const String searchProduct1Specs = '41 MM • ROSE GOLD';
+  static const String searchProduct1Ref = 'REF. TS-880-OR';
+  static const String searchProduct1Title = 'Royal Tourbillon\nSquelette';
+  static const String searchProduct1Price = '142 000 €';
+  static const String searchProduct1Action = 'ACQUIRE';
+
+  static const String searchProduct2Badge = 'ON REQUEST';
+  static const String searchProduct2Specs = '42 MM • G5 TITANIUM';
+  static const String searchProduct2Ref = 'REF. CI-914-AU';
+  static const String searchProduct2Title = 'Impérial\nChronograph';
+  static const String searchProduct2Price = '96 500 €';
+  static const String searchProduct2Action = 'VIEW';
+
+  static const String searchProduct3Badge = 'ONE OF A KIND';
+  static const String searchProduct3Specs = '39.5 MM • 950 PLATINUM';
+  static const String searchProduct3Ref = 'REF. PS-8801';
+  static const String searchProduct3Title = 'Calibre 8801\nPlatinum';
+  static const String searchProduct3Price = '188 000 €';
+  static const String searchProduct3Action = 'ACQUIRE';
+
+  static const String searchProduct4Badge = 'RESERVED FOR SALON';
+  static const String searchProduct4Specs = '43 MM • METEORITE';
+  static const String searchProduct4Ref = 'REF. TVC-04';
+  static const String searchProduct4Title = 'Céleste\nFlying Tourbillon';
+  static const String searchProduct4Price = '230 000 €';
+  static const String searchProduct4Action = 'PRIVATE RANK';
+
+  // Salon Concierge Floating Vitrine Bar
+  static const String bespokeWorkshopEyebrow = 'BESPOKE WORKSHOP';
+  static const String bespokeWorkshopSeek = 'Can’t find what you seek?';
+  static const String commissionAction = 'COMMISSION';
+
+  // Search — No Results Screen
+  static const String noResultsTitle = 'SALON ARCHIVES';
+  static const String noResultsSearchQuery = 'Titanium Smartwatch';
+  static const String archiveAndHeritage = 'CONTEMPORARY ARCHIVE & HERITAGE';
+  static const String zeroResults = '0 RESULTS';
+  static const String suggestedCollectionsEyebrow = 'SUGGESTED COLLECTIONS';
+  static const String suggestedChip1 = 'Swiss Fine Watchmaking';
+  static const String suggestedChip2 = 'Rare Complications';
+  static const String suggestedChip3 = 'Travel Leather Goods';
+  static const String suggestedChip4 = 'GIA-Certified Diamonds';
+
+  // Empty State Centerpiece
+  static const String recordNotFoundEyebrow = 'RECORD NOT FOUND';
+  static const String noMatchingMasterpieceHeading =
+      'No Matching\nMasterpiece';
+  static const String noMatchingMasterpieceDesc =
+      'The AURA House lists no piece under this name. Our collections focus exclusively on fine mechanical watchmaking and handcrafted high jewelry.';
+  static const String clearSearchAction = 'CLEAR SEARCH';
+
+  // Editorial Highlights Vault Showcase
+  static const String gallerySelectionEyebrow = 'GALLERY SELECTION';
+  static const String vaultPiecesTitle = 'Pieces Available in the Vault';
+  static const String viewAllAction = 'VIEW ALL';
+  static const String acquisitionValueLabel = 'ACQUISITION VALUE';
+  static const String vaultPiece1Badge = 'ONE OF A KIND • NO. 01/01';
+  static const String vaultPiece1Tag = 'GENÈVE MANUFACTURE';
+  static const String vaultPiece1Ref = 'Ref. 5370-G';
+  static const String vaultPiece1Title = 'Royal Skeleton Tourbillon';
+  static const String vaultPiece1Desc =
+      '38-jewel automatic calibre, 18K white gold case,…';
+  static const String vaultPiece1Price = '142 000 €';
+  static const String vaultPiece2Badge = 'COSC CHRONOMETER';
+  static const String vaultPiece2Tag = 'HIGH COMPLICATION';
+  static const String vaultPiece2Ref = 'Ref. IMP-09';
+  static const String vaultPiece2Title = 'Impérial Chronograph';
+  static const String vaultPiece2Desc =
+      'Column-wheel monopusher, 950 platinum and…';
+  static const String vaultPiece2Price = '96 500 €';
+  static const String acquireAction = 'ACQUIRE';
+
+  // Concierge Consultation Bespoke Banner
+  static const String bespokePrivateService =
+      'PRIVATE SERVICE • PLACE VENDÔME';
+  static const String needBespokeSearchTitle = 'Need a bespoke search?';
+  static const String bespokeSearchDesc =
+      'Ask your dedicated curator to source a historic piece or start a special order with our partner workshops.';
+  static const String curatorOnline = 'CURATOR ONLINE';
+  static const String contactTheSalon = 'CONTACT THE SALON';
 
   // Section: Curated Departments
   static const String curatedDepartments = 'CURATED DEPARTMENTS';

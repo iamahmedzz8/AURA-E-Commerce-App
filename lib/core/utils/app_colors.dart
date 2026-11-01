@@ -22,6 +22,7 @@ class AppColors {
   static const Color textMutedBeige = Color(0xFFD1C5B4);
   static const Color chipBackground = Color(0xFF272A30);
   static const Color chipBorder = Color(0x33C5A059);
+  static const Color activeFilterChipBackground = Color(0x33C5A059);
 
   static const Color statusGreen = Color(0xFF10B981);
   static const Color specsStripBackground = Color(0xFF1D2025);
@@ -31,4 +32,10 @@ class AppColors {
 
   static const Color conciergeBannerBackground = Color(0x99272A30);
   static const Color conciergeIconBackground = Color(0x1AC5A059);
+
+  // Search Results Product Grid Colors
+  static const Color specsCream = Color(0xFFF3E7C4);
+  static const Color statusReservedBg = Color(0xFF32353B);
+  static const Color badgeDarkBg = Color(0xB8101319);
+  static const Color floatingVitrineBackground = Color(0xE6272A30);
 }
