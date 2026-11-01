@@ -1,6 +1,7 @@
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_header.dart';
+import 'package:aura_maison_e_commerce/features/search/presentation/screens/search_results_screen.dart';
 import 'package:aura_maison_e_commerce/features/search/presentation/widgets/curator_suggestions_section.dart';
 import 'package:aura_maison_e_commerce/features/search/presentation/widgets/recent_searches_widget.dart';
 import 'package:aura_maison_e_commerce/features/search/presentation/widgets/search_suite_widget.dart';
@@ -20,8 +21,17 @@ class SearchScreen extends StatelessWidget {
             const SliverToBoxAdapter(
               child: AppHeader(title: AppStrings.searchTitle),
             ),
-            const SliverToBoxAdapter(
-              child: SearchSuiteWidget(),
+            SliverToBoxAdapter(
+              child: SearchSuiteWidget(
+                onSubmitted: (_) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const SearchResultsScreen(),
+                    ),
+                  );
+                },
+              ),
             ),
             const SliverToBoxAdapter(
               child: RecentSearchesWidget(),
