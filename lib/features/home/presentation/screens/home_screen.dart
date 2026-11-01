@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: navigation(),
+      // bottomNavigationBar: navigation(),
     );
   }
 
@@ -407,50 +407,50 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget navigation() {
-    final items = [
-      (Icons.home_outlined, 'HOME'),
-      (Icons.diamond_outlined, 'COLLECTIONS'),
-      (Icons.shopping_bag_outlined, 'BAG'),
-      (Icons.favorite_border, 'FAVORITES'),
-      (Icons.person_outline, 'PROFILE'),
-    ];
+  // Widget navigation() {
+  //   final items = [
+  //     (Icons.home_outlined, 'HOME'),
+  //     (Icons.diamond_outlined, 'COLLECTIONS'),
+  //     (Icons.shopping_bag_outlined, 'BAG'),
+  //     (Icons.favorite_border, 'FAVORITES'),
+  //     (Icons.person_outline, 'PROFILE'),
+  //   ];
 
-    return Container(
-      color: surface,
-      child: SafeArea(
-        child: Row(
-          children: List.generate(
-            items.length,
-            (index) => Expanded(
-              child: InkWell(
-                onTap: () => setState(() => selectedTab = index),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        items[index].$1,
-                        color: selectedTab == index ? gold : muted,
-                        size: 20,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        items[index].$2,
-                        style: TextStyle(
-                          color: selectedTab == index ? gold : muted,
-                          fontSize: 8,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  //   return Container(
+  //     color: surface,
+  //     child: SafeArea(
+  //       child: Row(
+  //         children: List.generate(
+  //           items.length,
+  //           (index) => Expanded(
+  //             child: InkWell(
+  //               onTap: () => setState(() => selectedTab = index),
+  //               child: Padding(
+  //                 padding: const EdgeInsets.symmetric(vertical: 10),
+  //                 child: Column(
+  //                   mainAxisSize: MainAxisSize.min,
+  //                   children: [
+  //                     Icon(
+  //                       items[index].$1,
+  //                       color: selectedTab == index ? gold : muted,
+  //                       size: 20,
+  //                     ),
+  //                     const SizedBox(height: 4),
+  //                     Text(
+  //                       items[index].$2,
+  //                       style: TextStyle(
+  //                         color: selectedTab == index ? gold : muted,
+  //                         fontSize: 8,
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

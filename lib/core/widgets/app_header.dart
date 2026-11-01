@@ -1,10 +1,16 @@
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
+import 'package:aura_maison_e_commerce/features/search/presentation/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppHeader extends StatelessWidget {
-  const AppHeader({super.key});
+  final String title;
+
+  const AppHeader({
+    super.key,
+    this.title = AppStrings.collectionsTitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +35,7 @@ class AppHeader extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               Text(
-                AppStrings.collectionsTitle,
+                title,
                 style: AppStyles.headerScreenTitle.copyWith(
                   color: AppColors.textPrimary,
                 ),
@@ -45,7 +51,16 @@ class AppHeader extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
                 icon: const Icon(Icons.search, color: AppColors.iconLight),
-                onPressed: () {},
+                onPressed: () {
+                  if (title != AppStrings.searchTitle) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SearchScreen(),
+                      ),
+                    );
+                  }
+                },
               ),
               // Notifications Button with gold badge
               Stack(
