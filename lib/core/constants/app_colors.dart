@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+
+/// Shared color constants for the AURA MAISON app.
+/// Used by both lib/splash/ and lib/auth/ modules.
+class AppColors {
+  static const orange = Color(0xFFFF7417);
+  static const orangeDark = Color(0xFFE96A16);
+  static const ink = Color(0xFF17191D);
+  static const muted = Color(0xFF858B96);
+  static const field = Color(0xFFF0F3F8);
+  static const mint = Color(0xFF79D8BD);
+  static const border = Color(0xFFE9EDF2);
+  static const white = Colors.white;
+  static const error = Color(0xFFD93025);
+
+  // AURA MAISON Haute Horlogerie & Vault Palette
+  static const obsidian = Color(0xFF101319);
+  static const obsidianDark = Color(0xFF0B0E13);
+  static const obsidianCard = Color(0xFF191C21);
+  static const obsidianElevated = Color(0xFF22262E);
+  static const obsidianBorder = Color(0xFF2A2E38);
+  static const gold = Color(0xFFC5A059);
+  static const goldLight = Color(0xFFF2E6C3);
+  static const goldDark = Color(0xFFA6823C);
+  static const ivory = Color(0xFFFAF9F5);
+  static const ivoryMuted = Color(0xFFD1C5B4);
+  static const luxuryMuted = Color(0xFF8A8F98);
+  static const emerald = Color(0xFF10B981);
+}
