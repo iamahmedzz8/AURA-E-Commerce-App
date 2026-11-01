@@ -62,12 +62,12 @@ class PasswordCriteriaGauge extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: isMet
-            ? AppColors.emerald.withOpacity(0.12)
+            ? AppColors.emerald.withValues(alpha: 0.12)
             : AppColors.obsidianDark,
         borderRadius: BorderRadius.circular(4),
         border: Border.all(
           color: isMet
-              ? AppColors.emerald.withOpacity(0.5)
+              ? AppColors.emerald.withValues(alpha: 0.5)
               : AppColors.obsidianBorder,
           width: 0.8,
         ),

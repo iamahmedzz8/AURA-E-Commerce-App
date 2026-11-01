@@ -25,7 +25,7 @@ class SalonCentralSanctuary extends StatelessWidget {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.gold.withOpacity(0.18),
+                      color: AppColors.gold.withValues(alpha: 0.18),
                       blurRadius: 40,
                       spreadRadius: 10,
                     ),
@@ -38,10 +38,10 @@ class SalonCentralSanctuary extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: AppColors.obsidianDark,
-                  border: Border.all(color: AppColors.gold.withOpacity(0.8), width: 1.5),
+                  border: Border.all(color: AppColors.gold.withValues(alpha: 0.8), width: 1.5),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.6),
+                      color: Colors.black.withValues(alpha: 0.6),
                       blurRadius: 18,
                     ),
                   ],
@@ -52,7 +52,7 @@ class SalonCentralSanctuary extends StatelessWidget {
                     height: 90,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.gold.withOpacity(0.3), width: 1),
+                      border: Border.all(color: AppColors.gold.withValues(alpha: 0.3), width: 1),
                     ),
                     child: const Center(
                       child: Text(
@@ -76,7 +76,7 @@ class SalonCentralSanctuary extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.obsidianCard,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.gold.withOpacity(0.4), width: 0.8),
+                    border: Border.all(color: AppColors.gold.withValues(alpha: 0.4), width: 0.8),
                   ),
                   child: const Row(
                     mainAxisSize: MainAxisSize.min,
@@ -124,7 +124,7 @@ class SalonCentralSanctuary extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(width: 18, height: 1, color: AppColors.gold.withOpacity(0.4)),
+              Container(width: 18, height: 1, color: AppColors.gold.withValues(alpha: 0.4)),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
@@ -136,7 +136,7 @@ class SalonCentralSanctuary extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(width: 18, height: 1, color: AppColors.gold.withOpacity(0.4)),
+              Container(width: 18, height: 1, color: AppColors.gold.withValues(alpha: 0.4)),
             ],
           ),
           const SizedBox(height: 10),

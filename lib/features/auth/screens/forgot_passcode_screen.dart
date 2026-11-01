@@ -136,7 +136,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
         border: Border.all(color: AppColors.obsidianBorder, width: 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.35),
+            color: Colors.black.withValues(alpha: 0.35),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -163,14 +163,14 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
                   color: AppColors.obsidianDark,
                   borderRadius: BorderRadius.circular(4),
                   border: Border.all(
-                    color: AppColors.gold.withOpacity(0.3),
+                    color: AppColors.gold.withValues(alpha: 0.3),
                     width: 0.8,
                   ),
                 ),
                 child: Text(
                   'Vault 4096-bit',
                   style: TextStyle(
-                    color: AppColors.gold.withOpacity(0.8),
+                    color: AppColors.gold.withValues(alpha: 0.8),
                     fontSize: 9.5,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.5,
@@ -191,7 +191,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
             decoration: InputDecoration(
               hintText: 'patron@vendome-sanctuary.ch',
               hintStyle: TextStyle(
-                color: AppColors.luxuryMuted.withOpacity(0.6),
+                color: AppColors.luxuryMuted.withValues(alpha: 0.6),
                 fontSize: 13.5,
               ),
               filled: true,
