@@ -25,7 +25,7 @@ class AuraText extends StatelessWidget {
         style: TextStyle(
           fontSize: size,
           fontWeight: weight,
-          color: color,
+          color: AppColors.goldDark,
           height: 1.35,
         ),
       );

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -291,7 +290,7 @@ class _OtpScreenState extends State<OtpScreen> {
         borderRadius: BorderRadius.circular(9),
         border: Border.all(color: AppColors.obsidianBorder, width: 0.8),
       ),
-      child:  Column(
+      child: const Column(
         children: [
           AuthInfoRow(
             label: 'ASSIGNED WORKSPACE',

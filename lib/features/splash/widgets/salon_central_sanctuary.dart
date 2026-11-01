@@ -162,7 +162,7 @@ class SalonCentralSanctuary extends StatelessWidget {
                 child: SalonVitrineCard(
                   code: 'CALIBRE 8801',
                   title: 'Vendôme Celestial',
-                  image: 'assets/images/product.png',
+                  image: 'assets/images/vendome.png',
                 ),
               ),
               SizedBox(width: 12),
@@ -170,7 +170,7 @@ class SalonCentralSanctuary extends StatelessWidget {
                 child: SalonVitrineCard(
                   code: 'MASTER CRAFTS',
                   title: 'Workshop Crafts',
-                  image: 'assets/images/craft.png',
+                  image: 'assets/images/WorkShop.png',
                 ),
               ),
             ],
