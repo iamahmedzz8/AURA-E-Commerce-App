@@ -19,42 +19,39 @@ class _HomeScreenState extends State<HomeScreen> {
       'category': 'FINE WATCHMAKING',
       'price': '\$124,500',
       'image':
-      'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=700',
+          'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=700',
     },
     {
       'name': 'Étoile Solitaire',
       'category': 'HIGH JEWELRY',
       'price': '\$88,000',
       'image':
-      'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700',
+          'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700',
     },
     {
       'name': 'Vendôme Matte Black',
       'category': 'LEATHER GOODS',
       'price': '\$16,800',
       'image':
-      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700',
+          'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700',
     },
     {
       'name': 'Éclipse Aviator',
       'category': 'EYEWEAR',
       'price': '\$3,400',
       'image':
-      'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=700',
+          'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=700',
     },
   ];
 
   Color get background =>
       isDark ? const Color(0xFF080B10) : const Color(0xFFFBF9F5);
 
-  Color get surface =>
-      isDark ? const Color(0xFF191C21) : Colors.white;
+  Color get surface => isDark ? const Color(0xFF191C21) : Colors.white;
 
-  Color get foreground =>
-      isDark ? Colors.white : const Color(0xFF171717);
+  Color get foreground => isDark ? Colors.white : const Color(0xFF171717);
 
-  Color get muted =>
-      isDark ? const Color(0xFF8A8F98) : const Color(0xFF777777);
+  Color get muted => isDark ? const Color(0xFF8A8F98) : const Color(0xFF777777);
 
   @override
   Widget build(BuildContext context) {
@@ -67,16 +64,17 @@ class _HomeScreenState extends State<HomeScreen> {
             SliverToBoxAdapter(child: hero()),
             SliverToBoxAdapter(child: collection()),
             SliverToBoxAdapter(child: disciplines()),
-            SliverToBoxAdapter(child: section('Featured Masterpieces', 'VIEW ALL')),
+            SliverToBoxAdapter(
+              child: section('Featured Masterpieces', 'VIEW ALL'),
+            ),
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate(
-                      (context, index) => productCard(index),
+                  (context, index) => productCard(index),
                   childCount: products.length,
                 ),
-                gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 14,
@@ -101,11 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           const Text(
             'AURA MAISON',
-            style: TextStyle(
-              color: gold,
-              fontSize: 12,
-              letterSpacing: 2,
-            ),
+            style: TextStyle(color: gold, fontSize: 12, letterSpacing: 2),
           ),
           const Spacer(),
           Icon(Icons.search, color: foreground),
@@ -144,10 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Colors.transparent,
-              Colors.black.withValues(alpha: .9),
-            ],
+            colors: [Colors.transparent, Colors.black.withValues(alpha: .9)],
           ),
         ),
         child: Column(
@@ -257,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             itemCount: items.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 10),
+            separatorBuilder: (_, _) => const SizedBox(width: 10),
             itemBuilder: (context, index) => Container(
               width: 80,
               color: surface,
@@ -296,11 +287,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Text(
             action,
-            style: const TextStyle(
-              color: gold,
-              fontSize: 9,
-              letterSpacing: 1,
-            ),
+            style: const TextStyle(color: gold, fontSize: 9, letterSpacing: 1),
           ),
           const SizedBox(width: 5),
           const Icon(Icons.arrow_forward_ios, color: gold, size: 10),
@@ -314,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final favorite = favorites.contains(index);
 
     return Container(
-      color: surface,
+      decoration: BoxDecoration(color: surface),
       clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -326,11 +313,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Image.network(
                   item['image']!,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => const Icon(
-                    Icons.watch,
-                    color: gold,
-                    size: 45,
-                  ),
+                  errorBuilder: (_, _, _) =>
+                      const Icon(Icons.watch, color: gold, size: 45),
                 ),
                 Positioned(
                   top: 8,
@@ -387,10 +371,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       side: const BorderSide(color: gold),
                       shape: const RoundedRectangleBorder(),
                     ),
-                    child: const Text(
-                      'RESERVE',
-                      style: TextStyle(fontSize: 9),
-                    ),
+                    child: const Text('RESERVE', style: TextStyle(fontSize: 9)),
                   ),
                 ),
               ],
@@ -441,7 +422,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Row(
           children: List.generate(
             items.length,
-                (index) => Expanded(
+            (index) => Expanded(
               child: InkWell(
                 onTap: () => setState(() => selectedTab = index),
                 child: Padding(

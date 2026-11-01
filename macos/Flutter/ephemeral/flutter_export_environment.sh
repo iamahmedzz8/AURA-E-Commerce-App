@@ -1,8 +1,13 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=C:\src\flutter"
+<<<<<<< HEAD
+export "FLUTTER_APPLICATION_PATH=G:\Projects\Flutter NTI\AURA-E-Commerce-App"
+export "FLUTTER_FRAMEWORK_SWIFT_PACKAGE_PATH=G:\Projects\Flutter NTI\AURA-E-Commerce-App\macos\Flutter\ephemeral\Packages\.packages\FlutterFramework"
+=======
 export "FLUTTER_APPLICATION_PATH=D:\AURA-E-Commerce-App"
 export "FLUTTER_FRAMEWORK_SWIFT_PACKAGE_PATH=D:\AURA-E-Commerce-App\macos\Flutter\ephemeral\Packages\.packages\FlutterFramework"
+>>>>>>> cff402c04f5b40a74bfb8d2b92103460c56a07ca
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"

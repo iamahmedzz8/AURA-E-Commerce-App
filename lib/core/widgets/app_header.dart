@@ -1,5 +1,4 @@
-
-import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
+import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +24,14 @@ class AppHeader extends StatelessWidget {
               Text(
                 AppStrings.brandTitle,
                 style: AppStyles.brandHeader.copyWith(
-                  color: AppColors.gold,
+                  color: AppColors.goldAccent,
                 ),
               ),
               const SizedBox(height: 2),
               Text(
                 AppStrings.collectionsTitle,
                 style: AppStyles.headerScreenTitle.copyWith(
-                  color: AppColors.luxuryMuted,
+                  color: AppColors.textPrimary,
                 ),
               ),
             ],
@@ -45,10 +44,7 @@ class AppHeader extends StatelessWidget {
                 iconSize: 20,
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
-                icon: const Icon(
-                  Icons.search,
-                  color: AppColors.iconLight,
-                ),
+                icon: const Icon(Icons.search, color: AppColors.iconLight),
                 onPressed: () {},
               ),
               // Notifications Button with gold badge
@@ -58,8 +54,10 @@ class AppHeader extends StatelessWidget {
                   IconButton(
                     iconSize: 20,
                     padding: EdgeInsets.zero,
-                    constraints:
-                        const BoxConstraints(minWidth: 44, minHeight: 44),
+                    constraints: const BoxConstraints(
+                      minWidth: 44,
+                      minHeight: 44,
+                    ),
                     icon: const Icon(
                       Icons.notifications_none_outlined,
                       color: AppColors.iconLight,

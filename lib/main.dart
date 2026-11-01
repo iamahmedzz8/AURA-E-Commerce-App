@@ -1,7 +1,8 @@
+import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
+import 'package:aura_maison_e_commerce/main_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'core/services/prefs_service.dart';
-import 'core/widgets/auth_gate.dart';
+import 'features/home/presentation/screens/home_screen.dart';
+import 'features/splash/screens/splash_salon_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +17,7 @@ class AuraMaisonApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthGate(),
+      home: SplashSalonScreen(),
     );
   }
 }
