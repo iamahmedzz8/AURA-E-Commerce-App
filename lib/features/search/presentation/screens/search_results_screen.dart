@@ -1,5 +1,6 @@
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
+import 'package:aura_maison_e_commerce/core/widgets/app_bottom_nav_bar.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_header.dart';
 import 'package:aura_maison_e_commerce/features/search/presentation/screens/no_results_screen.dart';
 import 'package:aura_maison_e_commerce/features/search/presentation/widgets/haute_horlogerie_grid.dart';
@@ -9,7 +10,28 @@ import 'package:aura_maison_e_commerce/features/search/presentation/widgets/sear
 import 'package:flutter/material.dart';
 
 class SearchResultsScreen extends StatelessWidget {
-  const SearchResultsScreen({super.key});
+  final String? query;
+
+  const SearchResultsScreen({super.key, this.query});
+
+  void _handleSearch(BuildContext context, String newQuery) {
+    final trimmed = newQuery.trim();
+    if (trimmed.isEmpty) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const NoResultsScreen(query: ""),
+        ),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => SearchResultsScreen(query: trimmed),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,39 +39,40 @@ class SearchResultsScreen extends StatelessWidget {
       backgroundColor: AppColors.background,
       body: SafeArea(
         bottom: false,
-        child: CustomScrollView(
-          slivers: [
-            const SliverToBoxAdapter(
-              child: AppHeader(title: AppStrings.workshopCurationTitle),
-            ),
-            SliverToBoxAdapter(
-              child: SearchResultsQueryBar(
-                onSubmitted: (_) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const NoResultsScreen(),
+        child: Column(
+          children: [
+            // Fixed App Header
+            const AppHeader(title: AppStrings.workshopCurationTitle),
+
+            // Scrollable Search Results Content
+            Expanded(
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: SearchResultsQueryBar(
+                      initialQuery: query,
+                      onSubmitted: (newQuery) => _handleSearch(context, newQuery),
                     ),
-                  );
-                },
+                  ),
+                  const SliverToBoxAdapter(
+                    child: InteractiveRefinementChips(),
+                  ),
+                  const SliverToBoxAdapter(
+                    child: HauteHorlogerieGrid(),
+                  ),
+                  const SliverToBoxAdapter(
+                    child: SalonConciergeVitrineBar(),
+                  ),
+                  const SliverToBoxAdapter(
+                    child: SizedBox(height: 16),
+                  ),
+                ],
               ),
-            ),
-            const SliverToBoxAdapter(
-              child: InteractiveRefinementChips(),
-            ),
-            const SliverToBoxAdapter(
-              child: HauteHorlogerieGrid(),
-            ),
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 12),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: const SafeArea(
-        top: false,
-        child: SalonConciergeVitrineBar(),
-      ),
+      bottomNavigationBar: const AppBottomNavBar(currentIndex: 1),
     );
   }
 }
