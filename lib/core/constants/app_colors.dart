@@ -35,4 +35,13 @@ static const Color goldBright = Color(0xFFFFD700);
 static const Color goldAccent = Color(0xFFD4AF37);
 
 static const Color iconDark = Color(0xFF222222);
+
+
+
+// 
+  static const Color primaryColor = Color(0xffC5A059);
+  static const Color secondaryColor = Color(0xffF3E8CC);
+  static const Color tertiaryColor = Color(0xffF7F3EC);
+  static const Color textColor = Color(0xff000000);
+  static const Color backgroundColor = Color(0xffF3E8CC);
 }

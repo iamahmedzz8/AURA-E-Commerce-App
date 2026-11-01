@@ -1,7 +1,5 @@
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
-import 'package:aura_maison_e_commerce/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'features/home/presentation/screens/home_screen.dart';
 import 'features/splash/screens/splash_salon_screen.dart';
 
 Future<void> main() async {
