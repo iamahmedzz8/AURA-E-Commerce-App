@@ -35,7 +35,7 @@ class AuraMedallionHeader extends StatelessWidget {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.gold.withOpacity(0.18),
+                      color: AppColors.gold.withValues(alpha: 0.18),
                       blurRadius: 34,
                       spreadRadius: 6,
                     ),
@@ -49,12 +49,12 @@ class AuraMedallionHeader extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: AppColors.obsidianDark,
                   border: Border.all(
-                    color: AppColors.gold.withOpacity(0.7),
+                    color: AppColors.gold.withValues(alpha: 0.7),
                     width: 1.2,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.5),
+                      color: Colors.black.withValues(alpha: 0.5),
                       blurRadius: 14,
                     ),
                   ],
@@ -66,7 +66,7 @@ class AuraMedallionHeader extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppColors.gold.withOpacity(0.25),
+                        color: AppColors.gold.withValues(alpha: 0.25),
                         width: 1,
                       ),
                     ),
@@ -84,7 +84,7 @@ class AuraMedallionHeader extends StatelessWidget {
               color: AppColors.obsidianCard,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: AppColors.gold.withOpacity(0.3),
+                color: AppColors.gold.withValues(alpha: 0.3),
                 width: 0.8,
               ),
             ),

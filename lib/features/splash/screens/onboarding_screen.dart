@@ -239,7 +239,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             decoration: BoxDecoration(
               color: AppColors.obsidianCard,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: AppColors.gold.withOpacity(0.2)),
+              border: Border.all(color: AppColors.gold.withValues(alpha: 0.2)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -280,7 +280,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   decoration: BoxDecoration(
                     color: AppColors.obsidianDark,
                     borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: AppColors.gold.withOpacity(0.4)),
+                    border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
                   ),
                   child: const Text(
                     'AES-256 HSM',
@@ -351,7 +351,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   height: 44,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.gold.withOpacity(0.7), width: 1.2),
+                    border: Border.all(color: AppColors.gold.withValues(alpha: 0.7), width: 1.2),
                     color: AppColors.obsidianDark,
                   ),
                   child: const Center(

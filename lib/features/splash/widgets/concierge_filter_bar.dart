@@ -24,7 +24,7 @@ class ConciergeFilterBar extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         itemCount: filters.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        separatorBuilder: (_, _) => const SizedBox(width: 8),
         itemBuilder: (context, index) {
           final filter = filters[index];
           final isSelected = filter.categoryKey == selectedCategoryKey;
@@ -45,7 +45,7 @@ class ConciergeFilterBar extends StatelessWidget {
                 boxShadow: isSelected
                     ? [
                         BoxShadow(
-                          color: AppColors.gold.withOpacity(0.3),
+                          color: AppColors.gold.withValues(alpha: 0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),

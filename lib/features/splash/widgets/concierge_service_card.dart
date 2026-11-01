@@ -24,7 +24,7 @@ class ConciergeServiceCard extends StatelessWidget {
         border: Border.all(color: AppColors.obsidianBorder, width: 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.35),
+            color: Colors.black.withValues(alpha: 0.35),
             blurRadius: 8,
             offset: const Offset(0, 3),
           ),
@@ -35,8 +35,8 @@ class ConciergeServiceCard extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(8),
           onTap: onTap,
-          splashColor: AppColors.gold.withOpacity(0.1),
-          highlightColor: AppColors.gold.withOpacity(0.05),
+          splashColor: AppColors.gold.withValues(alpha: 0.1),
+          highlightColor: AppColors.gold.withValues(alpha: 0.05),
           child: Padding(
             padding: const EdgeInsets.all(14),
             child: Column(
@@ -52,7 +52,7 @@ class ConciergeServiceCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: AppColors.obsidianDark,
                         borderRadius: BorderRadius.circular(6),
-                        border: Border.all(color: AppColors.gold.withOpacity(0.25), width: 0.8),
+                        border: Border.all(color: AppColors.gold.withValues(alpha: 0.25), width: 0.8),
                       ),
                       child: Icon(service.icon, size: 20, color: AppColors.gold),
                     ),
@@ -94,7 +94,7 @@ class ConciergeServiceCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: AppColors.obsidianDark,
                         borderRadius: BorderRadius.circular(4),
-                        border: Border.all(color: AppColors.gold.withOpacity(0.3), width: 0.8),
+                        border: Border.all(color: AppColors.gold.withValues(alpha: 0.3), width: 0.8),
                       ),
                       child: Text(
                         service.tag,
@@ -132,7 +132,7 @@ class ConciergeServiceCard extends StatelessWidget {
                         child: Text(
                           service.badge!,
                           style: TextStyle(
-                            color: AppColors.goldLight.withOpacity(0.9),
+                            color: AppColors.goldLight.withValues(alpha: 0.9),
                             fontSize: 9,
                             fontWeight: FontWeight.w600,
                             letterSpacing: 0.8,

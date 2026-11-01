@@ -82,7 +82,7 @@ class AppScreensCatalog extends StatelessWidget {
         child: ListView.separated(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           itemCount: screens.length,
-          separatorBuilder: (_, __) => const SizedBox(height: 14),
+          separatorBuilder: (_, _) => const SizedBox(height: 14),
           itemBuilder: (context, index) {
             final item = screens[index];
 
@@ -91,12 +91,12 @@ class AppScreensCatalog extends StatelessWidget {
                 color: AppColors.obsidianCard,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: item.isNew ? AppColors.gold.withOpacity(0.6) : AppColors.obsidianBorder,
+                  color: item.isNew ? AppColors.gold.withValues(alpha: 0.6) : AppColors.obsidianBorder,
                   width: item.isNew ? 1.2 : 1,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.4),
+                    color: Colors.black.withValues(alpha: 0.4),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -120,7 +120,7 @@ class AppScreensCatalog extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: AppColors.obsidianDark,
                             borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: AppColors.gold.withOpacity(0.3)),
+                            border: Border.all(color: AppColors.gold.withValues(alpha: 0.3)),
                           ),
                           child: Icon(item.icon, color: AppColors.gold, size: 22),
                         ),
@@ -145,7 +145,7 @@ class AppScreensCatalog extends StatelessWidget {
                                     Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1.5),
                                       decoration: BoxDecoration(
-                                        color: AppColors.emerald.withOpacity(0.2),
+                                        color: AppColors.emerald.withValues(alpha: 0.2),
                                         borderRadius: BorderRadius.circular(4),
                                         border: Border.all(color: AppColors.emerald, width: 0.6),
                                       ),

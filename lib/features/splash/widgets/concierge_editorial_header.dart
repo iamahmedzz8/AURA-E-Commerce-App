@@ -24,7 +24,7 @@ class ConciergeEditorialHeader extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.obsidianCard,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.gold.withOpacity(0.3), width: 0.8),
+            border: Border.all(color: AppColors.gold.withValues(alpha: 0.3), width: 0.8),
           ),
           child: Text(
             tag,

@@ -1,6 +1,7 @@
 /// Splash Feature Module — barrel export
 /// Covers: Splash, Onboarding (3 steps), Private Concierge (filterable)
 /// Internal models, data, and widgets live here and only talk to each other.
+library;
 
 export 'screens/splash_salon_screen.dart';
 export 'screens/onboarding_screen.dart';

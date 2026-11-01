@@ -48,3 +48,7 @@ app.*.map.json
 .widget_preview/
 
 linux/flutter/ephemeral/
+# Flutter generated platform files
+**/ephemeral/
+.flutter-plugins
+.packages
