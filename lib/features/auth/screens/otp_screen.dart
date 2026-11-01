@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
+import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
+import 'package:aura_maison_e_commerce/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/aura_medallion_header.dart';
@@ -10,12 +12,20 @@ import '../widgets/encryption_footer_note.dart';
 import '../widgets/session_security_banner.dart';
 import 'reset_password_screen.dart';
 
+enum OtpPurpose { signup, resetPassword }
+
 /// OTP Verification Screen
 /// Validates 6-digit cryptographic security code.
 /// TODO: Connect [verify] and [resend] to your API via [OtpCubit].
 class OtpScreen extends StatefulWidget {
   final String email;
-  const OtpScreen({super.key, required this.email});
+  final OtpPurpose purpose;
+
+  const OtpScreen({
+    super.key,
+    required this.email,
+    this.purpose = OtpPurpose.resetPassword,
+  });
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -69,11 +79,30 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 
-  void _verify() {
+  Future<void> _verify() async {
     final code = _controllers.map((c) => c.text).join();
     if (code.length != 6) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter all 6 digits.')),
+      );
+      return;
+    }
+
+    if (widget.purpose == OtpPurpose.signup) {
+      await PrefsService.setOnboardingCompleted(true);
+      await PrefsService.saveLoginSession(
+        email: widget.email,
+        rememberMe: true,
+      );
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Account verified. Welcome to Aura.')),
+      );
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
+        (_) => false,
       );
       return;
     }

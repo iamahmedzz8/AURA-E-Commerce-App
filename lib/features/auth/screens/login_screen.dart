@@ -1,8 +1,8 @@
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
+import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
 import 'package:aura_maison_e_commerce/core/widgets/aura_text.dart';
+import 'package:aura_maison_e_commerce/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-
 
 import '../data/login_data.dart';
 import '../widgets/aura_input.dart';
@@ -23,18 +23,50 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final emailController = TextEditingController(
-    text: 'julian.vane@lunecurate.io',
-  );
-  final passwordController = TextEditingController(text: 'SignatureLuxury2025');
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   bool staySignedIn = true;
   bool showPassword = false;
+
+  @override
+  void initState() {
+    super.initState();
+    staySignedIn = PrefsService.rememberMe;
+    if (PrefsService.rememberMe && PrefsService.savedEmail.isNotEmpty) {
+      emailController.text = PrefsService.savedEmail;
+    }
+  }
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _signIn() async {
+    final email = emailController.text.trim();
+    final password = passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter email and passcode.')),
+      );
+      return;
+    }
+
+    await PrefsService.setOnboardingCompleted(true);
+    await PrefsService.saveLoginSession(
+      email: email,
+      rememberMe: staySignedIn,
+    );
+
+    if (!mounted) return;
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (_) => const HomeScreen()),
+      (_) => false,
+    );
   }
 
   @override
@@ -289,7 +321,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(width: 7),
             const Expanded(
               child: AuraText(
-                'Stay signed in',
+                'Remember Me',
                 size: 13,
                 color: AppColors.muted,
               ),
@@ -317,7 +349,7 @@ class _LoginScreenState extends State<LoginScreen> {
           width: double.infinity,
           height: 60,
           child: ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: _signIn,
             icon: const Icon(Icons.lock_outline, size: 19),
             label: const Text(
               'Sign In to Vault',

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'features/home/presentation/screens/home_screen.dart';
-import 'features/splash/screens/splash_salon_screen.dart';
 
-void main() {
+import 'core/services/prefs_service.dart';
+import 'core/widgets/auth_gate.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PrefsService.init();
   runApp(const AuraMaisonApp());
 }
 
@@ -13,7 +16,7 @@ class AuraMaisonApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashSalonScreen(),
+      home: AuthGate(),
     );
   }
 }

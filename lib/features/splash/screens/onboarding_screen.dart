@@ -1,5 +1,5 @@
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
+import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
 import 'package:aura_maison_e_commerce/features/auth/screens/login_screen.dart';
 import 'package:aura_maison_e_commerce/features/auth/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -51,8 +51,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
-  void _skipToAuth() {
+  Future<void> _completeOnboarding() async {
+    await PrefsService.setOnboardingCompleted(true);
+  }
+
+  Future<void> _skipToAuth() async {
+    await _completeOnboarding();
+    if (!mounted) return;
     Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+    );
+  }
+
+  Future<void> _goToSignup() async {
+    await _completeOnboarding();
+    if (!mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const SignupScreen()),
+    );
+  }
+
+  Future<void> _goToLogin() async {
+    await _completeOnboarding();
+    if (!mounted) return;
+    Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => const LoginScreen()),
     );
@@ -435,12 +459,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           const SizedBox(height: 16),
           AuraGoldButton(
             label: 'CREATE A PRIVILEGE ACCOUNT',
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const SignupScreen()),
-              );
-            },
+            onTap: _goToSignup,
           ),
           const SizedBox(height: 12),
           SizedBox(
@@ -452,12 +471,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 side: const BorderSide(color: AppColors.gold, width: 1),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const LoginScreen()),
-                );
-              },
+              onPressed: _goToLogin,
               child: const Text(
                 'ALREADY A MEMBER? SIGN IN',
                 style: TextStyle(

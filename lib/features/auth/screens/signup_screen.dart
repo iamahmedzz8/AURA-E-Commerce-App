@@ -235,7 +235,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => OtpScreen(email: email.text),
+                          builder: (context) => OtpScreen(
+                            email: email.text.trim().isEmpty
+                                ? 'member@aura.io'
+                                : email.text.trim(),
+                            purpose: OtpPurpose.signup,
+                          ),
                         ),
                       );
                     },

@@ -1,5 +1,6 @@
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
+import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
+import 'package:aura_maison_e_commerce/features/auth/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/confidentiality_pill.dart';
@@ -12,6 +13,18 @@ import 'onboarding_screen.dart';
 /// Main entry point of AURA MAISON luxury experience.
 class SplashSalonScreen extends StatelessWidget {
   const SplashSalonScreen({super.key});
+
+  Future<void> _enterSalon(BuildContext context) async {
+    final Widget next = PrefsService.isOnboardingCompleted
+        ? const LoginScreen()
+        : const OnboardingScreen();
+
+    if (!context.mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => next),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +50,7 @@ class SplashSalonScreen extends StatelessWidget {
                   const SalonCentralSanctuary(),
                   const Spacer(),
                   SalonEntrancePortal(
-                    onEnter: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const OnboardingScreen(),
-                        ),
-                      );
-                    },
+                    onEnter: () => _enterSalon(context),
                   ),
                   const SizedBox(height: 16),
                 ],
