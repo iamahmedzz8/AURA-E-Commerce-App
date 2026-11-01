@@ -29,7 +29,7 @@ class _SearchSuiteWidgetState extends State<SearchSuiteWidget> {
   void initState() {
     super.initState();
     if (widget.controller == null) {
-      _controller = TextEditingController(text: AppStrings.searchPlaceholder);
+      _controller = TextEditingController();
       _isLocalController = true;
     } else {
       _controller = widget.controller!;
@@ -74,19 +74,23 @@ class _SearchSuiteWidgetState extends State<SearchSuiteWidget> {
             ),
             child: Row(
               children: [
-                // Left Icon (Search)
-                const Padding(
-                  padding: EdgeInsets.only(left: 16, right: 8),
-                  child: Icon(
-                    Icons.search,
-                    size: 16,
-                    color: AppColors.goldAccent,
+                // Left Icon (Search - Tappable)
+                GestureDetector(
+                  onTap: () => widget.onSubmitted?.call(_controller.text),
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 16, right: 8),
+                    child: Icon(
+                      Icons.search,
+                      size: 16,
+                      color: AppColors.goldAccent,
+                    ),
                   ),
                 ),
                 // Text Field Input
                 Expanded(
                   child: TextField(
                     controller: _controller,
+                    textInputAction: TextInputAction.search,
                     onChanged: widget.onChanged,
                     onSubmitted: widget.onSubmitted,
                     style: AppStyles.searchInputText.copyWith(

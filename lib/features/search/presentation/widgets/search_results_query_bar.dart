@@ -10,6 +10,7 @@ class SearchResultsQueryBar extends StatefulWidget {
   final VoidCallback? onClearTap;
   final VoidCallback? onFilterTap;
   final String? resultsCountText;
+  final String? initialQuery;
 
   const SearchResultsQueryBar({
     super.key,
@@ -19,6 +20,7 @@ class SearchResultsQueryBar extends StatefulWidget {
     this.onClearTap,
     this.onFilterTap,
     this.resultsCountText,
+    this.initialQuery,
   });
 
   @override
@@ -33,7 +35,9 @@ class _SearchResultsQueryBarState extends State<SearchResultsQueryBar> {
   void initState() {
     super.initState();
     if (widget.controller == null) {
-      _controller = TextEditingController(text: AppStrings.searchPlaceholder);
+      _controller = TextEditingController(
+        text: widget.initialQuery ?? AppStrings.searchPlaceholder,
+      );
       _isLocalController = true;
     } else {
       _controller = widget.controller!;
@@ -72,13 +76,16 @@ class _SearchResultsQueryBarState extends State<SearchResultsQueryBar> {
             ),
             child: Row(
               children: [
-                // Left: Search Icon
-                const Padding(
-                  padding: EdgeInsets.only(left: 14, right: 8),
-                  child: Icon(
-                    Icons.search,
-                    size: 16,
-                    color: AppColors.goldAccent,
+                // Left: Search Icon (Tappable)
+                GestureDetector(
+                  onTap: () => widget.onSubmitted?.call(_controller.text),
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 14, right: 8),
+                    child: Icon(
+                      Icons.search,
+                      size: 16,
+                      color: AppColors.goldAccent,
+                    ),
                   ),
                 ),
 
@@ -86,6 +93,7 @@ class _SearchResultsQueryBarState extends State<SearchResultsQueryBar> {
                 Expanded(
                   child: TextField(
                     controller: _controller,
+                    textInputAction: TextInputAction.search,
                     onChanged: widget.onChanged,
                     onSubmitted: widget.onSubmitted,
                     style: AppStyles.searchResultsQueryText.copyWith(

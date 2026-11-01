@@ -8,6 +8,7 @@ class NoResultsQueryBar extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
   final VoidCallback? onClear;
+  final String? initialQuery;
 
   const NoResultsQueryBar({
     super.key,
@@ -15,6 +16,7 @@ class NoResultsQueryBar extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.onClear,
+    this.initialQuery,
   });
 
   @override
@@ -29,7 +31,9 @@ class _NoResultsQueryBarState extends State<NoResultsQueryBar> {
   void initState() {
     super.initState();
     if (widget.controller == null) {
-      _controller = TextEditingController(text: AppStrings.noResultsSearchQuery);
+      _controller = TextEditingController(
+        text: widget.initialQuery ?? AppStrings.noResultsSearchQuery,
+      );
       _isLocalController = true;
     } else {
       _controller = widget.controller!;
@@ -62,11 +66,14 @@ class _NoResultsQueryBarState extends State<NoResultsQueryBar> {
             ),
             child: Row(
               children: [
-                // Gold Search Icon
-                const Icon(
-                  Icons.search,
-                  color: AppColors.goldAccent,
-                  size: 16,
+                // Gold Search Icon (Tappable)
+                GestureDetector(
+                  onTap: () => widget.onSubmitted?.call(_controller.text),
+                  child: const Icon(
+                    Icons.search,
+                    color: AppColors.goldAccent,
+                    size: 16,
+                  ),
                 ),
                 const SizedBox(width: 8),
 
@@ -74,13 +81,18 @@ class _NoResultsQueryBarState extends State<NoResultsQueryBar> {
                 Expanded(
                   child: TextField(
                     controller: _controller,
+                    textInputAction: TextInputAction.search,
                     onChanged: widget.onChanged,
                     onSubmitted: widget.onSubmitted,
                     style: AppStyles.noResultsInput.copyWith(
                       color: AppColors.textOffWhite,
                     ),
                     cursorColor: AppColors.goldAccent,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      hintText: AppStrings.searchPlaceholder,
+                      hintStyle: AppStyles.noResultsInput.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
                       border: InputBorder.none,
                       isDense: true,
                       contentPadding: EdgeInsets.zero,
