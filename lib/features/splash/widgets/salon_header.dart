@@ -82,11 +82,11 @@ class SalonHeader extends StatelessWidget {
               ),
               const SizedBox(width: 6),
               Expanded(
-                child: Container(height: 2, color: AppColors.gold.withOpacity(0.35)),
+                child: Container(height: 2, color: AppColors.gold.withValues(alpha: 0.35)),
               ),
               const SizedBox(width: 6),
               Expanded(
-                child: Container(height: 2, color: AppColors.gold.withOpacity(0.35)),
+                child: Container(height: 2, color: AppColors.gold.withValues(alpha: 0.35)),
               ),
             ],
           ),

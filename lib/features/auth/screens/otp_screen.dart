@@ -14,9 +14,6 @@ import 'reset_password_screen.dart';
 
 enum OtpPurpose { signup, resetPassword }
 
-/// OTP Verification Screen
-/// Validates 6-digit cryptographic security code.
-/// TODO: Connect [verify] and [resend] to your API via [OtpCubit].
 class OtpScreen extends StatefulWidget {
   final String email;
   final OtpPurpose purpose;

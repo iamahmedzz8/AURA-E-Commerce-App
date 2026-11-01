@@ -26,7 +26,7 @@ class SalonVitrineCard extends StatelessWidget {
         border: Border.all(color: AppColors.obsidianBorder, width: 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.4),
+            color: Colors.black.withValues(alpha: 0.4),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -41,7 +41,7 @@ class SalonVitrineCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.obsidianDark,
                 borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: AppColors.gold.withOpacity(0.15)),
+                border: Border.all(color: AppColors.gold.withValues(alpha: 0.15)),
               ),
               child: Center(
                 child: image != null
@@ -49,7 +49,7 @@ class SalonVitrineCard extends StatelessWidget {
                     : Icon(
                         icon ?? Icons.watch_outlined,
                         size: 38,
-                        color: AppColors.gold.withOpacity(0.7),
+                        color: AppColors.gold.withValues(alpha: 0.7),
                       ),
               ),
             ),

@@ -20,7 +20,7 @@ class GlobalSyncCard extends StatelessWidget {
         color: AppColors.obsidianElevated,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: AppColors.gold.withOpacity(0.2),
+          color: AppColors.gold.withValues(alpha: 0.2),
           width: 0.8,
         ),
       ),

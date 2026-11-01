@@ -223,7 +223,7 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
         alignment: Alignment.center,
         child: Column(
           children: [
-            Icon(Icons.search_off_outlined, size: 36, color: AppColors.gold.withOpacity(0.5)),
+            Icon(Icons.search_off_outlined, size: 36, color: AppColors.gold.withValues(alpha: 0.5)),
             const SizedBox(height: 12),
             const Text(
               'No bespoke services found matching your filter.',
@@ -289,7 +289,7 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: AppColors.gold.withOpacity(0.15),
+                      color: AppColors.gold.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(

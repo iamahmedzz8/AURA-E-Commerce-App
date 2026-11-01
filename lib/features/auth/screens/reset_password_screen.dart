@@ -100,7 +100,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           backgroundColor: AppColors.obsidianDark,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: BorderSide(color: AppColors.gold.withOpacity(0.4)),
+            side: BorderSide(color: AppColors.gold.withValues(alpha: 0.4)),
           ),
           title: const Row(
             children: [
@@ -208,7 +208,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         border: Border.all(color: AppColors.obsidianBorder, width: 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.35),
+            color: Colors.black.withValues(alpha: 0.35),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -236,8 +236,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   borderRadius: BorderRadius.circular(4),
                   border: Border.all(
                     color: _score == 4
-                        ? AppColors.emerald.withOpacity(0.6)
-                        : AppColors.gold.withOpacity(0.3),
+                        ? AppColors.emerald.withValues(alpha: 0.6)
+                        : AppColors.gold.withValues(alpha: 0.3),
                     width: 0.8,
                   ),
                 ),
@@ -265,7 +265,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             decoration: InputDecoration(
               hintText: 'Chronos#2024Atelier',
               hintStyle: TextStyle(
-                color: AppColors.luxuryMuted.withOpacity(0.55),
+                color: AppColors.luxuryMuted.withValues(alpha: 0.55),
                 fontSize: 13.5,
               ),
               filled: true,
@@ -353,10 +353,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: AppColors.emerald.withOpacity(0.12),
+                    color: AppColors.emerald.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(
-                      color: AppColors.emerald.withOpacity(0.5),
+                      color: AppColors.emerald.withValues(alpha: 0.5),
                       width: 0.8,
                     ),
                   ),
@@ -391,7 +391,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             decoration: InputDecoration(
               hintText: 'Chronos#2024Atelier',
               hintStyle: TextStyle(
-                color: AppColors.luxuryMuted.withOpacity(0.55),
+                color: AppColors.luxuryMuted.withValues(alpha: 0.55),
                 fontSize: 13.5,
               ),
               filled: true,

@@ -1,5 +1,6 @@
 /// Independent Auth Feature Module
 /// Exports authentication screens, models, data, widgets, and cubit placeholders.
+library;
 
 export 'screens/login_screen.dart';
 export 'screens/signup_screen.dart';

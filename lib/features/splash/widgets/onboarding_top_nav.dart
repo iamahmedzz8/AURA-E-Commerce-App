@@ -36,7 +36,7 @@ class OnboardingTopNav extends StatelessWidget {
                   boxShadow: isCurrent
                       ? [
                           BoxShadow(
-                            color: AppColors.gold.withOpacity(0.5),
+                            color: AppColors.gold.withValues(alpha: 0.5),
                             blurRadius: 6,
                           )
                         ]

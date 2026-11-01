@@ -44,7 +44,7 @@ class TamperProofSealCard extends StatelessWidget {
               Text(
                 location,
                 style: TextStyle(
-                  color: AppColors.gold.withOpacity(0.9),
+                  color: AppColors.gold.withValues(alpha: 0.9),
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.8,

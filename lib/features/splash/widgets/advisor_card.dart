@@ -22,10 +22,10 @@ class AdvisorCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.obsidianCard,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.gold.withOpacity(0.35), width: 1),
+        border: Border.all(color: AppColors.gold.withValues(alpha: 0.35), width: 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.5),
+            color: Colors.black.withValues(alpha: 0.5),
             blurRadius: 14,
             offset: const Offset(0, 4),
           ),
@@ -41,9 +41,9 @@ class AdvisorCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
-                  color: AppColors.gold.withOpacity(0.15),
+                  color: AppColors.gold.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColors.gold.withOpacity(0.3), width: 0.8),
+                  border: Border.all(color: AppColors.gold.withValues(alpha: 0.3), width: 0.8),
                 ),
                 child: Text(
                   advisor.sealText,
