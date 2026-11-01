@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'features/home/presentation/screens/home_screen.dart';
+import 'features/splash/screens/splash_salon_screen.dart';
 
 void main() {
   runApp(const AuraMaisonApp());
@@ -12,7 +13,7 @@ class AuraMaisonApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: SplashSalonScreen(),
     );
   }
 }
