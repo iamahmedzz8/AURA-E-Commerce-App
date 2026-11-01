@@ -1,4 +1,9 @@
+import 'dart:developer';
+
+import 'package:aura_maison_e_commerce/core/theme/aura_theme.dart';
+import 'package:aura_maison_e_commerce/core/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/home/presentation/screens/home_screen.dart';
 
 void main() {
@@ -10,9 +15,20 @@ class AuraMaisonApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+    return BlocProvider(
+      create: (_) => ThemeCubit(),
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, themeMode) {
+          log('Current theme: $themeMode');
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: AuraTheme.lightTheme,
+            darkTheme: AuraTheme.darkTheme,
+            themeMode: themeMode,
+            home: const HomeScreen(),
+          );
+        },
+      ),
     );
   }
 }
