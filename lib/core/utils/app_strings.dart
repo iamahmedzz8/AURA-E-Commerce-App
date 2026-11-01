@@ -1,7 +1,71 @@
 class AppStrings {
   // Header
   static const String brandTitle = 'AURA\nMAISON';
+  static const String brandTitleInline = 'AURA MAISON';
   static const String collectionsTitle = 'Collections';
+  static const String searchTitle = 'Search';
+  static const String headerDividerPipe = '|';
+
+  // Search Suite
+  static const String searchPlaceholder = 'Skeleton Tourbillon';
+  static const String searchArchivesLabel = 'PLACE VENDÔME ARCHIVES';
+  static const String searchListedWorksCount = '1,840 Listed Works';
+
+  // Recent Searches
+  static const String recentSearchesTitle = 'RECENT SEARCHES';
+  static const String clearAll = 'Clear All';
+  static const String recentPill1 = 'Impérial Chronograph';
+  static const String recentPill2 = 'Calibre 8801';
+  static const String recentPill3 = 'Sedna Platinum';
+  static const String recentPill4 = 'Watch Trunk';
+
+  // Section 2: Signature Collections
+  static const String signatureCollectionsTitle = 'SIGNATURE COLLECTIONS';
+  static const String signatureCollectionsSeries = 'SERIES I & II';
+  static const String bentoCard1Tag = 'WORKSHOP I';
+  static const String bentoCard1Title = 'Swiss Fine\nWatchmaking';
+  static const String bentoCard1Count = '14 Timepieces';
+  static const String bentoCard2Tag = 'PRIVATE SALON';
+  static const String bentoCard2Title = 'High Jewelry\n& Solitaires';
+  static const String bentoCard2Count = '9 Rare Pieces';
+  static const String bentoCard3Tag = 'CRAFTSMANSHIP';
+  static const String bentoCard3Title = 'Workshop\nLeather Goods';
+  static const String bentoCard3Count = '6 Cases & Bags';
+  static const String bentoCard4Tag = 'LIMITED EDITION';
+  static const String bentoCard4Title = '18k Gold\nEyewear';
+  static const String bentoCard4Count = '4 Numbered\nFrames';
+
+  // Section 3: Curator's Suggestions & Concierge
+  static const String curatorSuggestionsTitle = 'CURATOR’S SUGGESTIONS';
+  static const String curatorSuggestionsSubtitle =
+      'Tailored to your collecting profile';
+  // Trending Item 1
+  static const String trending1Tag = 'AURA VENDÔME';
+  static const String trending1Badge = 'UNIQUE';
+  static const String trending1Title = 'Skeleton Tourbillon No. VIII';
+  static const String trending1Ref = 'RÉF. TS-880-OR';
+  static const String trending1Price = '142 000 €';
+  static const String trending1Status = 'Available';
+  // Trending Item 2
+  static const String trending2Tag = 'CHRONOMETRY';
+  static const String trending2Badge = 'COSC';
+  static const String trending2Title = 'Impérial Split-Seconds Chronograph';
+  static const String trending2Ref = 'RÉF. CI-914-AU';
+  static const String trending2Price = '96 500 €';
+  static const String trending2Status = 'On Request';
+  // Trending Item 3
+  static const String trending3Tag = 'SOLITAIRE GIA';
+  static const String trending3Badge = 'D-FLAWLESS';
+  static const String trending3Title = 'Solitaire Étoile Polaire 4.20ct';
+  static const String trending3Ref = 'RÉF. HJ-SOL-042';
+  static const String trending3Price = '215 000 €';
+  static const String trending3Status = 'In Vault';
+  // Concierge Advisory Banner
+  static const String confidentialSearchTitle = 'CONFIDENTIAL\nSEARCH';
+  static const String confidentialSearchSubtitle =
+      'Ask your private curator about embargoed pieces';
+  static const String contactButton = 'CONTACT';
+
   // Section: Curated Departments
   static const String curatedDepartments = 'CURATED DEPARTMENTS';
   static const String privateWorkshops = 'The Private Workshops';
