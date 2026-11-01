@@ -111,6 +111,55 @@ class AppStrings {
   static const String bespokeWorkshopSeek = 'Can’t find what you seek?';
   static const String commissionAction = 'COMMISSION';
 
+  // Search — No Results Screen
+  static const String noResultsTitle = 'SALON ARCHIVES';
+  static const String noResultsSearchQuery = 'Titanium Smartwatch';
+  static const String archiveAndHeritage = 'CONTEMPORARY ARCHIVE & HERITAGE';
+  static const String zeroResults = '0 RESULTS';
+  static const String suggestedCollectionsEyebrow = 'SUGGESTED COLLECTIONS';
+  static const String suggestedChip1 = 'Swiss Fine Watchmaking';
+  static const String suggestedChip2 = 'Rare Complications';
+  static const String suggestedChip3 = 'Travel Leather Goods';
+  static const String suggestedChip4 = 'GIA-Certified Diamonds';
+
+  // Empty State Centerpiece
+  static const String recordNotFoundEyebrow = 'RECORD NOT FOUND';
+  static const String noMatchingMasterpieceHeading =
+      'No Matching\nMasterpiece';
+  static const String noMatchingMasterpieceDesc =
+      'The AURA House lists no piece under this name. Our collections focus exclusively on fine mechanical watchmaking and handcrafted high jewelry.';
+  static const String clearSearchAction = 'CLEAR SEARCH';
+
+  // Editorial Highlights Vault Showcase
+  static const String gallerySelectionEyebrow = 'GALLERY SELECTION';
+  static const String vaultPiecesTitle = 'Pieces Available in the Vault';
+  static const String viewAllAction = 'VIEW ALL';
+  static const String acquisitionValueLabel = 'ACQUISITION VALUE';
+  static const String vaultPiece1Badge = 'ONE OF A KIND • NO. 01/01';
+  static const String vaultPiece1Tag = 'GENÈVE MANUFACTURE';
+  static const String vaultPiece1Ref = 'Ref. 5370-G';
+  static const String vaultPiece1Title = 'Royal Skeleton Tourbillon';
+  static const String vaultPiece1Desc =
+      '38-jewel automatic calibre, 18K white gold case,…';
+  static const String vaultPiece1Price = '142 000 €';
+  static const String vaultPiece2Badge = 'COSC CHRONOMETER';
+  static const String vaultPiece2Tag = 'HIGH COMPLICATION';
+  static const String vaultPiece2Ref = 'Ref. IMP-09';
+  static const String vaultPiece2Title = 'Impérial Chronograph';
+  static const String vaultPiece2Desc =
+      'Column-wheel monopusher, 950 platinum and…';
+  static const String vaultPiece2Price = '96 500 €';
+  static const String acquireAction = 'ACQUIRE';
+
+  // Concierge Consultation Bespoke Banner
+  static const String bespokePrivateService =
+      'PRIVATE SERVICE • PLACE VENDÔME';
+  static const String needBespokeSearchTitle = 'Need a bespoke search?';
+  static const String bespokeSearchDesc =
+      'Ask your dedicated curator to source a historic piece or start a special order with our partner workshops.';
+  static const String curatorOnline = 'CURATOR ONLINE';
+  static const String contactTheSalon = 'CONTACT THE SALON';
+
   // Section: Curated Departments
   static const String curatedDepartments = 'CURATED DEPARTMENTS';
   static const String privateWorkshops = 'The Private Workshops';

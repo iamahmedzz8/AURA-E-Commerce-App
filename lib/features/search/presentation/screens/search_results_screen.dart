@@ -1,6 +1,7 @@
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_header.dart';
+import 'package:aura_maison_e_commerce/features/search/presentation/screens/no_results_screen.dart';
 import 'package:aura_maison_e_commerce/features/search/presentation/widgets/haute_horlogerie_grid.dart';
 import 'package:aura_maison_e_commerce/features/search/presentation/widgets/interactive_refinement_chips.dart';
 import 'package:aura_maison_e_commerce/features/search/presentation/widgets/salon_concierge_vitrine_bar.dart';
@@ -12,31 +13,40 @@ class SearchResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
         bottom: false,
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: AppHeader(title: AppStrings.workshopCurationTitle),
             ),
             SliverToBoxAdapter(
-              child: SearchResultsQueryBar(),
+              child: SearchResultsQueryBar(
+                onSubmitted: (_) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const NoResultsScreen(),
+                    ),
+                  );
+                },
+              ),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: InteractiveRefinementChips(),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: HauteHorlogerieGrid(),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: SizedBox(height: 12),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: SafeArea(
+      bottomNavigationBar: const SafeArea(
         top: false,
         child: SalonConciergeVitrineBar(),
       ),
