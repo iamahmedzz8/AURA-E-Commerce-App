@@ -4,6 +4,7 @@ class AppStrings {
   static const String brandTitleInline = 'AURA MAISON';
   static const String collectionsTitle = 'Collections';
   static const String searchTitle = 'Search';
+  static const String workshopCurationTitle = 'Workshop Curation';
   static const String headerDividerPipe = '|';
 
   // Search Suite
@@ -65,6 +66,50 @@ class AppStrings {
   static const String confidentialSearchSubtitle =
       'Ask your private curator about embargoed pieces';
   static const String contactButton = 'CONTACT';
+
+  // Search Results
+  static const String searchResultsCountBanner =
+      '14 PIECES FOUND • ARCHIVES & SALONS';
+  static const String auraCertified = 'AURA CERTIFIED';
+  static const String refinementSortPriceHighToLow = 'PRICE: HIGH TO LOW';
+  static const String refinementActiveFilters = 'FILTERS (3 ACTIVE)';
+  static const String refinementActiveCount = '3';
+  static const String refinementImmediate = 'IMMEDIATE';
+  static const String refinementPlatinumWhiteGold = 'PLATINUM & WHITE GOLD';
+
+  // Search Results Haute Horlogerie Grid
+  static const String searchProduct1Badge = 'VENDÔME';
+  static const String searchProduct1Specs = '41 MM • ROSE GOLD';
+  static const String searchProduct1Ref = 'REF. TS-880-OR';
+  static const String searchProduct1Title = 'Royal Tourbillon\nSquelette';
+  static const String searchProduct1Price = '142 000 €';
+  static const String searchProduct1Action = 'ACQUIRE';
+
+  static const String searchProduct2Badge = 'ON REQUEST';
+  static const String searchProduct2Specs = '42 MM • G5 TITANIUM';
+  static const String searchProduct2Ref = 'REF. CI-914-AU';
+  static const String searchProduct2Title = 'Impérial\nChronograph';
+  static const String searchProduct2Price = '96 500 €';
+  static const String searchProduct2Action = 'VIEW';
+
+  static const String searchProduct3Badge = 'ONE OF A KIND';
+  static const String searchProduct3Specs = '39.5 MM • 950 PLATINUM';
+  static const String searchProduct3Ref = 'REF. PS-8801';
+  static const String searchProduct3Title = 'Calibre 8801\nPlatinum';
+  static const String searchProduct3Price = '188 000 €';
+  static const String searchProduct3Action = 'ACQUIRE';
+
+  static const String searchProduct4Badge = 'RESERVED FOR SALON';
+  static const String searchProduct4Specs = '43 MM • METEORITE';
+  static const String searchProduct4Ref = 'REF. TVC-04';
+  static const String searchProduct4Title = 'Céleste\nFlying Tourbillon';
+  static const String searchProduct4Price = '230 000 €';
+  static const String searchProduct4Action = 'PRIVATE RANK';
+
+  // Salon Concierge Floating Vitrine Bar
+  static const String bespokeWorkshopEyebrow = 'BESPOKE WORKSHOP';
+  static const String bespokeWorkshopSeek = 'Can’t find what you seek?';
+  static const String commissionAction = 'COMMISSION';
 
   // Section: Curated Departments
   static const String curatedDepartments = 'CURATED DEPARTMENTS';

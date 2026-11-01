@@ -194,6 +194,110 @@ class AppStyles {
     height: 14 / 11,
   );
 
+  // Search Results Query Bar & Curator Banner Typography
+  static const TextStyle searchResultsQueryText = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.14,
+    height: 18 / 14,
+  );
+  static const TextStyle curatorBannerFoundCount = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.55,
+    height: 14 / 11,
+  );
+  static const TextStyle curatorBannerCertified = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 1.0,
+    height: 12 / 10,
+  );
+  static const TextStyle refinementChipText = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.8,
+    height: 14 / 11,
+  );
+  static const TextStyle refinementBadgeCount = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 10,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0.0,
+    height: 12 / 10,
+  );
+
+  // Search Results Product Grid Typography
+  static const TextStyle productGridBadge = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 1.0,
+    height: 12 / 10,
+  );
+  static const TextStyle productGridSpecs = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 1.1,
+    height: 14 / 11,
+  );
+  static const TextStyle productGridRef = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 1.1,
+    height: 14 / 11,
+  );
+  static const TextStyle productGridTitle = TextStyle(
+    fontFamily: 'EB Garamond',
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.2,
+    height: 25 / 20,
+  );
+  static const TextStyle productGridPrice = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.4,
+    height: 20 / 16,
+  );
+  static const TextStyle productGridAction = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.55,
+    height: 14 / 11,
+  );
+
+  // Salon Concierge Floating Vitrine Bar Typography
+  static const TextStyle vitrineEyebrow = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 1.1,
+    height: 14 / 11,
+  );
+  static const TextStyle vitrineSeekTitle = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.24,
+    height: 18 / 12,
+  );
+  static const TextStyle vitrineCommissionButton = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.55,
+    height: 14 / 11,
+  );
+
   // Serif Titles (EB Garamond)
   static const TextStyle headerScreenTitle = TextStyle(
     fontFamily: 'EB Garamond',
