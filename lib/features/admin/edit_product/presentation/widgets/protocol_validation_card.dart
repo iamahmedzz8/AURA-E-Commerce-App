@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import '../../../../../core/theme/dark_theme.dart';
+
+class ProtocolValidationCard extends StatelessWidget {
+  const ProtocolValidationCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E2520), // لون أخضر غامق جداً
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.green.withOpacity(0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.verified, color: Colors.greenAccent, size: 18),
+              const SizedBox(width: 8),
+              const Text('FINE WATCHMAKING PROTOCOL', style: TextStyle(color: Colors.greenAccent, fontSize: 10, letterSpacing: 1, fontFamily: 'Inter', fontWeight: FontWeight.bold)),
+              const Spacer(),
+              Icon(Icons.close, color: DarkTheme.secondaryText.withOpacity(0.5), size: 16),
+            ],
+          ),
+          const SizedBox(height: 8),
+          const Text('✓ Changes validated by the workshop protocol', style: TextStyle(color: DarkTheme.primaryText, fontSize: 12, fontFamily: 'Inter')),
+          const SizedBox(height: 8),
+          Text('Cryptographic timestamp: 18 Feb 2025 • 14:32 CET', style: TextStyle(color: DarkTheme.secondaryText.withOpacity(0.7), fontSize: 10, fontFamily: 'Inter')),
+        ],
+      ),
+    );
+  }
+}
