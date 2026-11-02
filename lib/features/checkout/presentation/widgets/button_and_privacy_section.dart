@@ -33,13 +33,15 @@ class ButtonAndPrivacySection extends StatelessWidget {
           ),
         ),
 
-        Gap(8),
+        Gap(10),
         Row(
           children: [
             Icon(Icons.lock_outline_rounded, color: AppColors.primaryColor),
-            CustomText(
-              text: 'Encrypted 256-bit checkout · 30-day luxury guarantee',
-              size: 14,
+            Expanded(
+              child: CustomText(
+                text: 'Encrypted 256-bit checkout · 30-day luxury guarantee',
+                size: 12,
+              ),
             ),
           ],
         ),

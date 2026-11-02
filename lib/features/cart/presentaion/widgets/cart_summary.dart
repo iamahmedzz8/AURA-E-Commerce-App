@@ -17,7 +17,7 @@ class CartSummary extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(text: 'Order summary', weight: FontWeight.w800, size: 20),
+          CustomText(text: 'Cart summary', weight: FontWeight.w800, size: 20),
           Gap(10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

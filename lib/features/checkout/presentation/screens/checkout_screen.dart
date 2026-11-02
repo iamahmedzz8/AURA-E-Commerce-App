@@ -64,7 +64,7 @@ class CheckoutScreen extends StatelessWidget {
               PromoCodeSection(),
               Gap(20),
               CartSummary(),
-              Gap(10),
+              Gap(20),
               ButtonAndPrivacySection(),
               Gap(20),
             ],

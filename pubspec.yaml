@@ -58,31 +58,31 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-  fonts:
-    - family: EBGaramond
-      fonts:
-        - asset: assets/fonts/EBGaramond-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/EBGaramond-Italic.ttf
-          weight: 400
-          style: italic
-        - asset: assets/fonts/EBGaramond-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/EBGaramond-MediumItalic.ttf
-          weight: 500
-          style: italic
-        - asset: assets/fonts/EBGaramond-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/EBGaramond-SemiBoldItalic.ttf
-          weight: 600
-          style: italic
-        - asset: assets/fonts/EBGaramond-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/EBGaramond-BoldItalic.ttf
-          weight: 700
-          style: italic
-        - asset: assets/fonts/EBGaramond-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/EBGaramond-ExtraBoldItalic.ttf
-          weight: 800
-          style: italic
+  # fonts:
+  #   - family: EBGaramond
+  #     fonts:
+  #       - asset: assets/fonts/EBGaramond-Regular.ttf
+  #         weight: 400
+  #       - asset: assets/fonts/EBGaramond-Italic.ttf
+  #         weight: 400
+  #         style: italic
+  #       - asset: assets/fonts/EBGaramond-Medium.ttf
+  #         weight: 500
+  #       - asset: assets/fonts/EBGaramond-MediumItalic.ttf
+  #         weight: 500
+  #         style: italic
+  #       - asset: assets/fonts/EBGaramond-SemiBold.ttf
+  #         weight: 600
+  #       - asset: assets/fonts/EBGaramond-SemiBoldItalic.ttf
+  #         weight: 600
+  #         style: italic
+  #       - asset: assets/fonts/EBGaramond-Bold.ttf
+  #         weight: 700
+  #       - asset: assets/fonts/EBGaramond-BoldItalic.ttf
+  #         weight: 700
+  #         style: italic
+  #       - asset: assets/fonts/EBGaramond-ExtraBold.ttf
+  #         weight: 800
+  #       - asset: assets/fonts/EBGaramond-ExtraBoldItalic.ttf
+  #         weight: 800
+  #         style: italic

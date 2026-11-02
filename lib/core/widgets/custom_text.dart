@@ -32,7 +32,7 @@ class CustomText extends StatelessWidget {
       style: TextStyle(
         letterSpacing: space??1,
         fontSize: size??16,
-        fontFamily: family?? "EBGaramond",
+        fontFamily: family?? '',
         color: color,
         fontWeight: weight,
       ),
