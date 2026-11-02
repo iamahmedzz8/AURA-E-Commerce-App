@@ -1,7 +1,9 @@
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
+import 'package:aura_maison_e_commerce/features/cart/presentaion/screens/cart_screen.dart';
 import 'package:aura_maison_e_commerce/features/categories/presentation/screens/categories_screen.dart';
+import 'package:aura_maison_e_commerce/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:aura_maison_e_commerce/features/home/presentation/screens/home_screen.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,20 +20,10 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> screens = [
     HomeScreen(),
     CategoriesScreen(),
+    CartScreen(),
 
-    Center(
-      child: Text(
-        "Home Screen",
-        style: AppStyles.sectionHeading.copyWith(color: Colors.white),
-      ),
-    ),
-    Center(
-      child: Text(
-        "Home Screen",
-        style: AppStyles.sectionHeading.copyWith(color: Colors.white),
-      ),
-    ),
-    
+    FavoritesScreen(),
+
     ProfileScreen(),
   ];
   @override
