@@ -1,6 +1,5 @@
-import 'package:aura_maison_e_commerce/features/admin/inventory/domain/entities/inventory_entity.dart';
+import 'package:aura_maison_e_commerce/features/admin/inventory/domain/entities/inventory_item.dart';
 import 'package:flutter/material.dart';
-
 
 abstract class InventoryRemoteDataSource {
   Future<List<InventoryItem>> fetchInventoryItems();

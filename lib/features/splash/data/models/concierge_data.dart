@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/advisor_model.dart';
-import '../models/concierge_service_model.dart';
-import '../models/service_filter_model.dart';
+import 'advisor_model.dart';
+import 'concierge_service_model.dart';
+import 'service_filter_model.dart';
 
 /// Centralized data source for Concierge & Bespoke Services.
 /// You can easily add, edit, or remove items here to update the UI.

@@ -1,6 +1,6 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
-import 'package:aura_maison_e_commerce/features/auth/screens/login_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/confidentiality_pill.dart';
@@ -20,10 +20,7 @@ class SplashSalonScreen extends StatelessWidget {
         : const OnboardingScreen();
 
     if (!context.mounted) return;
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => next),
-    );
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => next));
   }
 
   @override
@@ -36,7 +33,8 @@ class SplashSalonScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              minHeight: size.height -
+              minHeight:
+                  size.height -
                   MediaQuery.of(context).padding.top -
                   MediaQuery.of(context).padding.bottom,
             ),
@@ -49,9 +47,7 @@ class SplashSalonScreen extends StatelessWidget {
                   const SizedBox(height: 18),
                   const SalonCentralSanctuary(),
                   const Spacer(),
-                  SalonEntrancePortal(
-                    onEnter: () => _enterSalon(context),
-                  ),
+                  SalonEntrancePortal(onEnter: () => _enterSalon(context)),
                   const SizedBox(height: 16),
                 ],
               ),

@@ -1,7 +1,7 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../models/advisor_model.dart';
+import '../../data/models/advisor_model.dart';
 
 /// Reusable card component for displaying an assigned Advisor / Diplomatic Liaison.
 /// Driven by [AdvisorModel].
@@ -9,11 +9,7 @@ class AdvisorCard extends StatelessWidget {
   final AdvisorModel advisor;
   final VoidCallback? onContact;
 
-  const AdvisorCard({
-    super.key,
-    required this.advisor,
-    this.onContact,
-  });
+  const AdvisorCard({super.key, required this.advisor, this.onContact});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +18,10 @@ class AdvisorCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.obsidianCard,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.gold.withValues(alpha: 0.35), width: 1),
+        border: Border.all(
+          color: AppColors.gold.withValues(alpha: 0.35),
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.5),
@@ -43,7 +42,10 @@ class AdvisorCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.gold.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColors.gold.withValues(alpha: 0.3), width: 0.8),
+                  border: Border.all(
+                    color: AppColors.gold.withValues(alpha: 0.3),
+                    width: 0.8,
+                  ),
                 ),
                 child: Text(
                   advisor.sealText,

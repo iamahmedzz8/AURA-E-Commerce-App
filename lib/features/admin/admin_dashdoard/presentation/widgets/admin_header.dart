@@ -6,7 +6,7 @@ class AdminHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 900;
+    // final isMobile = MediaQuery.of(context).size.width < 900;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -21,23 +21,55 @@ class AdminHeader extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text('WORKSHOP MANAGEMENT', style: TextStyle(color: DarkTheme.gold, fontSize: 9, letterSpacing: 1.5, fontFamily: 'Inter')),
-                      SizedBox(width: 20,),
+                      Text(
+                        'WORKSHOP MANAGEMENT',
+                        style: TextStyle(
+                          color: DarkTheme.gold,
+                          fontSize: 9,
+                          letterSpacing: 1.5,
+                          fontFamily: 'Inter',
+                        ),
+                      ),
+                      SizedBox(width: 20),
                       _VendorBadge(),
                     ],
                   ),
-                  Text('Workbench Fleet', style: TextStyle(color: DarkTheme.primaryText, fontSize: 20, fontFamily: 'EB Garamond', fontWeight: FontWeight.bold)),
-                  SizedBox(height: 5,),
-                  Text('ROLE: WORKSHOP MANAGER', style: TextStyle(color: DarkTheme.secondaryText, fontSize: 9, letterSpacing: 1, fontFamily: 'Inter')),
+                  Text(
+                    'Workbench Fleet',
+                    style: TextStyle(
+                      color: DarkTheme.primaryText,
+                      fontSize: 20,
+                      fontFamily: 'EB Garamond',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    'ROLE: WORKSHOP MANAGER',
+                    style: TextStyle(
+                      color: DarkTheme.secondaryText,
+                      fontSize: 9,
+                      letterSpacing: 1,
+                      fontFamily: 'Inter',
+                    ),
+                  ),
                 ],
               ),
               const Spacer(),
-              const Icon(Icons.assignment_outlined, color: DarkTheme.secondaryText, size: 20),
+              const Icon(
+                Icons.assignment_outlined,
+                color: DarkTheme.secondaryText,
+                size: 20,
+              ),
               const SizedBox(width: 12),
               const CircleAvatar(
                 radius: 16,
                 backgroundColor: DarkTheme.gold,
-                child: Icon(Icons.person, size: 18, color: DarkTheme.background),
+                child: Icon(
+                  Icons.person,
+                  size: 18,
+                  color: DarkTheme.background,
+                ),
               ),
             ],
           ),
@@ -59,7 +91,15 @@ class _VendorBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(3),
         border: Border.all(color: DarkTheme.border),
       ),
-      child: const Text('VENDÔME', style: TextStyle(color: DarkTheme.gold, fontSize: 8, letterSpacing: 1, fontFamily: 'Inter')),
+      child: const Text(
+        'VENDÔME',
+        style: TextStyle(
+          color: DarkTheme.gold,
+          fontSize: 8,
+          letterSpacing: 1,
+          fontFamily: 'Inter',
+        ),
+      ),
     );
   }
 }

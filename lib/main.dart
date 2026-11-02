@@ -1,8 +1,5 @@
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
-import 'package:aura_maison_e_commerce/features/splash/splash.dart';
-import 'package:aura_maison_e_commerce/features/support/contact/presentation/screens/about_as.dart';
-import 'package:aura_maison_e_commerce/features/support/contact/presentation/screens/contact_screen.dart';
-import 'package:aura_maison_e_commerce/main_screen.dart';
+import 'package:aura_maison_e_commerce/features/splash/presentation/screens/splash_salon_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -19,7 +16,7 @@ class AuraMaisonApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainScreen(),
+      home: SplashSalonScreen(),
     );
   }
 }

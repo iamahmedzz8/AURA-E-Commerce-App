@@ -1,7 +1,5 @@
-
 import 'package:aura_maison_e_commerce/features/support/contact/presentation/widgets/contact_common_widgets.dart';
 import 'package:aura_maison_e_commerce/features/support/contact/presentation/widgets/contact_selection_widgets.dart';
-import 'package:aura_maison_e_commerce/features/support/contact/presentation/widgets/contact_widget.dart';
 import 'package:aura_maison_e_commerce/features/support/contact/presentation/widgets/curator_widgets.dart';
 import 'package:aura_maison_e_commerce/features/support/support/presentation/cubit/support_state.dart';
 
@@ -21,11 +19,9 @@ class ContactScreen extends StatefulWidget {
 class _ContactScreenState extends State<ContactScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _referenceController =
-      TextEditingController();
+  final TextEditingController _referenceController = TextEditingController();
 
-  final TextEditingController _instructionsController =
-      TextEditingController();
+  final TextEditingController _instructionsController = TextEditingController();
 
   String selectedCategory = 'Rare Complication Acquisition';
 
@@ -59,18 +55,12 @@ class _ContactScreenState extends State<ContactScreen> {
   }) {
     return InputDecoration(
       hintText: hint,
-      hintStyle: const TextStyle(
-        color: Color(0xFF858991),
-        fontSize: 13,
-      ),
+      hintStyle: const TextStyle(color: Color(0xFF858991), fontSize: 13),
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
       filled: true,
       fillColor: const Color(0xFF1B1E23),
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 15,
-        vertical: 16,
-      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
         borderSide: BorderSide.none,
@@ -88,17 +78,11 @@ class _ContactScreenState extends State<ContactScreen> {
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
-        borderSide: const BorderSide(
-          color: Colors.redAccent,
-          width: 0.8,
-        ),
+        borderSide: const BorderSide(color: Colors.redAccent, width: 0.8),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
-        borderSide: const BorderSide(
-          color: Colors.redAccent,
-          width: 1,
-        ),
+        borderSide: const BorderSide(color: Colors.redAccent, width: 1),
       ),
     );
   }
@@ -156,10 +140,7 @@ class _ContactScreenState extends State<ContactScreen> {
       ),
       decoration: _fieldDecoration(
         hint: 'Please share your confidential instructions...',
-      ).copyWith(
-        counterText: '',
-        alignLabelWithHint: true,
-      ),
+      ).copyWith(counterText: '', alignLabelWithHint: true),
     );
   }
 
@@ -173,11 +154,7 @@ class _ContactScreenState extends State<ContactScreen> {
         const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.lock_outline,
-              color: AppColors.goldAccent,
-              size: 13,
-            ),
+            Icon(Icons.lock_outline, color: AppColors.goldAccent, size: 13),
             SizedBox(width: 5),
             Text(
               'End-to-end encryption',
@@ -198,10 +175,7 @@ class _ContactScreenState extends State<ContactScreen> {
             padding: EdgeInsets.symmetric(vertical: 4),
             child: Text(
               'Clear',
-              style: TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 10,
-              ),
+              style: TextStyle(color: AppColors.textSecondary, fontSize: 10),
             ),
           ),
         ),
@@ -214,25 +188,13 @@ class _ContactScreenState extends State<ContactScreen> {
       value: selectedCategory,
       isExpanded: true,
       dropdownColor: const Color(0xFF25282D),
-      icon: const Icon(
-        Icons.keyboard_arrow_down,
-        color: AppColors.goldAccent,
-      ),
-      style: const TextStyle(
-        color: AppColors.textPrimary,
-        fontSize: 13,
-      ),
-      decoration: _fieldDecoration(
-        hint: 'Select request category',
-      ),
+      icon: const Icon(Icons.keyboard_arrow_down, color: AppColors.goldAccent),
+      style: const TextStyle(color: AppColors.textPrimary, fontSize: 13),
+      decoration: _fieldDecoration(hint: 'Select request category'),
       items: categories.map((category) {
         return DropdownMenuItem<String>(
           value: category,
-          child: Text(
-            category,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+          child: Text(category, maxLines: 1, overflow: TextOverflow.ellipsis),
         );
       }).toList(),
       onChanged: (value) {
@@ -248,10 +210,7 @@ class _ContactScreenState extends State<ContactScreen> {
   Widget _buildReferenceField() {
     return TextFormField(
       controller: _referenceController,
-      style: const TextStyle(
-        color: AppColors.textPrimary,
-        fontSize: 13,
-      ),
+      style: const TextStyle(color: AppColors.textPrimary, fontSize: 13),
       decoration: _fieldDecoration(
         hint: '#AM-2025-8849-VDM',
         prefixIcon: const Icon(
@@ -302,8 +261,7 @@ class _ContactScreenState extends State<ContactScreen> {
         ContactResponseTile(
           icon: Icons.apartment_outlined,
           title: 'In-person salon appointment',
-          subtitle:
-              'Place Vendôme, Salon Gabriel (Private Booking)',
+          subtitle: 'Place Vendôme, Salon Gabriel (Private Booking)',
           selected: selectedResponseMethod == 2,
           onTap: () {
             setState(() {
@@ -321,11 +279,7 @@ class _ContactScreenState extends State<ContactScreen> {
       height: 49,
       child: ElevatedButton.icon(
         onPressed: _sendRequest,
-        icon: const Icon(
-          Icons.send_outlined,
-          color: Colors.black,
-          size: 17,
-        ),
+        icon: const Icon(Icons.send_outlined, color: Colors.black, size: 17),
         label: const FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
@@ -342,9 +296,7 @@ class _ContactScreenState extends State<ContactScreen> {
           backgroundColor: AppColors.goldAccent,
           foregroundColor: Colors.black,
           elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         ),
       ),
     );
@@ -388,8 +340,7 @@ class _ContactScreenState extends State<ContactScreen> {
     return Form(
       key: _formKey,
       child: ListView(
-        keyboardDismissBehavior:
-            ScrollViewKeyboardDismissBehavior.onDrag,
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: EdgeInsets.fromLTRB(
           availableWidth < 360 ? 14 : 20,
           14,
@@ -421,9 +372,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
           _buildSectionSpacing(24),
 
-          const ContactSectionLabel(
-            title: 'Request Category',
-          ),
+          const ContactSectionLabel(title: 'Request Category'),
           _buildCategoryField(),
 
           _buildSectionSpacing(17),
@@ -436,9 +385,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
           _buildSectionSpacing(17),
 
-          const ContactSectionLabel(
-            title: 'Protocol Priority',
-          ),
+          const ContactSectionLabel(title: 'Protocol Priority'),
           _buildPrioritySelector(),
 
           _buildSectionSpacing(18),
@@ -451,9 +398,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
           _buildSectionSpacing(23),
 
-          const ContactSectionLabel(
-            title: 'Preferred Response Method',
-          ),
+          const ContactSectionLabel(title: 'Preferred Response Method'),
           _buildResponseMethods(),
 
           _buildSectionSpacing(10),
@@ -491,14 +436,12 @@ class _ContactScreenState extends State<ContactScreen> {
                   final maxContentWidth = width >= 1000
                       ? 720.0
                       : width >= 700
-                          ? 680.0
-                          : double.infinity;
+                      ? 680.0
+                      : double.infinity;
 
                   return Center(
                     child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxWidth: maxContentWidth,
-                      ),
+                      constraints: BoxConstraints(maxWidth: maxContentWidth),
                       child: SizedBox(
                         width: double.infinity,
                         child: requestStatus != null

@@ -1,4 +1,4 @@
-import '../models/bag_item_model.dart';
+import 'models/bag_item_model.dart';
 
 class LoginData {
   static const bagItem = BagItemModel(

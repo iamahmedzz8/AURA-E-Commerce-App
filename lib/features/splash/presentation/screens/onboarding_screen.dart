@@ -1,7 +1,7 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
-import 'package:aura_maison_e_commerce/features/auth/screens/login_screen.dart';
-import 'package:aura_maison_e_commerce/features/auth/screens/signup_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/login_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/assigned_advisor_card.dart';
@@ -89,10 +89,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            OnboardingTopNav(
-              currentStep: _currentStep,
-              onSkip: _skipToAuth,
-            ),
+            OnboardingTopNav(currentStep: _currentStep, onSkip: _skipToAuth),
             Expanded(
               child: PageView(
                 controller: _pageController,
@@ -248,7 +245,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.obsidianDark,
                         borderRadius: BorderRadius.circular(10),
@@ -276,11 +276,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ],
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.obsidianDark,
                     borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
+                    border: Border.all(
+                      color: AppColors.gold.withValues(alpha: 0.4),
+                    ),
                   ),
                   child: const Text(
                     'AES-256 HSM',
@@ -304,7 +309,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     foregroundColor: AppColors.gold,
                     side: const BorderSide(color: AppColors.gold, width: 1),
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
                   ),
                   onPressed: () => _goToStep(0),
                   child: const Text(
@@ -351,7 +358,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   height: 44,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.gold.withValues(alpha: 0.7), width: 1.2),
+                    border: Border.all(
+                      color: AppColors.gold.withValues(alpha: 0.7),
+                      width: 1.2,
+                    ),
                     color: AppColors.obsidianDark,
                   ),
                   child: const Center(
@@ -441,7 +451,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const PrivateConciergeScreen()),
+                  MaterialPageRoute(
+                    builder: (_) => const PrivateConciergeScreen(),
+                  ),
                 );
               },
               icon: const Icon(Icons.tune, size: 14, color: AppColors.gold),
@@ -469,7 +481,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.ivory,
                 side: const BorderSide(color: AppColors.gold, width: 1),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
+                ),
               ),
               onPressed: _goToLogin,
               child: const Text(

@@ -33,8 +33,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       RegExp(r'[A-Z]').hasMatch(_newPassphraseController.text);
   bool get _hasDigit =>
       RegExp(r'[0-9]').hasMatch(_newPassphraseController.text);
-  bool get _hasSpecialChar =>
-      RegExp(r'[!@#\$%^&*(),.?":{}|<>]').hasMatch(_newPassphraseController.text);
+  bool get _hasSpecialChar => RegExp(
+    r'[!@#\$%^&*(),.?":{}|<>]',
+  ).hasMatch(_newPassphraseController.text);
 
   int get _score {
     int s = 0;
@@ -79,9 +80,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
     if (!_passwordsMatch) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Both passphrases must match exactly.'),
-        ),
+        const SnackBar(content: Text('Both passphrases must match exactly.')),
       );
       return;
     }
@@ -242,7 +241,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                 ),
                 child: Text(
-                  _score == 4 ? 'MAXIMUM SECURITY' : 'SECURITY LEVEL: $_score/4',
+                  _score == 4
+                      ? 'MAXIMUM SECURITY'
+                      : 'SECURITY LEVEL: $_score/4',
                   style: TextStyle(
                     color: _score == 4 ? AppColors.emerald : AppColors.gold,
                     fontSize: 9.5,
@@ -305,10 +306,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
-                borderSide: const BorderSide(
-                  color: AppColors.gold,
-                  width: 1.2,
-                ),
+                borderSide: const BorderSide(color: AppColors.gold, width: 1.2),
               ),
             ),
           ),
@@ -350,8 +348,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               ),
               if (_passwordsMatch)
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.emerald.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(4),
@@ -452,9 +452,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.gold,
           foregroundColor: AppColors.obsidianDark,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           elevation: 4,
         ),
         onPressed: _isLoading ? null : _updatePassphrase,

@@ -1,12 +1,11 @@
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
-import 'package:aura_maison_e_commerce/features/auth/screens/login_screen.dart';
-import 'package:aura_maison_e_commerce/features/auth/screens/signup_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/login_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../data/concierge_data.dart';
-import '../models/advisor_model.dart';
-import '../models/concierge_service_model.dart';
+import '../../data/models/concierge_data.dart';
+import '../../data/models/advisor_model.dart';
+import '../../data/models/concierge_service_model.dart';
 import '../widgets/advisor_card.dart';
 import '../widgets/concierge_editorial_header.dart';
 import '../widgets/concierge_filter_bar.dart';
@@ -38,11 +37,13 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
 
   List<ConciergeServiceModel> get _filteredServices {
     return ConciergeData.services.where((service) {
-      final matchesCategory = _selectedCategoryKey == 'all' ||
+      final matchesCategory =
+          _selectedCategoryKey == 'all' ||
           service.category == _selectedCategoryKey;
 
       final query = _searchQuery.trim().toLowerCase();
-      final matchesQuery = query.isEmpty ||
+      final matchesQuery =
+          query.isEmpty ||
           service.title.toLowerCase().contains(query) ||
           service.description.toLowerCase().contains(query) ||
           service.location.toLowerCase().contains(query) ||
@@ -111,7 +112,9 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    _activeAdvisorIndex = (_activeAdvisorIndex + 1) % ConciergeData.advisors.length;
+                    _activeAdvisorIndex =
+                        (_activeAdvisorIndex + 1) %
+                        ConciergeData.advisors.length;
                   });
                 },
                 child: const Row(
@@ -187,11 +190,22 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
             onChanged: (val) => setState(() => _searchQuery = val),
             decoration: InputDecoration(
               hintText: 'Search bespoke privileges or locations...',
-              hintStyle: const TextStyle(color: AppColors.luxuryMuted, fontSize: 12),
-              prefixIcon: const Icon(Icons.search, size: 18, color: AppColors.gold),
+              hintStyle: const TextStyle(
+                color: AppColors.luxuryMuted,
+                fontSize: 12,
+              ),
+              prefixIcon: const Icon(
+                Icons.search,
+                size: 18,
+                color: AppColors.gold,
+              ),
               suffixIcon: _searchQuery.isNotEmpty
                   ? IconButton(
-                      icon: const Icon(Icons.close, size: 16, color: AppColors.luxuryMuted),
+                      icon: const Icon(
+                        Icons.close,
+                        size: 16,
+                        color: AppColors.luxuryMuted,
+                      ),
                       onPressed: () {
                         _searchController.clear();
                         setState(() => _searchQuery = '');
@@ -223,7 +237,11 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
         alignment: Alignment.center,
         child: Column(
           children: [
-            Icon(Icons.search_off_outlined, size: 36, color: AppColors.gold.withValues(alpha: 0.5)),
+            Icon(
+              Icons.search_off_outlined,
+              size: 36,
+              color: AppColors.gold.withValues(alpha: 0.5),
+            ),
             const SizedBox(height: 12),
             const Text(
               'No bespoke services found matching your filter.',
@@ -239,7 +257,10 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
                   _searchQuery = '';
                 });
               },
-              child: const Text('Reset Filters', style: TextStyle(color: AppColors.gold)),
+              child: const Text(
+                'Reset Filters',
+                style: TextStyle(color: AppColors.gold),
+              ),
             ),
           ],
         ),
@@ -258,7 +279,10 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
     );
   }
 
-  void _showServiceDetailsSheet(BuildContext context, ConciergeServiceModel service) {
+  void _showServiceDetailsSheet(
+    BuildContext context,
+    ConciergeServiceModel service,
+  ) {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.obsidianDark,
@@ -287,7 +311,10 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.gold.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(4),
@@ -303,7 +330,10 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
                   ),
                   Text(
                     service.location,
-                    style: const TextStyle(color: AppColors.luxuryMuted, fontSize: 11),
+                    style: const TextStyle(
+                      color: AppColors.luxuryMuted,
+                      fontSize: 11,
+                    ),
                   ),
                 ],
               ),
@@ -334,7 +364,9 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.gold,
                     foregroundColor: AppColors.obsidianDark,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
                   ),
                   onPressed: () {
                     Navigator.pop(ctx);
@@ -370,7 +402,9 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.gold,
               foregroundColor: AppColors.obsidianDark,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
               elevation: 4,
             ),
             onPressed: () {
@@ -397,7 +431,9 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
             style: OutlinedButton.styleFrom(
               foregroundColor: AppColors.ivory,
               side: const BorderSide(color: AppColors.gold, width: 1),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
             ),
             onPressed: () {
               Navigator.push(

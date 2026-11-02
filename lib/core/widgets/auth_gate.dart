@@ -1,7 +1,7 @@
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
-import 'package:aura_maison_e_commerce/features/auth/screens/login_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/login_screen.dart';
 import 'package:aura_maison_e_commerce/features/home/presentation/screens/home_screen.dart';
-import 'package:aura_maison_e_commerce/features/splash/screens/splash_salon_screen.dart';
+import 'package:aura_maison_e_commerce/features/splash/presentation/screens/splash_salon_screen.dart';
 import 'package:flutter/material.dart';
 
 /// Chooses the first screen from SharedPreferences:

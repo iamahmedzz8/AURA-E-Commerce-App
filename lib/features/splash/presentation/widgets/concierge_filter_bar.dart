@@ -1,6 +1,6 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import '../models/service_filter_model.dart';
+import '../../data/models/service_filter_model.dart';
 
 /// Horizontal luxury filter bar for concierge categories.
 /// Driven by [ServiceFilterModel].
@@ -59,16 +59,22 @@ class ConciergeFilterBar extends StatelessWidget {
                     Icon(
                       filter.icon,
                       size: 14,
-                      color: isSelected ? AppColors.obsidianDark : AppColors.gold,
+                      color: isSelected
+                          ? AppColors.obsidianDark
+                          : AppColors.gold,
                     ),
                     const SizedBox(width: 6),
                   ],
                   Text(
                     filter.label,
                     style: TextStyle(
-                      color: isSelected ? AppColors.obsidianDark : AppColors.ivory,
+                      color: isSelected
+                          ? AppColors.obsidianDark
+                          : AppColors.ivory,
                       fontSize: 11.5,
-                      fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                      fontWeight: isSelected
+                          ? FontWeight.w700
+                          : FontWeight.w500,
                       letterSpacing: 0.3,
                     ),
                   ),

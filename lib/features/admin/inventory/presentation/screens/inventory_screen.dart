@@ -1,5 +1,5 @@
+import 'package:aura_maison_e_commerce/core/theme/dark_theme.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/theme/dark_theme.dart';
 import '../../domain/entities/inventory_item.dart';
 import '../../data/datasources/inventory_remote_data_source.dart';
 import '../widgets/header_section.dart';
@@ -21,15 +21,22 @@ class InventoryScreen extends StatelessWidget {
           future: dataSource.fetchInventoryItems(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator(color: DarkTheme.gold));
+              return Center(
+                child: CircularProgressIndicator(color: DarkTheme.gold),
+              );
             }
             if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}', style: const TextStyle(color: Colors.redAccent)));
+              return Center(
+                child: Text(
+                  'Error: ${snapshot.error}',
+                  style: const TextStyle(color: Colors.redAccent),
+                ),
+              );
             }
             final items = snapshot.data ?? [];
             return CustomScrollView(
               slivers: [
-                 SliverAppBar(
+                SliverAppBar(
                   pinned: true,
                   automaticallyImplyLeading: false,
                   backgroundColor: DarkTheme.background,
@@ -38,40 +45,51 @@ class InventoryScreen extends StatelessWidget {
                   toolbarHeight: 80,
                   title: HeaderSection(),
                 ),
-                 SliverToBoxAdapter(child: StatsSection()),
-                 SliverToBoxAdapter(child: ActionButtons()),
-                 SliverToBoxAdapter(child: SearchFilter()),
+                SliverToBoxAdapter(child: StatsSection()),
+                SliverToBoxAdapter(child: ActionButtons()),
+                SliverToBoxAdapter(child: SearchFilter()),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
-                        (context, index) => InventoryCard(item: items[index]),
+                    (context, index) => InventoryCard(item: items[index]),
                     childCount: items.length,
                   ),
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding:  EdgeInsets.symmetric(vertical: 24.0),
+                    padding: EdgeInsets.symmetric(vertical: 24.0),
                     child: Column(
                       children: [
                         Text(
                           'Showing ${items.length} of 48 listed masterpieces',
-                          style:  TextStyle(color: DarkTheme.secondaryText, fontSize: 12),
+                          style: TextStyle(
+                            color: DarkTheme.secondaryText,
+                            fontSize: 12,
+                          ),
                         ),
-                         SizedBox(height: 8),
+                        SizedBox(height: 8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children:  [
-                            Icon(Icons.copy, size: 14, color: DarkTheme.secondaryText),
+                          children: [
+                            Icon(
+                              Icons.copy,
+                              size: 14,
+                              color: DarkTheme.secondaryText,
+                            ),
                             SizedBox(width: 4),
                             Text(
                               'SIMULATE EMPTY INVENTORY STATE',
-                              style: TextStyle(color: DarkTheme.secondaryText, fontSize: 10, letterSpacing: 1),
+                              style: TextStyle(
+                                color: DarkTheme.secondaryText,
+                                fontSize: 10,
+                                letterSpacing: 1,
+                              ),
                             ),
                           ],
                         ),
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             );
           },

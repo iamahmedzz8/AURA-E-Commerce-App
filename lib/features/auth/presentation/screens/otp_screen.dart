@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
-import 'package:aura_maison_e_commerce/features/home/presentation/screens/home_screen.dart';
+import 'package:aura_maison_e_commerce/main_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/aura_medallion_header.dart';
 import '../widgets/auth_info_row.dart';
 import '../widgets/auth_top_bar.dart';
@@ -98,7 +96,7 @@ class _OtpScreenState extends State<OtpScreen> {
       );
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
+        MaterialPageRoute(builder: (_) => const MainScreen()),
         (_) => false,
       );
       return;
@@ -138,7 +136,8 @@ class _OtpScreenState extends State<OtpScreen> {
                 icon: Icons.lock,
                 tag: 'CONCIERGE PROTOCOL',
                 title: 'Private Security Code',
-                subtitle: 'An exclusive six-digit confirmation\ncode has been sent to',
+                subtitle:
+                    'An exclusive six-digit confirmation\ncode has been sent to',
                 extraChild: Text(
                   widget.email,
                   textAlign: TextAlign.center,
@@ -226,7 +225,11 @@ class _OtpScreenState extends State<OtpScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.hourglass_bottom, color: AppColors.gold, size: 16),
+              const Icon(
+                Icons.hourglass_bottom,
+                color: AppColors.gold,
+                size: 16,
+              ),
               const SizedBox(width: 7),
               Text(
                 'Expires in 00:${_seconds.toString().padLeft(2, '0')}',
@@ -243,7 +246,9 @@ class _OtpScreenState extends State<OtpScreen> {
             child: Text(
               'ISSUE A NEW CODE',
               style: TextStyle(
-                color: _seconds == 0 ? AppColors.gold : AppColors.obsidianBorder,
+                color: _seconds == 0
+                    ? AppColors.gold
+                    : AppColors.obsidianBorder,
                 letterSpacing: 1.1,
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
@@ -273,9 +278,7 @@ class _OtpScreenState extends State<OtpScreen> {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.gold,
           foregroundColor: AppColors.obsidianDark,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         ),
       ),
     );
@@ -300,9 +303,7 @@ class _OtpScreenState extends State<OtpScreen> {
           foregroundColor: AppColors.ivoryMuted,
           backgroundColor: AppColors.obsidianCard,
           side: const BorderSide(color: AppColors.obsidianBorder),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         ),
       ),
     );

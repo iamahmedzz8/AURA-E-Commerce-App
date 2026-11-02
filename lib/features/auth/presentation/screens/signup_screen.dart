@@ -1,12 +1,9 @@
-
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/aura_text.dart';
-import 'package:aura_maison_e_commerce/features/auth/screens/otp_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/otp_screen.dart';
 import 'package:flutter/material.dart';
 
-
-import '../models/validators.dart';
+import '../../data/models/validators.dart';
 import '../widgets/aura_input.dart';
 import '../widgets/custom_auth_button.dart';
 import '../widgets/or_divider.dart';
@@ -291,7 +288,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     color: AppColors.muted,
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pushReplacement(
+                    onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => const LoginScreen()),
                     ),

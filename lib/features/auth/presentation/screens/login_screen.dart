@@ -1,10 +1,10 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
 import 'package:aura_maison_e_commerce/core/widgets/aura_text.dart';
-import 'package:aura_maison_e_commerce/features/home/presentation/screens/home_screen.dart';
+import 'package:aura_maison_e_commerce/main_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../data/login_data.dart';
+import '../../data/login_data.dart';
 import '../widgets/aura_input.dart';
 import '../widgets/bag_preview_card.dart';
 import '../widgets/face_id_card.dart';
@@ -56,15 +56,12 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     await PrefsService.setOnboardingCompleted(true);
-    await PrefsService.saveLoginSession(
-      email: email,
-      rememberMe: staySignedIn,
-    );
+    await PrefsService.saveLoginSession(email: email, rememberMe: staySignedIn);
 
     if (!mounted) return;
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (_) => const HomeScreen()),
+      MaterialPageRoute(builder: (_) => const MainScreen()),
       (_) => false,
     );
   }
@@ -320,11 +317,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(width: 7),
             const Expanded(
-              child: AuraText(
-                'Remember Me',
-                size: 13,
-                color: AppColors.muted,
-              ),
+              child: AuraText('Remember Me', size: 13, color: AppColors.muted),
             ),
             GestureDetector(
               onTap: () {

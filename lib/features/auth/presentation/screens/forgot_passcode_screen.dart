@@ -221,10 +221,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
-                borderSide: const BorderSide(
-                  color: AppColors.gold,
-                  width: 1.2,
-                ),
+                borderSide: const BorderSide(color: AppColors.gold, width: 1.2),
               ),
             ),
           ),
@@ -241,9 +238,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.gold,
           foregroundColor: AppColors.obsidianDark,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           elevation: 4,
         ),
         onPressed: _isLoading ? null : _sendRecoveryLink,

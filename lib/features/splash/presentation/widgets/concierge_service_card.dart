@@ -1,6 +1,6 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import '../models/concierge_service_model.dart';
+import '../../data/models/concierge_service_model.dart';
 
 /// Reusable card component for displaying a Concierge Service item.
 /// Driven by [ConciergeServiceModel].
@@ -8,11 +8,7 @@ class ConciergeServiceCard extends StatelessWidget {
   final ConciergeServiceModel service;
   final VoidCallback? onTap;
 
-  const ConciergeServiceCard({
-    super.key,
-    required this.service,
-    this.onTap,
-  });
+  const ConciergeServiceCard({super.key, required this.service, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +48,16 @@ class ConciergeServiceCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: AppColors.obsidianDark,
                         borderRadius: BorderRadius.circular(6),
-                        border: Border.all(color: AppColors.gold.withValues(alpha: 0.25), width: 0.8),
+                        border: Border.all(
+                          color: AppColors.gold.withValues(alpha: 0.25),
+                          width: 0.8,
+                        ),
                       ),
-                      child: Icon(service.icon, size: 20, color: AppColors.gold),
+                      child: Icon(
+                        service.icon,
+                        size: 20,
+                        color: AppColors.gold,
+                      ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -73,7 +76,11 @@ class ConciergeServiceCard extends StatelessWidget {
                           const SizedBox(height: 3),
                           Row(
                             children: [
-                              const Icon(Icons.location_on_outlined, size: 11, color: AppColors.luxuryMuted),
+                              const Icon(
+                                Icons.location_on_outlined,
+                                size: 11,
+                                color: AppColors.luxuryMuted,
+                              ),
                               const SizedBox(width: 4),
                               Text(
                                 service.location,
@@ -90,11 +97,17 @@ class ConciergeServiceCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.obsidianDark,
                         borderRadius: BorderRadius.circular(4),
-                        border: Border.all(color: AppColors.gold.withValues(alpha: 0.3), width: 0.8),
+                        border: Border.all(
+                          color: AppColors.gold.withValues(alpha: 0.3),
+                          width: 0.8,
+                        ),
                       ),
                       child: Text(
                         service.tag,
@@ -124,7 +137,10 @@ class ConciergeServiceCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.obsidianElevated,
                           borderRadius: BorderRadius.circular(3),
