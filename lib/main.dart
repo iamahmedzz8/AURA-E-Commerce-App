@@ -21,7 +21,7 @@ class AuraMaisonApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashSalonScreen(),
+      home: ContactScreen(),
     );
   }
 }
