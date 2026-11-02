@@ -33,7 +33,7 @@ class EmptyFavoritesState extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: AppColors.goldAccent.withOpacity(0.20),
+                    color: AppColors.goldAccent.withValues(alpha: 0.20),
                   ),
                 ),
                 child: Center(
@@ -41,10 +41,10 @@ class EmptyFavoritesState extends StatelessWidget {
                     width: 76,
                     height: 76,
                     decoration: BoxDecoration(
-                      color: AppColors.ivoryMuted.withOpacity(0.08),
+                      color: AppColors.ivoryMuted.withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: AppColors.goldAccent.withOpacity(0.15),
+                        color: AppColors.goldAccent.withValues(alpha: 0.15),
                       ),
                     ),
                     child: const Icon(
@@ -60,10 +60,7 @@ class EmptyFavoritesState extends StatelessWidget {
 
           // Workshop Badge
           Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 4,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
               color: AppColors.obsidianCard,
               borderRadius: BorderRadius.circular(20),
@@ -71,11 +68,7 @@ class EmptyFavoritesState extends StatelessWidget {
             child: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  Icons.lock_outline,
-                  color: AppColors.goldAccent,
-                  size: 11,
-                ),
+                Icon(Icons.lock_outline, color: AppColors.goldAccent, size: 11),
                 SizedBox(width: 4),
                 Text(
                   'VENDÔME WORKSHOP',
@@ -146,10 +139,7 @@ class EmptyFavoritesState extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 8),
-                  Icon(
-                    Icons.arrow_forward,
-                    size: 16,
-                  ),
+                  Icon(Icons.arrow_forward, size: 16),
                 ],
               ),
             ),
@@ -169,16 +159,10 @@ class EmptyFavoritesState extends StatelessWidget {
               children: [
                 Text(
                   'VIEW RARE ALLOCATIONS',
-                  style: TextStyle(
-                    fontSize: 9,
-                    letterSpacing: 0.9,
-                  ),
+                  style: TextStyle(fontSize: 9, letterSpacing: 0.9),
                 ),
                 SizedBox(width: 5),
-                Icon(
-                  Icons.north_east,
-                  size: 12,
-                ),
+                Icon(Icons.north_east, size: 12),
               ],
             ),
           ),

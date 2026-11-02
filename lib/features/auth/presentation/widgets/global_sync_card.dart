@@ -9,7 +9,8 @@ class GlobalSyncCard extends StatelessWidget {
   const GlobalSyncCard({
     super.key,
     this.title = 'GLOBAL SYNC',
-    this.description = 'Your session will be updated on all your secure devices.',
+    this.description =
+        'Your session will be updated on all your secure devices.',
   });
 
   @override

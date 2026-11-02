@@ -160,6 +160,78 @@ class AppStrings {
   static const String curatorOnline = 'CURATOR ONLINE';
   static const String contactTheSalon = 'CONTACT THE SALON';
 
+  // VIP Member Sign In Screen
+  static const String vipMemberScreenTitle = 'VIP MEMBER';
+  static const String vipMemberAccessTitle = 'Member Access';
+  static const String vipMemberAccessSubtitle =
+      'Enter your patron credentials to access\nbespoke acquisitions and vault reserve.';
+  static const String patronSignInTab = 'PATRON SIGN IN';
+  static const String privateRegisterTab = 'PRIVATE REGISTER';
+  static const String patronIdCipherLabel = 'PATRON ID / CIPHER';
+  static const String salonVendomeBadge = 'SALON • VENDÔME';
+  static const String patronIdPlaceholder = 'v.rothschild@vendome.ch';
+  static const String workshopPassphraseLabel = 'WORKSHOP PASSPHRASE';
+  static const String highSecurityBadge = 'HIGH SECURITY';
+  static const String passphrasePlaceholder = 'ChronometrePrive2025';
+  static const String rememberSalonKey = 'Remember Salon Key';
+  static const String forgottenPassphrase = 'Forgotten Passphrase?';
+  static const String enterPrivateSalonAction = 'ENTER THE PRIVATE SALON';
+  static const String vaultBiometricsDivider = 'VAULT BIOMETRICS';
+  static const String authenticateBiometricTitle =
+      'Authenticate with FaceID / Touch\nVault';
+  static const String authenticateBiometricSubtitle =
+      'Instant hardware enclave validation for pre-\napproved patron devices.';
+  static const String conciergeEncryptionNote =
+      'CONCIERGE VERIFICATION: 256-BIT ENCRYPTED\nHOROLOGICAL LEDGER';
+  static const String atelierLocations =
+      'GENÈVE • PARIS • TOKYO • NEW YORK';
+
+  // Salon Membership Application Screen (Create Account)
+  static const String createAccountScreenTitle = 'CREATE ACCOUNT';
+  static const String patronsCircleEyebrow = 'PATRONS’ CIRCLE';
+  static const String salonMembershipHeading =
+      'Salon Membership\nApplication';
+  static const String salonMembershipSubtitle =
+      'Join the exclusive circle of AURA MAISON collectors and access our private watch allocations.';
+  static const String allocationVintageBadge = '2025 VINTAGE ALLOCATION';
+  static const String restrictedAccessLabel = 'Restricted Access';
+
+  // Registration Form Fields & Password Criteria
+  static const String fullNameLabel = 'FULL NAME';
+  static const String titleSurnameBadge = 'title & surname';
+  static const String fullNamePlaceholder =
+      'Baroness Victoria de Rothschild';
+  static const String privateEmailLabel = 'PRIVATE EMAIL ADDRESS';
+  static const String encryptedProtocolBadge = 'encrypted protocol';
+  static const String privateEmailPlaceholder = 'v.rothschild@vendome.ch';
+  static const String mobilePhoneLabel = 'MOBILE PHONE NUMBER';
+  static const String phoneCountryPrefix = '• CH +41';
+  static const String mobilePhonePlaceholder = '79 240 18 90';
+  static const String securePasswordLabel = 'SECURE PASSWORD';
+  static const String veryStrongBadge = 'Very Strong';
+  static const String securePasswordPlaceholder = 'Vendome•1875•Vault\$';
+  static const String criteriaMinCharacters = '8+ characters';
+  static const String criteriaUppercase = '1 uppercase letter';
+  static const String criteriaDigit = '1 digit';
+  static const String criteriaSpecialSymbol = '1 special symbol';
+
+  // Legal Consent & Application Action Button
+  static const String termsConsentPrefix =
+      'I accept the Terms and Conditions and the ';
+  static const String privacyPolicyLink = 'Privacy Policy';
+  static const String termsConsentSuffix = ' of the AURA MAISON Salon.';
+  static const String createPrivilegeAccountAction =
+      'CREATE MY PRIVILEGE ACCOUNT';
+
+  // Member Redirect & Discretion Guarantee
+  static const String alreadyMemberQuestion =
+      'Already a member of the House?';
+  static const String enterPrivateSalonLink = 'ENTER THE PRIVATE SALON';
+  static const String discretionGuaranteeTitle =
+      'FINE WATCHMAKING DISCRETION GUARANTEE';
+  static const String discretionGuaranteeSubtitle =
+      'Your contact details remain strictly encrypted and inaccessible to third parties.';
+
   // Section: Curated Departments
   static const String curatedDepartments = 'CURATED DEPARTMENTS';
   static const String privateWorkshops = 'The Private Workshops';

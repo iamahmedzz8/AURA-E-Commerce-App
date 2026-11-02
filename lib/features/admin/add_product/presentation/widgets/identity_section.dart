@@ -4,7 +4,6 @@ import '../../../../../core/theme/dark_theme.dart';
 class IdentitySection extends StatelessWidget {
   const IdentitySection({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,14 +54,17 @@ class IdentitySection extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'Royal Tourbillon Mystérieux',
               hintStyle: TextStyle(
-                color: DarkTheme.secondaryText.withOpacity(0.5),
+                color: DarkTheme.secondaryText.withValues(alpha: 0.5),
                 fontSize: 18,
                 fontFamily: 'EB Garamond',
                 fontWeight: FontWeight.w600,
               ),
               filled: true,
               fillColor: DarkTheme.background,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 14,
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: const BorderSide(color: DarkTheme.border),
@@ -105,7 +107,7 @@ class IdentitySection extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
           const SizedBox(height: 8),
@@ -120,13 +122,16 @@ class IdentitySection extends StatelessWidget {
             decoration: InputDecoration(
               hintText: '#TS-990-PT',
               hintStyle: TextStyle(
-                color: DarkTheme.secondaryText.withOpacity(0.5),
+                color: DarkTheme.secondaryText.withValues(alpha: 0.5),
                 fontSize: 14,
                 fontFamily: 'Inter',
               ),
               filled: true,
               fillColor: DarkTheme.background,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 14,
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: const BorderSide(color: DarkTheme.border),
@@ -140,9 +145,12 @@ class IdentitySection extends StatelessWidget {
                 borderSide: const BorderSide(color: DarkTheme.gold),
               ),
               suffixIcon: IconButton(
-                icon: const Icon(Icons.copy, color: DarkTheme.secondaryText, size: 18), // صغرناها
-                onPressed: () {
-                },
+                icon: const Icon(
+                  Icons.copy,
+                  color: DarkTheme.secondaryText,
+                  size: 18,
+                ), // صغرناها
+                onPressed: () {},
               ),
             ),
           ),
@@ -169,7 +177,11 @@ class IdentitySection extends StatelessWidget {
               child: DropdownButton<String>(
                 isExpanded: true,
                 dropdownColor: DarkTheme.surface,
-                icon: const Icon(Icons.keyboard_arrow_down, color: DarkTheme.secondaryText, size: 18),
+                icon: const Icon(
+                  Icons.keyboard_arrow_down,
+                  color: DarkTheme.secondaryText,
+                  size: 18,
+                ),
                 hint: const Text(
                   'Fine Watchmaking',
                   style: TextStyle(

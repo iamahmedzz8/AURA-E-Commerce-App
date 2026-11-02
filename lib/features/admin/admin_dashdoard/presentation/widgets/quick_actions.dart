@@ -10,7 +10,7 @@ class QuickActions extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         Text(
+        Text(
           'ORDERS & WATCHMAKING DECREES',
           style: TextStyle(
             color: DarkTheme.secondaryText,
@@ -20,7 +20,7 @@ class QuickActions extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-         SizedBox(height: 16),
+        SizedBox(height: 16),
 
         SizedBox(
           width: double.infinity,
@@ -28,15 +28,15 @@ class QuickActions extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: DarkTheme.gold,
               foregroundColor: DarkTheme.background,
-              padding:  EdgeInsets.symmetric(vertical: 16),
+              padding: EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
               elevation: 0,
             ),
             onPressed: () => Navigator.pushNamed(context, '/add-product'),
-            icon:  Icon(Icons.add_circle_outline, size: 18),
-            label:  Text(
+            icon: Icon(Icons.add_circle_outline, size: 18),
+            label: Text(
               'REGISTER A MASTERPIECE',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -47,25 +47,25 @@ class QuickActions extends StatelessWidget {
             ),
           ),
         ),
-         SizedBox(height: 12),
+        SizedBox(height: 12),
         SizedBox(
           width: double.infinity,
           child: OutlinedButton.icon(
             style: OutlinedButton.styleFrom(
               backgroundColor: DarkTheme.surface,
               foregroundColor: DarkTheme.primaryText,
-              side:  BorderSide(color: DarkTheme.border),
-              padding:  EdgeInsets.symmetric(vertical: 16),
+              side: BorderSide(color: DarkTheme.border),
+              padding: EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
-            onPressed: () => Navigator.push((context),
-                MaterialPageRoute(builder:
-                (context)=>InventoryScreen(),
-                )),
-            icon:  Icon(Icons.grid_view, size: 18, color: DarkTheme.gold),
-            label:  Text(
+            onPressed: () => Navigator.push(
+              (context),
+              MaterialPageRoute(builder: (context) => InventoryScreen()),
+            ),
+            icon: Icon(Icons.grid_view, size: 18, color: DarkTheme.gold),
+            label: Text(
               'MANAGE INVENTORY REGISTER',
               style: TextStyle(
                 letterSpacing: 1,
@@ -81,17 +81,19 @@ class QuickActions extends StatelessWidget {
           width: double.infinity,
           child: TextButton.icon(
             style: TextButton.styleFrom(
-              backgroundColor: DarkTheme.surface.withOpacity(0.5),
+              backgroundColor: DarkTheme.surface.withValues(alpha: 0.5),
               foregroundColor: DarkTheme.secondaryText,
-              padding:  EdgeInsets.symmetric(vertical: 14),
+              padding: EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
-                side: BorderSide(color: DarkTheme.border.withOpacity(0.5)),
+                side: BorderSide(
+                  color: DarkTheme.border.withValues(alpha: 0.5),
+                ),
               ),
             ),
             onPressed: () {},
-            icon:  Icon(Icons.settings_outlined, size: 16),
-            label:  Text(
+            icon: Icon(Icons.settings_outlined, size: 16),
+            label: Text(
               'GENERATE NOTARIZED COSC REPORT',
               style: TextStyle(
                 fontSize: 11,

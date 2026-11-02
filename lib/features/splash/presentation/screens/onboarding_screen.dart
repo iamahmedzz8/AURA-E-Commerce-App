@@ -1,7 +1,7 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
-import 'package:aura_maison_e_commerce/features/auth/presentation/screens/login_screen.dart';
-import 'package:aura_maison_e_commerce/features/auth/presentation/screens/signup_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/vip_member_sign_in_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/create_account_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/assigned_advisor_card.dart';
@@ -60,7 +60,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     if (!mounted) return;
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const LoginScreen()),
+      MaterialPageRoute(builder: (_) => const VipMemberSignInScreen()),
     );
   }
 
@@ -69,7 +69,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     if (!mounted) return;
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => const SignupScreen()),
+      MaterialPageRoute(builder: (_) => const CreateAccountScreen()),
     );
   }
 
@@ -78,7 +78,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     if (!mounted) return;
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => const LoginScreen()),
+      MaterialPageRoute(builder: (_) => const VipMemberSignInScreen()),
     );
   }
 

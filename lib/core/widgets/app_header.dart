@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
 import 'package:aura_maison_e_commerce/features/search/presentation/screens/search_screen.dart';
+
 class AppHeader extends StatelessWidget {
   final String title;
 
@@ -44,8 +44,7 @@ class AppHeader extends StatelessWidget {
               width: 40,
               child: IconButton(
                 padding: EdgeInsets.zero,
-                onPressed: onBackPressed ??
-                    () => Navigator.maybePop(context),
+                onPressed: onBackPressed ?? () => Navigator.maybePop(context),
                 icon: const Icon(
                   Icons.arrow_back_ios_new,
                   color: AppColors.ivoryMuted,
@@ -80,8 +79,7 @@ class AppHeader extends StatelessWidget {
           if (showBackButton)
             IconButton(
               padding: EdgeInsets.zero,
-              onPressed: onBackPressed ??
-                  () => Navigator.maybePop(context),
+              onPressed: onBackPressed ?? () => Navigator.maybePop(context),
               icon: const Icon(
                 Icons.arrow_back_ios_new,
                 color: AppColors.ivoryMuted,
@@ -129,21 +127,13 @@ class AppHeader extends StatelessWidget {
             IconButton(
               iconSize: 20,
               padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(
-                minWidth: 40,
-                minHeight: 44,
-              ),
-              icon: const Icon(
-                Icons.search,
-                color: AppColors.iconLight,
-              ),
+              constraints: const BoxConstraints(minWidth: 40, minHeight: 44),
+              icon: const Icon(Icons.search, color: AppColors.iconLight),
               onPressed: () {
                 if (title != AppStrings.searchTitle) {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => const SearchScreen(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const SearchScreen()),
                   );
                 }
               },
@@ -153,10 +143,7 @@ class AppHeader extends StatelessWidget {
             IconButton(
               iconSize: 21,
               padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(
-                minWidth: 40,
-                minHeight: 44,
-              ),
+              constraints: const BoxConstraints(minWidth: 40, minHeight: 44),
               icon: const Icon(
                 Icons.support_agent_outlined,
                 color: AppColors.iconLight,

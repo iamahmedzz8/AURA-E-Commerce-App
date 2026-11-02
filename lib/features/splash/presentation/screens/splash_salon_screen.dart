@@ -1,6 +1,6 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
-import 'package:aura_maison_e_commerce/features/auth/presentation/screens/login_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/vip_member_sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/confidentiality_pill.dart';
@@ -16,7 +16,7 @@ class SplashSalonScreen extends StatelessWidget {
 
   Future<void> _enterSalon(BuildContext context) async {
     final Widget next = PrefsService.isOnboardingCompleted
-        ? const LoginScreen()
+        ? const VipMemberSignInScreen()
         : const OnboardingScreen();
 
     if (!context.mounted) return;

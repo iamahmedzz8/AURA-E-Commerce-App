@@ -72,7 +72,7 @@ class _ContactScreenState extends State<ContactScreen> {
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
         borderSide: BorderSide(
-          color: AppColors.goldAccent.withOpacity(0.7),
+          color: AppColors.goldAccent.withValues(alpha: 0.7),
           width: 1,
         ),
       ),
@@ -185,7 +185,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
   Widget _buildCategoryField() {
     return DropdownButtonFormField<String>(
-      value: selectedCategory,
+      initialValue: selectedCategory,
       isExpanded: true,
       dropdownColor: const Color(0xFF25282D),
       icon: const Icon(Icons.keyboard_arrow_down, color: AppColors.goldAccent),

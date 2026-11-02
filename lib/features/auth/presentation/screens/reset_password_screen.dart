@@ -6,7 +6,7 @@ import '../widgets/auth_top_bar.dart';
 import '../widgets/global_sync_card.dart';
 import '../widgets/password_criteria_gauge.dart';
 import '../widgets/tamper_proof_seal_card.dart';
-import 'login_screen.dart';
+import 'vip_member_sign_in_screen.dart';
 
 /// Reset Password — New Password / Set a New Seal Screen (Node 6:325)
 /// Cryptographic password reset enforcing Haute Horlogerie security standards.
@@ -129,7 +129,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 Navigator.pop(ctx);
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (_) => const LoginScreen()),
+                  MaterialPageRoute(builder: (_) => const VipMemberSignInScreen()),
                   (route) => false,
                 );
               },

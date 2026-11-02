@@ -13,9 +13,25 @@ class GallerySection extends StatelessWidget {
           children: [
             const Icon(Icons.image_outlined, color: DarkTheme.gold, size: 20),
             const SizedBox(width: 8),
-            const Text('Gallery & Official Photos', style: TextStyle(color: DarkTheme.primaryText, fontSize: 20, fontFamily: 'EB Garamond', fontWeight: FontWeight.w600)),
+            const Text(
+              'Gallery & Official Photos',
+              style: TextStyle(
+                color: DarkTheme.primaryText,
+                fontSize: 20,
+                fontFamily: 'EB Garamond',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             const Spacer(),
-            Text('3 / 8 ACTIVE', style: TextStyle(color: DarkTheme.secondaryText.withOpacity(0.7), fontSize: 10, letterSpacing: 1, fontFamily: 'Inter')),
+            Text(
+              '3 / 8 ACTIVE',
+              style: TextStyle(
+                color: DarkTheme.secondaryText.withValues(alpha: 0.7),
+                fontSize: 10,
+                letterSpacing: 1,
+                fontFamily: 'Inter',
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 16),
@@ -30,19 +46,43 @@ class GallerySection extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Positioned(
-                top: 12, left: 12,
+                top: 12,
+                left: 12,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.circular(4)),
-                  child: const Text('[PRIMARY] CALIBRE 8801', style: TextStyle(color: DarkTheme.gold, fontSize: 10, letterSpacing: 1, fontFamily: 'Inter', fontWeight: FontWeight.bold)),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: const Text(
+                    '[PRIMARY] CALIBRE 8801',
+                    style: TextStyle(
+                      color: DarkTheme.gold,
+                      fontSize: 10,
+                      letterSpacing: 1,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
               Positioned(
-                top: 12, right: 12,
+                top: 12,
+                right: 12,
                 child: Container(
                   padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(color: Colors.black54, shape: BoxShape.circle),
-                  child: const Icon(Icons.grid_view, color: Colors.white, size: 14),
+                  decoration: BoxDecoration(
+                    color: Colors.black54,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.grid_view,
+                    color: Colors.white,
+                    size: 14,
+                  ),
                 ),
               ),
             ],
@@ -57,19 +97,37 @@ class GallerySection extends StatelessWidget {
                   backgroundColor: DarkTheme.gold,
                   foregroundColor: DarkTheme.background,
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
                 ),
                 onPressed: () {},
                 icon: const Icon(Icons.sync, size: 16),
-                label: const Text('REPLACE PHOTO', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1, fontFamily: 'Inter')),
+                label: const Text(
+                  'REPLACE PHOTO',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                    fontFamily: 'Inter',
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: 12),
             Container(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: Colors.redAccent.withOpacity(0.2), borderRadius: BorderRadius.circular(4), border: Border.all(color: Colors.redAccent)),
-              child: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 20),
-            )
+              decoration: BoxDecoration(
+                color: Colors.redAccent.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: Colors.redAccent),
+              ),
+              child: const Icon(
+                Icons.delete_outline,
+                color: Colors.redAccent,
+                size: 20,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 16),
@@ -84,19 +142,30 @@ class GallerySection extends StatelessWidget {
             Expanded(
               child: Container(
                 height: 60,
-                decoration: BoxDecoration(color: DarkTheme.surface, borderRadius: BorderRadius.circular(4), border: Border.all(color: DarkTheme.border)),
+                decoration: BoxDecoration(
+                  color: DarkTheme.surface,
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: DarkTheme.border),
+                ),
                 child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.add, color: DarkTheme.secondaryText, size: 16),
                     SizedBox(height: 2),
-                    Text('ADD', style: TextStyle(color: DarkTheme.secondaryText, fontSize: 8, fontFamily: 'Inter')),
+                    Text(
+                      'ADD',
+                      style: TextStyle(
+                        color: DarkTheme.secondaryText,
+                        fontSize: 8,
+                        fontFamily: 'Inter',
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }

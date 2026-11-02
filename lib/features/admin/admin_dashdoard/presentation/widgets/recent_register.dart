@@ -21,18 +21,21 @@ class RecentRegister extends StatelessWidget {
             children: [
               Row(
                 children: [
-                   Text('MOVEMENTS & RECENT REGISTER',
-                      style: TextStyle(
-                          color: DarkTheme.primaryText,
-                          fontSize: 10,
-                          letterSpacing: 1,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.bold)),
-                   SizedBox(width: 6),
+                  Text(
+                    'MOVEMENTS & RECENT REGISTER',
+                    style: TextStyle(
+                      color: DarkTheme.primaryText,
+                      fontSize: 10,
+                      letterSpacing: 1,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(width: 6),
                   Container(
                     width: 6,
                     height: 6,
-                    decoration:  BoxDecoration(
+                    decoration: BoxDecoration(
                       color: DarkTheme.gold,
                       shape: BoxShape.circle,
                     ),
@@ -41,12 +44,15 @@ class RecentRegister extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {},
-                child: const Text('SHOW ALL',
-                    style: TextStyle(
-                        color: DarkTheme.gold,
-                        fontSize: 10,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.bold)),
+                child: const Text(
+                  'SHOW ALL',
+                  style: TextStyle(
+                    color: DarkTheme.gold,
+                    fontSize: 10,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
@@ -80,6 +86,7 @@ class RecentRegister extends StatelessWidget {
       ),
     );
   }
+
   Widget _logItem({
     required String title,
     required String subtitle,
@@ -101,7 +108,11 @@ class RecentRegister extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
               border: Border.all(color: DarkTheme.border),
             ),
-            child: Icon(Icons.image_outlined, color: DarkTheme.secondaryText.withOpacity(0.3), size: 20),
+            child: Icon(
+              Icons.image_outlined,
+              color: DarkTheme.secondaryText.withValues(alpha: 0.3),
+              size: 20,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(

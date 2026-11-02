@@ -21,7 +21,11 @@ class ImagerySection extends StatelessWidget {
             children: [
               Row(
                 children: const [
-                  Icon(Icons.camera_alt_outlined, color: DarkTheme.gold, size: 16),
+                  Icon(
+                    Icons.camera_alt_outlined,
+                    color: DarkTheme.gold,
+                    size: 16,
+                  ),
                   SizedBox(width: 8),
                   Text(
                     'WORKSHOP IMAGERY',
@@ -63,7 +67,11 @@ class ImagerySection extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: DarkTheme.border),
                   ),
-                  child: const Icon(Icons.add_photo_alternate_outlined, color: DarkTheme.gold, size: 28),
+                  child: const Icon(
+                    Icons.add_photo_alternate_outlined,
+                    color: DarkTheme.gold,
+                    size: 28,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 const Text(
@@ -107,7 +115,9 @@ class ImagerySection extends StatelessWidget {
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(color: DarkTheme.border),
                             image: const DecorationImage(
-                              image: NetworkImage('https://picsum.photos/seed/mvt/200/200'),
+                              image: NetworkImage(
+                                'https://picsum.photos/seed/mvt/200/200',
+                              ),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -116,23 +126,36 @@ class ImagerySection extends StatelessWidget {
                           top: 4,
                           right: 4,
                           child: CircleAvatar(
-                            backgroundColor: Colors.black.withOpacity(0.6),
+                            backgroundColor: Colors.black.withValues(
+                              alpha: 0.6,
+                            ),
                             radius: 9,
-                            child: const Icon(Icons.close, size: 12, color: Colors.white),
+                            child: const Icon(
+                              Icons.close,
+                              size: 12,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         Positioned(
                           bottom: 4,
                           left: 4,
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 4,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.6),
+                              color: Colors.black.withValues(alpha: 0.6),
                               borderRadius: BorderRadius.circular(2),
                             ),
                             child: const Text(
                               'MVT 01',
-                              style: TextStyle(color: Colors.white, fontSize: 8, fontFamily: 'Inter'),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                                fontFamily: 'Inter',
+                              ),
                             ),
                           ),
                         ),
@@ -148,7 +171,7 @@ class ImagerySection extends StatelessWidget {
               const SizedBox(width: 8),
               _buildAddButton('On Wrist'),
             ],
-          )
+          ),
         ],
       ),
     );

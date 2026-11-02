@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,7 @@ class PaymentSection extends StatelessWidget {
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
+                color: Colors.grey.withValues(alpha: 0.3),
                 spreadRadius: 1,
                 blurRadius: 3,
                 offset: const Offset(1, 3),
@@ -32,7 +31,7 @@ class PaymentSection extends StatelessWidget {
                 value: true,
                 onChanged: (va) {},
                 shape: CircleBorder(),
-                fillColor: MaterialStateProperty.all(AppColors.primaryColor),
+                fillColor: WidgetStateProperty.all(AppColors.primaryColor),
               ),
               Expanded(
                 child: Column(
@@ -75,7 +74,7 @@ class PaymentSection extends StatelessWidget {
             color: Colors.grey.shade200,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
+                color: Colors.grey.withValues(alpha: 0.3),
                 spreadRadius: 1,
                 blurRadius: 3,
                 offset: const Offset(1, 3),
@@ -88,7 +87,7 @@ class PaymentSection extends StatelessWidget {
                 value: false,
                 onChanged: (va) {},
                 shape: CircleBorder(),
-                fillColor: MaterialStateProperty.all(Colors.grey.shade300),
+                fillColor: WidgetStateProperty.all(Colors.grey.shade300),
               ),
               Expanded(
                 child: Column(

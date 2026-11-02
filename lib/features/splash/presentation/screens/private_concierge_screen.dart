@@ -1,6 +1,6 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
-import 'package:aura_maison_e_commerce/features/auth/presentation/screens/login_screen.dart';
-import 'package:aura_maison_e_commerce/features/auth/presentation/screens/signup_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/vip_member_sign_in_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/create_account_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/concierge_data.dart';
@@ -372,7 +372,7 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
                     Navigator.pop(ctx);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const SignupScreen()),
+                      MaterialPageRoute(builder: (_) => const CreateAccountScreen()),
                     );
                   },
                   child: const Text(
@@ -410,7 +410,7 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const SignupScreen()),
+                MaterialPageRoute(builder: (_) => const CreateAccountScreen()),
               );
             },
             child: const Text(
@@ -438,7 +438,7 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const LoginScreen()),
+                MaterialPageRoute(builder: (_) => const VipMemberSignInScreen()),
               );
             },
             child: const Text(

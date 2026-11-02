@@ -26,7 +26,7 @@ class InventoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:  EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: DarkTheme.surface,
         borderRadius: BorderRadius.circular(8),
@@ -35,7 +35,7 @@ class InventoryCard extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding:  EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -47,10 +47,13 @@ class InventoryCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(color: DarkTheme.border),
                   ),
-                  child: Icon(Icons.image_outlined,
-                      color: DarkTheme.secondaryText.withOpacity(0.5), size: 28),
+                  child: Icon(
+                    Icons.image_outlined,
+                    color: DarkTheme.secondaryText.withValues(alpha: 0.5),
+                    size: 28,
+                  ),
                 ),
-                 SizedBox(width: 12),
+                SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +64,7 @@ class InventoryCard extends StatelessWidget {
                           Expanded(
                             child: Text(
                               item.brand,
-                              style:  TextStyle(
+                              style: TextStyle(
                                 color: DarkTheme.gold,
                                 fontSize: 9,
                                 letterSpacing: 1,
@@ -81,7 +84,7 @@ class InventoryCard extends StatelessWidget {
                                   shape: BoxShape.circle,
                                 ),
                               ),
-                               SizedBox(width: 4),
+                              SizedBox(width: 4),
                               Text(
                                 item.status,
                                 style: TextStyle(
@@ -93,13 +96,13 @@ class InventoryCard extends StatelessWidget {
                                 ),
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
-                       SizedBox(height: 4),
+                      SizedBox(height: 4),
                       Text(
                         item.title,
-                        style:  TextStyle(
+                        style: TextStyle(
                           color: DarkTheme.primaryText,
                           fontSize: 16,
                           fontFamily: 'EB Garamond',
@@ -107,22 +110,22 @@ class InventoryCard extends StatelessWidget {
                           height: 1.2,
                         ),
                       ),
-                       SizedBox(height: 4),
+                      SizedBox(height: 4),
                       Text(
                         'Ref. ${item.reference}  •  ${item.unitInfo}',
-                        style:  TextStyle(
+                        style: TextStyle(
                           color: DarkTheme.secondaryText,
                           fontSize: 10,
                           fontFamily: 'Inter',
                         ),
                       ),
-                       SizedBox(height: 12),
+                      SizedBox(height: 12),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             item.categoryLabel,
-                            style:  TextStyle(
+                            style: TextStyle(
                               color: DarkTheme.secondaryText,
                               fontSize: 9,
                               letterSpacing: 0.5,
@@ -131,7 +134,7 @@ class InventoryCard extends StatelessWidget {
                           ),
                           Text(
                             item.price,
-                            style:  TextStyle(
+                            style: TextStyle(
                               color: DarkTheme.gold,
                               fontSize: 16,
                               fontFamily: 'EB Garamond',
@@ -147,8 +150,8 @@ class InventoryCard extends StatelessWidget {
             ),
           ),
           Container(
-            padding:  EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            decoration:  BoxDecoration(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
               border: Border(top: BorderSide(color: DarkTheme.border)),
             ),
             child: Row(
@@ -158,11 +161,13 @@ class InventoryCard extends StatelessWidget {
                     icon: Icons.edit_outlined,
                     label: 'EDIT',
                     color: DarkTheme.gold,
-                    onTap: (){
-                      Navigator.push((context),
-                          MaterialPageRoute(builder:
-                          (context)=>EditProductScreen()
-                          ));
+                    onTap: () {
+                      Navigator.push(
+                        (context),
+                        MaterialPageRoute(
+                          builder: (context) => EditProductScreen(),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -173,7 +178,7 @@ class InventoryCard extends StatelessWidget {
                       icon: Icons.visibility_outlined,
                       label: 'SALON PREVIEW',
                       color: DarkTheme.gold,
-                      onTap: (){},
+                      onTap: () {},
                     ),
                   ),
                 if (!item.showSalonButton && !item.isRestock && !item.isAssign)
@@ -182,7 +187,7 @@ class InventoryCard extends StatelessWidget {
                       icon: Icons.build_outlined,
                       label: 'WORKSHOP RECORD',
                       color: DarkTheme.secondaryText,
-                      onTap: (){},
+                      onTap: () {},
                     ),
                   ),
                 if (item.isRestock)
@@ -191,7 +196,7 @@ class InventoryCard extends StatelessWidget {
                       icon: Icons.refresh,
                       label: 'RESTOCK',
                       color: DarkTheme.gold,
-                      onTap: (){},
+                      onTap: () {},
                     ),
                   ),
                 if (item.isAssign)
@@ -200,7 +205,7 @@ class InventoryCard extends StatelessWidget {
                       icon: Icons.assignment_ind_outlined,
                       label: 'ASSIGN',
                       color: DarkTheme.gold,
-                      onTap: (){},
+                      onTap: () {},
                     ),
                   ),
 
@@ -208,16 +213,17 @@ class InventoryCard extends StatelessWidget {
                   icon: Icons.delete_outline,
                   label: '',
                   color: DarkTheme.secondaryText,
-                  onTap: (){},
+                  onTap: () {},
                   isIconOnly: true,
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
+
   Widget _buildActionButton({
     required IconData icon,
     required String label,
@@ -230,8 +236,8 @@ class InventoryCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(4),
-        splashColor: color.withOpacity(0.2),
-        highlightColor: color.withOpacity(0.1),
+        splashColor: color.withValues(alpha: 0.2),
+        highlightColor: color.withValues(alpha: 0.1),
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: isIconOnly ? 8 : 4,
@@ -240,25 +246,25 @@ class InventoryCard extends StatelessWidget {
           child: isIconOnly
               ? Icon(icon, size: 18, color: color)
               : Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, size: 14, color: color),
-               SizedBox(width: 6),
-              Flexible(
-                child: Text(
-                  label,
-                  style: TextStyle(
-                    color: color,
-                    fontSize: 9,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Inter',
-                    letterSpacing: 0.5,
-                  ),
-                  overflow: TextOverflow.ellipsis,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(icon, size: 14, color: color),
+                    SizedBox(width: 6),
+                    Flexible(
+                      child: Text(
+                        label,
+                        style: TextStyle(
+                          color: color,
+                          fontSize: 9,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Inter',
+                          letterSpacing: 0.5,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
         ),
       ),
     );

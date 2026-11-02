@@ -6,6 +6,7 @@ import '../widgets/auth_top_bar.dart';
 import '../widgets/concierge_support_badge.dart';
 import '../widgets/instruction_protocol_card.dart';
 import 'otp_screen.dart';
+import 'vip_member_sign_in_screen.dart';
 
 /// Forgot Passcode / Access Key Recovery Screen (Node 6:238)
 /// High-security protocol for resetting member access key or vault passcode.
@@ -273,7 +274,17 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
   Widget _buildReturnToLogin(BuildContext context) {
     return Center(
       child: TextButton.icon(
-        onPressed: () => Navigator.maybePop(context),
+        onPressed: () {
+          if (Navigator.of(context).canPop()) {
+            Navigator.of(context).pop();
+          } else {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute<void>(
+                builder: (_) => const VipMemberSignInScreen(),
+              ),
+            );
+          }
+        },
         icon: const Icon(
           Icons.arrow_back,
           size: 15,

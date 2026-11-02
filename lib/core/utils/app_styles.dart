@@ -481,6 +481,237 @@ class AppStyles {
     height: 14 / 11,
   );
 
+  // VIP Member Sign In Typography
+  static const TextStyle vipHeaderTitle = TextStyle(
+    fontFamily: 'EB Garamond',
+    fontSize: 26,
+    fontWeight: FontWeight.w500,
+    letterSpacing: -0.65,
+    height: 32 / 26,
+  );
+  static const TextStyle vipHeaderSubtitle = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.24,
+    height: 19.5 / 12,
+  );
+  static const TextStyle accessModeTab = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 1.1,
+    height: 14 / 11,
+  );
+  static const TextStyle vipFieldLabel = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 1.1,
+    height: 14 / 11,
+  );
+  static const TextStyle vipFieldBadge = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+    height: 12 / 10,
+  );
+  static const TextStyle vipInputText = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.14,
+    height: 22 / 14,
+  );
+  static const TextStyle vipRememberLabel = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.24,
+    height: 18 / 12,
+  );
+  static const TextStyle vipEnterSalonButton = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 2.2,
+    height: 14 / 11,
+  );
+  static const TextStyle biometricDividerLabel = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 1.0,
+    height: 12 / 10,
+  );
+  static const TextStyle biometricCardTitle = TextStyle(
+    fontFamily: 'EB Garamond',
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.2,
+    height: 26 / 20,
+  );
+  static const TextStyle biometricCardSubtitle = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.24,
+    height: 18 / 12,
+  );
+  static const TextStyle provenanceFooterLedger = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+    height: 12 / 10,
+  );
+  static const TextStyle provenanceFooterLocations = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 1.0,
+    height: 12 / 10,
+  );
+
+  // Salon Membership Application Typography
+  static const TextStyle patronsCircleEyebrow = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 2.64,
+    height: 14 / 11,
+  );
+
+  static const TextStyle salonMembershipHeading = TextStyle(
+    fontFamily: 'EB Garamond',
+    fontSize: 32,
+    fontWeight: FontWeight.w400,
+    letterSpacing: -0.32,
+    height: 40 / 32,
+  );
+
+  static const TextStyle salonMembershipSubtitle = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.14,
+    height: 22.75 / 14,
+  );
+
+  static const TextStyle allocationBadgeText = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 9,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 1.8,
+    height: 22 / 9,
+  );
+
+  static const TextStyle restrictedAccessText = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 9,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.45,
+    height: 22 / 9,
+  );
+
+  static const TextStyle formFieldLabel = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 1.54,
+    height: 14 / 11,
+  );
+
+  static const TextStyle formFieldSubBadge = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 9,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.0,
+    height: 14 / 9,
+  );
+
+  static const TextStyle formInputText = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.14,
+    height: 22 / 14,
+  );
+
+  static const TextStyle passwordIndicatorBadge = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.25,
+    height: 22 / 10,
+  );
+
+  static const TextStyle passwordCriteriaText = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.24,
+    height: 18 / 12,
+  );
+
+  static const TextStyle consentRegularText = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.24,
+    height: 15 / 12,
+  );
+
+  static const TextStyle consentLinkText = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.24,
+    height: 15 / 12,
+    decoration: TextDecoration.underline,
+  );
+
+  static const TextStyle createPrivilegeAccountButton = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 1.76,
+    height: 14 / 11,
+  );
+
+  static const TextStyle alreadyMemberQuestion = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.14,
+    height: 22 / 14,
+  );
+
+  static const TextStyle enterPrivateSalonLink = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 11,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 1.98,
+    height: 14 / 11,
+  );
+
+  static const TextStyle discretionGuaranteeTitle = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.5,
+    height: 22 / 10,
+  );
+
+  static const TextStyle discretionGuaranteeSubtitle = TextStyle(
+    fontFamily: 'Plus Jakarta Sans',
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.24,
+    height: 18 / 12,
+  );
+
   // Serif Titles (EB Garamond)
   static const TextStyle headerScreenTitle = TextStyle(
     fontFamily: 'EB Garamond',

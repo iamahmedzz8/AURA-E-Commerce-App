@@ -1,11 +1,11 @@
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
-import 'package:aura_maison_e_commerce/features/auth/presentation/screens/login_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/vip_member_sign_in_screen.dart';
 import 'package:aura_maison_e_commerce/features/home/presentation/screens/home_screen.dart';
 import 'package:aura_maison_e_commerce/features/splash/presentation/screens/splash_salon_screen.dart';
 import 'package:flutter/material.dart';
 
 /// Chooses the first screen from SharedPreferences:
-/// logged in → Home · onboarding done → Login · otherwise → Splash.
+/// logged in → Home · onboarding done → VIP Member Sign In · otherwise → Splash.
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
 
@@ -15,7 +15,7 @@ class AuthGate extends StatelessWidget {
       return const HomeScreen();
     }
     if (PrefsService.isOnboardingCompleted) {
-      return const LoginScreen();
+      return const VipMemberSignInScreen();
     }
     return const SplashSalonScreen();
   }

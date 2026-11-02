@@ -21,10 +21,7 @@ class SessionSecurityBanner extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.obsidianCard,
         borderRadius: BorderRadius.circular(9),
-        border: Border.all(
-          color: AppColors.obsidianBorder,
-          width: 0.8,
-        ),
+        border: Border.all(color: AppColors.obsidianBorder, width: 0.8),
       ),
       child: Row(
         children: [
@@ -54,7 +51,11 @@ class SessionSecurityBanner extends StatelessWidget {
               ],
             ),
           ),
-          const Icon(Icons.shield_outlined, color: AppColors.luxuryMuted, size: 17),
+          const Icon(
+            Icons.shield_outlined,
+            color: AppColors.luxuryMuted,
+            size: 17,
+          ),
           const SizedBox(width: 4),
           Text(
             protocolBadge,

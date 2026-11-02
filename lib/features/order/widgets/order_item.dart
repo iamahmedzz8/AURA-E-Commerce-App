@@ -1,11 +1,15 @@
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({super.key, required this.orderStatus, required this.imageUrl, required this.backgroundColor});
+  const OrderItem({
+    super.key,
+    required this.orderStatus,
+    required this.imageUrl,
+    required this.backgroundColor,
+  });
   final String orderStatus;
   final String imageUrl;
   final Color backgroundColor;
@@ -21,7 +25,7 @@ class OrderItem extends StatelessWidget {
             blurRadius: 3,
             spreadRadius: 1,
             offset: Offset(1, 3),
-            color: Colors.grey.withOpacity(.3),
+            color: Colors.grey.withValues(alpha: .3),
           ),
         ],
       ),
@@ -87,10 +91,7 @@ class OrderItem extends StatelessWidget {
             ],
           ),
           Gap(15),
-          Image.asset(
-            imageUrl,
-            width: double.infinity,
-          ),
+          Image.asset(imageUrl, width: double.infinity),
           Gap(15),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

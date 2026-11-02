@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
@@ -23,13 +22,11 @@ class FaqQuestionCard extends StatelessWidget {
       duration: const Duration(milliseconds: 220),
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: isExpanded
-            ? AppColors.cardActive
-            : AppColors.cardInactive,
+        color: isExpanded ? AppColors.cardActive : AppColors.cardInactive,
         borderRadius: BorderRadius.circular(5),
         border: Border.all(
           color: isExpanded
-              ? AppColors.goldAccent.withOpacity(0.35)
+              ? AppColors.goldAccent.withValues(alpha: 0.35)
               : AppColors.chipBorder,
           width: 0.8,
         ),
@@ -40,10 +37,7 @@ class FaqQuestionCard extends StatelessWidget {
             onTap: onTap,
             borderRadius: BorderRadius.circular(5),
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 18,
-                vertical: 19,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 19),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -59,9 +53,7 @@ class FaqQuestionCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 14),
                   Icon(
-                    isExpanded
-                        ? Icons.remove
-                        : Icons.add,
+                    isExpanded ? Icons.remove : Icons.add,
                     color: AppColors.goldAccent,
                     size: 18,
                   ),
@@ -73,10 +65,7 @@ class FaqQuestionCard extends StatelessWidget {
           if (isExpanded) ...[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: Container(
-                height: 0.7,
-                color: AppColors.headerDivider,
-              ),
+              child: Container(height: 0.7, color: AppColors.headerDivider),
             ),
 
             Padding(

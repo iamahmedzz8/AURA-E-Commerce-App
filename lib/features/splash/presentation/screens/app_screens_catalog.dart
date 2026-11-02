@@ -1,6 +1,6 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
-import 'package:aura_maison_e_commerce/features/auth/presentation/screens/login_screen.dart';
-import 'package:aura_maison_e_commerce/features/auth/presentation/screens/signup_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/vip_member_sign_in_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/create_account_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'onboarding_screen.dart';
@@ -47,7 +47,7 @@ class AppScreensCatalog extends StatelessWidget {
         description:
             'Sign in to access your curated private vault and synchronized bag.',
         icon: Icons.lock_outline,
-        builder: (_) => const LoginScreen(),
+        builder: (_) => const VipMemberSignInScreen(),
       ),
       _ScreenEntry(
         title: 'Create Privilege Account',
@@ -55,7 +55,7 @@ class AppScreensCatalog extends StatelessWidget {
         description:
             'Join the Inner Circle with encrypted credentials and member benefits.',
         icon: Icons.person_add_outlined,
-        builder: (_) => const SignupScreen(),
+        builder: (_) => const CreateAccountScreen(),
       ),
     ];
 

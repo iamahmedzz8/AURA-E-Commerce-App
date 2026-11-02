@@ -120,10 +120,7 @@ class AuraMedallionHeader extends StatelessWidget {
               height: 1.5,
             ),
           ),
-          if (extraChild != null) ...[
-            const SizedBox(height: 6),
-            extraChild!,
-          ],
+          if (extraChild != null) ...[const SizedBox(height: 6), extraChild!],
         ],
       ),
     );

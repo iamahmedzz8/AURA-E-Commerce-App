@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
@@ -26,7 +25,7 @@ class FavoriteProductCard extends StatelessWidget {
         color: AppColors.obsidianCard,
         borderRadius: BorderRadius.circular(7),
         border: Border.all(
-          color: AppColors.obsidianBorder.withOpacity(0.5),
+          color: AppColors.obsidianBorder.withValues(alpha: 0.5),
         ),
       ),
       clipBehavior: Clip.antiAlias,
@@ -73,11 +72,7 @@ class FavoriteProductCard extends StatelessWidget {
                 ),
 
                 // Product status badge
-                Positioned(
-                  top: 12,
-                  left: 10,
-                  child: _statusBadge(),
-                ),
+                Positioned(top: 12, left: 10, child: _statusBadge()),
 
                 // Remove from favorites
                 Positioned(
@@ -149,7 +144,6 @@ class FavoriteProductCard extends StatelessWidget {
             ),
           ),
 
-          
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
             child: Column(
@@ -220,9 +214,7 @@ class FavoriteProductCard extends StatelessWidget {
                             backgroundColor: AppColors.gold,
                             foregroundColor: AppColors.obsidianDark,
                             elevation: 0,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 5,
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(3),
                             ),
@@ -264,17 +256,11 @@ class FavoriteProductCard extends StatelessWidget {
 
   Widget _statusBadge() {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 9,
-        vertical: 5,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
       decoration: BoxDecoration(
-        color: AppColors.obsidianDark.withOpacity(0.88),
+        color: AppColors.obsidianDark.withValues(alpha: 0.88),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: AppColors.obsidianBorder,
-          width: 0.5,
-        ),
+        border: Border.all(color: AppColors.obsidianBorder, width: 0.5),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

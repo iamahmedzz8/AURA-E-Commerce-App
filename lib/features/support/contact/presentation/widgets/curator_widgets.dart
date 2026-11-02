@@ -1,14 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 
 class CuratorCard extends StatelessWidget {
   final String? imageUrl;
 
-  const CuratorCard({
-    super.key,
-    this.imageUrl,
-  });
+  const CuratorCard({super.key, this.imageUrl});
 
   Widget _buildAvatar() {
     final hasImage = imageUrl != null && imageUrl!.trim().isNotEmpty;
@@ -24,7 +20,7 @@ class CuratorCard extends StatelessWidget {
               ? Image.network(
                   imageUrl!,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => const Icon(
+                  errorBuilder: (_, _, _) => const Icon(
                     Icons.person,
                     color: AppColors.textSecondary,
                     size: 30,
@@ -154,11 +150,7 @@ class CuratorAvailabilityCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.access_time,
-                color: AppColors.goldAccent,
-                size: 17,
-              ),
+              Icon(Icons.access_time, color: AppColors.goldAccent, size: 17),
               SizedBox(width: 8),
               Expanded(
                 child: Text(

@@ -15,7 +15,11 @@ class DeleteHeroSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: DarkTheme.border),
           ),
-          child: const Icon(Icons.gpp_bad_outlined, color: Colors.redAccent, size: 40),
+          child: const Icon(
+            Icons.gpp_bad_outlined,
+            color: Colors.redAccent,
+            size: 40,
+          ),
         ),
         const SizedBox(height: 20),
 
@@ -31,24 +35,43 @@ class DeleteHeroSection extends StatelessWidget {
             children: [
               Icon(Icons.circle, color: DarkTheme.gold, size: 6),
               SizedBox(width: 6),
-              Text('ACCREDITATION LEVEL: GENERAL MANAGEMENT', style: TextStyle(color: DarkTheme.primaryText, fontSize: 9, letterSpacing: 1, fontFamily: 'Inter', fontWeight: FontWeight.w600)),
+              Text(
+                'ACCREDITATION LEVEL: GENERAL MANAGEMENT',
+                style: TextStyle(
+                  color: DarkTheme.primaryText,
+                  fontSize: 9,
+                  letterSpacing: 1,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ],
           ),
         ),
         const SizedBox(height: 20),
 
-
         const Text(
           'Confirm Removal of the\nPiece?',
           textAlign: TextAlign.center,
-          style: TextStyle(color: DarkTheme.primaryText, fontSize: 26, height: 1.2, fontFamily: 'EB Garamond', fontWeight: FontWeight.w600),
+          style: TextStyle(
+            color: DarkTheme.primaryText,
+            fontSize: 26,
+            height: 1.2,
+            fontFamily: 'EB Garamond',
+            fontWeight: FontWeight.w600,
+          ),
         ),
         const SizedBox(height: 12),
 
         Text(
           'This action will permanently remove this\nmasterpiece from the catalogue and revoke its\npublic allocation at the Vendôme salon.',
           textAlign: TextAlign.center,
-          style: TextStyle(color: DarkTheme.secondaryText.withOpacity(0.9), fontSize: 13, height: 1.5, fontFamily: 'Inter'),
+          style: TextStyle(
+            color: DarkTheme.secondaryText.withValues(alpha: 0.9),
+            fontSize: 13,
+            height: 1.5,
+            fontFamily: 'Inter',
+          ),
         ),
       ],
     );

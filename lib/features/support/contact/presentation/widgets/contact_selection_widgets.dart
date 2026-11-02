@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 
@@ -87,14 +86,9 @@ class _PriorityOption extends StatelessWidget {
           duration: const Duration(milliseconds: 180),
           constraints: const BoxConstraints(minHeight: 52),
           alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 5,
-            vertical: 8,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
           decoration: BoxDecoration(
-            color: selected
-                ? const Color(0xFF303238)
-                : Colors.transparent,
+            color: selected ? const Color(0xFF303238) : Colors.transparent,
             borderRadius: BorderRadius.circular(7),
           ),
           child: FittedBox(
@@ -108,8 +102,7 @@ class _PriorityOption extends StatelessWidget {
                     : AppColors.textSecondary,
                 fontSize: 11,
                 height: 1.4,
-                fontWeight:
-                    selected ? FontWeight.w500 : FontWeight.normal,
+                fontWeight: selected ? FontWeight.w500 : FontWeight.normal,
               ),
             ),
           ),
@@ -145,16 +138,13 @@ class ContactResponseTile extends StatelessWidget {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 180),
           margin: const EdgeInsets.only(bottom: 7),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 14,
-            vertical: 13,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
           decoration: BoxDecoration(
             color: const Color(0xFF1D2025),
             borderRadius: BorderRadius.circular(9),
             border: Border.all(
               color: selected
-                  ? AppColors.goldAccent.withOpacity(0.55)
+                  ? AppColors.goldAccent.withValues(alpha: 0.55)
                   : Colors.transparent,
               width: 0.8,
             ),
@@ -168,11 +158,7 @@ class ContactResponseTile extends StatelessWidget {
                   color: const Color(0xFF30343A),
                   borderRadius: BorderRadius.circular(9),
                 ),
-                child: Icon(
-                  icon,
-                  color: AppColors.goldAccent,
-                  size: 17,
-                ),
+                child: Icon(icon, color: AppColors.goldAccent, size: 17),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -203,9 +189,7 @@ class ContactResponseTile extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Icon(
-                selected
-                    ? Icons.radio_button_checked
-                    : Icons.radio_button_off,
+                selected ? Icons.radio_button_checked : Icons.radio_button_off,
                 color: selected
                     ? AppColors.goldAccent
                     : AppColors.textSecondary,

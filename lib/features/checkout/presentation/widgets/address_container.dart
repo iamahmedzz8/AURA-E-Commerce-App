@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ class AddressContainer extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
+            color: Colors.grey.withValues(alpha: 0.3),
             spreadRadius: 1,
             blurRadius: 3,
             offset: const Offset(1, 3),
@@ -63,15 +62,14 @@ class AddressContainer extends StatelessWidget {
                   text: '12 Tahrir St, Apt 5, Nasr City, Cairo',
                   size: 16,
                   weight: FontWeight.w400,
-                  family:''
+                  family: '',
                 ),
                 Gap(5),
                 Row(
                   children: [
                     Icon(Icons.phone_outlined, color: AppColors.primaryColor),
                     Gap(5),
-                    CustomText(text: '+20 100 234 5678',family: '',),
-                    
+                    CustomText(text: '+20 100 234 5678', family: ''),
                   ],
                 ),
               ],
