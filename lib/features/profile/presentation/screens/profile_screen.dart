@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/features/admin/admin_dashdoard/presentation/screens/admin_dashboard_screen.dart';
 import 'package:aura_maison_e_commerce/features/profile/data/models/profile_model.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/screens/edit_profile.dart';
 import 'package:flutter/material.dart';
@@ -152,12 +153,12 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const AdminScreen(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AdminDashboardScreen(),
+                      ),
+                    );
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
