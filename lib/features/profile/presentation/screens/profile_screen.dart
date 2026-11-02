@@ -1,4 +1,4 @@
-
+import 'package:aura_maison_e_commerce/features/admin/admin_dashdoard/presentation/screens/admin_dashboard_screen.dart';
 import 'package:aura_maison_e_commerce/features/profile/data/models/profile_model.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/screens/edit_profile.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +35,7 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: 16),
               const TransitCard(),
 
-              const SectionHeader(
-                title: 'Workshop Ledger & Security Services',
-              ),
+              const SectionHeader(title: 'Workshop Ledger & Security Services'),
 
               const ProfileMenuTile(
                 icon: Icons.account_balance_wallet_outlined,
@@ -86,18 +84,27 @@ class ProfileScreen extends StatelessWidget {
                   Expanded(
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(
-                          color: AppColors.primaryGold,
-                        ),
+                        side: const BorderSide(color: AppColors.primaryGold),
                         padding: const EdgeInsets.symmetric(vertical: 12),
                       ),
                       onPressed: () {},
-                      child: const Text(
-                        'DIRECT LINE',
-                        style: TextStyle(
-                          color: AppColors.primaryGold,
-                          fontSize: 11,
-                        ),
+                      child: Row(
+                        mainAxisAlignment: .center,
+                        children: [
+                          Icon(
+                            Icons.phone,
+                            color: AppColors.primaryGold,
+                            size: 17,
+                          ),
+                          SizedBox(width: 8),
+                          const Text(
+                            'DIRECT LINE',
+                            style: TextStyle(
+                              color: AppColors.primaryGold,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -105,9 +112,7 @@ class ProfileScreen extends StatelessWidget {
                   Expanded(
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(
-                          color: AppColors.cardBorder,
-                        ),
+                        side: const BorderSide(color: AppColors.cardBorder),
                         padding: const EdgeInsets.symmetric(vertical: 12),
                       ),
                       onPressed: () {},
@@ -135,6 +140,46 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   );
                 },
+              ),
+              const SizedBox(height: 12),
+
+              Center(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AppColors.primaryGold),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AdminDashboardScreen(),
+                      ),
+                    );
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.admin_panel_settings_outlined,
+                        color: AppColors.primaryGold,
+                        size: 17,
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        'ADMIN ACCESS',
+                        style: TextStyle(
+                          color: AppColors.primaryGold,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
