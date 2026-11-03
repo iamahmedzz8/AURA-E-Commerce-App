@@ -1,4 +1,44 @@
 class AppStrings {
+  static const String emailRequired = "Email is required";
+  static const String emailMinLength =
+      "The part before @ must be at least 6 characters long";
+  static const String emailMustEndGmail = "Email must end with @gmail.com";
+  static const String emailInvalidFormat = "Invalid email format";
+  static const String idRequired = "ID is required.";
+  static const String idInvalid =
+      "ID must be exactly 14 digits long and contain only numbers.";
+  static const String phoneRequired = "Phone number is required.";
+  static const String phoneInvalidStart =
+      "Phone number must start with '01' followed by 0, 1, 2, or 5.";
+  static const String phoneInvalidLength =
+      "Phone number must be exactly 11 digits long.";
+  static const String phoneInvalidFormat =
+      "Phone number can only contain numbers.";
+  static const String usernameRequired = "Username is required.";
+  static const String usernameMinLength =
+      "Username must be at least 6 characters long.";
+  static const String usernameMustStartWithLetter =
+      "Username must start with a letter.";
+  static const String usernameMustContainAtLeast3Letters =
+      "Username must contain at least 3 letters.";
+  static const String usernameInvalidFormat =
+      "Username can only contain letters and numbers.";
+  static const String passwordAtLeast8Char =
+      'Password must be at least 8 characters long.';
+  static const String passwordAtLeast1Uppercase =
+      'Password must contain at least one uppercase letter.';
+  static const String passwordAtLeast1Lowercase =
+      'Password must contain at least one lowercase letter.';
+  static const String passwordAtLeast1Number =
+      'Password must contain at least one number.';
+  static const String passwordAtLeast1SpecialChar =
+      'Password must contain at least one special character.';
+  static const String passwordNotTheSame =
+      "Password and confirm password must be the same.";
+  static const String emailError = 'Please enter a valid email address';
+  static const String fieldRequired = 'This field is required.';
+  static const String nameError =
+      'Please enter a valid name (letters and spaces only)';
   // Header
   static const String brandTitle = 'AURA\nMAISON';
   static const String brandTitleInline = 'AURA MAISON';
@@ -124,8 +164,7 @@ class AppStrings {
 
   // Empty State Centerpiece
   static const String recordNotFoundEyebrow = 'RECORD NOT FOUND';
-  static const String noMatchingMasterpieceHeading =
-      'No Matching\nMasterpiece';
+  static const String noMatchingMasterpieceHeading = 'No Matching\nMasterpiece';
   static const String noMatchingMasterpieceDesc =
       'The AURA House lists no piece under this name. Our collections focus exclusively on fine mechanical watchmaking and handcrafted high jewelry.';
   static const String clearSearchAction = 'CLEAR SEARCH';
@@ -152,8 +191,7 @@ class AppStrings {
   static const String acquireAction = 'ACQUIRE';
 
   // Concierge Consultation Bespoke Banner
-  static const String bespokePrivateService =
-      'PRIVATE SERVICE • PLACE VENDÔME';
+  static const String bespokePrivateService = 'PRIVATE SERVICE • PLACE VENDÔME';
   static const String needBespokeSearchTitle = 'Need a bespoke search?';
   static const String bespokeSearchDesc =
       'Ask your dedicated curator to source a historic piece or start a special order with our partner workshops.';
@@ -183,14 +221,12 @@ class AppStrings {
       'Instant hardware enclave validation for pre-\napproved patron devices.';
   static const String conciergeEncryptionNote =
       'CONCIERGE VERIFICATION: 256-BIT ENCRYPTED\nHOROLOGICAL LEDGER';
-  static const String atelierLocations =
-      'GENÈVE • PARIS • TOKYO • NEW YORK';
+  static const String atelierLocations = 'GENÈVE • PARIS • TOKYO • NEW YORK';
 
   // Salon Membership Application Screen (Create Account)
   static const String createAccountScreenTitle = 'CREATE ACCOUNT';
   static const String patronsCircleEyebrow = 'PATRONS’ CIRCLE';
-  static const String salonMembershipHeading =
-      'Salon Membership\nApplication';
+  static const String salonMembershipHeading = 'Salon Membership\nApplication';
   static const String salonMembershipSubtitle =
       'Join the exclusive circle of AURA MAISON collectors and access our private watch allocations.';
   static const String allocationVintageBadge = '2025 VINTAGE ALLOCATION';
@@ -199,8 +235,7 @@ class AppStrings {
   // Registration Form Fields & Password Criteria
   static const String fullNameLabel = 'FULL NAME';
   static const String titleSurnameBadge = 'title & surname';
-  static const String fullNamePlaceholder =
-      'Baroness Victoria de Rothschild';
+  static const String fullNamePlaceholder = 'Baroness Victoria de Rothschild';
   static const String privateEmailLabel = 'PRIVATE EMAIL ADDRESS';
   static const String encryptedProtocolBadge = 'encrypted protocol';
   static const String privateEmailPlaceholder = 'v.rothschild@vendome.ch';
@@ -224,8 +259,7 @@ class AppStrings {
       'CREATE MY PRIVILEGE ACCOUNT';
 
   // Member Redirect & Discretion Guarantee
-  static const String alreadyMemberQuestion =
-      'Already a member of the House?';
+  static const String alreadyMemberQuestion = 'Already a member of the House?';
   static const String enterPrivateSalonLink = 'ENTER THE PRIVATE SALON';
   static const String discretionGuaranteeTitle =
       'FINE WATCHMAKING DISCRETION GUARANTEE';

@@ -1,4 +1,4 @@
-
+import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
 import 'package:aura_maison_e_commerce/features/splash/presentation/screens/splash_salon_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefsService.init();
+  await initServiceLocator();
   runApp(const AuraMaisonApp());
 }
 
@@ -14,7 +15,7 @@ class AuraMaisonApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashSalonScreen(),
     );
