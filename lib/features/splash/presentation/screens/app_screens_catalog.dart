@@ -60,7 +60,7 @@ class AppScreensCatalog extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: AppColors.obsidian,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: AppColors.obsidianDark,
         elevation: 0,

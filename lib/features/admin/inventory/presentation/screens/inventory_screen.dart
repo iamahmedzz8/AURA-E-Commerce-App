@@ -1,6 +1,5 @@
-import 'package:aura_maison_e_commerce/core/theme/dark_theme.dart';
 import 'package:flutter/material.dart';
-import '../../domain/entities/inventory_item.dart';
+import 'package:aura_maison_e_commerce/features/admin/inventory/domain/entities/inventory_item.dart';
 import '../../data/datasources/inventory_remote_data_source.dart';
 import '../widgets/header_section.dart';
 import '../widgets/stats_section.dart';
@@ -15,14 +14,15 @@ class InventoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final dataSource = MockInventoryRemoteDataSource();
     return Scaffold(
-      backgroundColor: DarkTheme.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: FutureBuilder<List<InventoryItem>>(
           future: dataSource.fetchInventoryItems(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                child: CircularProgressIndicator(color: DarkTheme.gold),
+                child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary
+                ),
               );
             }
             if (snapshot.hasError) {
@@ -39,7 +39,7 @@ class InventoryScreen extends StatelessWidget {
                 SliverAppBar(
                   pinned: true,
                   automaticallyImplyLeading: false,
-                  backgroundColor: DarkTheme.background,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor ,
                   surfaceTintColor: Colors.transparent,
                   elevation: 0,
                   toolbarHeight: 80,
@@ -62,7 +62,7 @@ class InventoryScreen extends StatelessWidget {
                         Text(
                           'Showing ${items.length} of 48 listed masterpieces',
                           style: TextStyle(
-                            color: DarkTheme.secondaryText,
+                            color: Theme.of(context).textTheme.bodyMedium?.color,
                             fontSize: 12,
                           ),
                         ),
@@ -73,13 +73,13 @@ class InventoryScreen extends StatelessWidget {
                             Icon(
                               Icons.copy,
                               size: 14,
-                              color: DarkTheme.secondaryText,
+                              color: Theme.of(context).textTheme.bodyMedium?.color,
                             ),
                             SizedBox(width: 4),
                             Text(
                               'SIMULATE EMPTY INVENTORY STATE',
                               style: TextStyle(
-                                color: DarkTheme.secondaryText,
+                                color: Theme.of(context).textTheme.bodyMedium?.color,
                                 fontSize: 10,
                                 letterSpacing: 1,
                               ),

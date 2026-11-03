@@ -14,7 +14,7 @@ class OrderHistory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         toolbarHeight: 40,
         elevation: 0,
         scrolledUnderElevation: 0,

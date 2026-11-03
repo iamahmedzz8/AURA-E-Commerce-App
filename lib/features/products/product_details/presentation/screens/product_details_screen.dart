@@ -144,7 +144,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         'Each piece is crafted with premium materials and exceptional attention to detail.';
 
     return Scaffold(
-      backgroundColor: background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         bottom: false,
         child: Stack(
@@ -269,22 +269,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     icon: const Icon(
                       Icons.search,
                       color: Colors.white,
-                      size: 21,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: toggleTheme,
-                    visualDensity: VisualDensity.compact,
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(
-                      minWidth: 32,
-                      minHeight: 36,
-                    ),
-                    icon: Icon(
-                      isDark
-                          ? Icons.light_mode_outlined
-                          : Icons.dark_mode_outlined,
-                      color: gold,
                       size: 21,
                     ),
                   ),
@@ -1467,7 +1451,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: background,
         foregroundColor: foreground,

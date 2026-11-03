@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
     final profile = ProfileModel.sample();
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),

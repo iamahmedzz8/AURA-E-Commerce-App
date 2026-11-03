@@ -108,7 +108,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
     final items = filteredProducts;
 
     return Scaffold(
-      backgroundColor: background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: background,
         elevation: 0,

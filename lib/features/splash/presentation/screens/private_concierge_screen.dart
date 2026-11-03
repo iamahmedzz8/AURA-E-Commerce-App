@@ -59,7 +59,7 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
     final displayedServices = _filteredServices;
 
     return Scaffold(
-      backgroundColor: AppColors.obsidian,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [

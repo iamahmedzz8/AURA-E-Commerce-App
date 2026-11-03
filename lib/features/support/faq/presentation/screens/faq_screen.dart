@@ -165,7 +165,7 @@ class _FaqScreenState extends State<FaqScreen> {
     final displayedQuestions = filteredQuestions;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [

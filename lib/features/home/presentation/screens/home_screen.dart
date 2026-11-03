@@ -96,7 +96,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: background,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: SafeArea(
             bottom: false,
             child: CustomScrollView(
@@ -143,7 +143,6 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
               ],
             ),
           ),
-          bottomNavigationBar: navigation(),
         );
       },
     );
@@ -1013,16 +1012,4 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
     );
   }
 
-  Widget navigation() {
-    return AppBottomNavBar(
-      currentIndex: selectedTab,
-      onTap: (index) {
-        context.read<HomeCubit>().changeTab(index);
-
-        if (index == 1) {
-          openProducts();
-        }
-      },
-    );
-  }
 }

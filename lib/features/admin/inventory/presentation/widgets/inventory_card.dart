@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/theme/dark_theme.dart';
 import '../../../edit_product/presentation/screens/edit_product_screen.dart';
-import '../../domain/entities/inventory_item.dart';
-
+import 'package:aura_maison_e_commerce/features/admin/inventory/domain/entities/inventory_item.dart';
 class InventoryCard extends StatelessWidget {
   final InventoryItem item;
   final VoidCallback? onEdit;

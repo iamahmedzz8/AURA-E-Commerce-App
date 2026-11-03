@@ -74,7 +74,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     final bool canGoBack = Navigator.of(context).canPop();
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         bottom: false,
         child: Column(
