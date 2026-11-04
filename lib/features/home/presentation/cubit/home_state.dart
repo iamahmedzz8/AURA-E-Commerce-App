@@ -9,15 +9,39 @@ class HomeState {
     this.favorites = const {},
   });
 
-  HomeState copyWith({
-    bool? isDark,
-    int? selectedTab,
-    Set<int>? favorites,
-  }) {
+  HomeState copyWith({bool? isDark, int? selectedTab, Set<int>? favorites}) {
     return HomeState(
       isDark: isDark ?? this.isDark,
       selectedTab: selectedTab ?? this.selectedTab,
       favorites: favorites ?? this.favorites,
     );
   }
+}
+
+//=============================Offers State=========================
+abstract class OffersState {}
+
+class OffersLoadingState extends OffersState {}
+
+class OffersSuccessState extends OffersState {
+  final List offers;
+  OffersSuccessState({required this.offers});
+}
+
+class OffersFailureState extends OffersState {
+  final String errorMessage;
+  OffersFailureState({required this.errorMessage});
+}
+
+//=============================Categories State=========================
+abstract class CategoriesState {}
+
+class CategoriesLoadingState extends CategoriesState {}
+class CategoriesSuccessState extends CategoriesState {
+  final List categories;
+  CategoriesSuccessState({required this.categories});
+}
+class CategoriesFailureState extends CategoriesState {
+  final String errorMessage;
+  CategoriesFailureState({required this.errorMessage});
 }
