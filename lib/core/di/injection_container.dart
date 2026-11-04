@@ -9,7 +9,12 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:aura_maison_e_commerce/features/auth/data/datasources/auth_local_data_source.dart';
+import 'package:aura_maison_e_commerce/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:aura_maison_e_commerce/features/auth/data/repositories/auth_repository.dart';
+import 'package:aura_maison_e_commerce/features/auth/domain/repositories/auth_repository.dart';
+import 'package:aura_maison_e_commerce/features/auth/domain/usecases/get_auth_usecase.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/login_cubit.dart';
 /// Global service locator instance
 final GetIt sl = GetIt.instance;
 
@@ -89,4 +94,40 @@ Future<void> initServiceLocator() async {
   sl.registerLazySingleton<DioClient>(
     () => DioClient(sl<Dio>()),
   );
+  // ── 6. Auth Data Sources ────────────────────────────────────
+  sl.registerLazySingleton<AuthRemoteDataSource>(
+        () => AuthRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
+
+  sl.registerLazySingleton<AuthLocalDataSource>(
+        () => AuthLocalDataSourceImpl(
+      tokenStorageService: sl<TokenStorageService>(),
+    ),
+  );
+
+// ── 7. Auth Repository ──────────────────────────────────────
+  sl.registerLazySingleton<AuthRepository>(
+        () => AuthRepositoryImpl(
+      remoteDataSource: sl<AuthRemoteDataSource>(),
+      localDataSource: sl<AuthLocalDataSource>(),
+    ),
+  );
+
+// ── 8. Auth UseCase ─────────────────────────────────────────
+  sl.registerLazySingleton<GetAuthUseCase>(
+        () => GetAuthUseCase(
+      sl<AuthRepository>(),
+    ),
+  );
+
+// ── 9. Login Cubit ──────────────────────────────────────────
+  sl.registerFactory<LoginCubit>(
+        () => LoginCubit(
+      getAuthUseCase: sl<GetAuthUseCase>(),
+    ),
+  );
 }
+
+
