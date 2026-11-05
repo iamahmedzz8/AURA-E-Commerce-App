@@ -2,10 +2,15 @@ import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
 import 'package:aura_maison_e_commerce/core/theme/theme_cubit.dart';
 import 'package:aura_maison_e_commerce/core/theme/aura_theme.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/create_account_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/vip_member_sign_in_screen.dart';
+import 'package:aura_maison_e_commerce/features/home/presentation/screens/home_screen.dart';
 import 'package:aura_maison_e_commerce/features/splash/presentation/screens/splash_salon_screen.dart';
+import 'package:aura_maison_e_commerce/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/addresses_cubit.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -22,12 +27,8 @@ class AuraMaisonApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ThemeCubit>(
-          create: (_) => ThemeCubit(),
-        ),
-        BlocProvider<AddressesCubit>(
-          create: (_) => sl<AddressesCubit>(),
-        ),
+        BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
+        BlocProvider<AddressesCubit>(create: (_) => sl<AddressesCubit>()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, themeMode) {
@@ -36,7 +37,7 @@ class AuraMaisonApp extends StatelessWidget {
             theme: AuraTheme.lightTheme,
             darkTheme: AuraTheme.darkTheme,
             themeMode: themeMode,
-            home: const SplashSalonScreen(),
+            home: const CreateAccountScreen(),
           );
         },
       ),

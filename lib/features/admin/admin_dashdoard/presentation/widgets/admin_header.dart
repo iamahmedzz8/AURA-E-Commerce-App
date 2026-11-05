@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/theme/dark_theme.dart';
 
@@ -62,13 +63,21 @@ class AdminHeader extends StatelessWidget {
                 size: 20,
               ),
               const SizedBox(width: 12),
-              const CircleAvatar(
-                radius: 16,
-                backgroundColor: DarkTheme.gold,
-                child: Icon(
-                  Icons.person,
-                  size: 18,
-                  color: DarkTheme.background,
+              InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfileScreen()),
+                  );
+                },
+                child: const CircleAvatar(
+                  radius: 16,
+                  backgroundColor: DarkTheme.gold,
+                  child: Icon(
+                    Icons.person,
+                    size: 18,
+                    color: DarkTheme.background,
+                  ),
                 ),
               ),
             ],
