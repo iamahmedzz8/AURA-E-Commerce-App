@@ -2,6 +2,8 @@ import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/add
 import 'package:aura_maison_e_commerce/features/admin/admin_dashdoard/presentation/screens/admin_dashboard_screen.dart';
 import 'package:aura_maison_e_commerce/features/profile/data/models/profile_model.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/screens/edit_profile.dart';
+import 'package:aura_maison_e_commerce/features/support/contact/presentation/screens/concierge_contactform.dart';
+import 'package:aura_maison_e_commerce/features/support/support/presentation/screens/police_privacy.dart';
 import 'package:flutter/material.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/screens/change_password_screen.dart';
@@ -81,10 +83,18 @@ class ProfileScreen extends StatelessWidget {
                 subtitle: '5 Masterpieces Archival for Viewing',
               ),
 
-              const ProfileMenuTile(
-                icon: Icons.security,
-                title: 'Security & Hardware Key',
-                subtitle: 'Hardware Enclave, FaceID, Dual-Vault Auth',
+              InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PrivacyPolicyScreen(),
+                  ),
+                ),
+                child: const ProfileMenuTile(
+                  icon: Icons.security,
+                  title: 'Security & Hardware Key',
+                  subtitle: 'Hardware Enclave, FaceID, Dual-Vault Auth',
+                ),
               ),
 
               const ProfileMenuTile(
@@ -107,7 +117,14 @@ class ProfileScreen extends StatelessWidget {
                         side: const BorderSide(color: AppColors.primaryGold),
                         padding: const EdgeInsets.symmetric(vertical: 12),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ContactScreen(),
+                          ),
+                        );
+                      },
                       child: Row(
                         mainAxisAlignment: .center,
                         children: [

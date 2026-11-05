@@ -1,19 +1,43 @@
+
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
+import 'package:aura_maison_e_commerce/core/utils/validators.dart';
 import 'package:flutter/material.dart';
 
-/// Element 3: Privilege Registration Form & Password Criteria
-/// Figma Nodes: 26:27 to 26:84
+class PasswordRules {
+  static const int minLength = 8;
+
+  static bool hasMinLength(String p) => p.length >= minLength;
+
+  static bool hasUppercase(String p) => RegExp(r'[A-Z]').hasMatch(p);
+
+  static bool hasDigit(String p) => RegExp(r'\d').hasMatch(p);
+
+  static bool hasSpecial(String p) =>
+      RegExp(r'[^A-Za-z0-9\s]').hasMatch(p);
+
+  static int score(String p) => [
+    hasMinLength(p),
+    hasUppercase(p),
+    hasDigit(p),
+    hasSpecial(p),
+  ].where((met) => met).length;
+
+  static bool isValid(String p) => score(p) == 4;
+}
+
 class PrivilegeRegistrationForm extends StatefulWidget {
-  final TextEditingController? nameController;
+  final TextEditingController? firstNameController;
+  final TextEditingController? lastNameController;
   final TextEditingController? emailController;
   final TextEditingController? phoneController;
   final TextEditingController? passwordController;
 
   const PrivilegeRegistrationForm({
     super.key,
-    this.nameController,
+    this.firstNameController,
+    this.lastNameController,
     this.emailController,
     this.phoneController,
     this.passwordController,
@@ -24,104 +48,124 @@ class PrivilegeRegistrationForm extends StatefulWidget {
       _PrivilegeRegistrationFormState();
 }
 
-class _PrivilegeRegistrationFormState extends State<PrivilegeRegistrationForm> {
-  late final TextEditingController _nameController;
+class _PrivilegeRegistrationFormState
+    extends State<PrivilegeRegistrationForm> {
+  static const String _firstNameLabel = 'FIRST NAME';
+  static const String _lastNameLabel = 'LAST NAME';
+
+  late final TextEditingController _firstNameController;
+  late final TextEditingController _lastNameController;
   late final TextEditingController _emailController;
   late final TextEditingController _phoneController;
   late final TextEditingController _passwordController;
 
-  bool _obscurePassword = false;
+  bool _obscurePassword = true;
+
   final String _selectedCountryCode = AppStrings.phoneCountryPrefix;
 
   @override
   void initState() {
     super.initState();
-    _nameController =
-        widget.nameController ??
-        TextEditingController(text: AppStrings.fullNamePlaceholder);
+
+    _firstNameController =
+        widget.firstNameController ?? TextEditingController();
+
+    _lastNameController =
+        widget.lastNameController ?? TextEditingController();
+
     _emailController =
-        widget.emailController ??
-        TextEditingController(text: AppStrings.privateEmailPlaceholder);
+        widget.emailController ?? TextEditingController();
+
     _phoneController =
-        widget.phoneController ??
-        TextEditingController(text: AppStrings.mobilePhonePlaceholder);
+        widget.phoneController ?? TextEditingController();
+
     _passwordController =
-        widget.passwordController ??
-        TextEditingController(text: AppStrings.securePasswordPlaceholder);
+        widget.passwordController ?? TextEditingController();
+
+    _passwordController.addListener(_onPasswordChanged);
+  }
+
+  void _onPasswordChanged() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
   void dispose() {
-    if (widget.nameController == null) _nameController.dispose();
-    if (widget.emailController == null) _emailController.dispose();
-    if (widget.phoneController == null) _phoneController.dispose();
-    if (widget.passwordController == null) _passwordController.dispose();
+    _passwordController.removeListener(_onPasswordChanged);
+
+    if (widget.firstNameController == null) {
+      _firstNameController.dispose();
+    }
+
+    if (widget.lastNameController == null) {
+      _lastNameController.dispose();
+    }
+
+    if (widget.emailController == null) {
+      _emailController.dispose();
+    }
+
+    if (widget.phoneController == null) {
+      _phoneController.dispose();
+    }
+
+    if (widget.passwordController == null) {
+      _passwordController.dispose();
+    }
+
     super.dispose();
+  }
+
+  String get _strengthLabel {
+    switch (PasswordRules.score(_passwordController.text)) {
+      case 4:
+        return AppStrings.veryStrongBadge;
+      case 3:
+        return 'STRONG';
+      case 2:
+        return 'FAIR';
+      default:
+        return 'WEAK';
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final String password = _passwordController.text;
+    final int strengthScore = PasswordRules.score(password);
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 1. FULL NAME FIELD
+          // FIRST NAME + LAST NAME
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                AppStrings.fullNameLabel,
-                style: AppStyles.formFieldLabel.copyWith(
-                  color: AppColors.goldAccent,
+              Expanded(
+                child: _buildNameField(
+                  label: _firstNameLabel,
+                  hint: 'First name',
+                  controller: _firstNameController,
                 ),
               ),
-              Text(
-                AppStrings.titleSurnameBadge,
-                style: AppStyles.formFieldSubBadge.copyWith(
-                  color: AppColors.textSecondary,
+              SizedBox(width: 8),
+              Expanded(
+                child: _buildNameField(
+                  label: _lastNameLabel,
+                  hint: 'Last name',
+                  controller: _lastNameController,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          _buildInputContainer(
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _nameController,
-                    style: AppStyles.formInputText.copyWith(
-                      color: AppColors.textPrimary,
-                    ),
-                    decoration: InputDecoration(
-                      isDense: true,
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 13,
-                      ),
-                      hintText: AppStrings.fullNamePlaceholder,
-                      hintStyle: AppStyles.formInputText.copyWith(
-                        color: AppColors.textSecondary.withValues(alpha: 0.5),
-                      ),
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 16),
-                  child: Icon(
-                    Icons.person_outline,
-                    size: 18,
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
 
-          // 2. PRIVATE EMAIL ADDRESS FIELD
+          SizedBox(height: 20),
+
+          // EMAIL LABEL
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -139,59 +183,44 @@ class _PrivilegeRegistrationFormState extends State<PrivilegeRegistrationForm> {
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          _buildInputContainer(
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    style: AppStyles.formInputText.copyWith(
-                      color: AppColors.textPrimary,
-                    ),
-                    decoration: InputDecoration(
-                      isDense: true,
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 13,
-                      ),
-                      hintText: AppStrings.privateEmailPlaceholder,
-                      hintStyle: AppStyles.formInputText.copyWith(
-                        color: AppColors.textSecondary.withValues(alpha: 0.5),
-                      ),
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 16),
-                  child: Icon(
-                    Icons.mail_outline,
-                    size: 18,
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-              ],
+
+          SizedBox(height: 6),
+
+          // EMAIL INPUT + VALIDATION
+          _buildValidatedInput(
+            controller: _emailController,
+            validator: (email) {
+              return Validator.validateEmail(email.toString());
+            },
+            keyboardType: TextInputType.emailAddress,
+            hint: AppStrings.privateEmailPlaceholder,
+            suffixIcon: Icon(
+              Icons.mail_outline,
+              size: 18,
+              color: AppColors.textSecondary,
             ),
           ),
-          const SizedBox(height: 20),
 
-          // 3. MOBILE PHONE NUMBER FIELD
+          SizedBox(height: 20),
+
+          // PHONE LABEL
           Text(
             AppStrings.mobilePhoneLabel,
             style: AppStyles.formFieldLabel.copyWith(
               color: AppColors.goldAccent,
             ),
           ),
-          const SizedBox(height: 6),
+
+          SizedBox(height: 6),
+
+          // PHONE INPUT + COUNTRY CODE
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Country Code Selector
               _buildInputContainer(
                 width: 112,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -201,7 +230,7 @@ class _PrivilegeRegistrationFormState extends State<PrivilegeRegistrationForm> {
                           color: AppColors.textPrimary,
                         ),
                       ),
-                      const Icon(
+                      Icon(
                         Icons.keyboard_arrow_down,
                         size: 16,
                         color: AppColors.goldAccent,
@@ -210,37 +239,25 @@ class _PrivilegeRegistrationFormState extends State<PrivilegeRegistrationForm> {
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
 
-              // Phone Number Input
+              SizedBox(width: 8),
+
               Expanded(
-                child: _buildInputContainer(
-                  child: TextField(
-                    controller: _phoneController,
-                    keyboardType: TextInputType.phone,
-                    style: AppStyles.formInputText.copyWith(
-                      color: AppColors.textPrimary,
-                    ),
-                    decoration: InputDecoration(
-                      isDense: true,
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 13,
-                      ),
-                      hintText: AppStrings.mobilePhonePlaceholder,
-                      hintStyle: AppStyles.formInputText.copyWith(
-                        color: AppColors.textSecondary.withValues(alpha: 0.5),
-                      ),
-                    ),
-                  ),
+                child: _buildValidatedInput(
+                  controller: _phoneController,
+                  validator: (phone) {
+                    return Validator.validatePhoneNumber(phone.toString());
+                  },
+                  keyboardType: TextInputType.phone,
+                  hint: AppStrings.mobilePhonePlaceholder,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 20),
 
-          // 4. SECURE PASSWORD FIELD
+          SizedBox(height: 20),
+
+          // PASSWORD LABEL
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -251,14 +268,17 @@ class _PrivilegeRegistrationFormState extends State<PrivilegeRegistrationForm> {
                 ),
               ),
               Text(
-                AppStrings.veryStrongBadge,
+                _strengthLabel,
                 style: AppStyles.passwordIndicatorBadge.copyWith(
                   color: AppColors.goldAccent,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 6),
+
+          SizedBox(height: 6),
+
+          // PASSWORD INPUT
           _buildInputContainer(
             child: Row(
               children: [
@@ -272,13 +292,15 @@ class _PrivilegeRegistrationFormState extends State<PrivilegeRegistrationForm> {
                     decoration: InputDecoration(
                       isDense: true,
                       border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(
+                      contentPadding: EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 13,
                       ),
                       hintText: AppStrings.securePasswordPlaceholder,
                       hintStyle: AppStyles.formInputText.copyWith(
-                        color: AppColors.textSecondary.withValues(alpha: 0.5),
+                        color: AppColors.textSecondary.withValues(
+                          alpha: 0.5,
+                        ),
                       ),
                     ),
                   ),
@@ -301,29 +323,33 @@ class _PrivilegeRegistrationFormState extends State<PrivilegeRegistrationForm> {
               ],
             ),
           ),
-          const SizedBox(height: 8),
 
-          // 4-Segment Robustness Gauge
+          SizedBox(height: 8),
+
+          // PASSWORD STRENGTH
           Row(
             children: [
-              _buildStrengthSegment(active: true),
-              const SizedBox(width: 6),
-              _buildStrengthSegment(active: true),
-              const SizedBox(width: 6),
-              _buildStrengthSegment(active: true),
-              const SizedBox(width: 6),
-              _buildStrengthSegment(active: false),
+              for (int i = 0; i < 4; i++) ...[
+                if (i > 0) SizedBox(width: 6),
+                _buildStrengthSegment(
+                  active: i < strengthScore,
+                ),
+              ],
             ],
           ),
-          const SizedBox(height: 8),
 
-          // Password Criteria Grid Card
+          SizedBox(height: 8),
+
+          // PASSWORD CRITERIA
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: AppColors.cardInactive,
               borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: AppColors.chipBorder, width: 0.5),
+              border: Border.all(
+                color: AppColors.chipBorder,
+                width: 0.5,
+              ),
             ),
             child: Column(
               children: [
@@ -332,27 +358,30 @@ class _PrivilegeRegistrationFormState extends State<PrivilegeRegistrationForm> {
                     Expanded(
                       child: _buildCriteriaItem(
                         AppStrings.criteriaMinCharacters,
-                        true,
+                        PasswordRules.hasMinLength(password),
                       ),
                     ),
                     Expanded(
                       child: _buildCriteriaItem(
                         AppStrings.criteriaUppercase,
-                        true,
+                        PasswordRules.hasUppercase(password),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded(
-                      child: _buildCriteriaItem(AppStrings.criteriaDigit, true),
+                      child: _buildCriteriaItem(
+                        AppStrings.criteriaDigit,
+                        PasswordRules.hasDigit(password),
+                      ),
                     ),
                     Expanded(
                       child: _buildCriteriaItem(
                         AppStrings.criteriaSpecialSymbol,
-                        true,
+                        PasswordRules.hasSpecial(password),
                       ),
                     ),
                   ],
@@ -365,31 +394,165 @@ class _PrivilegeRegistrationFormState extends State<PrivilegeRegistrationForm> {
     );
   }
 
-  Widget _buildInputContainer({required Widget child, double? width}) {
+  // NAME FIELD
+  Widget _buildNameField({
+    required String label,
+    required String hint,
+    required TextEditingController controller,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: AppStyles.formFieldLabel.copyWith(
+            color: AppColors.goldAccent,
+          ),
+        ),
+        SizedBox(height: 6),
+        _buildInputContainer(
+          child: TextField(
+            controller: controller,
+            keyboardType: TextInputType.name,
+            textCapitalization: TextCapitalization.words,
+            style: AppStyles.formInputText.copyWith(
+              color: AppColors.textPrimary,
+            ),
+            decoration: InputDecoration(
+              isDense: true,
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 13,
+              ),
+              hintText: hint,
+              hintStyle: AppStyles.formInputText.copyWith(
+                color: AppColors.textSecondary.withValues(alpha: 0.5),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // VALIDATED INPUT
+  
+Widget _buildValidatedInput({
+  required TextEditingController controller,
+  required String? Function(String?) validator,
+  required TextInputType keyboardType,
+  required String hint,
+  Widget? suffixIcon,
+}) {
+  return FormField<String>(
+    initialValue: controller.text,
+    validator: validator,
+    autovalidateMode: AutovalidateMode.onUserInteraction,
+    builder: (field) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            height: 48,
+            decoration: BoxDecoration(
+              color: AppColors.cardInactive,
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(
+                color: AppColors.chipBorder,
+                width: 0.5,
+              ),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: controller,
+                    keyboardType: keyboardType,
+                    style: AppStyles.formInputText.copyWith(
+                      color: AppColors.textPrimary,
+                    ),
+                    onChanged: (value) {
+                      field.didChange(value);
+                    },
+                    decoration: InputDecoration(
+                      isDense: true,
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 13,
+                      ),
+                      hintText: hint,
+                      hintStyle: AppStyles.formInputText.copyWith(
+                        color: AppColors.textSecondary.withValues(
+                          alpha: 0.5,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                if (suffixIcon != null)
+                  Padding(
+                    padding: EdgeInsets.only(right: 16),
+                    child: suffixIcon,
+                  ),
+              ],
+            ),
+          ),
+
+          if (field.hasError) ...[
+            SizedBox(height: 5),
+            Text(
+              field.errorText!,
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ],
+      );
+    },
+  );
+}
+
+  // INPUT CONTAINER
+  Widget _buildInputContainer({
+    required Widget child,
+    double? width,
+  }) {
     return Container(
       width: width,
       height: 48,
       decoration: BoxDecoration(
         color: AppColors.cardInactive,
         borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: AppColors.chipBorder, width: 0.5),
+        border: Border.all(
+          color: AppColors.chipBorder,
+          width: 0.5,
+        ),
       ),
       child: child,
     );
   }
 
+  // PASSWORD STRENGTH SEGMENT
   Widget _buildStrengthSegment({required bool active}) {
     return Expanded(
       child: Container(
         height: 4,
         decoration: BoxDecoration(
-          color: active ? AppColors.goldAccent : AppColors.statusReservedBg,
+          color: active
+              ? AppColors.goldAccent
+              : AppColors.statusReservedBg,
           borderRadius: BorderRadius.circular(12),
         ),
       ),
     );
   }
 
+  // PASSWORD CRITERIA ITEM
   Widget _buildCriteriaItem(String label, bool met) {
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -397,9 +560,11 @@ class _PrivilegeRegistrationFormState extends State<PrivilegeRegistrationForm> {
         Icon(
           met ? Icons.check_circle : Icons.radio_button_unchecked,
           size: 14,
-          color: met ? AppColors.statusGreen : AppColors.textSecondary,
+          color: met
+              ? AppColors.statusGreen
+              : AppColors.textSecondary,
         ),
-        const SizedBox(width: 6),
+        SizedBox(width: 6),
         Flexible(
           child: Text(
             label,

@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
+import 'package:aura_maison_e_commerce/features/auth/data/datasources/resendotp.dart';
+import 'package:aura_maison_e_commerce/features/auth/data/datasources/verify_email.dart';
+import 'package:aura_maison_e_commerce/features/auth/data/models/verify_model.dart';
 import 'package:aura_maison_e_commerce/main_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/aura_medallion_header.dart';
@@ -27,10 +30,18 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  static const int _initialSeconds = 49;
+
   final _controllers = List.generate(6, (_) => TextEditingController());
   final _nodes = List.generate(6, (_) => FocusNode());
+
+  final VerifyEmailService _verifyService = VerifyEmailService();
+  final ResendOtpService _resendService = ResendOtpService();
+
   Timer? _timer;
-  int _seconds = 49;
+  int _seconds = _initialSeconds;
+  bool _isVerifying = false;
+  bool _isResending = false;
 
   @override
   void initState() {
@@ -50,63 +61,97 @@ class _OtpScreenState extends State<OtpScreen> {
     super.dispose();
   }
 
+  void _showMessage(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(message)));
+  }
+
   void _startTimer() {
     _timer?.cancel();
+    setState(() => _seconds = _initialSeconds);
+
     _timer = Timer.periodic(const Duration(seconds: 1), (t) {
-      if (_seconds == 0) {
+      if (!mounted) {
         t.cancel();
+        return;
+      }
+      if (_seconds <= 1) {
+        t.cancel();
+        setState(() => _seconds = 0);
       } else {
         setState(() => _seconds--);
       }
     });
   }
 
-  void _resend() {
-    if (_seconds != 0) return;
-    for (final c in _controllers) {
-      c.clear();
+  Future<void> _resend() async {
+    if (_seconds != 0 || _isResending) return;
+
+    setState(() => _isResending = true);
+
+    try {
+      // For signup, ask the server to send a new code.
+      if (widget.purpose == OtpPurpose.signup) {
+        await _resendService.resend(widget.email);
+      }
+
+      if (!mounted) return;
+
+      for (final c in _controllers) {
+        c.clear();
+      }
+      _startTimer();
+      _nodes.first.requestFocus();
+      _showMessage('Dispatched new security code via relay.');
+    } catch (e) {
+      _showMessage(e.toString().replaceFirst('Exception: ', ''));
+    } finally {
+      if (mounted) setState(() => _isResending = false);
     }
-    setState(() => _seconds = 49);
-    _startTimer();
-    _nodes.first.requestFocus();
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Dispatched new security code via relay.')),
-    );
   }
 
   Future<void> _verify() async {
+    if (_isVerifying) return;
+
     final code = _controllers.map((c) => c.text).join();
     if (code.length != 6) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter all 6 digits.')),
-      );
+      _showMessage('Please enter all 6 digits.');
       return;
     }
 
     if (widget.purpose == OtpPurpose.signup) {
-      await PrefsService.setOnboardingCompleted(true);
-      await PrefsService.saveLoginSession(
-        email: widget.email,
-        rememberMe: true,
-      );
+      FocusScope.of(context).unfocus();
+      setState(() => _isVerifying = true);
 
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Account verified. Welcome to Aura.')),
-      );
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (_) => const MainScreen()),
-        (_) => false,
-      );
+      try {
+        await _verifyService.verifyEmail(
+          VerifyEmailModel(email: widget.email, otp: code),
+        );
+
+        await PrefsService.setOnboardingCompleted(true);
+        await PrefsService.saveLoginSession(
+          email: widget.email,
+          rememberMe: true,
+        );
+
+        if (!mounted) return;
+        _showMessage('Account verified. Welcome to Aura.');
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const MainScreen()),
+          (_) => false,
+        );
+      } catch (e) {
+        _showMessage(e.toString().replaceFirst('Exception: ', ''));
+      } finally {
+        if (mounted) setState(() => _isVerifying = false);
+      }
       return;
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Verification successful. Proceeding to set new seal...'),
-      ),
-    );
+    _showMessage('Verification successful. Proceeding to set new seal...');
 
     Navigator.push(
       context,
@@ -219,6 +264,8 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   Widget _buildTimerAndResend() {
+    final bool canResend = _seconds == 0 && !_isResending;
+
     return Center(
       child: Column(
         children: [
@@ -242,13 +289,11 @@ class _OtpScreenState extends State<OtpScreen> {
             ],
           ),
           TextButton(
-            onPressed: _seconds == 0 ? _resend : null,
+            onPressed: canResend ? _resend : null,
             child: Text(
               'ISSUE A NEW CODE',
               style: TextStyle(
-                color: _seconds == 0
-                    ? AppColors.gold
-                    : AppColors.obsidianBorder,
+                color: canResend ? AppColors.gold : AppColors.obsidianBorder,
                 letterSpacing: 1.1,
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
@@ -265,8 +310,17 @@ class _OtpScreenState extends State<OtpScreen> {
       width: double.infinity,
       height: 54,
       child: ElevatedButton.icon(
-        onPressed: _verify,
-        icon: const Icon(Icons.arrow_forward, size: 17),
+        onPressed: _isVerifying ? null : _verify,
+        icon: _isVerifying
+            ? const SizedBox(
+                width: 16,
+                height: 16,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: AppColors.obsidianDark,
+                ),
+              )
+            : const Icon(Icons.arrow_forward, size: 17),
         label: const Text(
           'VERIFY AURA ACCESS',
           style: TextStyle(
@@ -278,6 +332,8 @@ class _OtpScreenState extends State<OtpScreen> {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.gold,
           foregroundColor: AppColors.obsidianDark,
+          disabledBackgroundColor: AppColors.gold,
+          disabledForegroundColor: AppColors.obsidianDark,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         ),
       ),
