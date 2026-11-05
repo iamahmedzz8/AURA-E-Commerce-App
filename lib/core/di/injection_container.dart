@@ -28,13 +28,6 @@ import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/update
 import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/get_user_addresses_use_case.dart';
 import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/delete_address_use_case.dart';
 
-import '../../features/products/products/data/datasources/products_remote_data_source.dart';
-import '../../features/products/products/data/repositories/products_repository_impl.dart';
-import '../../features/products/products/domain/repositories/products_repository.dart';
-import '../../features/products/products/domain/usecases/add_product_usecase.dart';
-import '../../features/products/products/domain/usecases/delete_product_usecase.dart';
-import '../../features/products/products/presentation/cubit/products_cubit.dart';
-
 
 /// Global service locator instance
 final GetIt sl = GetIt.instance;
@@ -226,39 +219,6 @@ Future<void> initServiceLocator() async {
     updateAddressUseCase: sl<UpdateAddressUseCase>(),
     deleteAddressUseCase: sl<DeleteAddressUseCase>(),
     selectedAddressService: sl<SelectedAddressService>(),
-    ),
-  );
-  // ── 20. Products Remote Data Source ────────────────────────
-  sl.registerLazySingleton<ProductsRemoteDataSource>(
-        () => ProductsRemoteDataSource(),
-  );
-
-  // ── 21. Products Repository ────────────────────────────────
-  sl.registerLazySingleton<ProductsRepository>(
-        () => ProductsRepositoryImpl(
-          sl<ProductsRemoteDataSource>(),
-    ),
-  );
-
-  // ── 22. Add Product Use Case ───────────────────────────────
-  sl.registerLazySingleton<AddProductUseCase>(
-        () => AddProductUseCase(
-      sl<ProductsRepository>(),
-    ),
-  );
-
-  // ── 23. Delete Product Use Case ────────────────────────────
-  sl.registerLazySingleton<DeleteProductUseCase>(
-        () => DeleteProductUseCase(
-      sl<ProductsRepository>(),
-    ),
-  );
-
-  // ── 24. Products Cubit ─────────────────────────────────────
-  sl.registerFactory<ProductsCubit>(
-        () => ProductsCubit(
-      addProductUseCase: sl<AddProductUseCase>(),
-      deleteProductUseCase: sl<DeleteProductUseCase>(),
     ),
   );
 }

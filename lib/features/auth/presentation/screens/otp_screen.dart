@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
+import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/otp_cubit.dart';
 import 'package:aura_maison_e_commerce/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../widgets/aura_medallion_header.dart';
 import '../widgets/auth_info_row.dart';
 import '../widgets/auth_top_bar.dart';
@@ -10,7 +14,7 @@ import '../widgets/encryption_footer_note.dart';
 import '../widgets/session_security_banner.dart';
 import 'reset_password_screen.dart';
 
-enum OtpPurpose { signup, resetPassword }
+export '../cubit/otp_cubit.dart' show OtpPurpose;
 
 class OtpScreen extends StatefulWidget {
   final String email;
@@ -27,10 +31,13 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  static const int _initialSeconds = 49;
+
   final _controllers = List.generate(6, (_) => TextEditingController());
   final _nodes = List.generate(6, (_) => FocusNode());
+
   Timer? _timer;
-  int _seconds = 49;
+  int _seconds = _initialSeconds;
 
   @override
   void initState() {
@@ -50,119 +57,166 @@ class _OtpScreenState extends State<OtpScreen> {
     super.dispose();
   }
 
+  void _showMessage(String message, {bool isError = false}) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          backgroundColor: AppColors.obsidianElevated,
+          content: Text(
+            message,
+            style: TextStyle(
+              color: isError ? Colors.redAccent : AppColors.ivory,
+            ),
+          ),
+        ),
+      );
+  }
+
   void _startTimer() {
     _timer?.cancel();
+    setState(() => _seconds = _initialSeconds);
+
     _timer = Timer.periodic(const Duration(seconds: 1), (t) {
-      if (_seconds == 0) {
+      if (!mounted) {
         t.cancel();
+        return;
+      }
+      if (_seconds <= 1) {
+        t.cancel();
+        setState(() => _seconds = 0);
       } else {
-        setState(() => _seconds--);
+        if (mounted) {
+          setState(() => _seconds--);
+        }
       }
     });
   }
 
-  void _resend() {
+  void _resend(BuildContext context) {
     if (_seconds != 0) return;
-    for (final c in _controllers) {
-      c.clear();
-    }
-    setState(() => _seconds = 49);
-    _startTimer();
-    _nodes.first.requestFocus();
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Dispatched new security code via relay.')),
-    );
+    context.read<OtpCubit>().resendOtp(widget.email);
   }
 
-  Future<void> _verify() async {
+  void _verify(BuildContext context) {
     final code = _controllers.map((c) => c.text).join();
     if (code.length != 6) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter all 6 digits.')),
+      _showMessage(
+        'Please enter all 6 digits of the security code.',
+        isError: true,
       );
       return;
     }
 
-    if (widget.purpose == OtpPurpose.signup) {
-      await PrefsService.setOnboardingCompleted(true);
-      await PrefsService.saveLoginSession(
-        email: widget.email,
-        rememberMe: true,
-      );
-
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Account verified. Welcome to Aura.')),
-      );
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (_) => const MainScreen()),
-        (_) => false,
-      );
-      return;
-    }
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Verification successful. Proceeding to set new seal...'),
-      ),
-    );
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => ResetPasswordScreen(email: widget.email),
-      ),
-    );
+    FocusScope.of(context).unfocus();
+    context.read<OtpCubit>().verifyOtp(
+          email: widget.email,
+          otp: code,
+          purpose: widget.purpose,
+        );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 26),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AuthTopBar(
-                title: 'Otp Verification',
-                onBack: () => Navigator.pop(context),
-                backIcon: Icons.arrow_back,
-              ),
-              const SizedBox(height: 24),
-              AuraMedallionHeader(
-                icon: Icons.lock,
-                tag: 'CONCIERGE PROTOCOL',
-                title: 'Private Security Code',
-                subtitle:
-                    'An exclusive six-digit confirmation\ncode has been sent to',
-                extraChild: Text(
-                  widget.email,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: AppColors.ivory,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                  ),
+    return BlocProvider<OtpCubit>(
+      create: (_) => sl<OtpCubit>(),
+      child: Scaffold(
+        backgroundColor: AppColors.obsidianDark,
+        body: SafeArea(
+          child: BlocConsumer<OtpCubit, OtpState>(
+            listener: (context, state) async {
+              if (state is OtpFailure) {
+                _showMessage(state.message, isError: true);
+              } else if (state is OtpResendFailure) {
+                _showMessage(state.message, isError: true);
+              } else if (state is OtpResendSuccess) {
+                for (final c in _controllers) {
+                  c.clear();
+                }
+                _startTimer();
+                _nodes.first.requestFocus();
+                _showMessage(state.message);
+              } else if (state is OtpSuccess) {
+                if (state.purpose == OtpPurpose.signup) {
+                  await PrefsService.setOnboardingCompleted(true);
+                  await PrefsService.saveLoginSession(
+                    email: state.email,
+                    rememberMe: true,
+                  );
+
+                  if (!context.mounted) return;
+                  _showMessage('Account verified. Welcome to Aura Maison.');
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (_) => const MainScreen()),
+                    (_) => false,
+                  );
+                } else {
+                  _showMessage(
+                    'Security code confirmed. Proceeding to set new seal...',
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ResetPasswordScreen(
+                        email: state.email,
+                        otp: state.otp,
+                      ),
+                    ),
+                  );
+                }
+              }
+            },
+            builder: (context, state) {
+              final isVerifying = state is OtpLoading;
+              final isResending = state is OtpResendLoading;
+
+              return SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 26),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AuthTopBar(
+                      title: 'Otp Verification',
+                      onBack: () => Navigator.pop(context),
+                      backIcon: Icons.arrow_back,
+                    ),
+                    const SizedBox(height: 24),
+                    AuraMedallionHeader(
+                      icon: Icons.lock,
+                      tag: 'CONCIERGE PROTOCOL',
+                      title: 'Private Security Code',
+                      subtitle:
+                          'An exclusive six-digit confirmation\ncode has been sent to',
+                      extraChild: Text(
+                        widget.email,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: AppColors.ivory,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    const SessionSecurityBanner(),
+                    const SizedBox(height: 24),
+                    _buildOtpInputBoxes(),
+                    const SizedBox(height: 18),
+                    _buildTimerAndResend(context, isResending),
+                    const SizedBox(height: 22),
+                    _buildVerifyButton(context, isVerifying),
+                    const SizedBox(height: 12),
+                    _buildChangeAuthButton(),
+                    const SizedBox(height: 24),
+                    _buildWorkspaceInfoCard(),
+                    const SizedBox(height: 18),
+                    const EncryptionFooterNote(),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 24),
-              const SessionSecurityBanner(),
-              const SizedBox(height: 24),
-              _buildOtpInputBoxes(),
-              const SizedBox(height: 18),
-              _buildTimerAndResend(),
-              const SizedBox(height: 22),
-              _buildVerifyButton(),
-              const SizedBox(height: 12),
-              _buildChangeAuthButton(),
-              const SizedBox(height: 24),
-              _buildWorkspaceInfoCard(),
-              const SizedBox(height: 18),
-              const EncryptionFooterNote(),
-            ],
+              );
+            },
           ),
         ),
       ),
@@ -218,7 +272,9 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 
-  Widget _buildTimerAndResend() {
+  Widget _buildTimerAndResend(BuildContext context, bool isResending) {
+    final bool canResend = _seconds == 0 && !isResending;
+
     return Center(
       child: Column(
         children: [
@@ -241,35 +297,57 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
             ],
           ),
-          TextButton(
-            onPressed: _seconds == 0 ? _resend : null,
-            child: Text(
-              'ISSUE A NEW CODE',
-              style: TextStyle(
-                color: _seconds == 0
-                    ? AppColors.gold
-                    : AppColors.obsidianBorder,
-                letterSpacing: 1.1,
-                fontSize: 11,
-                fontWeight: FontWeight.w700,
+          if (isResending)
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              child: SizedBox(
+                width: 18,
+                height: 18,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: AppColors.gold,
+                ),
+              ),
+            )
+          else
+            TextButton(
+              onPressed: canResend ? () => _resend(context) : null,
+              child: Text(
+                'ISSUE A NEW CODE',
+                style: TextStyle(
+                  color: canResend
+                      ? AppColors.gold
+                      : AppColors.obsidianBorder,
+                  letterSpacing: 1.1,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
   }
 
-  Widget _buildVerifyButton() {
+  Widget _buildVerifyButton(BuildContext context, bool isVerifying) {
     return SizedBox(
       width: double.infinity,
       height: 54,
       child: ElevatedButton.icon(
-        onPressed: _verify,
-        icon: const Icon(Icons.arrow_forward, size: 17),
-        label: const Text(
-          'VERIFY AURA ACCESS',
-          style: TextStyle(
+        onPressed: isVerifying ? null : () => _verify(context),
+        icon: isVerifying
+            ? const SizedBox(
+                width: 18,
+                height: 18,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: AppColors.obsidianDark,
+                ),
+              )
+            : const Icon(Icons.arrow_forward, size: 17),
+        label: Text(
+          isVerifying ? 'AUTHENTICATING...' : 'VERIFY AURA ACCESS',
+          style: const TextStyle(
             letterSpacing: 1.2,
             fontWeight: FontWeight.w800,
             fontSize: 11,
@@ -278,6 +356,9 @@ class _OtpScreenState extends State<OtpScreen> {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.gold,
           foregroundColor: AppColors.obsidianDark,
+          disabledBackgroundColor: AppColors.gold.withValues(alpha: 0.5),
+          disabledForegroundColor:
+              AppColors.obsidianDark.withValues(alpha: 0.7),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         ),
       ),
