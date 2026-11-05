@@ -100,18 +100,13 @@ class RecentRegister extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: DarkTheme.background,
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: DarkTheme.border),
-            ),
-            child: Icon(
-              Icons.image_outlined,
-              color: DarkTheme.secondaryText.withValues(alpha: 0.3),
-              size: 20,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: Image.asset(
+              'assets/images/vintage_allocation_bg.png',
+              width: 50,
+              height: 50,
+              fit: BoxFit.cover,
             ),
           ),
           const SizedBox(width: 12),

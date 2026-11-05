@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/theme/dark_theme.dart';
+import '../../../../products/products/presentation/cubit/products_cubit.dart';
 
 class DeleteActionButtons extends StatelessWidget {
-  const DeleteActionButtons({super.key});
+  final String productId;
+
+  const DeleteActionButtons({super.key, required this.productId});
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +16,16 @@ class DeleteActionButtons extends StatelessWidget {
           width: double.infinity,
           child: OutlinedButton.icon(
             style: OutlinedButton.styleFrom(
-              foregroundColor: DarkTheme.secondaryText.withValues(
-                alpha: 0.5,
-              ), // باهت
+              foregroundColor: DarkTheme.secondaryText.withValues(alpha: 0.5),
               side: BorderSide(color: DarkTheme.border.withValues(alpha: 0.5)),
               padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
-            onPressed: null,
+            onPressed: () {
+              context.read<ProductsCubit>().deleteProduct(productId);
+            },
             icon: const Icon(Icons.delete_outline, size: 18),
             label: const Text(
               'REMOVE PERMANENTLY FROM REGISTER',

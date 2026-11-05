@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/theme/dark_theme.dart';
-
-// Widgets
+import '../../../../products/products/presentation/cubit/products_cubit.dart';
 import '../widgets/ delete_action_buttons.dart';
 import '../widgets/declassification_effects_list.dart';
 import '../widgets/delete_app_bar.dart';
@@ -11,7 +11,9 @@ import '../widgets/piece_summary_card.dart';
 import '../widgets/sealing_code_input.dart';
 
 class DeleteProductScreen extends StatelessWidget {
-  const DeleteProductScreen({super.key});
+  final String productId;
+
+  const DeleteProductScreen({super.key, required this.productId});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +34,7 @@ class DeleteProductScreen extends StatelessWidget {
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               sliver: SliverList(
-                delegate: SliverChildListDelegate(
-                    [
+                delegate: SliverChildListDelegate([
                   const IrreversibleProtocolCard(),
                   const SizedBox(height: 24),
                   const DeleteHeroSection(),
@@ -44,7 +45,27 @@ class DeleteProductScreen extends StatelessWidget {
                   const SizedBox(height: 24),
                   const SealingCodeInput(),
                   const SizedBox(height: 24),
-                  const DeleteActionButtons(),
+                  BlocListener<ProductsCubit, ProductsState>(
+                    listener: (context, state) {
+                      if (state is DeleteProductSuccess) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Product deleted successfully'),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                        Navigator.pop(context,true);
+                      } else if (state is DeleteProductFailure) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.error),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                    },
+                    child: DeleteActionButtons(productId: productId),
+                  ),
                   const SizedBox(height: 40),
                 ]),
               ),

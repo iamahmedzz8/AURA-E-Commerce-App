@@ -1,5 +1,9 @@
+import 'package:aura_maison_e_commerce/features/admin/delete_product/presentation/screens/delete_product_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/di/injection_container.dart';
 import '../../../../../core/theme/dark_theme.dart';
+import '../../../../products/products/presentation/cubit/products_cubit.dart';
 import '../../../edit_product/presentation/screens/edit_product_screen.dart';
 import 'package:aura_maison_e_commerce/features/admin/inventory/domain/entities/inventory_item.dart';
 class InventoryCard extends StatelessWidget {
@@ -212,7 +216,20 @@ class InventoryCard extends StatelessWidget {
                   icon: Icons.delete_outline,
                   label: '',
                   color: DarkTheme.secondaryText,
-                  onTap: () {},
+                  onTap: () async {
+                    final result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider(
+                          create: (context) => sl<ProductsCubit>(),
+                          child: DeleteProductScreen(productId: item.id),
+                        ),
+                      ),
+                    );
+                    if (result == true && onDelete != null) {
+                      onDelete!();
+                    }
+                  },
                   isIconOnly: true,
                 ),
               ],

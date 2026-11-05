@@ -7,21 +7,41 @@ import '../widgets/action_buttons.dart';
 import '../widgets/search_filter.dart';
 import '../widgets/inventory_card.dart';
 
-class InventoryScreen extends StatelessWidget {
+class InventoryScreen extends StatefulWidget {
   const InventoryScreen({super.key});
 
   @override
+  State<InventoryScreen> createState() => _InventoryScreenState();
+}
+
+class _InventoryScreenState extends State<InventoryScreen> {
+  final InventoryApiDataSource dataSource = InventoryApiDataSource();
+  late Future<List<InventoryItem>> _futureItems;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureItems = dataSource.fetchInventoryItems();
+  }
+
+  void _refresh() {
+    setState(() {
+      _futureItems = dataSource.fetchInventoryItems();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final dataSource = MockInventoryRemoteDataSource();
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: FutureBuilder<List<InventoryItem>>(
-          future: dataSource.fetchInventoryItems(),
+          future: _futureItems,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary
+                child: CircularProgressIndicator(
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               );
             }
@@ -39,24 +59,27 @@ class InventoryScreen extends StatelessWidget {
                 SliverAppBar(
                   pinned: true,
                   automaticallyImplyLeading: false,
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor ,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   surfaceTintColor: Colors.transparent,
                   elevation: 0,
                   toolbarHeight: 80,
-                  title: HeaderSection(),
+                  title: const HeaderSection(),
                 ),
-                SliverToBoxAdapter(child: StatsSection()),
-                SliverToBoxAdapter(child: ActionButtons()),
-                SliverToBoxAdapter(child: SearchFilter()),
+                const SliverToBoxAdapter(child: StatsSection()),
+                 SliverToBoxAdapter(child: ActionButtons(onAdd: _refresh)),
+                const SliverToBoxAdapter(child: SearchFilter()),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
-                    (context, index) => InventoryCard(item: items[index]),
+                        (context, index) => InventoryCard(
+                      item: items[index],
+                      onDelete: _refresh,
+                    ),
                     childCount: items.length,
                   ),
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 24.0),
+                    padding: const EdgeInsets.symmetric(vertical: 24.0),
                     child: Column(
                       children: [
                         Text(
@@ -66,7 +89,7 @@ class InventoryScreen extends StatelessWidget {
                             fontSize: 12,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -75,7 +98,7 @@ class InventoryScreen extends StatelessWidget {
                               size: 14,
                               color: Theme.of(context).textTheme.bodyMedium?.color,
                             ),
-                            SizedBox(width: 4),
+                            const SizedBox(width: 4),
                             Text(
                               'SIMULATE EMPTY INVENTORY STATE',
                               style: TextStyle(

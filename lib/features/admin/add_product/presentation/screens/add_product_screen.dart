@@ -82,12 +82,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Product Added Successfully!'), backgroundColor: Colors.green),
                         );
-                      } else if (state is AddProductFailure) {
+                        Navigator.pop(context, true);
+                      }
+                      else if (state is AddProductFailure) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text(state.error), backgroundColor: Colors.red),
                         );
                       }
                     },
+
                     builder: (context, state) {
                       return SizedBox(
                         width: double.infinity,
