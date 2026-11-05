@@ -38,11 +38,11 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
 
     if (value.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+         SnackBar(
           backgroundColor: AppColors.obsidianElevated,
           content: Text(
-            'Please enter your member email or patron vault ID.',
-            style: TextStyle(color: AppColors.ivory),
+            // 'Please enter your member email or patron vault ID.',
+            // style: TextStyle(color: AppColors.ivory),
             'Secure recovery dispatch sent to $value.',
             style: const TextStyle(color: AppColors.ivory),
           ),

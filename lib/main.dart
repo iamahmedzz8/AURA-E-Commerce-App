@@ -37,7 +37,7 @@ class AuraMaisonApp extends StatelessWidget {
             theme: AuraTheme.lightTheme,
             darkTheme: AuraTheme.darkTheme,
             themeMode: themeMode,
-            home: const CreateAccountScreen(),
+            home: const SplashSalonScreen(),
           );
         },
       ),

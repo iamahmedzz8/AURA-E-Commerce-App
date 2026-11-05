@@ -1,5 +1,6 @@
 import 'package:aura_maison_e_commerce/core/network/api_endpoints.dart';
 import 'package:aura_maison_e_commerce/core/network/dio_client.dart';
+import 'package:aura_maison_e_commerce/features/auth/data/models/change_password_request_model.dart';
 
 /// Contract for remote authentication operations.
 /// Communicates directly with [DioClient] without intermediate repository abstractions.
@@ -22,6 +23,13 @@ abstract class AuthRemoteDataSource {
     required String otp,
     required String newPassword,
   });
+
+  Future<Map<String, dynamic>> login({
+    required String email,
+    required String password,
+  });
+
+  Future<void> changePassword({required ChangePasswordRequestModel request});
 }
 
 /// Concrete implementation of [AuthRemoteDataSource] consuming [DioClient].
@@ -68,38 +76,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       data: {'email': email, 'otp': otp, 'newPassword': newPassword},
     );
   }
-}
-import 'package:aura_maison_e_commerce/features/auth/data/models/change_password_request_model.dart';
-
-abstract class AuthRemoteDataSource {
-  Future<Map<String, dynamic>> login({
-    required String email,
-    required String password,
-  });
-
-  Future<void> changePassword({
-    required ChangePasswordRequestModel request,
-  });
-}
-
-class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final DioClient dioClient;
-
-  AuthRemoteDataSourceImpl({
-    required this.dioClient,
-  });
 
   @override
   Future<Map<String, dynamic>> login({
     required String email,
     required String password,
   }) async {
-    final response = await dioClient.post<Map<String, dynamic>>(
+    final response = await _dioClient.post<Map<String, dynamic>>(
       ApiEndpoints.login,
-      data: {
-        'email': email.trim(),
-        'password': password,
-      },
+      data: {'email': email.trim(), 'password': password},
     );
 
     final data = response.data;
@@ -115,9 +100,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> changePassword({
     required ChangePasswordRequestModel request,
   }) async {
-    await dioClient.post(
-      ApiEndpoints.changePassword,
-      data: request.toJson(),
-    );
+    await _dioClient.post(ApiEndpoints.changePassword, data: request.toJson());
   }
 }
