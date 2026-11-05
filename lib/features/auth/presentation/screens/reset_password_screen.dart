@@ -1,5 +1,8 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
+import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/reset_password_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/aura_medallion_header.dart';
 import '../widgets/auth_top_bar.dart';
@@ -10,10 +13,16 @@ import 'vip_member_sign_in_screen.dart';
 
 /// Reset Password — New Password / Set a New Seal Screen (Node 6:325)
 /// Cryptographic password reset enforcing Haute Horlogerie security standards.
-/// TODO: Connect [updatePassphrase] to your backend API via [ResetPasswordCubit].
+/// Connected directly to [ResetPasswordCubit].
 class ResetPasswordScreen extends StatefulWidget {
-  final String? email;
-  const ResetPasswordScreen({super.key, this.email});
+  final String email;
+  final String otp;
+
+  const ResetPasswordScreen({
+    super.key,
+    required this.email,
+    required this.otp,
+  });
 
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
@@ -26,7 +35,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   bool _obscureNew = true;
   bool _obscureConfirm = true;
-  bool _isLoading = false;
 
   bool get _hasMinLength => _newPassphraseController.text.length >= 8;
   bool get _hasUppercase =>
@@ -64,14 +72,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     super.dispose();
   }
 
-  void _updatePassphrase() {
+  void _updatePassphrase(BuildContext context) {
     FocusScope.of(context).unfocus();
 
     if (_score < 4) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
+          backgroundColor: AppColors.obsidianElevated,
           content: Text(
             'Your new passphrase must satisfy all four Fine Watchmaking security criteria.',
+            style: TextStyle(color: AppColors.ivory),
           ),
         ),
       );
@@ -80,119 +90,151 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
     if (!_passwordsMatch) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Both passphrases must match exactly.')),
+        const SnackBar(
+          backgroundColor: AppColors.obsidianElevated,
+          content: Text(
+            'Both passphrases must match exactly.',
+            style: TextStyle(color: AppColors.ivory),
+          ),
+        ),
       );
       return;
     }
 
-    setState(() => _isLoading = true);
+    context.read<ResetPasswordCubit>().resetPassword(
+          email: widget.email,
+          otp: widget.otp,
+          newPassword: _newPassphraseController.text,
+        );
+  }
 
-    // Simulated API dispatch (connect to ResetPasswordCubit)
-    Future.delayed(const Duration(milliseconds: 700), () {
-      if (!mounted) return;
-      setState(() => _isLoading = false);
-
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (ctx) => AlertDialog(
-          backgroundColor: AppColors.obsidianDark,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-            side: BorderSide(color: AppColors.gold.withValues(alpha: 0.4)),
-          ),
-          title: const Row(
-            children: [
-              Icon(Icons.verified_outlined, color: AppColors.gold, size: 24),
-              SizedBox(width: 10),
-              Text(
-                'Private Seal Updated',
-                style: TextStyle(
-                  fontFamily: 'serif',
-                  color: AppColors.ivory,
-                  fontSize: 18,
-                ),
-              ),
-            ],
-          ),
-          content: const Text(
-            'Your new cryptographic cipher has been synchronised across all authorized salon nodes.',
-            style: TextStyle(color: AppColors.luxuryMuted, fontSize: 13),
-          ),
-          actions: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.gold,
-                foregroundColor: AppColors.obsidianDark,
-              ),
-              onPressed: () {
-                Navigator.pop(ctx);
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (_) => const VipMemberSignInScreen()),
-                  (route) => false,
-                );
-              },
-              child: const Text(
-                'RETURN TO SALON SIGN-IN',
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.2,
-                ),
+  void _showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.obsidianDark,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: AppColors.gold.withValues(alpha: 0.4)),
+        ),
+        title: const Row(
+          children: [
+            Icon(Icons.verified_outlined, color: AppColors.gold, size: 24),
+            SizedBox(width: 10),
+            Text(
+              'Private Seal Updated',
+              style: TextStyle(
+                fontFamily: 'serif',
+                color: AppColors.ivory,
+                fontSize: 18,
               ),
             ),
           ],
         ),
-      );
-    });
+        content: const Text(
+          'Your new cryptographic cipher has been synchronised across all authorized salon nodes.',
+          style: TextStyle(color: AppColors.luxuryMuted, fontSize: 13),
+        ),
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.gold,
+              foregroundColor: AppColors.obsidianDark,
+            ),
+            onPressed: () {
+              Navigator.pop(ctx);
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const VipMemberSignInScreen(),
+                ),
+                (route) => false,
+              );
+            },
+            child: const Text(
+              'RETURN TO SALON SIGN-IN',
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1.2,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: SafeArea(
-        child: Column(
-          children: [
-            AuthTopBar(
-              title: 'Reset Password',
-              onBack: () => Navigator.maybePop(context),
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 28),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const AuraMedallionHeader(
-                        icon: Icons.lock_reset,
-                        tag: 'FINE WATCHMAKING ENCRYPTION',
-                        title: 'Set a New Seal',
-                        subtitle:
-                            'Your new passphrase must meet\nthe security criteria of Fine Watchmaking.',
+    return BlocProvider<ResetPasswordCubit>(
+      create: (_) => sl<ResetPasswordCubit>(),
+      child: Scaffold(
+        backgroundColor: AppColors.obsidian,
+        body: SafeArea(
+          child: Column(
+            children: [
+              AuthTopBar(
+                title: 'Reset Password',
+                onBack: () => Navigator.maybePop(context),
+              ),
+              Expanded(
+                child: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
+                  listener: (context, state) {
+                    if (state is ResetPasswordFailure) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: AppColors.obsidianElevated,
+                          content: Text(
+                            state.message,
+                            style: const TextStyle(color: Colors.redAccent),
+                          ),
+                        ),
+                      );
+                    } else if (state is ResetPasswordSuccess) {
+                      _showSuccessDialog(context);
+                    }
+                  },
+                  builder: (context, state) {
+                    final isLoading = state is ResetPasswordLoading;
+
+                    return SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 28),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const AuraMedallionHeader(
+                              icon: Icons.lock_reset,
+                              tag: 'FINE WATCHMAKING ENCRYPTION',
+                              title: 'Set a New Seal',
+                              subtitle:
+                                  'Your new passphrase must meet\nthe security criteria of Fine Watchmaking.',
+                            ),
+                            const SizedBox(height: 22),
+                            _buildNewPassphraseCard(),
+                            const SizedBox(height: 14),
+                            _buildConfirmPassphraseCard(),
+                            const SizedBox(height: 14),
+                            const GlobalSyncCard(),
+                            const SizedBox(height: 20),
+                            _buildActionButton(context, isLoading),
+                            const SizedBox(height: 12),
+                            _buildAdvisorLink(),
+                            const SizedBox(height: 24),
+                            const TamperProofSealCard(),
+                          ],
+                        ),
                       ),
-                      const SizedBox(height: 22),
-                      _buildNewPassphraseCard(),
-                      const SizedBox(height: 14),
-                      _buildConfirmPassphraseCard(),
-                      const SizedBox(height: 14),
-                      const GlobalSyncCard(),
-                      const SizedBox(height: 20),
-                      _buildActionButton(),
-                      const SizedBox(height: 12),
-                      _buildAdvisorLink(),
-                      const SizedBox(height: 24),
-                      const TamperProofSealCard(),
-                    ],
-                  ),
+                    );
+                  },
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -241,14 +283,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                 ),
                 child: Text(
-                  _score == 4
-                      ? 'MAXIMUM SECURITY'
-                      : 'SECURITY LEVEL: $_score/4',
+                  _score == 4 ? 'Optimal Security' : 'Cipher Incomplete',
                   style: TextStyle(
-                    color: _score == 4 ? AppColors.emerald : AppColors.gold,
+                    color: _score == 4
+                        ? AppColors.emerald
+                        : AppColors.gold.withValues(alpha: 0.8),
                     fontSize: 9.5,
                     fontWeight: FontWeight.w600,
-                    letterSpacing: 0.6,
+                    letterSpacing: 0.5,
                   ),
                 ),
               ),
@@ -264,10 +306,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               letterSpacing: 0.5,
             ),
             decoration: InputDecoration(
-              hintText: 'Chronos#2024Atelier',
+              hintText: '••••••••••••',
               hintStyle: TextStyle(
-                color: AppColors.luxuryMuted.withValues(alpha: 0.55),
-                fontSize: 13.5,
+                color: AppColors.luxuryMuted.withValues(alpha: 0.5),
+                letterSpacing: 2,
               ),
               filled: true,
               fillColor: AppColors.obsidianDark,
@@ -277,14 +319,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 color: AppColors.gold,
               ),
               suffixIcon: IconButton(
-                onPressed: () => setState(() => _obscureNew = !_obscureNew),
                 icon: Icon(
-                  _obscureNew
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
+                  _obscureNew ? Icons.visibility_off : Icons.visibility,
                   size: 18,
                   color: AppColors.luxuryMuted,
                 ),
+                onPressed: () => setState(() => _obscureNew = !_obscureNew),
               ),
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 14,
@@ -310,7 +350,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 14),
           PasswordCriteriaGauge(
             score: _score,
             hasMinLength: _hasMinLength,
@@ -330,6 +370,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         color: AppColors.obsidianCard,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.obsidianBorder, width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.35),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -389,10 +436,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               letterSpacing: 0.5,
             ),
             decoration: InputDecoration(
-              hintText: 'Chronos#2024Atelier',
+              hintText: '••••••••••••',
               hintStyle: TextStyle(
-                color: AppColors.luxuryMuted.withValues(alpha: 0.55),
-                fontSize: 13.5,
+                color: AppColors.luxuryMuted.withValues(alpha: 0.5),
+                letterSpacing: 2,
               ),
               filled: true,
               fillColor: AppColors.obsidianDark,
@@ -402,15 +449,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 color: AppColors.gold,
               ),
               suffixIcon: IconButton(
-                onPressed: () =>
-                    setState(() => _obscureConfirm = !_obscureConfirm),
                 icon: Icon(
-                  _obscureConfirm
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
+                  _obscureConfirm ? Icons.visibility_off : Icons.visibility,
                   size: 18,
                   color: AppColors.luxuryMuted,
                 ),
+                onPressed: () =>
+                    setState(() => _obscureConfirm = !_obscureConfirm),
               ),
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 14,
@@ -444,7 +489,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     );
   }
 
-  Widget _buildActionButton() {
+  Widget _buildActionButton(BuildContext context, bool isLoading) {
     return SizedBox(
       width: double.infinity,
       height: 52,
@@ -455,8 +500,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           elevation: 4,
         ),
-        onPressed: _isLoading ? null : _updatePassphrase,
-        child: _isLoading
+        onPressed: isLoading ? null : () => _updatePassphrase(context),
+        child: isLoading
             ? const SizedBox(
                 width: 20,
                 height: 20,
@@ -490,8 +535,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         onPressed: () {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
+              backgroundColor: AppColors.obsidianElevated,
               content: Text(
                 'Connecting to assigned Vendôme Salon concierge liaison...',
+                style: TextStyle(color: AppColors.ivory),
               ),
             ),
           );

@@ -3,6 +3,10 @@ import 'package:aura_maison_e_commerce/core/network/api_interceptors.dart';
 import 'package:aura_maison_e_commerce/core/network/dio_client.dart';
 import 'package:aura_maison_e_commerce/core/network/network_info.dart';
 import 'package:aura_maison_e_commerce/core/services/token_storage_service.dart';
+import 'package:aura_maison_e_commerce/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/forgot_passcode_cubit.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/otp_cubit.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/reset_password_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -45,12 +49,8 @@ Future<void> initServiceLocator() async {
   // ── 2. FlutterSecureStorage (Encrypted Token Storage) ──────────
   sl.registerLazySingleton<FlutterSecureStorage>(
     () => const FlutterSecureStorage(
-      aOptions: AndroidOptions(
-        resetOnError: true,
-      ),
-      iOptions: IOSOptions(
-        accessibility: KeychainAccessibility.first_unlock,
-      ),
+      aOptions: AndroidOptions(resetOnError: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
     ),
   );
 
@@ -62,9 +62,7 @@ Future<void> initServiceLocator() async {
   );
 
   // ── 3. Network Connectivity Checker ────────────────────────
-  sl.registerLazySingleton<NetworkInfo>(
-    () => NetworkInfoImpl(),
-  );
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
 
   // ── 4. Dio HTTP Client Instance ────────────────────────────
   sl.registerLazySingleton<Dio>(() {
@@ -84,10 +82,7 @@ Future<void> initServiceLocator() async {
 
     // Attach Auth & Token Refresh Interceptor
     dio.interceptors.add(
-      AuthInterceptor(
-        tokenStorage: sl<TokenStorageService>(),
-        dio: dio,
-      ),
+      AuthInterceptor(tokenStorage: sl<TokenStorageService>(), dio: dio),
     );
 
     // Attach Pretty Logger in Debug Mode
@@ -109,8 +104,20 @@ Future<void> initServiceLocator() async {
   });
 
   // ── 5. DioClient Singleton Wrapper ─────────────────────────
-  sl.registerLazySingleton<DioClient>(
-    () => DioClient(sl<Dio>()),
+  sl.registerLazySingleton<DioClient>(() => DioClient(sl<Dio>()));
+
+  // ── 6. Auth Remote Data Source (Direct Cubit <-> DataSource) ─
+  sl.registerLazySingleton<AuthRemoteDataSource>(
+    () => AuthRemoteDataSourceImpl(dioClient: sl<DioClient>()),
+  );
+
+  // ── 7. Auth Cubits (Factory for screen lifecycles) ───────────
+  sl.registerFactory<ForgotPasscodeCubit>(
+    () => ForgotPasscodeCubit(sl<AuthRemoteDataSource>()),
+  );
+  sl.registerFactory<OtpCubit>(() => OtpCubit(sl<AuthRemoteDataSource>()));
+  sl.registerFactory<ResetPasswordCubit>(
+    () => ResetPasswordCubit(sl<AuthRemoteDataSource>()),
   );
   // ── 6. Auth Data Sources ────────────────────────────────────
   sl.registerLazySingleton<AuthRemoteDataSource>(

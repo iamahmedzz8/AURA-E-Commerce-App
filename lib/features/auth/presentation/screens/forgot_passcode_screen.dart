@@ -1,5 +1,9 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
+import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/forgot_passcode_cubit.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/otp_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/aura_medallion_header.dart';
 import '../widgets/auth_top_bar.dart';
@@ -10,7 +14,7 @@ import 'vip_member_sign_in_screen.dart';
 
 /// Forgot Passcode / Access Key Recovery Screen (Node 6:238)
 /// High-security protocol for resetting member access key or vault passcode.
-/// TODO: Connect [sendRecoveryLink] to your backend API via [ForgotPasscodeCubit].
+/// Connected directly to [ForgotPasscodeCubit].
 class ForgotPasscodeScreen extends StatefulWidget {
   const ForgotPasscodeScreen({super.key});
 
@@ -21,7 +25,6 @@ class ForgotPasscodeScreen extends StatefulWidget {
 class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
   final _identifierController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -29,30 +32,17 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
     super.dispose();
   }
 
-  void _sendRecoveryLink() {
+  void _sendRecoveryLink(BuildContext context) {
     FocusScope.of(context).unfocus();
     final value = _identifierController.text.trim();
 
     if (value.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please enter your member email or patron vault ID.'),
-        ),
-      );
-      return;
-    }
-
-    setState(() => _isLoading = true);
-
-    // Simulated dispatch (connect API in ForgotPasscodeCubit)
-    Future.delayed(const Duration(milliseconds: 600), () {
-      if (!mounted) return;
-      setState(() => _isLoading = false);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
           backgroundColor: AppColors.obsidianElevated,
           content: Text(
+            'Please enter your member email or patron vault ID.',
+            style: TextStyle(color: AppColors.ivory),
             'Secure recovery dispatch sent to $value.',
             style: const TextStyle(color: AppColors.ivory),
           ),
@@ -73,56 +63,101 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
           ),
         ),
       );
-    });
+      return;
+    }
+
+    context.read<ForgotPasscodeCubit>().sendRecoveryLink(value);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: SafeArea(
-        child: Column(
-          children: [
-            AuthTopBar(
-              title: 'Forgot Password',
-              onBack: () => Navigator.maybePop(context),
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 24),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const AuraMedallionHeader(
-                        icon: Icons.vpn_key_outlined,
-                        tag: 'HIGH-SECURITY PROTOCOL',
-                        title: 'Private Seal Recovery',
-                        subtitle:
-                            'Enter your member email address\nor vault ID to reset your access key.',
+    return BlocProvider<ForgotPasscodeCubit>(
+      create: (_) => sl<ForgotPasscodeCubit>(),
+      child: Scaffold(
+        backgroundColor: AppColors.obsidian,
+        body: SafeArea(
+          child: Column(
+            children: [
+              AuthTopBar(
+                title: 'Forgot Password',
+                onBack: () => Navigator.maybePop(context),
+              ),
+              Expanded(
+                child: BlocConsumer<ForgotPasscodeCubit, ForgotPasscodeState>(
+                  listener: (context, state) {
+                    if (state is ForgotPasscodeFailure) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: AppColors.obsidianElevated,
+                          content: Text(
+                            state.message,
+                            style: const TextStyle(color: Colors.redAccent),
+                          ),
+                        ),
+                      );
+                    } else if (state is ForgotPasscodeSuccess) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: AppColors.obsidianElevated,
+                          content: Text(
+                            'Secure recovery dispatch sent to ${state.email}.',
+                            style: const TextStyle(color: AppColors.ivory),
+                          ),
+                        ),
+                      );
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => OtpScreen(
+                            email: state.email,
+                            purpose: OtpPurpose.resetPassword,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    final isLoading = state is ForgotPasscodeLoading;
+
+                    return SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 24),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const AuraMedallionHeader(
+                              icon: Icons.vpn_key_outlined,
+                              tag: 'HIGH-SECURITY PROTOCOL',
+                              title: 'Private Seal Recovery',
+                              subtitle:
+                                  'Enter your member email address\nor vault ID to reset your access key.',
+                            ),
+                            const SizedBox(height: 24),
+                            _buildInputVitrineCard(),
+                            const SizedBox(height: 14),
+                            const InstructionProtocolCard(
+                              title: 'ESCROW DURATION',
+                              description:
+                                  'A single-use link valid for 15 minutes will be sent via an encrypted protocol.',
+                            ),
+                            const SizedBox(height: 20),
+                            _buildActionButton(context, isLoading),
+                            const SizedBox(height: 18),
+                            _buildReturnToLogin(context),
+                            const SizedBox(height: 24),
+                            const ConciergeSupportBadge(),
+                          ],
+                        ),
                       ),
-                      const SizedBox(height: 24),
-                      _buildInputVitrineCard(),
-                      const SizedBox(height: 14),
-                      const InstructionProtocolCard(
-                        title: 'ESCROW DURATION',
-                        description:
-                            'A single-use link valid for 15 minutes will be sent via an encrypted protocol.',
-                      ),
-                      const SizedBox(height: 20),
-                      _buildActionButton(),
-                      const SizedBox(height: 18),
-                      _buildReturnToLogin(context),
-                      const SizedBox(height: 24),
-                      const ConciergeSupportBadge(),
-                    ],
-                  ),
+                    );
+                  },
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -231,7 +266,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
     );
   }
 
-  Widget _buildActionButton() {
+  Widget _buildActionButton(BuildContext context, bool isLoading) {
     return SizedBox(
       width: double.infinity,
       height: 52,
@@ -242,8 +277,8 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           elevation: 4,
         ),
-        onPressed: _isLoading ? null : _sendRecoveryLink,
-        child: _isLoading
+        onPressed: isLoading ? null : () => _sendRecoveryLink(context),
+        child: isLoading
             ? const SizedBox(
                 width: 20,
                 height: 20,
