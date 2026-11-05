@@ -4,19 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class DeliveryAddress extends StatelessWidget {
-  const DeliveryAddress({super.key});
+  final VoidCallback onChange;
+
+  const DeliveryAddress({
+    super.key,
+    required this.onChange,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.location_on_outlined, color: AppColors.primaryColor),
-        Gap(10),
-        CustomText(text: 'Delivery Address', size: 20, weight: FontWeight.bold),
-        Spacer(),
+        Icon(
+          Icons.location_on_outlined,
+          color: AppColors.primaryColor,
+        ),
+        const Gap(10),
+        const CustomText(
+          text: 'Delivery Address',
+          size: 20,
+          weight: FontWeight.bold,
+        ),
+        const Spacer(),
         TextButton(
-          onPressed: () {},
-          child: CustomText(
+          onPressed: onChange,
+          child: const CustomText(
             text: 'Change',
             size: 18,
             weight: FontWeight.bold,

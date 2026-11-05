@@ -28,6 +28,8 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      extendBody: true,
+
       bottomNavigationBar: AppBottomNavBar(
         currentIndex: currentIndex,
         onTap: (index) {
@@ -36,6 +38,7 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
       ),
+
       body: screens[currentIndex],
     );
   }

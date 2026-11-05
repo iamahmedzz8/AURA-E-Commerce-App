@@ -13,6 +13,25 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:aura_maison_e_commerce/features/auth/data/datasources/auth_local_data_source.dart';
+import 'package:aura_maison_e_commerce/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:aura_maison_e_commerce/features/auth/data/repositories/auth_repository.dart';
+import 'package:aura_maison_e_commerce/features/auth/domain/repositories/auth_repository.dart';
+import 'package:aura_maison_e_commerce/features/auth/domain/usecases/get_auth_usecase.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/login_cubit.dart';
+import 'package:aura_maison_e_commerce/features/auth/domain/usecases/change_password_use_case.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/change_password_cubit.dart';
+import 'package:aura_maison_e_commerce/features/addresses/data/datasources/addresses_remote_data_source.dart';
+import 'package:aura_maison_e_commerce/features/addresses/data/repositories/addresses_repository_impl.dart';
+import 'package:aura_maison_e_commerce/features/addresses/domain/repositories/addresses_repository.dart';
+import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/create_address_use_case.dart';
+import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/get_address_by_id_use_case.dart';
+import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/addresses_cubit.dart';
+import 'package:aura_maison_e_commerce/core/services/selected_address_service.dart';
+import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/update_address_use_case.dart';
+import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/get_user_addresses_use_case.dart';
+import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/delete_address_use_case.dart';
+
 
 /// Global service locator instance
 final GetIt sl = GetIt.instance;
@@ -22,7 +41,11 @@ Future<void> initServiceLocator() async {
   // ── 1. SharedPreferences (Theming, Localization, App State) ──
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
-
+  sl.registerLazySingleton<SelectedAddressService>(
+        () => SelectedAddressService(
+      preferences: sl<SharedPreferences>(),
+    ),
+  );
   // ── 2. FlutterSecureStorage (Encrypted Token Storage) ──────────
   sl.registerLazySingleton<FlutterSecureStorage>(
     () => const FlutterSecureStorage(
@@ -96,4 +119,115 @@ Future<void> initServiceLocator() async {
   sl.registerFactory<ResetPasswordCubit>(
     () => ResetPasswordCubit(sl<AuthRemoteDataSource>()),
   );
+  // ── 6. Auth Data Sources ────────────────────────────────────
+  sl.registerLazySingleton<AuthRemoteDataSource>(
+        () => AuthRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
+
+  sl.registerLazySingleton<AuthLocalDataSource>(
+        () => AuthLocalDataSourceImpl(
+      tokenStorageService: sl<TokenStorageService>(),
+    ),
+  );
+
+// ── 7. Auth Repository ──────────────────────────────────────
+  sl.registerLazySingleton<AuthRepository>(
+        () => AuthRepositoryImpl(
+      remoteDataSource: sl<AuthRemoteDataSource>(),
+      localDataSource: sl<AuthLocalDataSource>(),
+    ),
+  );
+
+// ── 8. Auth UseCase ─────────────────────────────────────────
+  sl.registerLazySingleton<GetAuthUseCase>(
+        () => GetAuthUseCase(
+      sl<AuthRepository>(),
+    ),
+  );
+
+// ── 9. Login Cubit ──────────────────────────────────────────
+  sl.registerFactory<LoginCubit>(
+        () => LoginCubit(
+      getAuthUseCase: sl<GetAuthUseCase>(),
+    ),
+  );
+
+  // ── 10. Change Password UseCase ────────────────────────────
+  sl.registerLazySingleton<ChangePasswordUseCase>(
+        () => ChangePasswordUseCase(
+      repository: sl<AuthRepository>(),
+    ),
+  );
+
+  // ── 11. Change Password Cubit ─────────────────────────────
+  sl.registerFactory<ChangePasswordCubit>(
+        () => ChangePasswordCubit(
+      changePasswordUseCase: sl<ChangePasswordUseCase>(),
+    ),
+  );
+
+  // ── 12. Addresses Remote Data Source ───────────────────────
+  sl.registerLazySingleton<AddressesRemoteDataSource>(
+        () => AddressesRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
+
+  // ── 13. Addresses Repository ───────────────────────────────
+  sl.registerLazySingleton<AddressesRepository>(
+        () => AddressesRepositoryImpl(
+      remoteDataSource: sl<AddressesRemoteDataSource>(),
+    ),
+  );
+
+  // ── 14. Get Address By ID Use Case ─────────────────────────
+  sl.registerLazySingleton<GetAddressByIdUseCase>(
+        () => GetAddressByIdUseCase(
+      sl<AddressesRepository>(),
+    ),
+  );
+
+  // ── 15. Get User Addresses Use Case ─────────────────────────
+  sl.registerLazySingleton<GetUserAddressesUseCase>(
+        () => GetUserAddressesUseCase(
+      repository: sl<AddressesRepository>(),
+    ),
+  );
+
+  // ── 16. Create Address Use Case ────────────────────────────
+  sl.registerLazySingleton<CreateAddressUseCase>(
+        () => CreateAddressUseCase(
+      sl<AddressesRepository>(),
+    ),
+  );
+
+  // ── 17. Update Address Use Case ────────────────────────────
+  sl.registerLazySingleton<UpdateAddressUseCase>(
+        () => UpdateAddressUseCase(
+      sl<AddressesRepository>(),
+    ),
+  );
+
+
+  // 18. Delete Address Use Case ──────────────────────────────
+  sl.registerLazySingleton<DeleteAddressUseCase>(
+        () => DeleteAddressUseCase(
+      sl<AddressesRepository>(),
+    ),
+  );
+
+  // ── 19. Addresses Cubit ────────────────────────────────────
+  sl.registerFactory<AddressesCubit>(() => AddressesCubit(
+    getAddressByIdUseCase: sl<GetAddressByIdUseCase>(),
+    getUserAddressesUseCase: sl<GetUserAddressesUseCase>(),
+    createAddressUseCase: sl<CreateAddressUseCase>(),
+    updateAddressUseCase: sl<UpdateAddressUseCase>(),
+    deleteAddressUseCase: sl<DeleteAddressUseCase>(),
+    selectedAddressService: sl<SelectedAddressService>(),
+    ),
+  );
 }
+
+

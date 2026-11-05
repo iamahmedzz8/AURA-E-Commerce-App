@@ -43,6 +43,23 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
           content: Text(
             'Please enter your member email or patron vault ID.',
             style: TextStyle(color: AppColors.ivory),
+            'Secure recovery dispatch sent to $value.',
+            style: const TextStyle(color: AppColors.ivory),
+          ),
+          action: SnackBarAction(
+            label: 'ENTER OTP',
+            textColor: AppColors.gold,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) =>OtpScreen (
+                    email: value,
+                    purpose: OtpPurpose.resetPassword,
+                  ),
+                ),
+              );
+            },
           ),
         ),
       );

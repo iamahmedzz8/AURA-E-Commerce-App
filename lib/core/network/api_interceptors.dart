@@ -46,6 +46,11 @@ class AuthInterceptor extends QueuedInterceptor {
     final isLoginEndpoint =
         err.requestOptions.path.contains(ApiEndpoints.login);
 
+    if (isRefreshEndpoint && statusCode != null && statusCode >= 400) {
+      await _tokenStorage.clearTokens();
+      return handler.next(err);
+    }
+
     // If 401 Unauthorized and not already refreshing or logging in
     if (statusCode == 401 && !isRefreshEndpoint && !isLoginEndpoint) {
       final refreshToken = await _tokenStorage.getRefreshToken();

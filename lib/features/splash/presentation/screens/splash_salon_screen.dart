@@ -1,8 +1,9 @@
-import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/screens/vip_member_sign_in_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:aura_maison_e_commerce/core/services/token_storage_service.dart';
+import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
+import 'package:aura_maison_e_commerce/main_screen.dart';
 import '../widgets/confidentiality_pill.dart';
 import '../widgets/salon_central_sanctuary.dart';
 import '../widgets/salon_entrance_portal.dart';
@@ -15,12 +16,33 @@ class SplashSalonScreen extends StatelessWidget {
   const SplashSalonScreen({super.key});
 
   Future<void> _enterSalon(BuildContext context) async {
-    final Widget next = PrefsService.isOnboardingCompleted
-        ? const VipMemberSignInScreen()
-        : const OnboardingScreen();
+    if (!PrefsService.isOnboardingCompleted) {
+      if (!context.mounted) return;
 
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const OnboardingScreen(),
+        ),
+      );
+      return;
+    }
+
+    final tokenStorage = sl<TokenStorageService>();
+    final accessToken = await tokenStorage.getAccessToken();
+    debugPrint(
+      'Access token exists: ${accessToken != null && accessToken.isNotEmpty}',
+    );
     if (!context.mounted) return;
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => next));
+
+    final Widget next = accessToken != null && accessToken.isNotEmpty
+        ? const MainScreen()
+        : const VipMemberSignInScreen();
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => next),
+    );
   }
 
   @override

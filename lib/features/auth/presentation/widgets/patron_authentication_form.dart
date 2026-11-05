@@ -8,13 +8,16 @@ class PatronAuthenticationForm extends StatefulWidget {
   final TextEditingController? passphraseController;
   final VoidCallback? onEnterSalonTap;
   final VoidCallback? onForgotPasswordTap;
-
+  final ValueChanged<bool>? onRememberChanged;
+  final bool isLoading;
   const PatronAuthenticationForm({
     super.key,
     this.idController,
     this.passphraseController,
     this.onEnterSalonTap,
     this.onForgotPasswordTap,
+    this.onRememberChanged,
+    this.isLoading = false,
   });
 
   @override
@@ -223,6 +226,7 @@ class _PatronAuthenticationFormState extends State<PatronAuthenticationForm> {
               GestureDetector(
                 onTap: () {
                   setState(() => _rememberKey = !_rememberKey);
+                  widget.onRememberChanged?.call(_rememberKey);
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -276,7 +280,7 @@ class _PatronAuthenticationFormState extends State<PatronAuthenticationForm> {
 
           // ── Primary Action CTA: ENTER THE PRIVATE SALON ──
           GestureDetector(
-            onTap: widget.onEnterSalonTap,
+            onTap: widget.isLoading ? null : widget.onEnterSalonTap,
             child: Container(
               height: 48,
               decoration: BoxDecoration(
@@ -290,22 +294,33 @@ class _PatronAuthenticationFormState extends State<PatronAuthenticationForm> {
                   ),
                 ],
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    AppStrings.enterPrivateSalonAction,
-                    style: AppStyles.vipEnterSalonButton.copyWith(
-                      color: AppColors.iconDark,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  const Icon(
-                    Icons.lock_open_rounded,
-                    size: 14,
+              child: Center(
+                child: widget.isLoading
+                    ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
                     color: AppColors.iconDark,
                   ),
-                ],
+                )
+                    : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppStrings.enterPrivateSalonAction,
+                      style: AppStyles.vipEnterSalonButton.copyWith(
+                        color: AppColors.iconDark,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Icon(
+                      Icons.lock_open_rounded,
+                      size: 14,
+                      color: AppColors.iconDark,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
