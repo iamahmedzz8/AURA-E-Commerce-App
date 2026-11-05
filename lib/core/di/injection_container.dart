@@ -3,10 +3,6 @@ import 'package:aura_maison_e_commerce/core/network/api_interceptors.dart';
 import 'package:aura_maison_e_commerce/core/network/dio_client.dart';
 import 'package:aura_maison_e_commerce/core/network/network_info.dart';
 import 'package:aura_maison_e_commerce/core/services/token_storage_service.dart';
-import 'package:aura_maison_e_commerce/features/auth/data/datasources/auth_remote_data_source.dart';
-import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/forgot_passcode_cubit.dart';
-import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/otp_cubit.dart';
-import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/reset_password_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -32,6 +28,7 @@ import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/update
 import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/get_user_addresses_use_case.dart';
 import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/delete_address_use_case.dart';
 
+
 /// Global service locator instance
 final GetIt sl = GetIt.instance;
 
@@ -41,13 +38,19 @@ Future<void> initServiceLocator() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
   sl.registerLazySingleton<SelectedAddressService>(
-    () => SelectedAddressService(preferences: sl<SharedPreferences>()),
+        () => SelectedAddressService(
+      preferences: sl<SharedPreferences>(),
+    ),
   );
   // ── 2. FlutterSecureStorage (Encrypted Token Storage) ──────────
   sl.registerLazySingleton<FlutterSecureStorage>(
     () => const FlutterSecureStorage(
-      aOptions: AndroidOptions(resetOnError: true),
-      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
+      aOptions: AndroidOptions(
+        resetOnError: true,
+      ),
+      iOptions: IOSOptions(
+        accessibility: KeychainAccessibility.first_unlock,
+      ),
     ),
   );
 
@@ -59,7 +62,9 @@ Future<void> initServiceLocator() async {
   );
 
   // ── 3. Network Connectivity Checker ────────────────────────
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
+  sl.registerLazySingleton<NetworkInfo>(
+    () => NetworkInfoImpl(),
+  );
 
   // ── 4. Dio HTTP Client Instance ────────────────────────────
   sl.registerLazySingleton<Dio>(() {
@@ -79,7 +84,10 @@ Future<void> initServiceLocator() async {
 
     // Attach Auth & Token Refresh Interceptor
     dio.interceptors.add(
-      AuthInterceptor(tokenStorage: sl<TokenStorageService>(), dio: dio),
+      AuthInterceptor(
+        tokenStorage: sl<TokenStorageService>(),
+        dio: dio,
+      ),
     );
 
     // Attach Pretty Logger in Debug Mode
@@ -101,102 +109,118 @@ Future<void> initServiceLocator() async {
   });
 
   // ── 5. DioClient Singleton Wrapper ─────────────────────────
-  sl.registerLazySingleton<DioClient>(() => DioClient(sl<Dio>()));
-
-  // ── 6. Auth Remote Data Source
+  sl.registerLazySingleton<DioClient>(
+    () => DioClient(sl<Dio>()),
+  );
+  // ── 6. Auth Data Sources ────────────────────────────────────
   sl.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(dioClient: sl<DioClient>()),
-  );
-
-  // ── 7. Auth Cubits (Factory for screen lifecycles) ───────────
-  sl.registerFactory<ForgotPasscodeCubit>(
-    () => ForgotPasscodeCubit(sl<AuthRemoteDataSource>()),
-  );
-  sl.registerFactory<OtpCubit>(() => OtpCubit(sl<AuthRemoteDataSource>()));
-  sl.registerFactory<ResetPasswordCubit>(
-    () => ResetPasswordCubit(sl<AuthRemoteDataSource>()),
+        () => AuthRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
   );
 
   sl.registerLazySingleton<AuthLocalDataSource>(
-    () =>
-        AuthLocalDataSourceImpl(tokenStorageService: sl<TokenStorageService>()),
+        () => AuthLocalDataSourceImpl(
+      tokenStorageService: sl<TokenStorageService>(),
+    ),
   );
 
-  // ── 7. Auth Repository ──────────────────────────────────────
+// ── 7. Auth Repository ──────────────────────────────────────
   sl.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(
+        () => AuthRepositoryImpl(
       remoteDataSource: sl<AuthRemoteDataSource>(),
       localDataSource: sl<AuthLocalDataSource>(),
     ),
   );
 
-  // ── 8. Auth UseCase ─────────────────────────────────────────
+// ── 8. Auth UseCase ─────────────────────────────────────────
   sl.registerLazySingleton<GetAuthUseCase>(
-    () => GetAuthUseCase(sl<AuthRepository>()),
+        () => GetAuthUseCase(
+      sl<AuthRepository>(),
+    ),
   );
 
-  // ── 9. Login Cubit ──────────────────────────────────────────
+// ── 9. Login Cubit ──────────────────────────────────────────
   sl.registerFactory<LoginCubit>(
-    () => LoginCubit(getAuthUseCase: sl<GetAuthUseCase>()),
+        () => LoginCubit(
+      getAuthUseCase: sl<GetAuthUseCase>(),
+    ),
   );
 
   // ── 10. Change Password UseCase ────────────────────────────
   sl.registerLazySingleton<ChangePasswordUseCase>(
-    () => ChangePasswordUseCase(repository: sl<AuthRepository>()),
+        () => ChangePasswordUseCase(
+      repository: sl<AuthRepository>(),
+    ),
   );
 
   // ── 11. Change Password Cubit ─────────────────────────────
   sl.registerFactory<ChangePasswordCubit>(
-    () =>
-        ChangePasswordCubit(changePasswordUseCase: sl<ChangePasswordUseCase>()),
+        () => ChangePasswordCubit(
+      changePasswordUseCase: sl<ChangePasswordUseCase>(),
+    ),
   );
 
   // ── 12. Addresses Remote Data Source ───────────────────────
   sl.registerLazySingleton<AddressesRemoteDataSource>(
-    () => AddressesRemoteDataSourceImpl(dioClient: sl<DioClient>()),
+        () => AddressesRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
   );
 
   // ── 13. Addresses Repository ───────────────────────────────
   sl.registerLazySingleton<AddressesRepository>(
-    () => AddressesRepositoryImpl(
+        () => AddressesRepositoryImpl(
       remoteDataSource: sl<AddressesRemoteDataSource>(),
     ),
   );
 
   // ── 14. Get Address By ID Use Case ─────────────────────────
   sl.registerLazySingleton<GetAddressByIdUseCase>(
-    () => GetAddressByIdUseCase(sl<AddressesRepository>()),
+        () => GetAddressByIdUseCase(
+      sl<AddressesRepository>(),
+    ),
   );
 
   // ── 15. Get User Addresses Use Case ─────────────────────────
   sl.registerLazySingleton<GetUserAddressesUseCase>(
-    () => GetUserAddressesUseCase(repository: sl<AddressesRepository>()),
+        () => GetUserAddressesUseCase(
+      repository: sl<AddressesRepository>(),
+    ),
   );
 
   // ── 16. Create Address Use Case ────────────────────────────
   sl.registerLazySingleton<CreateAddressUseCase>(
-    () => CreateAddressUseCase(sl<AddressesRepository>()),
+        () => CreateAddressUseCase(
+      sl<AddressesRepository>(),
+    ),
   );
 
   // ── 17. Update Address Use Case ────────────────────────────
   sl.registerLazySingleton<UpdateAddressUseCase>(
-    () => UpdateAddressUseCase(sl<AddressesRepository>()),
+        () => UpdateAddressUseCase(
+      sl<AddressesRepository>(),
+    ),
   );
+
 
   // 18. Delete Address Use Case ──────────────────────────────
   sl.registerLazySingleton<DeleteAddressUseCase>(
-    () => DeleteAddressUseCase(sl<AddressesRepository>()),
+        () => DeleteAddressUseCase(
+      sl<AddressesRepository>(),
+    ),
   );
 
   // ── 19. Addresses Cubit ────────────────────────────────────
-  sl.registerFactory<AddressesCubit>(
-    () => AddressesCubit(
-      getAddressByIdUseCase: sl<GetAddressByIdUseCase>(),
-      getUserAddressesUseCase: sl<GetUserAddressesUseCase>(),
-      createAddressUseCase: sl<CreateAddressUseCase>(),
-      updateAddressUseCase: sl<UpdateAddressUseCase>(),
-      deleteAddressUseCase: sl<DeleteAddressUseCase>(),
-      selectedAddressService: sl<SelectedAddressService>(),
+  sl.registerFactory<AddressesCubit>(() => AddressesCubit(
+    getAddressByIdUseCase: sl<GetAddressByIdUseCase>(),
+    getUserAddressesUseCase: sl<GetUserAddressesUseCase>(),
+    createAddressUseCase: sl<CreateAddressUseCase>(),
+    updateAddressUseCase: sl<UpdateAddressUseCase>(),
+    deleteAddressUseCase: sl<DeleteAddressUseCase>(),
+    selectedAddressService: sl<SelectedAddressService>(),
     ),
   );
 }
+
+

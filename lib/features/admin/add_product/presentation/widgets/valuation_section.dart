@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import '../../../../../core/theme/dark_theme.dart';
 
 class ValuationSection extends StatefulWidget {
-  const ValuationSection({super.key});
+  final TextEditingController priceController;
+  final TextEditingController stockController;
+
+  const ValuationSection({
+    super.key,
+    required this.priceController,
+    required this.stockController,
+  });
 
   @override
   State<ValuationSection> createState() => _ValuationSectionState();
 }
 
 class _ValuationSectionState extends State<ValuationSection> {
-  int stockCount = 1;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +36,6 @@ class _ValuationSectionState extends State<ValuationSection> {
             ],
           ),
           const SizedBox(height: 16),
-
           Row(
             children: [
               Expanded(
@@ -52,6 +56,8 @@ class _ValuationSectionState extends State<ValuationSection> {
                         children: [
                           Expanded(
                             child: TextField(
+                              controller: widget.priceController,
+                              keyboardType: TextInputType.number,
                               style: const TextStyle(color: DarkTheme.primaryText, fontSize: 20, fontFamily: 'EB Garamond'),
                               decoration: const InputDecoration(
                                 hintText: '165 000',
@@ -119,13 +125,21 @@ class _ValuationSectionState extends State<ValuationSection> {
                     IconButton(
                       icon: const Icon(Icons.remove, size: 16, color: DarkTheme.primaryText),
                       onPressed: () {
-                        if (stockCount > 0) setState(() => stockCount--);
+                        final current = int.tryParse(widget.stockController.text) ?? 1;
+                        if (current > 1) {
+                          widget.stockController.text = (current - 1).toString();
+                          setState(() {});
+                        }
                       },
                     ),
-                    Text('$stockCount', style: const TextStyle(color: DarkTheme.gold, fontSize: 16, fontFamily: 'EB Garamond')),
+                    Text(widget.stockController.text.isEmpty ? '1' : widget.stockController.text, style: const TextStyle(color: DarkTheme.gold, fontSize: 16, fontFamily: 'EB Garamond')),
                     IconButton(
                       icon: const Icon(Icons.add, size: 16, color: DarkTheme.primaryText),
-                      onPressed: () => setState(() => stockCount++),
+                      onPressed: () {
+                        final current = int.tryParse(widget.stockController.text) ?? 1;
+                        widget.stockController.text = (current + 1).toString();
+                        setState(() {});
+                      },
                     ),
                   ],
                 ),

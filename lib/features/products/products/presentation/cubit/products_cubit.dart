@@ -1,20 +1,38 @@
-import 'package:aura_maison_e_commerce/features/products/products/data/datasources/products_remote_data_source.dart';
-import 'package:aura_maison_e_commerce/features/products/products/presentation/cubit/products_state.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../domain/entities/products_entity.dart';
+import '../../domain/usecases/add_product_usecase.dart';
+import '../../domain/usecases/delete_product_usecase.dart';
+
+part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
-  ProductsCubit() : super(ProductsLoadingState());
+  final AddProductUseCase addProductUseCase;
+  final DeleteProductUseCase deleteProductUseCase;
 
-  Future<void> fetchProducts() async {
-    ProductsRemoteDataSource productsRemoteDataSource = ProductsRemoteDataSource();
+  ProductsCubit({
+    required this.addProductUseCase,
+    required this.deleteProductUseCase,
+  }) : super(ProductsInitial());
+
+  // دالة إضافة منتج
+  Future<void> addProduct(ProductEntity product) async {
+    emit(AddProductLoading());
     try {
-      // Simulate fetching products from an API or database
-      await productsRemoteDataSource.getProducts().then((val) {
-        emit(ProductsSuccessState(products: val));
-      });
-    } on DioException catch (e) {
-      emit(ProductsFailureState(errorMessage: e.response?.data.toString() ?? e.toString()));
+      await addProductUseCase(product);
+      emit(AddProductSuccess());
+    } catch (e) {
+      emit(AddProductFailure(e.toString()));
+    }
+  }
+
+  // دالة حذف منتج
+  Future<void> deleteProduct(String productId) async {
+    emit(DeleteProductLoading());
+    try {
+      await deleteProductUseCase(productId);
+      emit(DeleteProductSuccess());
+    } catch (e) {
+      emit(DeleteProductFailure(e.toString()));
     }
   }
 }
