@@ -2,7 +2,7 @@ import '../../domain/entities/auth_entity.dart';
 import '../../domain/repositories/auth_repository.dart' as domain;
 import '../datasources/auth_local_data_source.dart';
 import '../datasources/auth_remote_data_source.dart';
-
+import 'package:aura_maison_e_commerce/features/auth/data/models/change_password_request_model.dart';
 class AuthRepositoryImpl implements domain.AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
   final AuthLocalDataSource localDataSource;
@@ -37,5 +37,21 @@ class AuthRepositoryImpl implements domain.AuthRepository {
     );
 
     return auth;
+  }
+  @override
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+    required String confirmNewPassword,
+  }) async {
+    final request = ChangePasswordRequestModel(
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+      confirmNewPassword: confirmNewPassword,
+    );
+
+    await remoteDataSource.changePassword(
+      request: request,
+    );
   }
 }

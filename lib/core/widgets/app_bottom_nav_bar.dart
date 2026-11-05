@@ -1,7 +1,7 @@
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
-import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:ios26_bottom_navigationbar/ios26_bottom_navigationbar.dart';
 
 class AppBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -15,74 +15,51 @@ class AppBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.background,
-        border: Border(
-          top: BorderSide(
-            color: AppColors.chipBorder,
-            width: 0.5,
-          ),
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 0, 12, 27),
+      child: IOS26BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap: (index) {
+          onTap?.call(index);
+        },
+        style: (isDark
+            ? IOS26NavThemeData.dark()
+            : IOS26NavThemeData.light())
+            .copyWith(
+          activeColor: AppColors.goldBright,
+          blurSigmaX: 5,
+          blurSigmaY: 5
         ),
-      ),
-      child: SafeArea(
-        top: false,
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: AppColors.background,
-          elevation: 0,
-          currentIndex: currentIndex,
-          onTap: (index) {
-            if (onTap != null) {
-              onTap!(index);
-            } else {
-              // Default global navigation behavior across pushed screens
-              if (Navigator.of(context).canPop()) {
-                Navigator.of(context).popUntil((route) => route.isFirst);
-              }
-            }
-          },
-          selectedItemColor: AppColors.goldBright,
-          unselectedItemColor: AppColors.textMutedBeige,
-          selectedLabelStyle: AppStyles.navItemLabel.copyWith(
-            color: AppColors.goldBright,
+        items: [
+          IOS26NavItem.icon(
+            icon: Icons.home_outlined,
+            activeIcon: Icons.home_rounded,
+            label: AppStrings.navHome,
           ),
-          unselectedLabelStyle: AppStyles.navItemLabel.copyWith(
-            color: AppColors.textMutedBeige,
+          IOS26NavItem.icon(
+            icon: Icons.diamond_outlined,
+            activeIcon: Icons.diamond,
+            label: AppStrings.navCollections,
           ),
-          iconSize: 20,
-          items: [
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              label: AppStrings.navHome,
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.diamond_outlined),
-              label: AppStrings.navCollections,
-            ),
-            BottomNavigationBarItem(
-              icon: Badge(
-                label: Text(
-                  AppStrings.navBagCount,
-                  style: AppStyles.navBadgeText.copyWith(
-                    color: AppColors.iconDark,
-                  ),
-                ),
-                backgroundColor: AppColors.goldAccent,
-                child: const Icon(Icons.shopping_bag_outlined),
-              ),
-              label: AppStrings.navBag,
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark_border_rounded),
-              label: AppStrings.navFavorites,
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined),
-              label: AppStrings.navProfile,
-            ),
-          ],
-        ),
+          IOS26NavItem.icon(
+            icon: Icons.shopping_bag_outlined,
+            activeIcon: Icons.shopping_bag,
+            label: AppStrings.navBag,
+            badgeCount: int.tryParse(AppStrings.navBagCount),
+          ),
+          IOS26NavItem.icon(
+            icon: Icons.bookmark_border_rounded,
+            activeIcon: Icons.bookmark_rounded,
+            label: AppStrings.navFavorites,
+          ),
+          IOS26NavItem.icon(
+            icon: Icons.account_circle_outlined,
+            activeIcon: Icons.account_circle,
+            label: AppStrings.navProfile,
+          ),
+        ],
       ),
     );
   }

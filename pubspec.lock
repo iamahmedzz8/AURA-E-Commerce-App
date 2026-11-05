@@ -256,6 +256,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  ios26_bottom_navigationbar:
+    dependency: "direct main"
+    description:
+      name: ios26_bottom_navigationbar
+      sha256: "9bc7c5fb47cf48022ab3d91bf6ccb486b9e6366bcf4a69af04e08aad69ee84dc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   jni:
     dependency: transitive
     description:

@@ -1,13 +1,25 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
+import 'package:aura_maison_e_commerce/features/addresses/domain/entities/address_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class AddressContainer extends StatelessWidget {
-  const AddressContainer({super.key});
+  final AddressEntity address;
+  final VoidCallback? onEdit;
+
+  const AddressContainer({
+    super.key,
+    required this.address,
+    this.onEdit,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final addressDetails =
+        '${address.street}, Apt ${address.apartment}, '
+        '${address.city}, ${address.state}';
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -22,56 +34,94 @@ class AddressContainer extends StatelessWidget {
         ],
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset('assets/images/Gold accent highlight marker.png'),
-          Gap(10),
+          Image.asset(
+            'assets/images/Gold accent highlight marker.png',
+          ),
+          const Gap(10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    CustomText(text: 'Home', size: 18, weight: FontWeight.w700),
-                    Gap(7),
+                    const CustomText(
+                      text: 'Home',
+                      size: 18,
+                      weight: FontWeight.w700,
+                    ),
+                    const Gap(7),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: Colors.amberAccent,
                       ),
-                      margin: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8,
                         vertical: 2,
                       ),
-                      child: CustomText(text: 'Primary', size: 14),
+                      child: const CustomText(
+                        text: 'Primary',
+                        size: 14,
+                      ),
                     ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    const Spacer(),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24),
                       child: CircleAvatar(
                         radius: 10,
                         backgroundColor: AppColors.primaryColor,
-                        child: Icon(Icons.check, size: 15, color: Colors.white),
+                        child: Icon(
+                          Icons.check,
+                          size: 15,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 CustomText(
-                  text: '12 Tahrir St, Apt 5, Nasr City, Cairo',
+                  text: addressDetails,
                   size: 16,
                   weight: FontWeight.w400,
                   family: '',
                 ),
-                Gap(5),
+                const Gap(5),
                 Row(
                   children: [
-                    Icon(Icons.phone_outlined, color: AppColors.primaryColor),
-                    Gap(5),
-                    CustomText(text: '+20 100 234 5678', family: ''),
+                    const Icon(
+                      Icons.phone_outlined,
+                      color: AppColors.primaryColor,
+                    ),
+                    const Gap(5),
+                    CustomText(
+                      text: address.phoneNumber,
+                      family: '',
+                    ),
                   ],
                 ),
+
+                const Gap(8),
+
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton.icon(
+                    onPressed: onEdit,
+                    icon: const Icon(
+                      Icons.edit_outlined,
+                      size: 18,
+                      color: AppColors.primaryColor,
+                    ),
+                    label: const CustomText(
+                      text: 'Edit',
+                      size: 14,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
+
               ],
             ),
           ),
