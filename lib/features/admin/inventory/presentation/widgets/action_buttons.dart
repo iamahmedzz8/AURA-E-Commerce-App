@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ActionButtons extends StatelessWidget {
-  const ActionButtons({super.key});
+  final VoidCallback? onAdd;
+
+  const ActionButtons({super.key, this.onAdd});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +18,8 @@ class ActionButtons extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async {
+                final result = await Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => BlocProvider(
@@ -26,6 +28,9 @@ class ActionButtons extends StatelessWidget {
                     ),
                   ),
                 );
+                if (result == true) {
+                  onAdd?.call();
+                }
               },
               icon: Icon(Icons.add_circle_outline, size: 18),
               label: Text('+ ADD A PIECE'),

@@ -90,7 +90,7 @@ class DashboardTitleAndStatus extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: DarkTheme.border),
             image: const DecorationImage(
-              image: AssetImage('assets/images/vault_bg.jpg'),
+              image:  AssetImage('assets/images/vintage_allocation_bg.png'),
               fit: BoxFit.cover,
             ),
           ),

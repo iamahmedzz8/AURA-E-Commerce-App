@@ -14,7 +14,6 @@ class ProductsCubit extends Cubit<ProductsState> {
     required this.deleteProductUseCase,
   }) : super(ProductsInitial());
 
-  // دالة إضافة منتج
   Future<void> addProduct(ProductEntity product) async {
     emit(AddProductLoading());
     try {
@@ -25,7 +24,6 @@ class ProductsCubit extends Cubit<ProductsState> {
     }
   }
 
-  // دالة حذف منتج
   Future<void> deleteProduct(String productId) async {
     emit(DeleteProductLoading());
     try {
