@@ -1,10 +1,23 @@
+part of 'products_cubit.dart';
+
 abstract class ProductsState {}
-class ProductsLoadingState extends ProductsState {}
-class ProductsSuccessState extends ProductsState {
-  final List products;
-  ProductsSuccessState({required this.products});
+
+class ProductsInitial extends ProductsState {}
+
+class AddProductLoading extends ProductsState {}
+
+class AddProductSuccess extends ProductsState {}
+
+class AddProductFailure extends ProductsState {
+  final String error;
+  AddProductFailure(this.error);
 }
-class ProductsFailureState extends ProductsState {
-  final String errorMessage;
-  ProductsFailureState({required this.errorMessage});
+
+class DeleteProductLoading extends ProductsState {}
+
+class DeleteProductSuccess extends ProductsState {}
+
+class DeleteProductFailure extends ProductsState {
+  final String error;
+  DeleteProductFailure(this.error);
 }

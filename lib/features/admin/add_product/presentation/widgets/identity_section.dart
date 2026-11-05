@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import '../../../../../core/theme/dark_theme.dart';
 
 class IdentitySection extends StatelessWidget {
-  const IdentitySection({super.key});
+  final TextEditingController nameController;
+  final TextEditingController nameArabicController;
+  final TextEditingController descriptionController;
+
+  const IdentitySection({
+    super.key,
+    required this.nameController,
+    required this.nameArabicController,
+    required this.descriptionController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +54,7 @@ class IdentitySection extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           TextField(
+            controller: nameController,
             style: const TextStyle(
               color: DarkTheme.primaryText,
               fontSize: 18,
@@ -58,6 +68,53 @@ class IdentitySection extends StatelessWidget {
                 fontSize: 18,
                 fontFamily: 'EB Garamond',
                 fontWeight: FontWeight.w600,
+              ),
+              filled: true,
+              fillColor: DarkTheme.background,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 14,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: const BorderSide(color: DarkTheme.border),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: const BorderSide(color: DarkTheme.border),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: const BorderSide(color: DarkTheme.gold),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            'DESCRIPTION',
+            style: TextStyle(
+              color: DarkTheme.secondaryText,
+              fontSize: 9,
+              letterSpacing: 1,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 8),
+          TextField(
+            controller: descriptionController,
+            maxLines: 3,
+            style: const TextStyle(
+              color: DarkTheme.primaryText,
+              fontSize: 14,
+              fontFamily: 'Inter',
+            ),
+            decoration: InputDecoration(
+              hintText: 'Enter product description...',
+              hintStyle: TextStyle(
+                color: DarkTheme.secondaryText.withValues(alpha: 0.5),
+                fontSize: 14,
+                fontFamily: 'Inter',
               ),
               filled: true,
               fillColor: DarkTheme.background,
@@ -112,6 +169,7 @@ class IdentitySection extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           TextField(
+            controller: nameArabicController,
             style: const TextStyle(
               color: DarkTheme.gold,
               fontSize: 14,
@@ -149,7 +207,7 @@ class IdentitySection extends StatelessWidget {
                   Icons.copy,
                   color: DarkTheme.secondaryText,
                   size: 18,
-                ), // صغرناها
+                ),
                 onPressed: () {},
               ),
             ),

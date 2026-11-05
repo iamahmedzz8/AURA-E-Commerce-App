@@ -1,5 +1,8 @@
 import 'package:aura_maison_e_commerce/features/admin/add_product/presentation/screens/add_product_screen.dart';
+import 'package:aura_maison_e_commerce/features/products/products/presentation/cubit/products_cubit.dart';
+import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ActionButtons extends StatelessWidget {
   const ActionButtons({super.key});
@@ -15,8 +18,13 @@ class ActionButtons extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: () {
                 Navigator.push(
-                  (context),
-                  MaterialPageRoute(builder: (context) => AddProductScreen()),
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                      create: (context) => sl<ProductsCubit>(),
+                      child: const AddProductScreen(),
+                    ),
+                  ),
                 );
               },
               icon: Icon(Icons.add_circle_outline, size: 18),
