@@ -30,7 +30,9 @@ class SplashSalonScreen extends StatelessWidget {
 
     final tokenStorage = sl<TokenStorageService>();
     final accessToken = await tokenStorage.getAccessToken();
-
+    debugPrint(
+      'Access token exists: ${accessToken != null && accessToken.isNotEmpty}',
+    );
     if (!context.mounted) return;
 
     final Widget next = accessToken != null && accessToken.isNotEmpty

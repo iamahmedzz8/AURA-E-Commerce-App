@@ -1,9 +1,12 @@
+import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/addresses_cubit.dart';
 import 'package:aura_maison_e_commerce/features/admin/admin_dashdoard/presentation/screens/admin_dashboard_screen.dart';
 import 'package:aura_maison_e_commerce/features/profile/data/models/profile_model.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/screens/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/profile_widget.dart';
-
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/change_password_screen.dart';
+import 'package:aura_maison_e_commerce/features/addresses/presentation/screens/user_addresses_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -47,6 +50,23 @@ class ProfileScreen extends StatelessWidget {
                 icon: Icons.local_shipping_outlined,
                 title: 'Private Orders & Live Transit',
                 subtitle: '1 Active in Transit from Geneva Salon',
+              ),
+
+              ProfileMenuTile(
+                icon: Icons.location_on_outlined,
+                title: 'My Addresses',
+                subtitle: 'Manage your saved delivery addresses',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider.value(
+                        value: context.read<AddressesCubit>(),
+                        child: const UserAddressesScreen(),
+                      ),
+                    ),
+                  );
+                },
               ),
 
               const ProfileMenuTile(
@@ -143,6 +163,45 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
 
+              Center(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(
+                      color: AppColors.primaryGold,
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ChangePasswordScreen(),
+                      ),
+                    );
+                  },
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.lock_outline,
+                        color: AppColors.primaryGold,
+                        size: 17,
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        'CHANGE PASSWORD',
+                        style: TextStyle(
+                          color: AppColors.primaryGold,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               Center(
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
