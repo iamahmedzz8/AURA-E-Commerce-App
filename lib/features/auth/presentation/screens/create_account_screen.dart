@@ -136,10 +136,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             Column(
               children: [
                 // Fixed App Header
-                AppHeader(
-                  title: AppStrings.createAccountScreenTitle,
-                  showBackButton: canGoBack,
-                ),
+                // AppHeader(
+                //   title: AppStrings.createAccountScreenTitle,
+                //   showBackButton: canGoBack,
+                // ),
 
                 // Scrollable Salon Membership Content
                 Expanded(
@@ -206,7 +206,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: AppBottomNavBar(currentIndex: 4),
+      // bottomNavigationBar: AppBottomNavBar(currentIndex: 4),
     );
   }
 }

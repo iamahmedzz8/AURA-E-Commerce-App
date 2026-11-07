@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
+import 'package:aura_maison_e_commerce/features/home/data/models/offer_model.dart';
 import 'package:aura_maison_e_commerce/features/products/product_details/presentation/screens/product_details_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/home_cubit.dart';
@@ -6,6 +8,7 @@ import '../cubit/home_state.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_bottom_nav_bar.dart';
 import '../../../products/products/presentation/screens/products_screen.dart';
 import 'package:aura_maison_e_commerce/core/theme/theme_cubit.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -16,8 +19,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => HomeCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<HomeCubit>(
+          create: (_) => HomeCubit(),
+        ),
+        BlocProvider<OffersCubit>(
+          create: (_) => sl<OffersCubit>()..fetchOffers(),
+        ),
+      ],
       child: const _HomeScreenContent(),
     );
   }
@@ -31,8 +41,17 @@ class _HomeScreenContent extends StatefulWidget {
 }
 
 class _HomeScreenContentState extends State<_HomeScreenContent> {
-  bool get isDark =>
-      context.watch<ThemeCubit>().state == ThemeMode.dark;  int get selectedTab => context.read<HomeCubit>().state.selectedTab;
+  final PageController _offerPageController = PageController();
+  int _currentOfferPage = 0;
+
+  @override
+  void dispose() {
+    _offerPageController.dispose();
+    super.dispose();
+  }
+
+  bool get isDark => context.watch<ThemeCubit>().state == ThemeMode.dark;
+  int get selectedTab => context.read<HomeCubit>().state.selectedTab;
   Set<int> get favorites => context.read<HomeCubit>().state.favorites;
 
   static const Color gold = Color(0xFFC5A059);
@@ -56,7 +75,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       'description': 'Skeleton 950 Platinum',
       'rating': '—',
       'image':
-      'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=700',
+          'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=700',
       'tag': 'ONE OF A KIND',
     },
     {
@@ -66,7 +85,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       'description': '4.2ct D/FL Flawless',
       'rating': '—',
       'image':
-      'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700',
+          'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700',
       'tag': 'GIA CERTIFIED',
     },
     {
@@ -76,7 +95,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       'description': 'Croc-Embossed Leather',
       'rating': '—',
       'image':
-      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700',
+          'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700',
       'tag': 'MAISON HOME',
     },
     {
@@ -86,7 +105,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       'description': '18k Gold • Mineral Glass Lenses',
       'rating': '—',
       'image':
-      'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=700',
+          'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=700',
       'tag': 'PRIVATE EYEWEAR',
     },
   ];
@@ -116,11 +135,11 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   sliver: SliverGrid(
                     delegate: SliverChildBuilderDelegate(
-                          (context, index) => productCard(index),
+                      (context, index) => productCard(index),
                       childCount: products.length,
                     ),
                     gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 12,
                       mainAxisSpacing: 14,
@@ -144,7 +163,6 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
             ),
           ),
         );
-
       },
     );
   }
@@ -198,17 +216,25 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                   IconButton(
                     onPressed: openProducts,
                     visualDensity: VisualDensity.compact,
-                    icon: const Icon(Icons.search, color: Colors.white, size: 21),
+                    icon:
+                        const Icon(Icons.search, color: Colors.white, size: 21),
                   ),
                   IconButton(
                     onPressed: () {},
                     visualDensity: VisualDensity.compact,
-                    icon: const Icon(Icons.notifications_none_rounded, color: Colors.white, size: 21),
+                    icon: const Icon(
+                      Icons.notifications_none_rounded,
+                      color: Colors.white,
+                      size: 21,
+                    ),
                   ),
                   IconButton(
-                    onPressed: () => context.read<ThemeCubit>().toggleTheme(),                    visualDensity: VisualDensity.compact,
+                    onPressed: () => context.read<ThemeCubit>().toggleTheme(),
+                    visualDensity: VisualDensity.compact,
                     icon: Icon(
-                      isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                      isDark
+                          ? Icons.light_mode_outlined
+                          : Icons.dark_mode_outlined,
                       color: gold,
                       size: 21,
                     ),
@@ -222,7 +248,11 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                         color: gold,
                         borderRadius: BorderRadius.circular(9),
                       ),
-                      child: const Icon(Icons.person_outline_rounded, color: Color(0xFF171717), size: 20),
+                      child: const Icon(
+                        Icons.person_outline_rounded,
+                        color: Color(0xFF171717),
+                        size: 20,
+                      ),
                     ),
                   ),
                 ],
@@ -235,6 +265,319 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
   }
 
   Widget hero() {
+    return BlocBuilder<OffersCubit, OffersState>(
+      builder: (context, state) {
+        if (state is OffersLoadingState) {
+          return _buildHeroLoading();
+        }
+
+        if (state is OffersFailureState) {
+          return _buildHeroError(state.errorMessage);
+        }
+
+        if (state is OffersSuccessState) {
+          if (state.offers.isEmpty) {
+            return _buildDefaultHeroCard();
+          }
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 390,
+                child: PageView.builder(
+                  controller: _offerPageController,
+                  physics: const BouncingScrollPhysics(),
+                  onPageChanged: (index) {
+                    setState(() => _currentOfferPage = index);
+                  },
+                  itemCount: state.offers.length,
+                  itemBuilder: (context, index) {
+                    final offer = state.offers[index];
+                    return _buildOfferHeroCard(offer);
+                  },
+                ),
+              ),
+              if (state.offers.length > 1) ...[
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(state.offers.length, (i) {
+                    final isSelected = i == _currentOfferPage;
+                    return AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                      margin: const EdgeInsets.symmetric(horizontal: 3),
+                      width: isSelected ? 20 : 6,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? gold
+                            : (isDark
+                                ? Colors.white.withValues(alpha: .2)
+                                : Colors.black.withValues(alpha: .2)),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    );
+                  }),
+                ),
+              ],
+            ],
+          );
+        }
+
+        return _buildDefaultHeroCard();
+      },
+    );
+  }
+
+  Widget _buildOfferHeroCard(OfferModel offer) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: surface,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          if (offer.coverUrl.isNotEmpty)
+            Image.network(
+              offer.coverUrl,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  color: darkSurface,
+                  child: const Center(
+                    child: Icon(
+                      Icons.broken_image_outlined,
+                      color: Colors.white24,
+                      size: 40,
+                    ),
+                  ),
+                );
+              },
+            )
+          else
+            Container(color: darkSurface),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.black.withValues(alpha: .1),
+                  Colors.black.withValues(alpha: .35),
+                  Colors.black.withValues(alpha: .94),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 9,
+                    vertical: 5,
+                  ),
+                  color: Colors.black.withValues(alpha: .6),
+                  child: const Text(
+                    '● EXCLUSIVE MAISON OFFER',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      color: gold,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                const Text(
+                  'SPECIAL PROMOTION',
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    color: gold,
+                    fontSize: 10,
+                    letterSpacing: 1.4,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  offer.name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontFamily: 'EB Garamond',
+                    color: Colors.white,
+                    fontSize: 28,
+                    height: 1.05,
+                  ),
+                ),
+                if (offer.description != null &&
+                    offer.description!.isNotEmpty) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    offer.description!,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontFamily: 'Inter',
+                      color: Colors.white70,
+                      fontSize: 11,
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'CURATION',
+                            style: TextStyle(
+                              fontFamily: 'Inter',
+                              color: Colors.white60,
+                              fontSize: 8,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                          Text(
+                            'LIMITED PRIVILEGE',
+                            style: TextStyle(
+                              fontFamily: 'Inter',
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: openProducts,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: gold,
+                        foregroundColor: Colors.black,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 18,
+                          vertical: 12,
+                        ),
+                        shape: const RoundedRectangleBorder(),
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'EXPLORE\nOFFER',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 9.5,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: .8,
+                            ),
+                          ),
+                          SizedBox(width: 6),
+                          Icon(Icons.arrow_forward, size: 13),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeroLoading() {
+    return Container(
+      height: 390,
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      decoration: BoxDecoration(
+        color: surface,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(
+              width: 24,
+              height: 24,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: gold,
+              ),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              'CURATING OFFERS...',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                color: muted,
+                fontSize: 10,
+                letterSpacing: 1.2,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeroError(String message) {
+    return Container(
+      height: 390,
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: surface,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.error_outline, color: gold, size: 32),
+            const SizedBox(height: 12),
+            Text(
+              message.isNotEmpty ? message : 'Failed to load offers',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Inter',
+                color: foreground,
+                fontSize: 12,
+              ),
+            ),
+            const SizedBox(height: 16),
+            OutlinedButton(
+              onPressed: () => context.read<OffersCubit>().fetchOffers(),
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: gold),
+                foregroundColor: gold,
+              ),
+              child: const Text('RETRY'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDefaultHeroCard() {
     return Container(
       height: 390,
       margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
@@ -502,20 +845,20 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
   Widget disciplines() {
     final items = [
       (
-      'WATCHMAKING',
-      'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500'
+        'WATCHMAKING',
+        'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500'
       ),
       (
-      'HIGH JEWELRY',
-      'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500'
+        'HIGH JEWELRY',
+        'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500'
       ),
       (
-      'LEATHER GOODS',
-      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500'
+        'LEATHER GOODS',
+        'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500'
       ),
       (
-      'EYEWEAR',
-      'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500'
+        'EYEWEAR',
+        'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500'
       ),
     ];
 
@@ -678,7 +1021,8 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                     top: 8,
                     right: 8,
                     child: GestureDetector(
-                      onTap: () => context.read<HomeCubit>().toggleFavorite(index),
+                      onTap: () =>
+                          context.read<HomeCubit>().toggleFavorite(index),
                       child: Container(
                         width: 34,
                         height: 34,
@@ -702,7 +1046,8 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                     left: 9,
                     bottom: 9,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 5),
                       decoration: BoxDecoration(
                         color: Colors.black.withValues(alpha: .72),
                         borderRadius: BorderRadius.circular(2),
@@ -1012,5 +1357,4 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       ),
     );
   }
-
 }

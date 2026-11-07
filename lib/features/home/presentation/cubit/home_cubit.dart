@@ -1,7 +1,8 @@
 import 'package:aura_maison_e_commerce/features/home/data/datasources/home_remote_data_source.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home_state.dart';
+
+export 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(const HomeState());
@@ -24,38 +25,35 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(selectedTab: index));
   }
 }
+
 //=============Offers Cubit=========================
 class OffersCubit extends Cubit<OffersState> {
-  OffersCubit() : super(OffersLoadingState());
+  final HomeRemoteDataSource _homeRemoteDataSource;
+
+  OffersCubit([HomeRemoteDataSource? homeRemoteDataSource])
+      : _homeRemoteDataSource = homeRemoteDataSource ?? HomeRemoteDataSource(),
+        super(OffersInitialState());
 
   Future<void> fetchOffers() async {
-    HomeRemoteDataSource homeRemoteDataSource = HomeRemoteDataSource();
     emit(OffersLoadingState());
     try {
-      // Simulate fetching offers from an API or database
-      await homeRemoteDataSource.getOffers().then((val) {
-        emit(OffersSuccessState(offers: val));
-      });
-
-    
-    } on DioException catch (e) {
-      emit(OffersFailureState(errorMessage: e.response?.data.toString() ?? e.toString()));
+      final offers = await _homeRemoteDataSource.getOffers();
+      emit(OffersSuccessState(offers: offers));
+    } catch (e) {
+      emit(OffersFailureState(
+        errorMessage: e.toString().replaceFirst('Exception: ', ''),
+      ));
     }
   }
 }
+
+//=============Categories Cubit=====================
 class CategoriesCubit extends Cubit<CategoriesState> {
-  CategoriesCubit() : super(CategoriesLoadingState());
+  final HomeRemoteDataSource _homeRemoteDataSource;
 
-  Future<void> fetchCategories() async {
-    HomeRemoteDataSource homeRemoteDataSource = HomeRemoteDataSource();
-    emit(CategoriesLoadingState());
-    try {
-      // Simulate fetching categories from an API or database
-      await homeRemoteDataSource.getCategories().then((val) {
-        emit(CategoriesSuccessState(categories: val));
-      });
-    } on DioException catch (e) {
-      emit(CategoriesFailureState(errorMessage: e.response?.data.toString() ?? e.toString()));
-    }
-  }
+  CategoriesCubit([HomeRemoteDataSource? homeRemoteDataSource])
+      : _homeRemoteDataSource = homeRemoteDataSource ?? HomeRemoteDataSource(),
+        super(CategoriesInitialState());
 }
+
+class CategoriesInitialState extends CategoriesState {}

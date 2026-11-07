@@ -17,6 +17,9 @@ import 'package:aura_maison_e_commerce/features/auth/domain/usecases/get_auth_us
 import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:aura_maison_e_commerce/features/auth/domain/usecases/change_password_use_case.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/change_password_cubit.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/forgot_passcode_cubit.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/otp_cubit.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/reset_password_cubit.dart';
 import 'package:aura_maison_e_commerce/features/addresses/data/datasources/addresses_remote_data_source.dart';
 import 'package:aura_maison_e_commerce/features/addresses/data/repositories/addresses_repository_impl.dart';
 import 'package:aura_maison_e_commerce/features/addresses/domain/repositories/addresses_repository.dart';
@@ -27,6 +30,8 @@ import 'package:aura_maison_e_commerce/core/services/selected_address_service.da
 import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/update_address_use_case.dart';
 import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/get_user_addresses_use_case.dart';
 import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/delete_address_use_case.dart';
+import 'package:aura_maison_e_commerce/features/home/data/datasources/home_remote_data_source.dart';
+import 'package:aura_maison_e_commerce/features/home/presentation/cubit/home_cubit.dart';
 
 import '../../features/products/products/data/datasources/products_remote_data_source.dart';
 import '../../features/products/products/data/repositories/products_repository_impl.dart';
@@ -34,7 +39,6 @@ import '../../features/products/products/domain/repositories/products_repository
 import '../../features/products/products/domain/usecases/add_product_usecase.dart';
 import '../../features/products/products/domain/usecases/delete_product_usecase.dart';
 import '../../features/products/products/presentation/cubit/products_cubit.dart';
-
 
 /// Global service locator instance
 final GetIt sl = GetIt.instance;
@@ -45,7 +49,7 @@ Future<void> initServiceLocator() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
   sl.registerLazySingleton<SelectedAddressService>(
-        () => SelectedAddressService(
+    () => SelectedAddressService(
       preferences: sl<SharedPreferences>(),
     ),
   );
@@ -121,135 +125,155 @@ Future<void> initServiceLocator() async {
   );
   // ── 6. Auth Data Sources ────────────────────────────────────
   sl.registerLazySingleton<AuthRemoteDataSource>(
-        () => AuthRemoteDataSourceImpl(
+    () => AuthRemoteDataSourceImpl(
       dioClient: sl<DioClient>(),
     ),
   );
 
   sl.registerLazySingleton<AuthLocalDataSource>(
-        () => AuthLocalDataSourceImpl(
+    () => AuthLocalDataSourceImpl(
       tokenStorageService: sl<TokenStorageService>(),
     ),
   );
 
-// ── 7. Auth Repository ──────────────────────────────────────
+  // ── 7. Auth Repository ──────────────────────────────────────
   sl.registerLazySingleton<AuthRepository>(
-        () => AuthRepositoryImpl(
+    () => AuthRepositoryImpl(
       remoteDataSource: sl<AuthRemoteDataSource>(),
       localDataSource: sl<AuthLocalDataSource>(),
     ),
   );
 
-// ── 8. Auth UseCase ─────────────────────────────────────────
+  // ── 8. Auth UseCase ─────────────────────────────────────────
   sl.registerLazySingleton<GetAuthUseCase>(
-        () => GetAuthUseCase(
+    () => GetAuthUseCase(
       sl<AuthRepository>(),
     ),
   );
 
-// ── 9. Login Cubit ──────────────────────────────────────────
+  // ── 9. Login Cubit ──────────────────────────────────────────
   sl.registerFactory<LoginCubit>(
-        () => LoginCubit(
+    () => LoginCubit(
       getAuthUseCase: sl<GetAuthUseCase>(),
     ),
   );
 
   // ── 10. Change Password UseCase ────────────────────────────
   sl.registerLazySingleton<ChangePasswordUseCase>(
-        () => ChangePasswordUseCase(
+    () => ChangePasswordUseCase(
       repository: sl<AuthRepository>(),
     ),
   );
 
   // ── 11. Change Password Cubit ─────────────────────────────
   sl.registerFactory<ChangePasswordCubit>(
-        () => ChangePasswordCubit(
+    () => ChangePasswordCubit(
       changePasswordUseCase: sl<ChangePasswordUseCase>(),
     ),
   );
 
-  // ── 12. Addresses Remote Data Source ───────────────────────
+  // ── 12. Auth Recovery & Verification Cubits ─────────────────
+  sl.registerFactory<ForgotPasscodeCubit>(
+    () => ForgotPasscodeCubit(sl<AuthRemoteDataSource>()),
+  );
+  sl.registerFactory<OtpCubit>(
+    () => OtpCubit(sl<AuthRemoteDataSource>()),
+  );
+  sl.registerFactory<ResetPasswordCubit>(
+    () => ResetPasswordCubit(sl<AuthRemoteDataSource>()),
+  );
+
+  // ── 13. Addresses Remote Data Source ───────────────────────
   sl.registerLazySingleton<AddressesRemoteDataSource>(
-        () => AddressesRemoteDataSourceImpl(
+    () => AddressesRemoteDataSourceImpl(
       dioClient: sl<DioClient>(),
     ),
   );
 
-  // ── 13. Addresses Repository ───────────────────────────────
+  // ── 14. Addresses Repository ───────────────────────────────
   sl.registerLazySingleton<AddressesRepository>(
-        () => AddressesRepositoryImpl(
+    () => AddressesRepositoryImpl(
       remoteDataSource: sl<AddressesRemoteDataSource>(),
     ),
   );
 
-  // ── 14. Get Address By ID Use Case ─────────────────────────
+  // ── 15. Get Address By ID Use Case ─────────────────────────
   sl.registerLazySingleton<GetAddressByIdUseCase>(
-        () => GetAddressByIdUseCase(
+    () => GetAddressByIdUseCase(
       sl<AddressesRepository>(),
     ),
   );
 
-  // ── 15. Get User Addresses Use Case ─────────────────────────
+  // ── 16. Get User Addresses Use Case ─────────────────────────
   sl.registerLazySingleton<GetUserAddressesUseCase>(
-        () => GetUserAddressesUseCase(
+    () => GetUserAddressesUseCase(
       repository: sl<AddressesRepository>(),
     ),
   );
 
-  // ── 16. Create Address Use Case ────────────────────────────
+  // ── 17. Create Address Use Case ────────────────────────────
   sl.registerLazySingleton<CreateAddressUseCase>(
-        () => CreateAddressUseCase(
+    () => CreateAddressUseCase(
       sl<AddressesRepository>(),
     ),
   );
 
-  // ── 17. Update Address Use Case ────────────────────────────
+  // ── 18. Update Address Use Case ────────────────────────────
   sl.registerLazySingleton<UpdateAddressUseCase>(
-        () => UpdateAddressUseCase(
+    () => UpdateAddressUseCase(
       sl<AddressesRepository>(),
     ),
   );
 
-
-  // 18. Delete Address Use Case ──────────────────────────────
+  // ── 19. Delete Address Use Case ────────────────────────────
   sl.registerLazySingleton<DeleteAddressUseCase>(
-        () => DeleteAddressUseCase(
+    () => DeleteAddressUseCase(
       sl<AddressesRepository>(),
     ),
   );
 
-  // ── 19. Addresses Cubit ────────────────────────────────────
-  sl.registerFactory<AddressesCubit>(() => AddressesCubit(
-    getAddressByIdUseCase: sl<GetAddressByIdUseCase>(),
-    getUserAddressesUseCase: sl<GetUserAddressesUseCase>(),
-    createAddressUseCase: sl<CreateAddressUseCase>(),
-    updateAddressUseCase: sl<UpdateAddressUseCase>(),
-    deleteAddressUseCase: sl<DeleteAddressUseCase>(),
-    selectedAddressService: sl<SelectedAddressService>(),
+  // ── 20. Addresses Cubit ────────────────────────────────────
+  sl.registerFactory<AddressesCubit>(
+    () => AddressesCubit(
+      getAddressByIdUseCase: sl<GetAddressByIdUseCase>(),
+      getUserAddressesUseCase: sl<GetUserAddressesUseCase>(),
+      createAddressUseCase: sl<CreateAddressUseCase>(),
+      updateAddressUseCase: sl<UpdateAddressUseCase>(),
+      deleteAddressUseCase: sl<DeleteAddressUseCase>(),
+      selectedAddressService: sl<SelectedAddressService>(),
     ),
   );
+
+  // ── 21. Products Feature ───────────────────────────────────
   sl.registerLazySingleton<ProductsRemoteDataSource>(
-        () => ProductsRemoteDataSource(),
+    () => ProductsRemoteDataSource(),
   );
 
   sl.registerLazySingleton<ProductsRepository>(
-        () => ProductsRepositoryImpl(sl<ProductsRemoteDataSource>()),
+    () => ProductsRepositoryImpl(sl<ProductsRemoteDataSource>()),
   );
 
   sl.registerLazySingleton<AddProductUseCase>(
-        () => AddProductUseCase(sl<ProductsRepository>()),
+    () => AddProductUseCase(sl<ProductsRepository>()),
   );
 
   sl.registerLazySingleton<DeleteProductUseCase>(
-        () => DeleteProductUseCase(sl<ProductsRepository>()),
+    () => DeleteProductUseCase(sl<ProductsRepository>()),
   );
 
   sl.registerFactory<ProductsCubit>(
-        () => ProductsCubit(
+    () => ProductsCubit(
       addProductUseCase: sl<AddProductUseCase>(),
       deleteProductUseCase: sl<DeleteProductUseCase>(),
     ),
   );
+
+  // ── 22. Home Feature (Offers) ──────────────────────────────
+  sl.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSource(dioClient: sl<DioClient>()),
+  );
+
+  sl.registerFactory<OffersCubit>(
+    () => OffersCubit(sl<HomeRemoteDataSource>()),
+  );
 }
-
-

@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/login_cubit.dart';
+
 class VipMemberSignInScreen extends StatefulWidget {
   const VipMemberSignInScreen({super.key});
 
@@ -29,8 +30,7 @@ class _VipMemberSignInScreenState extends State<VipMemberSignInScreen> {
   void initState() {
     super.initState();
 
-    if (PrefsService.rememberMe &&
-        PrefsService.savedEmail.isNotEmpty) {
+    if (PrefsService.rememberMe && PrefsService.savedEmail.isNotEmpty) {
       _idController.text = PrefsService.savedEmail;
       _rememberMe = true;
     }
@@ -49,17 +49,12 @@ class _VipMemberSignInScreenState extends State<VipMemberSignInScreen> {
 
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please enter your email and password.'),
-        ),
+        const SnackBar(content: Text('Please enter your email and password.')),
       );
       return;
     }
 
-    cubit.login(
-      email: email,
-      password: password,
-    );
+    cubit.login(email: email, password: password);
   }
 
   Future<void> _onBiometricSignIn() async {
@@ -86,9 +81,7 @@ class _VipMemberSignInScreenState extends State<VipMemberSignInScreen> {
 
   void _onForgotPassword() {
     Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => const ForgotPasscodeScreen(),
-      ),
+      MaterialPageRoute<void>(builder: (_) => const ForgotPasscodeScreen()),
     );
   }
 
@@ -113,19 +106,15 @@ class _VipMemberSignInScreenState extends State<VipMemberSignInScreen> {
                 if (!mounted) return;
 
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const MainScreen(),
-                  ),
-                      (_) => false,
+                  MaterialPageRoute<void>(builder: (_) => const MainScreen()),
+                  (_) => false,
                 );
               }
 
               if (state is LoginFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.message),
-                  ),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(state.message)));
               }
             },
             builder: (context, state) {
@@ -138,25 +127,24 @@ class _VipMemberSignInScreenState extends State<VipMemberSignInScreen> {
                   child: Column(
                     children: [
                       // Fixed App Header
-                      AppHeader(
-                        title: AppStrings.vipMemberScreenTitle,
-                        showBackButton: canGoBack,
-                      ),
+                      // AppHeader(
+                      //   title: AppStrings.vipMemberScreenTitle,
+                      //   showBackButton: canGoBack,
+                      // ),
 
                       // Scrollable VIP Member Content
                       Expanded(
                         child: CustomScrollView(
                           slivers: [
-                            const SliverToBoxAdapter(
-                              child: VipAmbientHeader(),
-                            ),
+                            const SliverToBoxAdapter(child: VipAmbientHeader()),
                             SliverToBoxAdapter(
                               child: SegmentedAccessModeSwitch(
                                 onTabChanged: (index) {
                                   if (index == 1) {
                                     Navigator.of(context).push(
                                       MaterialPageRoute<void>(
-                                        builder: (_) => const CreateAccountScreen(),
+                                        builder: (_) =>
+                                            const CreateAccountScreen(),
                                       ),
                                     );
                                   }
@@ -191,7 +179,7 @@ class _VipMemberSignInScreenState extends State<VipMemberSignInScreen> {
                     ],
                   ),
                 ),
-                bottomNavigationBar: const AppBottomNavBar(currentIndex: 4),
+                // bottomNavigationBar: const AppBottomNavBar(currentIndex: 4),
               );
             },
           );

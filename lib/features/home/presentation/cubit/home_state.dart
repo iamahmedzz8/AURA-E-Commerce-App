@@ -1,3 +1,5 @@
+import 'package:aura_maison_e_commerce/features/home/data/models/offer_model.dart';
+
 class HomeState {
   final bool isDark;
   final int selectedTab;
@@ -21,10 +23,12 @@ class HomeState {
 //=============================Offers State=========================
 abstract class OffersState {}
 
+class OffersInitialState extends OffersState {}
+
 class OffersLoadingState extends OffersState {}
 
 class OffersSuccessState extends OffersState {
-  final List offers;
+  final List<OfferModel> offers;
   OffersSuccessState({required this.offers});
 }
 
@@ -37,10 +41,12 @@ class OffersFailureState extends OffersState {
 abstract class CategoriesState {}
 
 class CategoriesLoadingState extends CategoriesState {}
+
 class CategoriesSuccessState extends CategoriesState {
   final List categories;
   CategoriesSuccessState({required this.categories});
 }
+
 class CategoriesFailureState extends CategoriesState {
   final String errorMessage;
   CategoriesFailureState({required this.errorMessage});
