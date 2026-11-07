@@ -1,4 +1,3 @@
-import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_bottom_nav_bar.dart';
 import 'package:aura_maison_e_commerce/features/cart/presentaion/screens/cart_screen.dart';
 import 'package:aura_maison_e_commerce/features/categories/presentation/screens/categories_screen.dart';

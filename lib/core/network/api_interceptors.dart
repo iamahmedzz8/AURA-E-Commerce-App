@@ -32,6 +32,12 @@ class AuthInterceptor extends QueuedInterceptor {
       }
     }
 
+    // Avoid sending Content-Type on GET requests without body to prevent ASP.NET JSON deserializer errors
+    if (options.method.toUpperCase() == 'GET' && options.data == null) {
+      options.headers.remove('Content-Type');
+      options.contentType = null;
+    }
+
     return handler.next(options);
   }
 

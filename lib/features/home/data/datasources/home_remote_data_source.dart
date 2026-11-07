@@ -20,7 +20,7 @@ class HomeRemoteDataSource {
     try {
       final response = await _dioClient.get(
         ApiEndpoints.offers,
-        data: {
+        queryParameters: {
           'page': 1,
           'pageSize': 10,
         },
@@ -112,7 +112,7 @@ class HomeRemoteDataSource {
     try {
       final response = await _dioClient.get(
         ApiEndpoints.products,
-        data: {
+        queryParameters: {
           'page': page,
           'pageSize': pageSize,
         },
