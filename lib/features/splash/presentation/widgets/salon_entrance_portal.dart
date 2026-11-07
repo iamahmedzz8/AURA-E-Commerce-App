@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,7 @@ class SalonEntrancePortal extends StatelessWidget {
                   Icon(Icons.fingerprint, size: 18, color: AppColors.obsidianDark),
                   SizedBox(width: 10),
                   Text(
-                    'TOUCH TO ENTER SALON',
+                    AppStrings.touchToEnterSalon,
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
@@ -57,7 +58,7 @@ class SalonEntrancePortal extends StatelessWidget {
                   Icon(Icons.lock_outline, size: 14, color: AppColors.gold),
                   SizedBox(width: 6),
                   Text(
-                    'Biometric Patron Key',
+                    AppStrings.biometricPatronKey,
                     style: TextStyle(
                       color: AppColors.ivoryMuted,
                       fontSize: 12,
@@ -67,7 +68,7 @@ class SalonEntrancePortal extends StatelessWidget {
                 ],
               ),
               Text(
-                'VERIFIED',
+                AppStrings.verifiedUpper,
                 style: TextStyle(
                   color: AppColors.gold,
                   fontSize: 11,
@@ -85,7 +86,7 @@ class SalonEntrancePortal extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'WORKSHOP VAULT LINK',
+                    AppStrings.workshopVaultLink,
                     style: TextStyle(
                       color: AppColors.luxuryMuted,
                       fontSize: 10,
@@ -132,7 +133,7 @@ class SalonEntrancePortal extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'CIPHER: V2.4.0 • SALON EDITION',
+                AppStrings.cipherSalonEdition,
                 style: TextStyle(
                   color: AppColors.luxuryMuted,
                   fontSize: 9.5,
@@ -152,7 +153,7 @@ class SalonEntrancePortal extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   const Text(
-                    'NODE PARIS 01',
+                    AppStrings.nodeParis01,
                     style: TextStyle(
                       color: AppColors.ivoryMuted,
                       fontSize: 9.5,

@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class CartItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: 'Royal Tourbillon Squelette',
+                  text: AppStrings.royalTourbillonSquelette,
                   size: 18,
                   weight: FontWeight.w500,
                   color: AppColors.primaryColor,

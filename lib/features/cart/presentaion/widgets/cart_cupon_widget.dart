@@ -1,4 +1,5 @@
 
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class CartCuponWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(text: 'Have a coupon ?', weight: FontWeight.w800, size: 20),
+        CustomText(text: AppStrings.haveACoupon, weight: FontWeight.w800, size: 20),
         Gap(10),
         Row(
           children: [
@@ -22,7 +23,7 @@ class CartCuponWidget extends StatelessWidget {
                   filled: true,
                   fillColor: Colors.white,
                   prefixIcon: Icon(Icons.local_offer_outlined,color:  AppColors.primaryColor,),
-                  hint: CustomText(text: 'Save 10'),
+                  hint: CustomText(text: AppStrings.couponPlaceholder),
 
                   border: OutlineInputBorder(
                     borderSide: BorderSide.none,
@@ -41,7 +42,7 @@ class CartCuponWidget extends StatelessWidget {
               ),
               child: Center(
                 child: CustomText(
-                  text: 'Apply',
+                  text: AppStrings.applyCoupon,
                   color: Colors.white,
                   weight: FontWeight.w600,
                 ),

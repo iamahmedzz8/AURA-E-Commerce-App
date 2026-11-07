@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class PaymentSection extends StatelessWidget {
                     Row(
                       children: [
                         CustomText(
-                          text: 'Pay Online',
+                          text: AppStrings.payOnline,
                           size: 18,
                           weight: FontWeight.bold,
                         ),
@@ -56,7 +57,7 @@ class PaymentSection extends StatelessWidget {
                     ),
                     Gap(7),
                     CustomText(
-                      text: 'Credit/Debit Card, Apple Pay & Digital Wallets',
+                      text: AppStrings.payOnlineSubtitle,
                       size: 12,
                     ),
                   ],
@@ -94,13 +95,13 @@ class PaymentSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Cash on delivery',
+                      text: AppStrings.cashOnDelivery,
                       size: 18,
                       weight: FontWeight.bold,
                     ),
                     Gap(7),
                     CustomText(
-                      text: 'Pay safely upon physical delivery inspection',
+                      text: AppStrings.cashOnDeliverySubtitle,
                       size: 12,
                     ),
                   ],

@@ -1,4 +1,5 @@
 
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/features/home/presentation/screens/home_screen.dart';
 import 'package:aura_maison_e_commerce/features/order/screens/order_history.dart';
@@ -39,14 +40,14 @@ class OrderScreen extends StatelessWidget {
                 Gap(10),
                 CustomButton(
                   widget: const HomeScreen(),
-                  buttonText: 'Continue shopping → ',
+                  buttonText: AppStrings.continueShopping,
                   buttonColor: AppColors.primaryColor,
                   textColor: Colors.white,
                 ),
                 Gap(15),
                 CustomButton(
                   widget: const OrderHistory(),
-                  buttonText: '🧾 View order History ',
+                  buttonText: AppStrings.viewOrderHistory,
                   buttonColor: AppColors.tertiaryColor,
                 ),
               ],

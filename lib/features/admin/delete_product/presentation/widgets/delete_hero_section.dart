@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/theme/dark_theme.dart';
+import '../../../../../core/utils/app_strings.dart';
 
 class DeleteHeroSection extends StatelessWidget {
   const DeleteHeroSection({super.key});
@@ -22,7 +23,6 @@ class DeleteHeroSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
@@ -36,7 +36,7 @@ class DeleteHeroSection extends StatelessWidget {
               Icon(Icons.circle, color: DarkTheme.gold, size: 6),
               SizedBox(width: 6),
               Text(
-                'ACCREDITATION LEVEL: GENERAL MANAGEMENT',
+                AppStrings.accreditationGeneralManagement,
                 style: TextStyle(
                   color: DarkTheme.primaryText,
                   fontSize: 9,
@@ -49,9 +49,8 @@ class DeleteHeroSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-
         const Text(
-          'Confirm Removal of the\nPiece?',
+          AppStrings.confirmRemovalTitle,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: DarkTheme.primaryText,
@@ -62,9 +61,8 @@ class DeleteHeroSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-
         Text(
-          'This action will permanently remove this\nmasterpiece from the catalogue and revoke its\npublic allocation at the Vendôme salon.',
+          AppStrings.confirmRemovalSubtitle,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: DarkTheme.secondaryText.withValues(alpha: 0.9),

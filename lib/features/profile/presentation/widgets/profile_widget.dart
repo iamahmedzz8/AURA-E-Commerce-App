@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -278,9 +279,9 @@ class ProfileCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ProfileStatItem(label: 'COMMISSIONS', value: commissions),
-              ProfileStatItem(label: 'VAULT HOLDINGS', value: vaultHoldings),
-              ProfileStatItem(label: 'STATUS', value: status),
+              ProfileStatItem(label: AppStrings.commissionsUpper, value: commissions),
+              ProfileStatItem(label: AppStrings.vaultHoldingsUpper, value: vaultHoldings),
+              ProfileStatItem(label: AppStrings.statusUpper, value: status),
             ],
           ),
         ],
@@ -386,7 +387,7 @@ class TransitCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'TRANSIT IN ROUTE',
+                  AppStrings.transitInRoute,
                   style: TextStyle(
                     color: AppColors.primaryGold,
                     fontSize: 9,
@@ -394,7 +395,7 @@ class TransitCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Heures Célestes Tourbillon No. 04',
+                  AppStrings.heuresCelestes,
                   style: TextStyle(
                     color: AppColors.textWhite,
                     fontSize: 13,
@@ -438,7 +439,7 @@ class AdvisorCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'ASSIGNED PRIVATE ADVISOR',
+                  AppStrings.assignedPrivateAdvisor,
                   style: TextStyle(color: AppColors.textMuted, fontSize: 9),
                 ),
                 Text(
@@ -470,7 +471,7 @@ class ProfileHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'AURA MAISON WORKSHOP',
+              AppStrings.auraMaisonWorkshop,
               style: TextStyle(
                 color: AppColors.primaryGold,
                 fontSize: 10,
@@ -478,7 +479,7 @@ class ProfileHeader extends StatelessWidget {
               ),
             ),
             Text(
-              'Patron Profile',
+              AppStrings.patronProfile,
               style: TextStyle(
                 color: AppColors.textWhite,
                 fontSize: 20,

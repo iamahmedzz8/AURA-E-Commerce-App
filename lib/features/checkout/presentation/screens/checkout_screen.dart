@@ -1,4 +1,5 @@
 
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
@@ -61,7 +62,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ),
         centerTitle: true,
         title: const CustomText(
-          text: 'Checkout',
+          text: AppStrings.checkout,
           size: 25,
           weight: FontWeight.bold,
         ),

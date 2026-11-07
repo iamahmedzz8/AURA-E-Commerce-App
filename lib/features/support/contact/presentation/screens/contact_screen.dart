@@ -1,4 +1,5 @@
 
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:aura_maison_e_commerce/features/support/contact/data/models/contact_model.dart';
 import 'package:aura_maison_e_commerce/features/support/contact/presentation/widgets/contact_widget.dart';
@@ -65,7 +66,7 @@ void initState() {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
       appBar: CustomAppBar(
-        title: 'Private Concierge Support',
+        title: AppStrings.privateConciergeSupport,
       ),
 
       body: ListView(
@@ -81,7 +82,7 @@ void initState() {
               ),
               const SizedBox(width: 6),
               Text(
-                'PRIVATE SALON NETWORK • PARIS & GENÈVE',
+                AppStrings.privateSalonNetwork,
                 style: TextStyle(
                   color: AppColors.primaryGold,
                   fontSize: 9,
@@ -95,7 +96,7 @@ void initState() {
           const SizedBox(height: 12),
 
           Text(
-            'The Watchmaking Sanctuaries',
+            AppStrings.watchmakingSanctuaries,
             style: TextStyle(
               color: AppColors.textWhite,
               fontSize: 22,
@@ -107,7 +108,7 @@ void initState() {
           const SizedBox(height: 8),
 
           Text(
-            'Access strictly reserved for collectors and accredited representatives. Absolute discretion and a high-security protocol.',
+            AppStrings.watchmakingSanctuariesSubtitle,
             style: TextStyle(
               color: AppColors.textMuted,
               fontSize: 11,
@@ -141,7 +142,7 @@ void initState() {
           const SizedBox(height: 20),
 
           PrimaryButton(
-            text: 'OPEN CONCIERGE FORM',
+            text: AppStrings.openConciergeForm,
             onPressed: () {
               // TODO: Navigate to the concierge form screen.
             },
@@ -167,7 +168,7 @@ void initState() {
               size: 16,
             ),
             label: Text(
-              'SCHEDULE A PRIVATE SALON VISIT',
+              AppStrings.schedulePrivateSalonVisit,
               style: TextStyle(
                 color: AppColors.textWhite,
                 fontSize: 11,

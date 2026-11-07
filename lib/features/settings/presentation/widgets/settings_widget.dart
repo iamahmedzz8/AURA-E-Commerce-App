@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class SettingsEnclaveCard extends StatelessWidget {
                     Icon(Icons.circle, color: Colors.green, size: 8),
                     SizedBox(width: 6),
                     Text(
-                      'CRYPTOGRAPHIC ENCLAVE',
+                      AppStrings.cryptographicEnclave,
                       style: TextStyle(
                         color: AppColors.primaryGold,
                         fontSize: 10,
@@ -36,7 +37,7 @@ class SettingsEnclaveCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 const Text(
-                  'Salon Protocol Nº 8492-V',
+                  AppStrings.salonProtocolNumber,
                   style: TextStyle(
                     color: AppColors.textWhite,
                     fontSize: 16,
@@ -45,7 +46,7 @@ class SettingsEnclaveCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 const Text(
-                  'Accredited device • Place Vendôme, Paris',
+                  AppStrings.accreditedDevice,
                   style: TextStyle(color: AppColors.textMuted, fontSize: 11),
                 ),
               ],

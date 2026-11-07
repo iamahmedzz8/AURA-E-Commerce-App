@@ -55,7 +55,7 @@ class AppStrings {
   // Recent Searches
   static const String recentSearchesTitle = 'RECENT SEARCHES';
   static const String clearAll = 'Clear All';
-  static const String recentPill1 = 'Impérial Chronograph';
+  static const String recentPill1 = 'Imperial Chronograph';
   static const String recentPill2 = 'Calibre 8801';
   static const String recentPill3 = 'Sedna Platinum';
   static const String recentPill4 = 'Watch Trunk';
@@ -84,21 +84,21 @@ class AppStrings {
   static const String trending1Tag = 'AURA VENDÔME';
   static const String trending1Badge = 'UNIQUE';
   static const String trending1Title = 'Skeleton Tourbillon No. VIII';
-  static const String trending1Ref = 'RÉF. TS-880-OR';
+  static const String trending1Ref = 'REF. TS-880-OR';
   static const String trending1Price = '142 000 €';
   static const String trending1Status = 'Available';
   // Trending Item 2
   static const String trending2Tag = 'CHRONOMETRY';
   static const String trending2Badge = 'COSC';
-  static const String trending2Title = 'Impérial Split-Seconds Chronograph';
-  static const String trending2Ref = 'RÉF. CI-914-AU';
+  static const String trending2Title = 'Imperial Split-Seconds Chronograph';
+  static const String trending2Ref = 'REF. CI-914-AU';
   static const String trending2Price = '96 500 €';
   static const String trending2Status = 'On Request';
   // Trending Item 3
   static const String trending3Tag = 'SOLITAIRE GIA';
   static const String trending3Badge = 'D-FLAWLESS';
-  static const String trending3Title = 'Solitaire Étoile Polaire 4.20ct';
-  static const String trending3Ref = 'RÉF. HJ-SOL-042';
+  static const String trending3Title = 'Solitaire North Star 4.20ct';
+  static const String trending3Ref = 'REF. HJ-SOL-042';
   static const String trending3Price = '215 000 €';
   static const String trending3Status = 'In Vault';
   // Concierge Advisory Banner
@@ -121,14 +121,14 @@ class AppStrings {
   static const String searchProduct1Badge = 'VENDÔME';
   static const String searchProduct1Specs = '41 MM • ROSE GOLD';
   static const String searchProduct1Ref = 'REF. TS-880-OR';
-  static const String searchProduct1Title = 'Royal Tourbillon\nSquelette';
+  static const String searchProduct1Title = 'Royal Tourbillon\nSkeleton';
   static const String searchProduct1Price = '142 000 €';
   static const String searchProduct1Action = 'ACQUIRE';
 
   static const String searchProduct2Badge = 'ON REQUEST';
   static const String searchProduct2Specs = '42 MM • G5 TITANIUM';
   static const String searchProduct2Ref = 'REF. CI-914-AU';
-  static const String searchProduct2Title = 'Impérial\nChronograph';
+  static const String searchProduct2Title = 'Imperial\nChronograph';
   static const String searchProduct2Price = '96 500 €';
   static const String searchProduct2Action = 'VIEW';
 
@@ -142,7 +142,7 @@ class AppStrings {
   static const String searchProduct4Badge = 'RESERVED FOR SALON';
   static const String searchProduct4Specs = '43 MM • METEORITE';
   static const String searchProduct4Ref = 'REF. TVC-04';
-  static const String searchProduct4Title = 'Céleste\nFlying Tourbillon';
+  static const String searchProduct4Title = 'Celestial\nFlying Tourbillon';
   static const String searchProduct4Price = '230 000 €';
   static const String searchProduct4Action = 'PRIVATE RANK';
 
@@ -175,7 +175,7 @@ class AppStrings {
   static const String viewAllAction = 'VIEW ALL';
   static const String acquisitionValueLabel = 'ACQUISITION VALUE';
   static const String vaultPiece1Badge = 'ONE OF A KIND • NO. 01/01';
-  static const String vaultPiece1Tag = 'GENÈVE MANUFACTURE';
+  static const String vaultPiece1Tag = 'GENEVA MANUFACTURE';
   static const String vaultPiece1Ref = 'Ref. 5370-G';
   static const String vaultPiece1Title = 'Royal Skeleton Tourbillon';
   static const String vaultPiece1Desc =
@@ -184,7 +184,7 @@ class AppStrings {
   static const String vaultPiece2Badge = 'COSC CHRONOMETER';
   static const String vaultPiece2Tag = 'HIGH COMPLICATION';
   static const String vaultPiece2Ref = 'Ref. IMP-09';
-  static const String vaultPiece2Title = 'Impérial Chronograph';
+  static const String vaultPiece2Title = 'Imperial Chronograph';
   static const String vaultPiece2Desc =
       'Column-wheel monopusher, 950 platinum and…';
   static const String vaultPiece2Price = '96 500 €';
@@ -221,7 +221,7 @@ class AppStrings {
       'Instant hardware enclave validation for pre-\napproved patron devices.';
   static const String conciergeEncryptionNote =
       'CONCIERGE VERIFICATION: 256-BIT ENCRYPTED\nHOROLOGICAL LEDGER';
-  static const String atelierLocations = 'GENÈVE • PARIS • TOKYO • NEW YORK';
+  static const String atelierLocations = 'GENEVA • PARIS • TOKYO • NEW YORK';
 
   // Salon Membership Application Screen (Create Account)
   static const String createAccountScreenTitle = 'CREATE ACCOUNT';
@@ -308,7 +308,7 @@ class AppStrings {
   static const String p1SpecsSummary = 'Calibre 2755 QP · 68h Reserve';
   static const String p1Status = 'IN SALON';
   static const String p1Category = 'EXCEPTIONAL WATCHMAKING';
-  static const String p1Title = 'Céleste Skeleton Tourbillon';
+  static const String p1Title = 'Celestial Skeleton Tourbillon';
   static const String p1PriceLabel = 'ACQUISITION';
   static const String p1Price = '\$184,000';
   static const String p1Description =
@@ -327,7 +327,7 @@ class AppStrings {
   static const String p2SpecsSummary = 'Midnight Blue High-Fired Enamel Dial';
   static const String p2Status = 'MADE TO ORDER';
   static const String p2Category = 'FINE WATCHMAKING';
-  static const String p2Title = 'Souverain Platinum Chronograph';
+  static const String p2Title = 'Sovereign Platinum Chronograph';
   static const String p2PriceLabel = 'ESTIMATE';
   static const String p2Price = '\$245,000';
   static const String p2Description =
@@ -346,7 +346,7 @@ class AppStrings {
   static const String p3SpecsSummary = '18K White Gold & D-IF Diamonds';
   static const String p3Status = 'IN PRIVATE VAULT';
   static const String p3Category = 'HIGH JEWELRY';
-  static const String p3Title = 'Impériale Emerald Cuff';
+  static const String p3Title = 'Imperial Emerald Cuff';
   static const String p3PriceLabel = 'ACQUISITION';
   static const String p3Price = '\$310,000';
   static const String p3Description =
@@ -372,4 +372,490 @@ class AppStrings {
   static const String navFavorites = 'FAVORITES';
   static const String navProfile = 'PROFILE';
   static const String navBagCount = '2';
+
+  // ── Admin: Add Product Screen ────────────────────────────────
+  static const String addProductSuccess = 'Product Added Successfully!';
+  static const String saving = 'SAVING...';
+  static const String saveToSovereignRegister = 'SAVE TO SOVEREIGN REGISTER';
+  static const String cancelReturnToInventory =
+      'Cancel and return to inventory';
+  static const String defaultProductArabicName = 'Test Timepiece';
+  static const String defaultProductArabicDescription = 'Test Description';
+  static const String defaultProductName = 'Test Watch';
+  static const String defaultProductDescription = 'Test Description';
+
+  // Add Product: AppBar & Title
+  static const String workshopRegister = 'WORKSHOP\nREGISTER';
+  static const String calibreInspectionDossier = 'Calibre Inspection Dossier';
+  static const String roleWorkshopManager =
+      'ROLE: WORKSHOP MANAGER • VENDÔME';
+  static const String confidentialProtocol = 'CONFIDENTIAL PROTOCOL';
+  static const String registerNewHorologicalWork =
+      'Register New\nHorological Work';
+  static const String sovereignAcquisitionInventory =
+      'SOVEREIGN ACQUISITION INVENTORY';
+
+  // Add Product: Identity Section
+  static const String pieceIdentityOrigin = 'PIECE IDENTITY & ORIGIN';
+  static const String pieceName = 'PIECE NAME';
+  static const String pieceNamePlaceholder = 'Royal Mysterious Tourbillon';
+  static const String description = 'DESCRIPTION';
+  static const String descriptionPlaceholder =
+      'Enter product description...';
+  static const String workshopReferenceSku = 'WORKSHOP REFERENCE (SKU)';
+  static const String sealed = 'Sealed';
+  static const String skuPlaceholder = '#TS-990-PT';
+  static const String watchmakingCategory = 'WATCHMAKING CATEGORY';
+  static const String fineWatchmaking = 'Fine Watchmaking';
+
+  // ── Admin: Edit Product Screen ───────────────────────────────
+  static const String fineWatchmakingProtocol = 'FINE WATCHMAKING PROTOCOL';
+  static const String protocolChangesValidated =
+      '✓ Changes validated by the workshop protocol';
+  static const String cryptographicTimestamp =
+      'Cryptographic timestamp: 18 Feb 2025 • 14:32 CET';
+  static const String fineCraftFinishes = 'FINE CRAFT FINISHES';
+  static const String craftFinishesValue =
+      'Mirror-polished bevels, hand-applied\nGeneva stripes';
+  static const String certificationsHallmarks = 'CERTIFICATIONS & HALLMARKS';
+  static const String certificationsValue = 'Geneva Seal & COSC Certificate';
+  static const String powerReserve = 'POWER RESERVE';
+  static const String powerReserveValue = '72 Hours';
+  static const String calibreFrequency = 'CALIBRE FREQUENCY';
+  static const String calibreFrequencyValue = '21 600 vph';
+
+  // ── Admin: Delete Product Screen ─────────────────────────────
+  static const String productDeletedSuccess = 'Product deleted successfully';
+  static const String bespokeCommissionReview = 'Bespoke Commission Review';
+  static const String accreditationGeneralManagement =
+      'ACCREDITATION LEVEL: GENERAL MANAGEMENT';
+  static const String confirmRemovalTitle = 'Confirm Removal of the\nPiece?';
+  static const String confirmRemovalSubtitle =
+      'This action will permanently remove this\nmasterpiece from the catalogue and revoke its\npublic allocation at the Vendôme salon.';
+  static const String irrevocableProtocol =
+      'WORKSHOP DECISION • IRREVOCABLE PROTOCOL';
+  static const String removePermanently = 'REMOVE PERMANENTLY FROM REGISTER';
+  static const String keepPieceInInventory = 'KEEP PIECE IN INVENTORY';
+
+  // ── Auth: Sign In, Register, OTP & Recovery ─────────────────
+  static const String enterEmailAndPassword =
+      'Please enter your email and password.';
+  static const String biometricsVerifiedWelcome =
+      'Vault Biometrics Verified. Welcome, Patron.';
+  static const String fillAllRequiredFields =
+      'Please fill in all required fields.';
+  static const String enterValidEmailAddress =
+      'Please enter a valid email address.';
+  static const String passwordRulesPrompt =
+      'Password must be at least 8 characters and include an uppercase letter, a digit and a special symbol.';
+  static const String accountVerifiedWelcome =
+      'Account verified. Welcome to Aura Maison.';
+  static const String securityCodeConfirmed =
+      'Security code confirmed. Proceeding to set new seal...';
+  static const String otpVerificationTitle = 'Otp Verification';
+  static const String conciergeProtocol = 'CONCIERGE PROTOCOL';
+  static const String privateSecurityCode = 'Private Security Code';
+  static const String otpSentSubtitle =
+      'An exclusive six-digit confirmation\ncode has been sent to';
+  static const String expiresInPrefix = 'Expires in 00:';
+  static const String issueNewCode = 'ISSUE A NEW CODE';
+  static const String authenticating = 'AUTHENTICATING...';
+  static const String verifyAuraAccess = 'VERIFY AURA ACCESS';
+  static const String changeAuthentication = 'CHANGE AUTHENTICATION';
+  static const String assignedWorkspace = 'ASSIGNED WORKSPACE';
+  static const String assignedWorkspaceValue =
+      'Paris Fine Watchmaking Salon';
+  static const String deliveryChannel = 'DELIVERY CHANNEL';
+  static const String deliveryChannelValue = 'Secure Messaging Relay';
+  static const String batchId = 'BATCH ID';
+  static const String batchIdValue = 'W.R. - 0021-CH';
+  static const String enterMemberEmailPrompt =
+      'Please enter your member email or patron vault ID.';
+  static const String enterOtp = 'ENTER OTP';
+  static const String dispatching = 'DISPATCHING...';
+  static const String transmitRecoveryKey = 'TRANSMIT RECOVERY KEY';
+  static const String accountCreatedSuccess = 'Account created successfully!';
+  static const String enterAll6DigitsSecurityCode =
+      'Please enter all 6 digits of the security code.';
+
+  // ── Auth: Forgot Passcode Screen ─────────────────────────────
+  static const String forgotPassword = 'Forgot Password';
+  static const String highSecurityProtocol = 'HIGH-SECURITY PROTOCOL';
+  static const String privateSealRecovery = 'Private Seal Recovery';
+  static const String privateSealRecoverySubtitle =
+      'Enter your member email address\nor vault ID to reset your access key.';
+  static const String escrowDuration = 'ESCROW DURATION';
+  static const String escrowDurationDesc =
+      'A single-use link valid for 15 minutes will be sent via an encrypted protocol.';
+  static const String privateEmailOrPatronId = 'PRIVATE EMAIL OR PATRON ID';
+  static const String vault4096Bit = 'Vault 4096-bit';
+  static const String patronEmailPlaceholder = 'patron@vendome-sanctuary.ch';
+  static const String sendRecoveryLink = 'SEND RECOVERY LINK';
+  static const String returnToSalonSignIn = 'Return to Salon Sign-In';
+  static const String secureRecoveryDispatchSent =
+      'Secure recovery dispatch sent to ';
+
+  // ── Auth: Reset Password Screen ──────────────────────────────
+  static const String resetPasswordTitle = 'Reset Password';
+  static const String fineWatchmakingEncryption =
+      'FINE WATCHMAKING ENCRYPTION';
+  static const String setANewSeal = 'Set a New Seal';
+  static const String setANewSealSubtitle =
+      'Your new passphrase must meet\nthe security criteria of Fine Watchmaking.';
+  static const String newPassphrase = 'NEW PASSPHRASE';
+  static const String optimalSecurity = 'Optimal Security';
+  static const String cipherIncomplete = 'Cipher Incomplete';
+  static const String confirmPassphrase = 'CONFIRM PASSPHRASE';
+  static const String exactMatch = 'EXACT MATCH';
+  static const String updatePrivateSeal = 'UPDATE PRIVATE SEAL';
+  static const String needDedicatedAdvisor = 'Need a dedicated advisor?';
+  static const String connectingConciergeLiaison =
+      'Connecting to assigned Vendôme Salon concierge liaison...';
+  static const String privateSealUpdated = 'Private Seal Updated';
+  static const String privateSealUpdatedDesc =
+      'Your new cryptographic cipher has been synchronised across all authorized salon nodes.';
+  static const String returnToSalonSignInUpper = 'RETURN TO SALON SIGN-IN';
+  static const String passphraseCriteriaRequirement =
+      'Your new passphrase must satisfy all four Fine Watchmaking security criteria.';
+  static const String passphrasesMustMatch =
+      'Both passphrases must match exactly.';
+
+  // ── Auth: Change Password Screen ─────────────────────────────
+  static const String changePasswordTitle = 'CHANGE PASSWORD';
+  static const String passwordChangedSuccessfully =
+      'Password changed successfully';
+  static const String secureYourAccount = 'Secure Your Account';
+  static const String enterCurrentAndNewPassword =
+      'Enter your current password and choose a new one.';
+  static const String currentPassword = 'Current Password';
+  static const String newPassword = 'New Password';
+  static const String confirmNewPassword = 'Confirm New Password';
+  static const String pleaseEnterNewPassword = 'Please enter a new password';
+  static const String passwordsDoNotMatch = 'Passwords do not match';
+  static const String updatePasswordUpper = 'UPDATE PASSWORD';
+
+  // ── Home Screen ──────────────────────────────────────────────
+  static const String homeHeaderTitle = 'Home';
+  static const String featuredMasterpieces = 'Featured Masterpieces';
+  static const String discoverTheHouse = 'Discover the House';
+  static const String exploreAction = 'EXPLORE';
+  static const String exclusiveMaisonOffer = '● EXCLUSIVE MAISON OFFER';
+  static const String specialPromotion = 'SPECIAL PROMOTION';
+  static const String curation = 'CURATION';
+  static const String limitedPrivilege = 'LIMITED PRIVILEGE';
+  static const String exploreOffer = 'EXPLORE\nOFFER';
+  static const String curatingOffers = 'CURATING OFFERS...';
+  static const String failedToLoadOffers = 'Failed to load offers';
+  static const String retry = 'RETRY';
+  static const String limitedEdition25Pieces = '● LIMITED EDITION • 25 PIECES';
+  static const String fineWatchmakingNo07 = 'FINE WATCHMAKING NO. 07';
+  static const String imperialChronograph = 'Imperial\nChronograph';
+  static const String inHouseCalibreDesc =
+      'In-house hand-wound skeleton calibre\nwith silicon escapement and case in...';
+  static const String workshopPrice = 'WORKSHOP PRICE';
+  static const String acquireAllocation = 'ACQUIRE\nALLOCATION';
+  static const String privateInvitation = 'PRIVATE INVITATION';
+  static const String vipSalon = 'VIP SALON';
+  static const String genevePreviewTitle = 'Geneva Watches & Wonders Preview';
+  static const String genevePreviewSubtitle =
+      'Private access before public opening. Book your session with our master...';
+  static const String requestAccess = 'REQUEST ACCESS';
+  static const String placesLeft14 = '14 Places left';
+  static const String curatedDisciplines = 'Curated Disciplines';
+  static const String archivesAction = 'ARCHIVES';
+  static const String unableToLoadMasterpieces = 'Unable to load masterpieces';
+  static const String specialOrder = 'SPECIAL ORDER';
+  static const String celesteOrreryTitle = 'Celeste Orrery\nPerpetual Motion';
+  static const String celesteOrrerySubtitle =
+      'Automatic celestial artistry in motion.';
+  static const String viewTheStudy = 'VIEW THE STUDY';
+  static const String privateConcierge = 'PRIVATE CONCIERGE';
+  static const String dedicatedAdvisor = 'Your dedicated advisor';
+  static const String personalAssistanceDesc =
+      'Personal assistance for your collection.';
+  static const String directLine = 'DIRECT LINE';
+
+  // ── Products Screen ──────────────────────────────────────────
+  static const String theCollection = 'THE COLLECTION';
+  static const String discoverTheCollection = 'Discover the Collection';
+  static const String exceptionalPiecesChosen =
+      'Exceptional pieces, chosen for you.';
+  static const String searchTheCollection = 'Search the collection';
+  static const String masterpieces = 'Masterpieces';
+  static const String noPiecesFound = 'No pieces found';
+  static const String categoryAll = 'All';
+  static const String categoryWatches = 'Watches';
+  static const String categoryJewelry = 'Jewelry';
+  static const String categoryLeather = 'Leather';
+  static const String categoryEyewear = 'Eyewear';
+
+  // ── Product Details Screen ───────────────────────────────────
+  static const String productDetailsTitle = 'Product Details';
+  static const String chooseYourFinish = 'CHOOSE YOUR FINISH';
+  static const String quantity = 'QUANTITY';
+  static const String selectNumberOfPieces = 'Select the number of pieces';
+  static const String availableNow = 'Available Now';
+  static const String vatIncludedCertified =
+      'VAT Included • Certified Timepiece';
+  static const String inquireAdvisor = 'INQUIRE ADVISOR';
+  static const String availableViaEncryptedCall =
+      'Available via encrypted call';
+  static const String secureLine = 'SECURE LINE';
+  static const String theArtOfOpenworking = 'The Art of Openworking';
+  static const String inHouseCalibre8801 = 'IN-HOUSE CALIBRE 8801';
+  static const String complimentaryArmoredTransport =
+      'COMPLIMENTARY\nARMORED TRANSPORT';
+  static const String personalHandoverEscort =
+      'Personal handover under diplomatic escort';
+  static const String dedicatedPrivateCurator = 'DEDICATED PRIVATE CURATOR';
+  static const String vendomeSalonClientRelations =
+      'Vendôme Salon • Client Relations';
+  static const String clientReviews = 'CLIENT REVIEWS';
+  static const String writeAReview = 'WRITE A REVIEW';
+  static const String writeAReviewTitle = 'Write a Review';
+  static const String yourRating = 'YOUR RATING';
+  static const String submitReview = 'SUBMIT REVIEW';
+  static const String reviewing = 'REVIEWING';
+  static const String reviewSubmittedToast =
+      'Review UI submitted. API integration will be added later.';
+
+  // ── Cart Screen ──────────────────────────────────────────────
+  static const String shoppingBag = 'Shopping Bag';
+  static const String itemsCount3 = '3 items';
+  static const String haveACoupon = 'Have a coupon ?';
+  static const String couponPlaceholder = 'Save 10';
+  static const String applyCoupon = 'Apply';
+  static const String royalTourbillonSquelette = 'Royal Tourbillon Skeleton';
+  static const String cartSummary = 'Cart summary';
+  static const String subtotal = 'Subtotal';
+  static const String couponDiscount = 'Coupon SAVE10';
+  static const String deliveryFee = 'Delivery';
+  static const String total = 'Total';
+  static const String checkout = 'Checkout';
+
+  // ── Checkout Screen ──────────────────────────────────────────
+  static const String fineWatchmakingEscrowProtocol =
+      'FINE WATCHMAKING ESCROW PROTOCOL';
+  static const String deliveryAddress = 'Delivery Address';
+  static const String change = 'Change';
+  static const String paymentMethod = 'Payment Method';
+  static const String instantConfirmation = 'Instant Confirmation';
+  static const String payOnline = 'Pay Online';
+  static const String payOnlineSubtitle =
+      'Credit/Debit Card, Apple Pay & Digital Wallets';
+  static const String cashOnDelivery = 'Cash on delivery';
+  static const String cashOnDeliverySubtitle =
+      'Pay safely upon physical delivery inspection';
+  static const String luxuryVoucherDiscount =
+      '-EGP 208 luxury voucher discount';
+  static const String placeOrder = 'Place order (EGP 1,922) → ';
+  static const String checkoutSecurityGuarantee =
+      'Encrypted 256-bit checkout · 30-day luxury guarantee';
+
+  // ── Order Screens ────────────────────────────────────────────
+  static const String continueShopping = 'Continue shopping → ';
+  static const String viewOrderHistory = '🧾 View order History ';
+  static const String orderHistory = 'Order History';
+  static const String orderHistorySubtitle =
+      'Review, track parcel journeys, or request boutique concierge assistance.';
+  static const String orderStatusProcessing = 'Processing';
+  static const String orderStatusShipped = 'Shipped';
+  static const String orderStatusDelivered = 'Delivered';
+  static const String confirmedDispatchedSoon = 'CONFIRMED & DISPATCHED SOON';
+  static const String orderPlaced = 'Order placed!';
+  static const String orderPlacedSubtitle =
+      'Thank you for shopping with Aurea. Your\nbespoke parcel will arrive in 3–5 business days.';
+  static const String priorityCourier = '  Priority Courier';
+  static const String standardInsured = 'Standard Insured';
+  static const String stepPayment = 'Payment';
+  static const String stepPackaging = 'Packaging';
+  static const String stepOutForDelivery = 'Out for delivery';
+  static const String summaryDetails = 'Summary details';
+  static const String directDispatch = 'Direct dispatch';
+  static const String orderNumber = 'Order number';
+  static const String itemsCurated = 'Items (3 curated)';
+  static const String estimatedDelivery = 'Estimated Delivery';
+  static const String inclDeliveryAndDiscount =
+      'incl. EGP 30 delivery & EGP 200 discount';
+  static const String orderStatusProcessingBullet = '• Processing';
+  static const String orderStatusShippedEmoji = '🚚 Shipped';
+  static const String orderStatusDeliveredEmoji = '🎉 Delivered';
+  static const String whiteGloveGuarantee = 'White-Glove Guarantee';
+  static const String whiteGloveGuaranteeDesc =
+      'Complimentary resizing & vault returns within 30days.';
+  static const String viewDetails = 'View Details → ';
+
+  // ── Addresses Screens ────────────────────────────────────────
+  static const String editAddress = 'Edit Address';
+  static const String addNewAddress = 'Add New Address';
+  static const String addressSavedSuccessfully =
+      'Address saved successfully';
+  static const String addressUpdatedSuccessfully =
+      'Address updated successfully';
+  static const String stateLabel = 'State';
+  static const String cityLabel = 'City';
+  static const String streetLabel = 'Street';
+  static const String apartmentLabel = 'Apartment';
+  static const String phoneLabel = 'Phone Number';
+  static const String notesLabel = 'Notes';
+  static const String updateAddress = 'Update Address';
+  static const String saveAddress = 'Save Address';
+  static const String deleteAddress = 'Delete Address';
+  static const String deleteAddressConfirmation =
+      'Are you sure you want to delete this address?';
+  static const String cancel = 'Cancel';
+  static const String delete = 'Delete';
+  static const String tryAgain = 'Try Again';
+  static const String noAddressesYet =
+      'You haven’t added any addresses yet';
+  static const String addAddress = 'Add Address';
+  static const String myAddresses = 'My Addresses';
+  static const String editAddressTooltip = 'Edit address';
+  static const String deleteAddressTooltip = 'Delete address';
+  static const String addAddressTooltip = 'Add address';
+
+  // ── Profile Screens ──────────────────────────────────────────
+  static const String patronProfile = 'Patron Profile';
+  static const String workshopLedgerSecurity =
+      'Workshop Ledger & Security Services';
+  static const String vaultAcquisitions = 'Vault Acquisitions';
+  static const String vaultAcquisitionsSubtitle =
+      '3 Pieces Registered • Blockchain Provenance';
+  static const String privateOrdersTransit = 'Private Orders & Live Transit';
+  static const String privateOrdersTransitSubtitle =
+      '1 Active in Transit from Geneva Salon';
+  static const String manageSavedAddresses =
+      'Manage your saved delivery addresses';
+  static const String bespokeCommissions = 'Bespoke Commissions';
+  static const String bespokeCommissionsSubtitle =
+      '1 Custom Tourbillon Pending CAD Approval';
+  static const String savedVaultWishlist = 'Saved Vault Wishlist';
+  static const String savedVaultWishlistSubtitle =
+      '5 Masterpieces Archival for Viewing';
+  static const String securityHardwareKey = 'Security & Hardware Key';
+  static const String securityHardwareKeySubtitle =
+      'Hardware Enclave, FaceID, Dual-Vault Auth';
+  static const String curatedPreferences = 'Curated Preferences';
+  static const String curatedPreferencesSubtitle =
+      'USD (\$) | French / English • Midnight';
+  static const String salonCrypt = 'SALON CRYPT';
+  static const String editProfile = 'EDIT PROFILE';
+  static const String editProfileTitle = 'Edit Profile';
+  static const String adminAccess = 'ADMIN ACCESS';
+  static const String workshopSettings = 'Workshop Settings';
+  static const String honorificTitle = 'HONORIFIC TITLE / SALUTATION';
+  static const String fullNameUpper = 'FULL NAME';
+  static const String secureEmailAddress = 'SECURE EMAIL ADDRESS';
+  static const String secureDirectLine = 'SECURE DIRECT LINE';
+  static const String billingCurrency = 'BILLING & PAYMENT CURRENCY';
+  static const String communicationLanguage =
+      'COMMUNICATION & CORRESPONDENCE LANGUAGE';
+  static const String saveChanges = 'SAVE CHANGES';
+  static const String cancelChanges = 'CANCEL CHANGES';
+  static const String privateClientRegister = 'Private Client Register';
+  static const String biometricRegnalSubtitle =
+      'Biometric authentication and regnal titles recorded under watchmaking seal';
+  static const String commissionsUpper = 'COMMISSIONS';
+  static const String vaultHoldingsUpper = 'VAULT HOLDINGS';
+  static const String statusUpper = 'STATUS';
+  static const String transitInRoute = 'TRANSIT IN ROUTE';
+  static const String heuresCelestes = 'Celestial Hours Tourbillon No. 04';
+  static const String assignedPrivateAdvisor = 'ASSIGNED PRIVATE ADVISOR';
+  static const String auraMaisonWorkshop = 'AURA MAISON WORKSHOP';
+  static const String distinguishedMember =
+      'Distinguished Member No. 048-AURA';
+
+  // ── Settings Screens ─────────────────────────────────────────
+  static const String cryptographicEnclave = 'CRYPTOGRAPHIC ENCLAVE';
+  static const String salonProtocolNumber = 'Salon Protocol No. 8492-V';
+  static const String accreditedDevice =
+      'Accredited device • Place Vendôme, Paris';
+  static const String sectionAppearanceDisplay = '01 / APPEARANCE & DISPLAY';
+  static const String labelHighPrecision = 'High Precision';
+  static const String themeSelection = 'Theme Selection';
+  static const String salonColorPalette = 'Salon color palette';
+  static const String displayCurrency = 'Display Currency';
+  static const String assetPricesValuations = 'Asset prices and valuations';
+  static const String workshopLanguage = 'Workshop Language';
+  static const String certificateLeaseDrafting =
+      'Certificate and lease drafting';
+  static const String sectionSecurityBiometrics =
+      '02 / CRYPTOGRAPHIC SECURITY & BIOMETRICS';
+  static const String labelAes256Encrypted = 'AES-256 Encrypted';
+  static const String biometricAuthTitle =
+      'Biometric Authentication (FaceID / TouchID)';
+  static const String biometricAuthSubtitle =
+      'Required for signing escrow agreements and mission orders';
+  static const String salonPinTitle = '6-Digit Salon PIN';
+  static const String privateKeySeal = 'Private Key Seal';
+  static const String changePrivatePassword = 'Change Private Password';
+  static const String sectionNotifications =
+      '03 / NOTIFICATIONS & DISCREET PROTOCOLS';
+  static const String labelEncryptedChannels = 'Encrypted Channels';
+  static const String realTimeConvoyAlerts = 'Real-Time Convoy Alerts';
+  static const String rareAllocationPreviews = 'Rare Allocation Previews';
+  static const String privateConciergeChannel = 'Private Concierge Channel';
+  static const String sectionLegalPrivacy = '04 / LEGAL & PRIVACY';
+  static const String labelAudited = 'Audited';
+  static const String termsConditionsSale = 'Terms and Conditions of Sale';
+  static const String privacyPolicy = 'Privacy Policy';
+  static const String notarizedRegister = 'Place Vendôme Notarized Register';
+  static const String endSalonSession = 'END SALON SESSION';
+  static const String endToEndEncryptionFooter =
+      'End-to-end encryption • AURA MAISON OS v4.12';
+
+  // ── Splash & Salon Screens ───────────────────────────────────
+  static const String encryptedEnclaveVendome =
+      'ENCRYPTED ENCLAVE • PLACE VENDÔME';
+  static const String memberAuthentication = 'Member Authentication';
+  static const String certifiedUpper = 'CERTIFIED';
+  static const String fineWatchmakingHighCraft =
+      'FINE WATCHMAKING • HIGH CRAFT';
+  static const String placeVendomeGeneve = 'Place Vendôme • Geneva';
+  static const String privatePatronExperience =
+      'Private Patron Experience • Encrypted Enclave';
+  static const String calibre8801 = 'CALIBRE 8801';
+  static const String vendomeCelestial = 'Vendôme Celestial';
+  static const String masterCrafts = 'MASTER CRAFTS';
+  static const String workshopCrafts = 'Workshop Crafts';
+  static const String touchToEnterSalon = 'TOUCH TO ENTER SALON';
+  static const String biometricPatronKey = 'Biometric Patron Key';
+  static const String verifiedUpper = 'VERIFIED';
+  static const String workshopVaultLink = 'WORKSHOP VAULT LINK';
+  static const String cipherSalonEdition = 'CIPHER: V2.4.0 • SALON EDITION';
+  static const String nodeParis01 = 'NODE PARIS 01';
+
+  // ── Favorites Screen ─────────────────────────────────────────
+  static const String removedFromFavorites = 'Removed from your favorites';
+  static const String productMovedToBag = 'Product moved to bag';
+  static const String allProductsTransferred = 'All products transferred';
+  static const String manageFavorites = 'Manage favorites';
+  static const String exploreWorkshopCollections =
+      'Explore workshop collections';
+  static const String viewRareAllocations = 'View rare allocations';
+  static const String privateVisitRequest = 'Private visit request';
+
+  // ── Support & Concierge Screens ──────────────────────────────
+  static const String privateConciergeSupport = 'Private Concierge Support';
+  static const String privateSalonNetwork =
+      'PRIVATE SALON NETWORK • PARIS & GENEVA';
+  static const String watchmakingSanctuaries = 'The Watchmaking Sanctuaries';
+  static const String watchmakingSanctuariesSubtitle =
+      'Access strictly reserved for collectors and accredited representatives. Absolute discretion and a high-security protocol.';
+  static const String openConciergeForm = 'OPEN CONCIERGE FORM';
+  static const String schedulePrivateSalonVisit =
+      'SCHEDULE A PRIVATE SALON VISIT';
+  static const String auditedVendomeOffice =
+      'AUDITED VERSION 2025 • VENDÔME NOTARY’S OFFICE';
+  static const String privacySealDataProtection =
+      'Privacy Seal &\nPatron Data Protection';
+  static const String aboutUs = 'About Us';
+  static const String houseFounded1912 = 'HOUSE FOUNDED IN 1912';
+
+  // ── FAQ Screen ───────────────────────────────────────────────
+  static const String protocolRegister = 'PROTOCOL REGISTER';
+  static const String geneveParisLondres = 'Geneva • Paris • London';
+  static const String theRegister = 'THE REGISTER';
+  static const String articlesUpper = 'ARTICLES';
+  static const String noProtocolsFound = 'No protocols found.';
 }

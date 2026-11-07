@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:aura_maison_e_commerce/features/settings/presentation/widgets/settings_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: const CustomAppBar(
-        title: 'Workshop Settings',
+        title: AppStrings.workshopSettings,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
@@ -21,28 +22,28 @@ class SettingsScreen extends StatelessWidget {
 
           // Section 01
           const SectionHeaderWithLabel(
-            title: '01 / APPEARANCE & DISPLAY',
-            label: 'High Precision',
+            title: AppStrings.sectionAppearanceDisplay,
+            label: AppStrings.labelHighPrecision,
           ),
           const SizedBox(height: 8),
           const SettingsCustomTile(
             icon: Icons.nightlight_outlined,
-            title: 'Theme Selection',
-            subtitle: 'Salon color palette',
+            title: AppStrings.themeSelection,
+            subtitle: AppStrings.salonColorPalette,
             trailing: Text('Nocturnal Dark (Dark)', style: TextStyle(color: AppColors.primaryGold, fontSize: 12)),
             hasArrow: true,
           ),
           const SettingsCustomTile(
             icon: Icons.account_balance_wallet_outlined,
-            title: 'Display Currency',
-            subtitle: 'Asset prices and valuations',
+            title: AppStrings.displayCurrency,
+            subtitle: AppStrings.assetPricesValuations,
             trailing: Text('EUR (€) — Euro', style: TextStyle(color: AppColors.textWhite, fontSize: 12)),
             hasArrow: true,
           ),
           const SettingsCustomTile(
             icon: Icons.translate,
-            title: 'Workshop Language',
-            subtitle: 'Certificate and lease drafting',
+            title: AppStrings.workshopLanguage,
+            subtitle: AppStrings.certificateLeaseDrafting,
             trailing: Text('French (Paris / Gen...', style: TextStyle(color: AppColors.textMuted, fontSize: 11)),
             hasArrow: true,
           ),
@@ -51,32 +52,32 @@ class SettingsScreen extends StatelessWidget {
 
           // Section 02
           const SectionHeaderWithLabel(
-            title: '02 / CRYPTOGRAPHIC SECURITY & BIOMETRICS',
-            label: 'AES-256 Encrypted',
+            title: AppStrings.sectionSecurityBiometrics,
+            label: AppStrings.labelAes256Encrypted,
           ),
           const SizedBox(height: 8),
           SettingsSwitchTile(
             icon: Icons.fingerprint,
-            title: 'Biometric Authentication (FaceID / TouchID)',
-            subtitle: 'Required for signing escrow agreements and mission orders',
+            title: AppStrings.biometricAuthTitle,
+            subtitle: AppStrings.biometricAuthSubtitle,
             value: true,
             onChanged: (val) {},
           ),
           const SettingsActionTile(
             icon: Icons.pin_outlined,
-            title: '6-Digit Salon PIN',
+            title: AppStrings.salonPinTitle,
             subtitle: 'Configured ••••••',
             actionText: 'EDIT',
           ),
           const SettingsActionTile(
             icon: Icons.key_outlined,
-            title: 'Private Key Seal',
+            title: AppStrings.privateKeySeal,
             subtitle: 'HSM Hardware Encryption',
             actionText: 'ACTIVE — ENCLAVE',
           ),
           const SettingsCustomTile(
             icon: Icons.lock_reset,
-            title: 'Change Private Password',
+            title: AppStrings.changePrivatePassword,
             subtitle: 'Renewed 42 days ago',
             hasArrow: true,
           ),
@@ -85,27 +86,27 @@ class SettingsScreen extends StatelessWidget {
 
           // Section 03
           const SectionHeaderWithLabel(
-            title: '03 / NOTIFICATIONS & DISCREET PROTOCOLS',
-            label: 'Encrypted Channels',
+            title: AppStrings.sectionNotifications,
+            label: AppStrings.labelEncryptedChannels,
           ),
           const SizedBox(height: 8),
           SettingsSwitchTile(
             icon: Icons.local_shipping_outlined,
-            title: 'Real-Time Convoy Alerts',
+            title: AppStrings.realTimeConvoyAlerts,
             subtitle: 'Armored GPS tracking & private couriers',
             value: true,
             onChanged: (val) {},
           ),
           SettingsSwitchTile(
             icon: Icons.diamond_outlined,
-            title: 'Rare Allocation Previews',
+            title: AppStrings.rareAllocationPreviews,
             subtitle: 'Unique pieces and reserved complications',
             value: true,
             onChanged: (val) {},
           ),
           SettingsSwitchTile(
             icon: Icons.chat_bubble_outline,
-            title: 'Private Concierge Channel',
+            title: AppStrings.privateConciergeChannel,
             subtitle: 'Secure SMS Gateway & Signal',
             value: false,
             onChanged: (val) {},
@@ -115,21 +116,21 @@ class SettingsScreen extends StatelessWidget {
 
           // Section 04
           const SectionHeaderWithLabel(
-            title: '04 / LEGAL & PRIVACY',
-            label: 'Audited',
+            title: AppStrings.sectionLegalPrivacy,
+            label: AppStrings.labelAudited,
           ),
           const SizedBox(height: 8),
           const SettingsNavigationTile(
             icon: Icons.description_outlined,
-            title: 'Terms and Conditions of Sale',
+            title: AppStrings.termsConditionsSale,
           ),
           const SettingsNavigationTile(
             icon: Icons.shield_outlined,
-            title: 'Privacy Policy',
+            title: AppStrings.privacyPolicy,
           ),
           const SettingsNavigationTile(
             icon: Icons.account_balance_outlined,
-            title: 'Place Vendôme Notarized Register',
+            title: AppStrings.notarizedRegister,
           ),
 
           const SizedBox(height: 24),
@@ -147,7 +148,7 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () {},
               icon: const Icon(Icons.power_settings_new, color: Colors.red, size: 16),
               label: const Text(
-                'END SALON SESSION',
+                AppStrings.endSalonSession,
                 style: TextStyle(color: Colors.red, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2),
               ),
             ),
@@ -155,7 +156,7 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(height: 16),
           const Center(
             child: Text(
-              'End-to-end encryption • AURA MAISON OS v4.12',
+              AppStrings.endToEndEncryptionFooter,
               style: TextStyle(color: AppColors.textMuted, fontSize: 10),
             ),
           ),

@@ -1,4 +1,5 @@
 
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -84,7 +85,7 @@ class SalonCentralSanctuary extends StatelessWidget {
                       Icon(Icons.verified_outlined, size: 10, color: AppColors.gold),
                       SizedBox(width: 4),
                       Text(
-                        'CERTIFIED',
+                        AppStrings.certifiedUpper,
                         style: TextStyle(
                           color: AppColors.gold,
                           fontSize: 9,
@@ -100,7 +101,7 @@ class SalonCentralSanctuary extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           const Text(
-            'FINE WATCHMAKING • HIGH CRAFT',
+            AppStrings.fineWatchmakingHighCraft,
             style: TextStyle(
               color: AppColors.gold,
               fontSize: 10.5,
@@ -128,7 +129,7 @@ class SalonCentralSanctuary extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
-                  'Place Vendôme • Genève',
+                  AppStrings.placeVendomeGeneve,
                   style: TextStyle(
                     color: AppColors.ivoryMuted,
                     fontSize: 12,
@@ -146,7 +147,7 @@ class SalonCentralSanctuary extends StatelessWidget {
               Icon(Icons.shield_outlined, size: 12, color: AppColors.luxuryMuted),
               SizedBox(width: 6),
               Text(
-                'Private Patron Experience • Encrypted Enclave',
+                AppStrings.privatePatronExperience,
                 style: TextStyle(
                   color: AppColors.luxuryMuted,
                   fontSize: 11.5,
@@ -160,16 +161,16 @@ class SalonCentralSanctuary extends StatelessWidget {
             children: [
               Expanded(
                 child: SalonVitrineCard(
-                  code: 'CALIBRE 8801',
-                  title: 'Vendôme Celestial',
+                  code: AppStrings.calibre8801,
+                  title: AppStrings.vendomeCelestial,
                   image: 'assets/images/vendome.png',
                 ),
               ),
               SizedBox(width: 12),
               Expanded(
                 child: SalonVitrineCard(
-                  code: 'MASTER CRAFTS',
-                  title: 'Workshop Crafts',
+                  code: AppStrings.masterCrafts,
+                  title: AppStrings.workshopCrafts,
                   image: 'assets/images/WorkShop.png',
                 ),
               ),

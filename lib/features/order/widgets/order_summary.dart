@@ -1,5 +1,5 @@
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,50 +23,54 @@ class OrderSummary extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(
-                  text: 'Summary details',
+                const CustomText(
+                  text: AppStrings.summaryDetails,
                   weight: FontWeight.w800,
                   size: 20,
                 ),
                 Container(
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: AppColors.tertiaryColor,
                   ),
-                  child: CustomText(
-                    text: 'Direct dispatch',
+                  child: const CustomText(
+                    text: AppStrings.directDispatch,
                     weight: FontWeight.w500,
                     size: 12,
                   ),
                 ),
               ],
             ),
-            Gap(8),
+            const Gap(8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(
-                  text: 'Order number',
+                const CustomText(
+                  text: AppStrings.orderNumber,
                   weight: FontWeight.w500,
                   size: 16,
                 ),
-                CustomText(
+                const CustomText(
                   text: '#AUR-20481',
                   weight: FontWeight.bold,
                   size: 18,
                 ),
               ],
             ),
-            Gap(8),
+            const Gap(8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(text: 'Payment', weight: FontWeight.w500, size: 16),
+                const CustomText(
+                  text: AppStrings.stepPayment,
+                  weight: FontWeight.w500,
+                  size: 16,
+                ),
                 Row(
                   children: [
                     SvgPicture.asset('assets/images/Container.svg'),
-                    CustomText(
+                    const CustomText(
                       text: ' Mastercard •••• 4291',
                       weight: FontWeight.w300,
                       size: 14,
@@ -75,19 +79,23 @@ class OrderSummary extends StatelessWidget {
                 ),
               ],
             ),
-            Gap(8),
+            const Gap(8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(
-                  text: 'Items (3 curated)',
+                const CustomText(
+                  text: AppStrings.itemsCurated,
                   weight: FontWeight.w500,
                   size: 16,
                 ),
-                CustomText(text: '3 pieces', weight: FontWeight.w300, size: 14),
+                const CustomText(
+                  text: '3 pieces',
+                  weight: FontWeight.w300,
+                  size: 14,
+                ),
               ],
             ),
-            Gap(3),
+            const Gap(3),
             Row(
               children: [
                 Image.asset('assets/images/Background_Shadow.png'),
@@ -95,16 +103,16 @@ class OrderSummary extends StatelessWidget {
                 Image.asset('assets/images/Background_Shadow.png'),
               ],
             ),
-            Gap(8),
+            const Gap(8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(
-                  text: 'Estimated Delivery',
+                const CustomText(
+                  text: AppStrings.estimatedDelivery,
                   weight: FontWeight.w500,
                   size: 16,
                 ),
-                CustomText(
+                const CustomText(
                   text: 'Oct 28 – Oct 30',
                   weight: FontWeight.w800,
                   size: 14,
@@ -112,20 +120,24 @@ class OrderSummary extends StatelessWidget {
               ],
             ),
             Divider(color: Colors.grey.shade300, thickness: .8),
-            Gap(10),
+            const Gap(10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(text: 'Total', weight: FontWeight.w800, size: 20),
-                CustomText(
+                const CustomText(
+                  text: AppStrings.total,
+                  weight: FontWeight.w800,
+                  size: 20,
+                ),
+                const CustomText(
                   text: 'EGP 1,922',
                   weight: FontWeight.w800,
                   size: 20,
                 ),
               ],
             ),
-            CustomText(
-              text: 'incl. EGP 30 delivery & EGP 200 discount',
+            const CustomText(
+              text: AppStrings.inclDeliveryAndDiscount,
               weight: FontWeight.w300,
               size: 12,
             ),

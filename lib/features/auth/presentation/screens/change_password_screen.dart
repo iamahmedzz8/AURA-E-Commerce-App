@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
@@ -42,7 +43,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             color: Color(0xFFC5A059),
           ),
           title: const Text(
-            'CHANGE PASSWORD',
+            AppStrings.changePasswordTitle,
             style: TextStyle(
               color: Color(0xFFC5A059),
               fontSize: 16,
@@ -56,7 +57,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             if (state is ChangePasswordSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Password changed successfully'),
+                  content: Text(AppStrings.passwordChangedSuccessfully),
                 ),
               );
               Navigator.pop(context);
@@ -84,7 +85,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                     const SizedBox(height: 20),
                     const Text(
-                      'Secure Your Account',
+                      AppStrings.secureYourAccount,
                       style: TextStyle(
                         color: Color(0xFFFBF9F5),
                         fontSize: 24,
@@ -93,7 +94,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Enter your current password and choose a new one.',
+                      AppStrings.enterCurrentAndNewPassword,
                       style: TextStyle(
                         color: Color(0xFF8A8F98),
                         fontSize: 14,
@@ -103,7 +104,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
                     _passwordField(
                       controller: _currentPasswordController,
-                      label: 'Current Password',
+                      label: AppStrings.currentPassword,
                       obscureText: _obscureCurrent,
                       onToggle: () {
                         setState(() {
@@ -115,7 +116,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
                     _passwordField(
                       controller: _newPasswordController,
-                      label: 'New Password',
+                      label: AppStrings.newPassword,
                       obscureText: _obscureNew,
                       onToggle: () {
                         setState(() {
@@ -124,10 +125,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter a new password';
+                          return AppStrings.pleaseEnterNewPassword;
                         }
                         if (value.length < 8) {
-                          return 'Password must be at least 8 characters';
+                          return AppStrings.passwordAtLeast8Char;
                         }
                         return null;
                       },
@@ -136,7 +137,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
                     _passwordField(
                       controller: _confirmPasswordController,
-                      label: 'Confirm New Password',
+                      label: AppStrings.confirmNewPassword,
                       obscureText: _obscureConfirm,
                       onToggle: () {
                         setState(() {
@@ -145,7 +146,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       },
                       validator: (value) {
                         if (value != _newPasswordController.text) {
-                          return 'Passwords do not match';
+                          return AppStrings.passwordsDoNotMatch;
                         }
                         return null;
                       },
@@ -184,7 +185,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           color: Color(0xFF080B10),
                         )
                             : const Text(
-                          'UPDATE PASSWORD',
+                          AppStrings.updatePasswordUpper,
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
                             letterSpacing: 1,

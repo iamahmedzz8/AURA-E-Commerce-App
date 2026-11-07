@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/theme/theme_cubit.dart';
 import 'package:aura_maison_e_commerce/features/home/presentation/cubit/home_cubit.dart';
 import 'package:aura_maison_e_commerce/features/products/products/presentation/screens/products_screen.dart';
@@ -230,7 +231,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                   ),
                   const Text(
-                    'AURA MAISON',
+                    AppStrings.brandTitleInline,
                     style: TextStyle(
                       fontFamily: 'Inter',
                       color: gold,
@@ -244,7 +245,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             ),
             const Center(
               child: Text(
-                'Product Details',
+                AppStrings.productDetailsTitle,
                 maxLines: 1,
                 style: TextStyle(
                   fontFamily: 'EB Garamond',
@@ -464,7 +465,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         Row(
           children: [
             const Text(
-              'IN-HOUSE CALIBRE 8801',
+              AppStrings.inHouseCalibre8801,
               style: TextStyle(
                 color: orange,
                 fontSize: 10,
@@ -480,7 +481,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             ),
             const SizedBox(width: 5),
             Text(
-              'Available Now',
+              AppStrings.availableNow,
               style: TextStyle(
                 color: muted,
                 fontSize: 10,
@@ -531,7 +532,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                 ),
                 Text(
-                  'VAT Included • Certified Timepiece',
+                  AppStrings.vatIncludedCertified,
                   style: TextStyle(
                     color: muted,
                     fontSize: 10,
@@ -576,7 +577,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             children: [
               Expanded(
                 child: Text(
-                  'CHOOSE YOUR FINISH',
+                  AppStrings.chooseYourFinish,
                   style: TextStyle(
                     color: muted,
                     fontSize: 10,
@@ -648,7 +649,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'QUANTITY',
+                      AppStrings.quantity,
                       style: TextStyle(
                         color: muted,
                         fontSize: 10,
@@ -658,7 +659,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Select the number of pieces',
+                      AppStrings.selectNumberOfPieces,
                       style: TextStyle(
                         color: muted,
                         fontSize: 10,
@@ -866,7 +867,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               const SizedBox(width: 8),
               Text(
-                'The Art of Openworking',
+                AppStrings.theArtOfOpenworking,
                 style: TextStyle(
                   color: foreground,
                   fontSize: 16,
@@ -970,7 +971,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             children: [
               Expanded(
                 child: Text(
-                  'CLIENT REVIEWS',
+                  AppStrings.clientReviews,
                   style: TextStyle(
                     color: foreground,
                     fontSize: 15,
@@ -1066,7 +1067,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 );
               },
               icon: const Icon(Icons.edit_outlined, size: 16),
-              label: const Text('WRITE A REVIEW'),
+              label: const Text(AppStrings.writeAReview),
               style: OutlinedButton.styleFrom(
                 foregroundColor: orange,
                 side: BorderSide(color: orange.withValues(alpha: 0.55)),
@@ -1235,7 +1236,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'DEDICATED PRIVATE CURATOR',
+                  AppStrings.dedicatedPrivateCurator,
                   style: TextStyle(
                     color: orange,
                     fontSize: 9,
@@ -1252,7 +1253,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                 ),
                 Text(
-                  'Vendôme Salon • Client Relations',
+                  AppStrings.vendomeSalonClientRelations,
                   style: TextStyle(
                     color: muted,
                     fontSize: 10,
@@ -1278,7 +1279,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           children: [
             Expanded(
               child: Text(
-                'Available via encrypted call',
+                AppStrings.availableViaEncryptedCall,
                 style: TextStyle(
                   color: foreground,
                   fontSize: 11,
@@ -1293,7 +1294,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 color: orange,
               ),
               label: const Text(
-                'SECURE LINE',
+                AppStrings.secureLine,
                 style: TextStyle(
                   color: orange,
                   fontSize: 10,
@@ -1318,7 +1319,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             ),
             const SizedBox(width: 6),
             Text(
-              'Personal handover under diplomatic escort',
+              AppStrings.personalHandoverEscort,
               style: TextStyle(
                 color: muted,
                 fontSize: 10,
@@ -1353,7 +1354,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 size: 15,
               ),
               label: const Text(
-                'INQUIRE ADVISOR',
+                AppStrings.inquireAdvisor,
                 style: TextStyle(fontSize: 10),
               ),
               style: OutlinedButton.styleFrom(
@@ -1457,7 +1458,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
         foregroundColor: foreground,
         elevation: 0,
         title: Text(
-          'Write a Review',
+          AppStrings.writeAReviewTitle,
           style: TextStyle(color: foreground, fontFamily: 'EB Garamond', fontSize: 22),
         ),
       ),
@@ -1490,7 +1491,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('REVIEWING', style: TextStyle(color: orange, fontSize: 9, letterSpacing: 1.1, fontWeight: FontWeight.w700)),
+                          Text(AppStrings.reviewing, style: TextStyle(color: orange, fontSize: 9, letterSpacing: 1.1, fontWeight: FontWeight.w700)),
                           const SizedBox(height: 5),
                           Text(widget.productName, style: TextStyle(color: foreground, fontSize: 16, fontWeight: FontWeight.w600)),
                         ],
@@ -1500,7 +1501,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                 ),
               ),
               const SizedBox(height: 28),
-              Text('YOUR RATING', style: TextStyle(color: foreground, fontSize: 12, fontWeight: FontWeight.w700, letterSpacing: 1)),
+              Text(AppStrings.yourRating, style: TextStyle(color: foreground, fontSize: 12, fontWeight: FontWeight.w700, letterSpacing: 1)),
               const SizedBox(height: 12),
               Row(
                 children: List.generate(5, (index) {
@@ -1530,7 +1531,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                   onPressed: () {
                     FocusScope.of(context).unfocus();
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Review UI submitted. API integration will be added later.')),
+                      const SnackBar(content: Text(AppStrings.reviewSubmittedToast)),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -1540,7 +1541,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 17),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                   ),
-                  child: const Text('SUBMIT REVIEW', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 1)),
+                  child: const Text(AppStrings.submitReview, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 1)),
                 ),
               ),
             ],

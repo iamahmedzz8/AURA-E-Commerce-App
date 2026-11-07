@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:aura_maison_e_commerce/features/addresses/domain/entities/address_entity.dart';
@@ -53,16 +54,16 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: const Text('Delete Address'),
+          title: const Text(AppStrings.deleteAddress),
           content: const Text(
-            'Are you sure you want to delete this address?',
+            AppStrings.deleteAddressConfirmation,
           ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(dialogContext, false);
               },
-              child: const Text('Cancel'),
+              child: const Text(AppStrings.cancel),
             ),
             TextButton(
               onPressed: () {
@@ -71,7 +72,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
               style: TextButton.styleFrom(
                 foregroundColor: Colors.red,
               ),
-              child: const Text('Delete'),
+              child: const Text(AppStrings.delete),
             ),
           ],
         );
@@ -112,14 +113,14 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
                 onPressed: () => _openEditAddress(address),
                 icon: const Icon(Icons.edit_outlined),
                 color: AppColors.primaryColor,
-                tooltip: 'Edit address',
+                tooltip: AppStrings.editAddressTooltip,
               ),
 
               IconButton(
                 onPressed: () => _confirmDeleteAddress(address),
                 icon: const Icon(Icons.delete_outline),
                 color: Colors.red,
-                tooltip: 'Delete address',
+                tooltip: AppStrings.deleteAddressTooltip,
               ),
             ],
           ),
@@ -176,7 +177,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
                     onPressed: () {
                       context.read<AddressesCubit>().getUserAddresses();
                     },
-                    child: const Text('Try Again'),
+                    child: const Text(AppStrings.tryAgain),
                   ),
                 ],
               ),
@@ -196,13 +197,13 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
                   ),
                   const Gap(12),
                   const Text(
-                    'You haven’t added any addresses yet',
+                    AppStrings.noAddressesYet,
                     textAlign: TextAlign.center,
                   ),
                   const Gap(16),
                   ElevatedButton(
                     onPressed: _openAddAddress,
-                    child: const Text('Add Address'),
+                    child: const Text(AppStrings.addAddress),
                   ),
                 ],
               ),
@@ -235,7 +236,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const CustomText(
-          text: 'My Addresses',
+          text: AppStrings.myAddresses,
           size: 22,
           weight: FontWeight.bold,
         ),
@@ -243,7 +244,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
           IconButton(
             onPressed: _openAddAddress,
             icon: const Icon(Icons.add),
-            tooltip: 'Add address',
+            tooltip: AppStrings.addAddressTooltip,
           ),
         ],
       ),

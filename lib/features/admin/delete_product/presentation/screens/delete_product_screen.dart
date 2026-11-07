@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/theme/dark_theme.dart';
+import '../../../../../core/utils/app_strings.dart';
 import '../../../../products/products/presentation/cubit/products_cubit.dart';
 import '../widgets/ delete_action_buttons.dart';
 import '../widgets/declassification_effects_list.dart';
@@ -50,11 +51,11 @@ class DeleteProductScreen extends StatelessWidget {
                       if (state is DeleteProductSuccess) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Product deleted successfully'),
+                            content: Text(AppStrings.productDeletedSuccess),
                             backgroundColor: Colors.green,
                           ),
                         );
-                        Navigator.pop(context,true);
+                        Navigator.pop(context, true);
                       } else if (state is DeleteProductFailure) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

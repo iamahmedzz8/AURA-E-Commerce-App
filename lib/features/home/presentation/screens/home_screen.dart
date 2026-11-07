@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/offer_model.dart';
+import 'package:aura_maison_e_commerce/features/home/data/models/product_model.dart';
 import 'package:aura_maison_e_commerce/features/products/product_details/presentation/screens/product_details_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/home_cubit.dart';
@@ -22,14 +24,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeCubit>(
-          create: (_) => HomeCubit(),
-        ),
+        BlocProvider<HomeCubit>(create: (_) => HomeCubit()),
         BlocProvider<OffersCubit>(
           create: (_) => sl<OffersCubit>()..fetchOffers(),
         ),
         BlocProvider<CategoriesCubit>(
           create: (_) => sl<CategoriesCubit>()..fetchCategories(),
+        ),
+        BlocProvider<HomeProductsCubit>(
+          create: (_) => sl<HomeProductsCubit>()..fetchProducts(),
         ),
       ],
       child: const _HomeScreenContent(),
@@ -72,46 +75,46 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       isDark ? const Color(0xFF8A8F98) : const Color(0xFF777777);
 
   static const List<Map<String, String>> products = [
-    {
-      'name': 'Royal Tourbillon',
-      'category': 'WATCHMAKING HOUSE',
-      'price': '\$124,500',
-      'description': 'Skeleton 950 Platinum',
-      'rating': '—',
-      'image':
-          'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=700',
-      'tag': 'ONE OF A KIND',
-    },
-    {
-      'name': 'Star Solitaire',
-      'category': 'HIGH JEWELRY',
-      'price': '\$88,000',
-      'description': '4.2ct D/FL Flawless',
-      'rating': '—',
-      'image':
-          'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700',
-      'tag': 'GIA CERTIFIED',
-    },
-    {
-      'name': 'Vendome Matte Black',
-      'category': 'LEATHER GOODS',
-      'price': '\$16,800',
-      'description': 'Croc-Embossed Leather',
-      'rating': '—',
-      'image':
-          'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700',
-      'tag': 'MAISON HOME',
-    },
-    {
-      'name': 'Eclipse Aviator',
-      'category': 'EYEWEAR',
-      'price': '\$3,400',
-      'description': '18k Gold • Mineral Glass Lenses',
-      'rating': '—',
-      'image':
-          'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=700',
-      'tag': 'PRIVATE EYEWEAR',
-    },
+    // {
+    //   'name': 'Royal Tourbillon',
+    //   'category': 'WATCHMAKING HOUSE',
+    //   'price': '\$124,500',
+    //   'description': 'Skeleton 950 Platinum',
+    //   'rating': '—',
+    //   'image':
+    //       'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=700',
+    //   'tag': 'ONE OF A KIND',
+    // },
+    // {
+    //   'name': 'Star Solitaire',
+    //   'category': 'HIGH JEWELRY',
+    //   'price': '\$88,000',
+    //   'description': '4.2ct D/FL Flawless',
+    //   'rating': '—',
+    //   'image':
+    //       'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=700',
+    //   'tag': 'GIA CERTIFIED',
+    // },
+    // {
+    //   'name': 'Vendome Matte Black',
+    //   'category': 'LEATHER GOODS',
+    //   'price': '\$16,800',
+    //   'description': 'Croc-Embossed Leather',
+    //   'rating': '—',
+    //   'image':
+    //       'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700',
+    //   'tag': 'MAISON HOME',
+    // },
+    // {
+    //   'name': 'Eclipse Aviator',
+    //   'category': 'EYEWEAR',
+    //   'price': '\$3,400',
+    //   'description': '18k Gold • Mineral Glass Lenses',
+    //   'rating': '—',
+    //   'image':
+    //       'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=700',
+    //   'tag': 'PRIVATE EYEWEAR',
+    // },
   ];
 
   @override
@@ -130,39 +133,59 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 SliverToBoxAdapter(child: disciplines()),
                 SliverToBoxAdapter(
                   child: sectionHeader(
-                    title: 'Featured Masterpieces',
-                    action: 'VIEW ALL',
+                    title: AppStrings.featuredMasterpieces,
+                    action: AppStrings.viewAllAction,
                     onTap: openProducts,
                   ),
                 ),
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  sliver: SliverGrid(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) => productCard(index),
-                      childCount: products.length,
-                    ),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 14,
-                      childAspectRatio: .62,
-                    ),
-                  ),
+                BlocBuilder<HomeProductsCubit, HomeProductsState>(
+                  builder: (context, state) {
+                    if (state is HomeProductsLoadingState) {
+                      return _buildProductsGridLoading();
+                    }
+
+                    if (state is HomeProductsSuccessState &&
+                        state.products.isNotEmpty) {
+                      return SliverPadding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        sliver: SliverGrid(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) => productCardFromModel(
+                              state.products[index],
+                              index,
+                            ),
+                            childCount: state.products.length,
+                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 14,
+                                childAspectRatio: .62,
+                              ),
+                        ),
+                      );
+                    }
+
+                    if (state is HomeProductsFailureState) {
+                      return SliverToBoxAdapter(
+                        child: _buildProductsError(state.errorMessage),
+                      );
+                    }
+
+                    return _buildDefaultProductsGrid();
+                  },
                 ),
                 SliverToBoxAdapter(
                   child: sectionHeader(
-                    title: 'Discover the House',
-                    action: 'EXPLORE',
+                    title: AppStrings.discoverTheHouse,
+                    action: AppStrings.exploreAction,
                     onTap: openProducts,
                   ),
                 ),
                 SliverToBoxAdapter(child: editorial()),
                 SliverToBoxAdapter(child: concierge()),
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 20),
-                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 20)),
               ],
             ),
           ),
@@ -174,9 +197,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
   void openProducts() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => const ProductsScreen(),
-      ),
+      MaterialPageRoute(builder: (context) => const ProductsScreen()),
     );
   }
 
@@ -192,7 +213,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'AURA MAISON',
+                AppStrings.brandTitleInline,
                 style: TextStyle(
                   fontFamily: 'Inter',
                   color: gold,
@@ -204,7 +225,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
             ),
             const Center(
               child: Text(
-                'Home',
+                AppStrings.homeHeaderTitle,
                 style: TextStyle(
                   fontFamily: 'EB Garamond',
                   color: Colors.white,
@@ -220,8 +241,11 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                   IconButton(
                     onPressed: openProducts,
                     visualDensity: VisualDensity.compact,
-                    icon:
-                        const Icon(Icons.search, color: Colors.white, size: 21),
+                    icon: const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                      size: 21,
+                    ),
                   ),
                   IconButton(
                     onPressed: () {},
@@ -318,8 +342,8 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                         color: isSelected
                             ? gold
                             : (isDark
-                                ? Colors.white.withValues(alpha: .2)
-                                : Colors.black.withValues(alpha: .2)),
+                                  ? Colors.white.withValues(alpha: .2)
+                                  : Colors.black.withValues(alpha: .2)),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     );
@@ -390,7 +414,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                   ),
                   color: Colors.black.withValues(alpha: .6),
                   child: const Text(
-                    '● EXCLUSIVE MAISON OFFER',
+                    AppStrings.exclusiveMaisonOffer,
                     style: TextStyle(
                       fontFamily: 'Inter',
                       color: gold,
@@ -402,7 +426,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 ),
                 const Spacer(),
                 const Text(
-                  'SPECIAL PROMOTION',
+                  AppStrings.specialPromotion,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: gold,
@@ -445,7 +469,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'CURATION',
+                            AppStrings.curation,
                             style: TextStyle(
                               fontFamily: 'Inter',
                               color: Colors.white60,
@@ -454,7 +478,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                             ),
                           ),
                           Text(
-                            'LIMITED PRIVILEGE',
+                            AppStrings.limitedPrivilege,
                             style: TextStyle(
                               fontFamily: 'Inter',
                               color: Colors.white,
@@ -482,7 +506,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'EXPLORE\nOFFER',
+                            AppStrings.exploreOffer,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontFamily: 'Inter',
@@ -521,14 +545,11 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
             const SizedBox(
               width: 24,
               height: 24,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                color: gold,
-              ),
+              child: CircularProgressIndicator(strokeWidth: 2, color: gold),
             ),
             const SizedBox(height: 14),
             Text(
-              'CURATING OFFERS...',
+              AppStrings.curatingOffers,
               style: TextStyle(
                 fontFamily: 'Inter',
                 color: muted,
@@ -558,7 +579,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
             const Icon(Icons.error_outline, color: gold, size: 32),
             const SizedBox(height: 12),
             Text(
-              message.isNotEmpty ? message : 'Failed to load offers',
+              message.isNotEmpty ? message : AppStrings.failedToLoadOffers,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Inter',
@@ -573,7 +594,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 side: const BorderSide(color: gold),
                 foregroundColor: gold,
               ),
-              child: const Text('RETRY'),
+              child: const Text(AppStrings.retry),
             ),
           ],
         ),
@@ -586,9 +607,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       height: 390,
       margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
       clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -624,7 +643,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                   ),
                   color: Colors.black.withValues(alpha: .55),
                   child: const Text(
-                    '● LIMITED EDITION • 25 PIECES',
+                    AppStrings.limitedEdition25Pieces,
                     style: TextStyle(
                       fontFamily: 'Inter',
                       color: gold,
@@ -636,7 +655,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 ),
                 const Spacer(),
                 const Text(
-                  'FINE WATCHMAKING Nº 07',
+                  AppStrings.fineWatchmakingNo07,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: gold,
@@ -646,7 +665,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Imperial\nChronograph',
+                  AppStrings.imperialChronograph,
                   style: TextStyle(
                     fontFamily: 'EB Garamond',
                     color: Colors.white,
@@ -656,7 +675,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  'In-house hand-wound skeleton calibre\nwith silicon escapement and case in...',
+                  AppStrings.inHouseCalibreDesc,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: Colors.white70,
@@ -672,7 +691,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'WORKSHOP PRICE',
+                            AppStrings.workshopPrice,
                             style: TextStyle(
                               fontFamily: 'Inter',
                               color: Colors.white60,
@@ -708,7 +727,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'ACQUIRE\nALLOCATION',
+                            AppStrings.acquireAllocation,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontFamily: 'Inter',
@@ -719,10 +738,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                             ),
                           ),
                           SizedBox(width: 10),
-                          Icon(
-                            Icons.arrow_forward_rounded,
-                            size: 17,
-                          ),
+                          Icon(Icons.arrow_forward_rounded, size: 17),
                         ],
                       ),
                     ),
@@ -754,11 +770,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
               color: gold.withValues(alpha: .16),
               borderRadius: BorderRadius.circular(5),
             ),
-            child: const Icon(
-              Icons.diamond_outlined,
-              color: gold,
-              size: 25,
-            ),
+            child: const Icon(Icons.diamond_outlined, color: gold, size: 25),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -768,7 +780,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 const Row(
                   children: [
                     Text(
-                      'PRIVATE INVITATION',
+                      AppStrings.privateInvitation,
                       style: TextStyle(
                         fontFamily: 'Inter',
                         color: gold,
@@ -778,7 +790,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                     ),
                     SizedBox(width: 8),
                     Text(
-                      'VIP SALON',
+                      AppStrings.vipSalon,
                       style: TextStyle(
                         fontFamily: 'Inter',
                         color: gold,
@@ -790,7 +802,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'Genève Watches & Wonders Preview',
+                  AppStrings.genevePreviewTitle,
                   style: TextStyle(
                     fontFamily: 'EB Garamond',
                     color: foreground,
@@ -800,7 +812,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'Private access before public opening. Book your session with our master...',
+                  AppStrings.genevePreviewSubtitle,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: muted,
@@ -812,7 +824,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 Row(
                   children: [
                     const Text(
-                      'REQUEST ACCESS',
+                      AppStrings.requestAccess,
                       style: TextStyle(
                         fontFamily: 'Inter',
                         color: gold,
@@ -822,14 +834,10 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const Icon(
-                      Icons.north_east_rounded,
-                      color: gold,
-                      size: 14,
-                    ),
+                    const Icon(Icons.north_east_rounded, color: gold, size: 14),
                     const Spacer(),
                     Text(
-                      '14 Places left',
+                      AppStrings.placesLeft14,
                       style: TextStyle(
                         fontFamily: 'Inter',
                         color: muted,
@@ -851,8 +859,8 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         sectionHeader(
-          title: 'Curated Disciplines',
-          action: 'ARCHIVES',
+          title: AppStrings.curatedDisciplines,
+          action: AppStrings.archivesAction,
           onTap: openProducts,
         ),
         BlocBuilder<CategoriesCubit, CategoriesState>(
@@ -990,19 +998,19 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
     final items = [
       (
         'WATCHMAKING',
-        'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500'
+        'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500',
       ),
       (
         'HIGH JEWELRY',
-        'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500'
+        'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500',
       ),
       (
         'LEATHER GOODS',
-        'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500'
+        'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500',
       ),
       (
         'EYEWEAR',
-        'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500'
+        'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500',
       ),
     ];
 
@@ -1106,11 +1114,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                   ),
                 ),
                 const SizedBox(width: 5),
-                const Icon(
-                  Icons.north_east_rounded,
-                  color: gold,
-                  size: 13,
-                ),
+                const Icon(Icons.north_east_rounded, color: gold, size: 13),
               ],
             ),
           ),
@@ -1181,7 +1185,9 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                     bottom: 9,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 5),
+                        horizontal: 8,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.black.withValues(alpha: .72),
                         borderRadius: BorderRadius.circular(2),
@@ -1313,14 +1319,395 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       );
   }
 
+  Widget _buildDefaultProductsGrid() {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      sliver: SliverGrid(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) => productCard(index),
+          childCount: products.length,
+        ),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 14,
+          childAspectRatio: .62,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProductsGridLoading() {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      sliver: SliverGrid(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) => Container(
+            decoration: BoxDecoration(
+              color: surface,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: isDark
+                          ? const Color(0xFF22262C)
+                          : const Color(0xFFECEAE5),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(8),
+                      ),
+                    ),
+                    child: Center(
+                      child: SizedBox(
+                        width: 22,
+                        height: 22,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1.5,
+                          color: gold.withValues(alpha: 0.6),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 9),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 55,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: isDark
+                                ? const Color(0xFF22262C)
+                                : const Color(0xFFECEAE5),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          width: double.infinity,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            color: isDark
+                                ? const Color(0xFF22262C)
+                                : const Color(0xFFECEAE5),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Container(
+                          width: 80,
+                          height: 10,
+                          decoration: BoxDecoration(
+                            color: isDark
+                                ? const Color(0xFF22262C)
+                                : const Color(0xFFECEAE5),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          childCount: 4,
+        ),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 14,
+          childAspectRatio: .62,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProductsError(String message) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: surface,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: gold.withValues(alpha: 0.3), width: 0.8),
+      ),
+      child: Column(
+        children: [
+          const Icon(Icons.error_outline_rounded, color: gold, size: 28),
+          const SizedBox(height: 8),
+          Text(
+            AppStrings.unableToLoadMasterpieces,
+            style: TextStyle(
+              fontFamily: 'EB Garamond',
+              fontSize: 16,
+              color: foreground,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontFamily: 'Inter', fontSize: 11, color: muted),
+          ),
+          const SizedBox(height: 10),
+          TextButton.icon(
+            onPressed: () => context.read<HomeProductsCubit>().fetchProducts(),
+            icon: const Icon(Icons.refresh_rounded, color: gold, size: 16),
+            label: const Text(
+              AppStrings.retry,
+              style: TextStyle(
+                fontFamily: 'Inter',
+                color: gold,
+                fontSize: 11,
+                letterSpacing: 1,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget productCardFromModel(ProductModel item, int index) {
+    final isFavorite = favorites.contains(index);
+    final categoryText = item.categories.isNotEmpty
+        ? item.categories.first.toUpperCase()
+        : 'FINE CREATION';
+    final tagText = item.color.isNotEmpty
+        ? item.color.toUpperCase()
+        : (item.discountPercentage > 0
+              ? '${item.discountPercentage}% OFF'
+              : 'EXCLUSIVE');
+    final formattedPrice =
+        '\$${item.price.toStringAsFixed(item.price.truncateToDouble() == item.price ? 0 : 2)}';
+
+    return GestureDetector(
+      onTap: () => openProductDetailsFromModel(item),
+      child: Container(
+        decoration: BoxDecoration(
+          color: surface,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 6,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  if (item.coverPictureUrl.isNotEmpty)
+                    Image.network(
+                      item.coverPictureUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => Container(
+                        color: darkSurface,
+                        child: const Icon(
+                          Icons.watch_outlined,
+                          color: gold,
+                          size: 45,
+                        ),
+                      ),
+                    )
+                  else
+                    Container(
+                      color: darkSurface,
+                      child: const Icon(
+                        Icons.watch_outlined,
+                        color: gold,
+                        size: 45,
+                      ),
+                    ),
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: GestureDetector(
+                      onTap: () =>
+                          context.read<HomeCubit>().toggleFavorite(index),
+                      child: Container(
+                        width: 34,
+                        height: 34,
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? const Color(0xCC292D33)
+                              : Colors.white.withValues(alpha: .92),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          isFavorite
+                              ? Icons.bookmark_rounded
+                              : Icons.bookmark_border_rounded,
+                          color: isFavorite ? gold : foreground,
+                          size: 19,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 9,
+                    bottom: 9,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: .72),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                      child: Text(
+                        tagText,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontFamily: 'Inter',
+                          color: gold,
+                          fontSize: 8,
+                          letterSpacing: .5,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 5,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 9),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      categoryText,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontFamily: 'Inter',
+                        color: gold,
+                        fontSize: 8,
+                        letterSpacing: .6,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      item.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontFamily: 'EB Garamond',
+                        color: foreground,
+                        fontSize: 16,
+                        height: 1.1,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      item.description ?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        color: muted,
+                        fontSize: 10,
+                        height: 1.25,
+                      ),
+                    ),
+                    const Spacer(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            formattedPrice,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontFamily: 'Inter',
+                              color: foreground,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        Container(
+                          width: 34,
+                          height: 34,
+                          decoration: BoxDecoration(
+                            color: isDark
+                                ? const Color(0xFF292D33)
+                                : const Color(0xFFF0EEE9),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: IconButton(
+                            onPressed: () => showAddedToBag({
+                              'name': item.name,
+                              'price': formattedPrice,
+                            }),
+                            padding: EdgeInsets.zero,
+                            icon: Icon(
+                              Icons.shopping_bag_outlined,
+                              color: foreground,
+                              size: 18,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void openProductDetailsFromModel(ProductModel item) {
+    final formattedPrice =
+        '\$${item.price.toStringAsFixed(item.price.truncateToDouble() == item.price ? 0 : 2)}';
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProductDetailsScreen(
+          product: {
+            'id': item.id,
+            'name': item.name,
+            'category': item.categories.isNotEmpty
+                ? item.categories.first.toUpperCase()
+                : 'LUXURY CREATION',
+            'price': formattedPrice,
+            'description': item.description ?? '',
+            'rating': item.rating > 0 ? item.rating.toStringAsFixed(1) : '—',
+            'image': item.coverPictureUrl,
+            'tag': item.color.isNotEmpty
+                ? item.color.toUpperCase()
+                : 'EXCLUSIVE',
+          },
+        ),
+      ),
+    );
+  }
+
   Widget editorial() {
     return Container(
       height: 230,
       margin: const EdgeInsets.symmetric(horizontal: 16),
       clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -1350,7 +1737,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 const Text(
-                  'SPECIAL ORDER',
+                  AppStrings.specialOrder,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: gold,
@@ -1360,7 +1747,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 ),
                 const SizedBox(height: 7),
                 const Text(
-                  'Celeste Orrery\nPerpetual Motion',
+                  AppStrings.celesteOrreryTitle,
                   style: TextStyle(
                     fontFamily: 'EB Garamond',
                     color: Colors.white,
@@ -1370,7 +1757,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  'Automatic celestial artistry in motion.',
+                  AppStrings.celesteOrrerySubtitle,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: Colors.white70,
@@ -1380,12 +1767,9 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 const SizedBox(height: 12),
                 OutlinedButton.icon(
                   onPressed: openProducts,
-                  icon: const Icon(
-                    Icons.arrow_forward_rounded,
-                    size: 13,
-                  ),
+                  icon: const Icon(Icons.arrow_forward_rounded, size: 13),
                   label: const Text(
-                    'VIEW THE STUDY',
+                    AppStrings.viewTheStudy,
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 9,
@@ -1394,10 +1778,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                   ),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    side: const BorderSide(
-                      color: Colors.white54,
-                      width: .7,
-                    ),
+                    side: const BorderSide(color: Colors.white54, width: .7),
                     shape: const RoundedRectangleBorder(),
                   ),
                 ),
@@ -1438,7 +1819,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'PRIVATE CONCIERGE',
+                  AppStrings.privateConcierge,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: gold,
@@ -1448,7 +1829,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Your dedicated advisor',
+                  AppStrings.dedicatedAdvisor,
                   style: TextStyle(
                     fontFamily: 'EB Garamond',
                     color: foreground,
@@ -1456,7 +1837,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                   ),
                 ),
                 Text(
-                  'Personal assistance for your collection.',
+                  AppStrings.personalAssistanceDesc,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: muted,
@@ -1472,14 +1853,11 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
               backgroundColor: gold,
               foregroundColor: Colors.black,
               elevation: 0,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 10,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               shape: const RoundedRectangleBorder(),
             ),
             child: const Text(
-              'DIRECT LINE',
+              AppStrings.directLine,
               style: TextStyle(
                 fontFamily: 'Inter',
                 fontSize: 8,

@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/addresses_cubit.dart';
@@ -132,7 +133,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     return Scaffold(
       appBar: AppBar(
         title: CustomText(
-          text: widget.isEditMode ? 'Edit Address' : 'Add New Address',
+          text: widget.isEditMode ? AppStrings.editAddress : AppStrings.addNewAddress,
           size: 22,
           weight: FontWeight.bold,
         ),
@@ -142,7 +143,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
           if (state is AddressCreated) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('Address saved successfully'),
+                content: Text(AppStrings.addressSavedSuccessfully),
               ),
             );
 
@@ -152,7 +153,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
           if (state is AddressLoaded && widget.isEditMode) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('Address updated successfully'),
+                content: Text(AppStrings.addressUpdatedSuccessfully),
               ),
             );
 
@@ -175,33 +176,33 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildField(
-                  label: 'State',
+                  label: AppStrings.stateLabel,
                   controller: _stateController,
                 ),
                 const Gap(16),
                 _buildField(
-                  label: 'City',
+                  label: AppStrings.cityLabel,
                   controller: _cityController,
                 ),
                 const Gap(16),
                 _buildField(
-                  label: 'Street',
+                  label: AppStrings.streetLabel,
                   controller: _streetController,
                 ),
                 const Gap(16),
                 _buildField(
-                  label: 'Apartment',
+                  label: AppStrings.apartmentLabel,
                   controller: _apartmentController,
                 ),
                 const Gap(16),
                 _buildField(
-                  label: 'Phone Number',
+                  label: AppStrings.phoneLabel,
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
                 ),
                 const Gap(16),
                 _buildField(
-                  label: 'Notes',
+                  label: AppStrings.notesLabel,
                   controller: _notesController,
                   maxLines: 3,
                   requiredField: false,
@@ -226,7 +227,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                             ? const CircularProgressIndicator(
                           color: Colors.white,
                         )
-                        : Text(widget.isEditMode ? 'Update Address' : 'Save Address',
+                        : Text(widget.isEditMode ? AppStrings.updateAddress : AppStrings.saveAddress,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 17,

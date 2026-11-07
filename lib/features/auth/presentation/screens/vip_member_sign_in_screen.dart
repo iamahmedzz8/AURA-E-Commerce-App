@@ -49,7 +49,7 @@ class _VipMemberSignInScreenState extends State<VipMemberSignInScreen> {
 
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter your email and password.')),
+        const SnackBar(content: Text(AppStrings.enterEmailAndPassword)),
       );
       return;
     }
@@ -69,7 +69,7 @@ class _VipMemberSignInScreenState extends State<VipMemberSignInScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Vault Biometrics Verified. Welcome, Patron.'),
+        content: Text(AppStrings.biometricsVerifiedWelcome),
       ),
     );
 
@@ -126,12 +126,6 @@ class _VipMemberSignInScreenState extends State<VipMemberSignInScreen> {
                   bottom: false,
                   child: Column(
                     children: [
-                      // Fixed App Header
-                      // AppHeader(
-                      //   title: AppStrings.vipMemberScreenTitle,
-                      //   showBackButton: canGoBack,
-                      // ),
-
                       // Scrollable VIP Member Content
                       Expanded(
                         child: CustomScrollView(
@@ -179,7 +173,6 @@ class _VipMemberSignInScreenState extends State<VipMemberSignInScreen> {
                     ],
                   ),
                 ),
-                // bottomNavigationBar: const AppBottomNavBar(currentIndex: 4),
               );
             },
           );

@@ -66,22 +66,19 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         lastName.isEmpty ||
         email.isEmpty ||
         password.isEmpty) {
-      _showMessage('Please fill in all required fields.');
+      _showMessage(AppStrings.fillAllRequiredFields);
       return;
     }
 
     // 2) Email
     if (!_emailRegex.hasMatch(email)) {
-      _showMessage('Please enter a valid email address.');
+      _showMessage(AppStrings.enterValidEmailAddress);
       return;
     }
 
     // 3) Password rules (same rules shown in the criteria card)
     if (!PasswordRules.isValid(password)) {
-      _showMessage(
-        'Password must be at least ${PasswordRules.minLength} characters and '
-        'include an uppercase letter, a digit and a special symbol.',
-      );
+      _showMessage(AppStrings.passwordRulesPrompt);
       return;
     }
 
@@ -99,7 +96,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
       if (!mounted) return;
 
-      _showMessage('Account created successfully!');
+      _showMessage(AppStrings.accountCreatedSuccess);
 
       Navigator.of(context).push(
         MaterialPageRoute<void>(

@@ -1,5 +1,6 @@
 import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/offer_model.dart';
+import 'package:aura_maison_e_commerce/features/home/data/models/product_model.dart';
 
 class HomeState {
   final bool isDark;
@@ -53,4 +54,21 @@ class CategoriesSuccessState extends CategoriesState {
 class CategoriesFailureState extends CategoriesState {
   final String errorMessage;
   CategoriesFailureState({required this.errorMessage});
+}
+
+//=============================Products State=========================
+abstract class HomeProductsState {}
+
+class HomeProductsInitialState extends HomeProductsState {}
+
+class HomeProductsLoadingState extends HomeProductsState {}
+
+class HomeProductsSuccessState extends HomeProductsState {
+  final List<ProductModel> products;
+  HomeProductsSuccessState({required this.products});
+}
+
+class HomeProductsFailureState extends HomeProductsState {
+  final String errorMessage;
+  HomeProductsFailureState({required this.errorMessage});
 }

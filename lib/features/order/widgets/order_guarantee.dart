@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,7 +10,7 @@ class OrderGuarantee extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 1, 21, 55),
@@ -18,21 +19,21 @@ class OrderGuarantee extends StatelessWidget {
       child: Row(
         children: [
           SvgPicture.asset('assets/images/logooo.svg'),
-          Gap(10),
-          Expanded(
+          const Gap(10),
+          const Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: 'White-Glove Guarantee',
+                  text: AppStrings.whiteGloveGuarantee,
                   color: Colors.white,
                   size: 20,
                   weight: FontWeight.bold,
                 ),
                 CustomText(
                   maxLines: 2,
-                  text: 'Complimentary resizing & vault returns within 30days.',
+                  text: AppStrings.whiteGloveGuaranteeDesc,
                   color: Colors.white,
                   size: 12,
                   weight: FontWeight.w400,

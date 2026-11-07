@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
@@ -33,7 +34,7 @@ class CheckoutButton extends StatelessWidget {
                   child: Center(
                     child: CustomText(
                       size: 20,
-                      text: 'Checkout',
+                      text: AppStrings.checkout,
                       color: Colors.white,
                       weight: FontWeight.bold,
                     ),

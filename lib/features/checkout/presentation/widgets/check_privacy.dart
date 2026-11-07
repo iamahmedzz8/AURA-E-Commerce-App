@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class CheckPrivacy extends StatelessWidget {
           Expanded(child: SvgPicture.asset('assets/images/privacy.svg')),
           Gap(10),
           CustomText(
-            text: 'FINE WATCHMAKING ESCROW PROTOCOL',
+            text: AppStrings.fineWatchmakingEscrowProtocol,
             size: 13,
             maxLines: 1,
             space: 1.8,

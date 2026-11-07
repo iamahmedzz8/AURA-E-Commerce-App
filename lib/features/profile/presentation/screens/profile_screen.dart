@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/addresses_cubit.dart';
 import 'package:aura_maison_e_commerce/features/admin/admin_dashdoard/presentation/screens/admin_dashboard_screen.dart';
 import 'package:aura_maison_e_commerce/features/profile/data/models/profile_model.dart';
@@ -40,24 +41,24 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: 16),
               const TransitCard(),
 
-              const SectionHeader(title: 'Workshop Ledger & Security Services'),
+              const SectionHeader(title: AppStrings.workshopLedgerSecurity),
 
               const ProfileMenuTile(
                 icon: Icons.account_balance_wallet_outlined,
-                title: 'Vault Acquisitions',
-                subtitle: '3 Pieces Registered • Blockchain Provenance',
+                title: AppStrings.vaultAcquisitions,
+                subtitle: AppStrings.vaultAcquisitionsSubtitle,
               ),
 
               const ProfileMenuTile(
                 icon: Icons.local_shipping_outlined,
-                title: 'Private Orders & Live Transit',
-                subtitle: '1 Active in Transit from Geneva Salon',
+                title: AppStrings.privateOrdersTransit,
+                subtitle: AppStrings.privateOrdersTransitSubtitle,
               ),
 
               ProfileMenuTile(
                 icon: Icons.location_on_outlined,
-                title: 'My Addresses',
-                subtitle: 'Manage your saved delivery addresses',
+                title: AppStrings.myAddresses,
+                subtitle: AppStrings.manageSavedAddresses,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -73,14 +74,14 @@ class ProfileScreen extends StatelessWidget {
 
               const ProfileMenuTile(
                 icon: Icons.design_services_outlined,
-                title: 'Bespoke Commissions',
-                subtitle: '1 Custom Tourbillon Pending CAD Approval',
+                title: AppStrings.bespokeCommissions,
+                subtitle: AppStrings.bespokeCommissionsSubtitle,
               ),
 
               const ProfileMenuTile(
                 icon: Icons.bookmark_border,
-                title: 'Saved Vault Wishlist',
-                subtitle: '5 Masterpieces Archival for Viewing',
+                title: AppStrings.savedVaultWishlist,
+                subtitle: AppStrings.savedVaultWishlistSubtitle,
               ),
 
               InkWell(
@@ -92,15 +93,15 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 child: const ProfileMenuTile(
                   icon: Icons.security,
-                  title: 'Security & Hardware Key',
-                  subtitle: 'Hardware Enclave, FaceID, Dual-Vault Auth',
+                  title: AppStrings.securityHardwareKey,
+                  subtitle: AppStrings.securityHardwareKeySubtitle,
                 ),
               ),
 
               const ProfileMenuTile(
                 icon: Icons.tune,
-                title: 'Curated Preferences',
-                subtitle: 'USD (\$) | French / English • Midnight',
+                title: AppStrings.curatedPreferences,
+                subtitle: AppStrings.curatedPreferencesSubtitle,
               ),
 
               const SizedBox(height: 16),
@@ -135,7 +136,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           SizedBox(width: 8),
                           const Text(
-                            'DIRECT LINE',
+                            AppStrings.directLine,
                             style: TextStyle(
                               color: AppColors.primaryGold,
                               fontSize: 11,
@@ -154,7 +155,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       onPressed: () {},
                       child: const Text(
-                        'SALON CRYPT',
+                        AppStrings.salonCrypt,
                         style: TextStyle(
                           color: AppColors.textMuted,
                           fontSize: 11,
@@ -168,7 +169,7 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: 16),
 
               PrimaryButton(
-                text: 'EDIT PROFILE',
+                text: AppStrings.editProfile,
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -209,7 +210,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       SizedBox(width: 8),
                       Text(
-                        'CHANGE PASSWORD',
+                        AppStrings.changePasswordTitle,
                         style: TextStyle(
                           color: AppColors.primaryGold,
                           fontSize: 11,
@@ -247,7 +248,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       SizedBox(width: 8),
                       Text(
-                        'ADMIN ACCESS',
+                        AppStrings.adminAccess,
                         style: TextStyle(
                           color: AppColors.primaryGold,
                           fontSize: 11,

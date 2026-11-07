@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -17,13 +18,13 @@ class CartSummary extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(text: 'Cart summary', weight: FontWeight.w800, size: 20),
+          CustomText(text: AppStrings.cartSummary, weight: FontWeight.w800, size: 20),
           Gap(10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomText(
-                text: 'Subtotal',
+                text: AppStrings.subtotal,
                 weight: FontWeight.w600,
                 size: 16,
                 color: Colors.grey.shade600,
@@ -36,7 +37,7 @@ class CartSummary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomText(
-                text: 'Coupon SAVE10',
+                text: AppStrings.couponDiscount,
                 weight: FontWeight.w900,
                 size: 18,
                 color: Colors.green,
@@ -55,7 +56,7 @@ class CartSummary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomText(
-                text: 'Delivery',
+                text: AppStrings.deliveryFee,
                 weight: FontWeight.w600,
                 size: 16,
                 color: Colors.grey.shade600,
@@ -69,7 +70,7 @@ class CartSummary extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomText(text: 'Total', weight: FontWeight.w800, size: 20),
+              CustomText(text: AppStrings.total, weight: FontWeight.w800, size: 20),
               CustomText(text: 'EGP 1900', weight: FontWeight.w800, size: 20),
             ],
           ),

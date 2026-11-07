@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -31,7 +32,7 @@ class PromoCodeSection extends StatelessWidget {
             children: [
               CustomText(text: 'SAVE10', weight: FontWeight.w700, size: 17),
               CustomText(
-                text: '-EGP 208 luxury voucher discount',
+                text: AppStrings.luxuryVoucherDiscount,
                 color: Colors.green,
                 weight: FontWeight.w300,
               ),

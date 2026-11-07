@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:aura_maison_e_commerce/features/support/support/data/models/police_privacy.dart';
 import 'package:aura_maison_e_commerce/features/support/support/presentation/widgets/police_item.dart';
@@ -44,7 +45,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: const CustomAppBar(
-        title: 'Workshop Settings',
+        title: AppStrings.privacyPolicy,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
@@ -54,7 +55,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
               Icon(Icons.circle, color: AppColors.primaryGold, size: 6),
               SizedBox(width: 6),
               Text(
-                'AUDITED VERSION 2025 • VENDÔME NOTARY’S OFFICE',
+                AppStrings.auditedVendomeOffice,
                 style: TextStyle(
                   color: AppColors.primaryGold,
                   fontSize: 9,
@@ -66,7 +67,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           const Text(
-            'Privacy Seal &\nPatron Data Protection',
+            AppStrings.privacySealDataProtection,
             style: TextStyle(
               color: AppColors.textWhite,
               fontSize: 22,

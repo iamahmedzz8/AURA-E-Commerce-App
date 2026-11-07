@@ -268,7 +268,7 @@ Future<void> initServiceLocator() async {
     ),
   );
 
-  // ── 22. Home Feature (Offers & Categories) ──────────────────
+  // ── 22. Home Feature (Offers, Categories & Products) ────────
   sl.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSource(dioClient: sl<DioClient>()),
   );
@@ -279,5 +279,9 @@ Future<void> initServiceLocator() async {
 
   sl.registerFactory<CategoriesCubit>(
     () => CategoriesCubit(sl<HomeRemoteDataSource>()),
+  );
+
+  sl.registerFactory<HomeProductsCubit>(
+    () => HomeProductsCubit(sl<HomeRemoteDataSource>()),
   );
 }

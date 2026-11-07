@@ -1,4 +1,5 @@
 
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,8 @@ class EditProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: const CustomAppBar(
-        title: 'Edit Profile',
-        subtitle: 'Workshop Settings',
+        title: AppStrings.editProfileTitle,
+        subtitle: AppStrings.workshopSettings,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -27,7 +28,7 @@ class EditProfileScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             const SectionHeader(
-              title: 'HONORIFIC TITLE / SALUTATION',
+              title: AppStrings.honorificTitle,
             ),
 
             _buildTitleChips(),
@@ -35,7 +36,7 @@ class EditProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             _buildInputField(
-              label: 'FULL NAME',
+              label: AppStrings.fullNameUpper,
               initialValue: 'Baroness Victoria de Rothschild',
               icon: Icons.lock_outline,
             ),
@@ -43,7 +44,7 @@ class EditProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             _buildInputField(
-              label: 'SECURE EMAIL ADDRESS',
+              label: AppStrings.secureEmailAddress,
               initialValue: 'v.rothschild@vendome.ch',
               icon: Icons.verified_user_outlined,
             ),
@@ -51,7 +52,7 @@ class EditProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             _buildInputField(
-              label: 'SECURE DIRECT LINE',
+              label: AppStrings.secureDirectLine,
               initialValue: '+33 142 68 00 00',
               icon: Icons.phone_outlined,
             ),
@@ -59,21 +60,21 @@ class EditProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             _buildDropdownField(
-              label: 'BILLING & PAYMENT CURRENCY',
+              label: AppStrings.billingCurrency,
               value: 'EUR (€) — European Euro',
             ),
 
             const SizedBox(height: 16),
 
             _buildDropdownField(
-              label: 'COMMUNICATION & CORRESPONDENCE LANGUAGE',
+              label: AppStrings.communicationLanguage,
               value: 'French (Maison Vendôme)',
             ),
 
             const SizedBox(height: 24),
 
             PrimaryButton(
-              text: 'SAVE CHANGES',
+              text: AppStrings.saveChanges,
               onPressed: () {},
             ),
 
@@ -85,7 +86,7 @@ class EditProfileScreen extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: const Text(
-                  'CANCEL CHANGES',
+                  AppStrings.cancelChanges,
                   style: TextStyle(
                     color: AppColors.textMuted,
                     fontSize: 11,
@@ -145,7 +146,7 @@ class EditProfileScreen extends StatelessWidget {
           const SizedBox(height: 12),
 
           const Text(
-            'Distinguished Member No. 048-AURA',
+            AppStrings.distinguishedMember,
             style: TextStyle(
               color: AppColors.textMuted,
               fontSize: 11,
@@ -163,7 +164,7 @@ class EditProfileScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Private Client Register',
+          AppStrings.privateClientRegister,
           style: TextStyle(
             color: AppColors.textWhite,
             fontSize: 18,
@@ -174,7 +175,7 @@ class EditProfileScreen extends StatelessWidget {
         SizedBox(height: 4),
 
         Text(
-          'Biometric authentication and regnal titles recorded under watchmaking seal',
+          AppStrings.biometricRegnalSubtitle,
           style: TextStyle(
             color: AppColors.textMuted,
             fontSize: 11,

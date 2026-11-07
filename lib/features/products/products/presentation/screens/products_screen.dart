@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -27,7 +28,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   final TextEditingController searchController = TextEditingController();
 
-  String selectedCategory = 'All';
+  String selectedCategory = AppStrings.categoryAll;
   final Set<int> favorites = {};
 
   final List<Map<String, dynamic>> products = [
@@ -76,16 +77,16 @@ class _ProductsScreenState extends State<ProductsScreen> {
   ];
 
   final List<String> categories = [
-    'All',
-    'Watches',
-    'Jewelry',
-    'Leather',
-    'Eyewear',
+    AppStrings.categoryAll,
+    AppStrings.categoryWatches,
+    AppStrings.categoryJewelry,
+    AppStrings.categoryLeather,
+    AppStrings.categoryEyewear,
   ];
 
   List<Map<String, dynamic>> get filteredProducts {
     return products.where((product) {
-      final matchesCategory = selectedCategory == 'All' ||
+      final matchesCategory = selectedCategory == AppStrings.categoryAll ||
           product['category'] == selectedCategory;
 
       final matchesSearch = product['name']
@@ -120,7 +121,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
-          'THE COLLECTION',
+          AppStrings.theCollection,
           style: TextStyle(
             color: gold,
             fontSize: 14,
@@ -137,7 +138,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 12, 20, 6),
               child: Text(
-                'Discover the Collection',
+                AppStrings.discoverTheCollection,
                 style: TextStyle(
                   color: foreground,
                   fontSize: 27,
@@ -148,7 +149,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                'Exceptional pieces, chosen for you.',
+                AppStrings.exceptionalPiecesChosen,
                 style: TextStyle(
                   color: muted,
                   fontSize: 13,
@@ -162,7 +163,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 onChanged: (_) => setState(() {}),
                 style: TextStyle(color: foreground),
                 decoration: InputDecoration(
-                  hintText: 'Search the collection',
+                  hintText: AppStrings.searchTheCollection,
                   hintStyle: TextStyle(color: muted),
                   prefixIcon: const Icon(
                     Icons.search,
@@ -232,7 +233,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Masterpieces',
+                    AppStrings.masterpieces,
                     style: TextStyle(
                       color: foreground,
                       fontSize: 18,
@@ -252,7 +253,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               child: items.isEmpty
                   ? Center(
                 child: Text(
-                  'No pieces found',
+                  AppStrings.noPiecesFound,
                   style: TextStyle(color: muted),
                 ),
               )

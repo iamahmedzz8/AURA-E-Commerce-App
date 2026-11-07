@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/theme/dark_theme.dart';
+import '../../../../../core/utils/app_strings.dart';
 
 class IdentitySection extends StatelessWidget {
   final TextEditingController nameController;
@@ -30,7 +31,7 @@ class IdentitySection extends StatelessWidget {
               Icon(Icons.fingerprint, color: DarkTheme.gold, size: 18),
               SizedBox(width: 10),
               Text(
-                'PIECE IDENTITY & ORIGIN',
+                AppStrings.pieceIdentityOrigin,
                 style: TextStyle(
                   color: DarkTheme.primaryText,
                   fontSize: 11,
@@ -43,7 +44,7 @@ class IdentitySection extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           const Text(
-            'PIECE NAME',
+            AppStrings.pieceName,
             style: TextStyle(
               color: DarkTheme.secondaryText,
               fontSize: 9,
@@ -62,7 +63,7 @@ class IdentitySection extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
             decoration: InputDecoration(
-              hintText: 'Royal Tourbillon Mystérieux',
+              hintText: AppStrings.pieceNamePlaceholder,
               hintStyle: TextStyle(
                 color: DarkTheme.secondaryText.withValues(alpha: 0.5),
                 fontSize: 18,
@@ -91,7 +92,7 @@ class IdentitySection extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const Text(
-            'DESCRIPTION',
+            AppStrings.description,
             style: TextStyle(
               color: DarkTheme.secondaryText,
               fontSize: 9,
@@ -110,7 +111,7 @@ class IdentitySection extends StatelessWidget {
               fontFamily: 'Inter',
             ),
             decoration: InputDecoration(
-              hintText: 'Enter product description...',
+              hintText: AppStrings.descriptionPlaceholder,
               hintStyle: TextStyle(
                 color: DarkTheme.secondaryText.withValues(alpha: 0.5),
                 fontSize: 14,
@@ -141,7 +142,7 @@ class IdentitySection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Text(
-                'WORKSHOP REFERENCE (SKU)',
+                AppStrings.workshopReferenceSku,
                 style: TextStyle(
                   color: DarkTheme.secondaryText,
                   fontSize: 9,
@@ -155,7 +156,7 @@ class IdentitySection extends StatelessWidget {
                   Icon(Icons.lock_outline, color: DarkTheme.gold, size: 12),
                   SizedBox(width: 4),
                   Text(
-                    'Sealed',
+                    AppStrings.sealed,
                     style: TextStyle(
                       color: DarkTheme.gold,
                       fontSize: 10,
@@ -178,7 +179,7 @@ class IdentitySection extends StatelessWidget {
               letterSpacing: 0.5,
             ),
             decoration: InputDecoration(
-              hintText: '#TS-990-PT',
+              hintText: AppStrings.skuPlaceholder,
               hintStyle: TextStyle(
                 color: DarkTheme.secondaryText.withValues(alpha: 0.5),
                 fontSize: 14,
@@ -214,7 +215,7 @@ class IdentitySection extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const Text(
-            'WATCHMAKING CATEGORY',
+            AppStrings.watchmakingCategory,
             style: TextStyle(
               color: DarkTheme.secondaryText,
               fontSize: 9,
@@ -241,7 +242,7 @@ class IdentitySection extends StatelessWidget {
                   size: 18,
                 ),
                 hint: const Text(
-                  'Fine Watchmaking',
+                  AppStrings.fineWatchmaking,
                   style: TextStyle(
                     color: DarkTheme.primaryText,
                     fontSize: 14,

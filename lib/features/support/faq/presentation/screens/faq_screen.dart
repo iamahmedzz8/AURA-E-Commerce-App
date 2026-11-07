@@ -1,4 +1,5 @@
 
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_header.dart';
 import 'package:aura_maison_e_commerce/features/support/faq/data/models/faq_model.dart';
 import 'package:aura_maison_e_commerce/features/support/faq/presentation/widgets/faq_widget.dart';
@@ -224,7 +225,7 @@ class _FaqScreenState extends State<FaqScreen> {
 
   Widget _buildHeader() {
   return const AppHeader(
-    title: 'Private Concierge Support',
+    title: AppStrings.privateConciergeSupport,
     isConcierge: true,
   );
 }
@@ -249,7 +250,7 @@ class _FaqScreenState extends State<FaqScreen> {
               const SizedBox(width: 9),
 
               Text(
-                'PROTOCOL REGISTER',
+                AppStrings.protocolRegister,
                 style: AppStyles.sectionEyebrow.copyWith(
                   color: AppColors.goldAccent,
                   letterSpacing: 1.6,
@@ -261,7 +262,7 @@ class _FaqScreenState extends State<FaqScreen> {
 
               Flexible(
                 child: Text(
-                  'Genève • Paris • Londres',
+                  AppStrings.geneveParisLondres,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.right,
@@ -291,7 +292,7 @@ class _FaqScreenState extends State<FaqScreen> {
       child: Row(
         children: [
           Text(
-            'THE REGISTER',
+            AppStrings.theRegister,
             style: AppStyles.sectionEyebrow.copyWith(
               color: AppColors.textSecondary,
               letterSpacing: 1.5,
@@ -301,7 +302,7 @@ class _FaqScreenState extends State<FaqScreen> {
           const Spacer(),
 
           Text(
-            '$count ARTICLES',
+            '$count ${AppStrings.articlesUpper}',
             style: AppStyles.sectionCount.copyWith(
               color: AppColors.goldAccent,
             ),
@@ -317,7 +318,7 @@ class _FaqScreenState extends State<FaqScreen> {
         padding: const EdgeInsets.all(35),
         child: Center(
           child: Text(
-            'No protocols found.',
+            AppStrings.noProtocolsFound,
             style: AppStyles.cardSubtitle.copyWith(
               color: AppColors.textSecondary,
             ),

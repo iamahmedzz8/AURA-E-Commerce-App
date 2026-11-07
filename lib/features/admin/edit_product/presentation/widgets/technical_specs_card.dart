@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/theme/dark_theme.dart';
+import '../../../../../core/utils/app_strings.dart';
 
 class TechnicalSpecsCard extends StatelessWidget {
   const TechnicalSpecsCard({super.key});
@@ -32,20 +33,20 @@ class TechnicalSpecsCard extends StatelessWidget {
               _buildSpecText('CALIBRE & MECHANISM', 'In-House Calibre 8801 — Manual Winding', trailingIcon: Icons.tune),
               const SizedBox(height: 16),
 
-              const Text('FINE CRAFT FINISHES', style: TextStyle(color: DarkTheme.secondaryText, fontSize: 9, letterSpacing: 0.5, fontFamily: 'Inter', fontWeight: FontWeight.w600)),
+              const Text(AppStrings.fineCraftFinishes, style: TextStyle(color: DarkTheme.secondaryText, fontSize: 9, letterSpacing: 0.5, fontFamily: 'Inter', fontWeight: FontWeight.w600)),
               const SizedBox(height: 8),
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(color: DarkTheme.background, borderRadius: BorderRadius.circular(4), border: Border.all(color: DarkTheme.border)),
-                child: const Text('Mirror-polished bevels, hand-applied\nGeneva stripes', style: TextStyle(color: DarkTheme.primaryText, fontSize: 14, fontFamily: 'Inter', height: 1.4)),
+                child: const Text(AppStrings.craftFinishesValue, style: TextStyle(color: DarkTheme.primaryText, fontSize: 14, fontFamily: 'Inter', height: 1.4)),
               ),
               const SizedBox(height: 16),
 
-              _buildSpecText('CERTIFICATIONS & HALLMARKS', 'Geneva Seal & COSC Certificate', trailingIcon: Icons.shield_outlined, iconColor: DarkTheme.gold),
+              _buildSpecText(AppStrings.certificationsHallmarks, AppStrings.certificationsValue, trailingIcon: Icons.shield_outlined, iconColor: DarkTheme.gold),
               const SizedBox(height: 16),
 
-              // 2 كروت صغيرة جنب بعض
+              // Two compact side-by-side spec cards
               Row(
                 children: [
                   Expanded(
@@ -55,9 +56,9 @@ class TechnicalSpecsCard extends StatelessWidget {
                       child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('POWER RESERVE', style: TextStyle(color: DarkTheme.secondaryText, fontSize: 9, letterSpacing: 0.5, fontFamily: 'Inter')),
+                          Text(AppStrings.powerReserve, style: TextStyle(color: DarkTheme.secondaryText, fontSize: 9, letterSpacing: 0.5, fontFamily: 'Inter')),
                           SizedBox(height: 8),
-                          Text('72 Hours', style: TextStyle(color: DarkTheme.gold, fontSize: 18, fontFamily: 'EB Garamond', fontWeight: FontWeight.bold)),
+                          Text(AppStrings.powerReserveValue, style: TextStyle(color: DarkTheme.gold, fontSize: 18, fontFamily: 'EB Garamond', fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ),
@@ -70,9 +71,9 @@ class TechnicalSpecsCard extends StatelessWidget {
                       child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('CALIBRE FREQUENCY', style: TextStyle(color: DarkTheme.secondaryText, fontSize: 9, letterSpacing: 0.5, fontFamily: 'Inter')),
+                          Text(AppStrings.calibreFrequency, style: TextStyle(color: DarkTheme.secondaryText, fontSize: 9, letterSpacing: 0.5, fontFamily: 'Inter')),
                           SizedBox(height: 8),
-                          Text('21 600 vph', style: TextStyle(color: DarkTheme.primaryText, fontSize: 18, fontFamily: 'EB Garamond', fontWeight: FontWeight.bold)),
+                          Text(AppStrings.calibreFrequencyValue, style: TextStyle(color: DarkTheme.primaryText, fontSize: 18, fontFamily: 'EB Garamond', fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ),

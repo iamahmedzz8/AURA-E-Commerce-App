@@ -1,4 +1,5 @@
 
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:aura_maison_e_commerce/core/widgets/navigation.dart';
@@ -24,7 +25,7 @@ class ButtonAndPrivacySection extends StatelessWidget {
             ),
             child: Center(
               child: CustomText(
-                text: 'Place order (EGP 1,922) → ',
+                text: AppStrings.placeOrder,
                 color: Colors.white,
                 weight: FontWeight.bold,
                 size: 20,
@@ -39,7 +40,7 @@ class ButtonAndPrivacySection extends StatelessWidget {
             Icon(Icons.lock_outline_rounded, color: AppColors.primaryColor),
             Expanded(
               child: CustomText(
-                text: 'Encrypted 256-bit checkout · 30-day luxury guarantee',
+                text: AppStrings.checkoutSecurityGuarantee,
                 size: 12,
               ),
             ),

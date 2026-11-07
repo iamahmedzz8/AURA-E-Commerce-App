@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:aura_maison_e_commerce/features/support/contact/data/models/about_model.dart';
 import 'package:aura_maison_e_commerce/features/support/contact/presentation/widgets/about_as_widget.dart';
@@ -38,7 +39,7 @@ class AboutUsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: const CustomAppBar(title: 'Workshop Settings'),
+      appBar: const CustomAppBar(title: AppStrings.aboutUs),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
@@ -47,7 +48,7 @@ class AboutUsScreen extends StatelessWidget {
               Icon(Icons.circle, color: AppColors.primaryGold, size: 6),
               SizedBox(width: 6),
               Text(
-                'HOUSE FOUNDED IN 1912',
+                AppStrings.houseFounded1912,
                 style: TextStyle(
                   color: AppColors.primaryGold,
                   fontSize: 9,

@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +110,7 @@ class OrderItem extends StatelessWidget {
               TextButton(
                 onPressed: () {},
                 child: CustomText(
-                  text: 'View Details → ',
+                  text: AppStrings.viewDetails,
                   color: AppColors.primaryColor,
                   size: 16,
                   weight: FontWeight.w500,

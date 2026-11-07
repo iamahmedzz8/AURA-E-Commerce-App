@@ -1,4 +1,5 @@
 
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:aura_maison_e_commerce/features/cart/presentaion/widgets/cart_cupon_widget.dart';
 import 'package:aura_maison_e_commerce/features/cart/presentaion/widgets/cart_item_widget.dart';
@@ -24,7 +25,7 @@ class CartScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    text: 'Shopping Bag',
+                    text: AppStrings.shoppingBag,
                     size: 22,
                     weight: FontWeight.w600,
                   ),
@@ -35,7 +36,7 @@ class CartScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       color: Color(0xffF3E8CC),
                     ),
-                    child: Center(child: CustomText(text: '3 items')),
+                    child: Center(child: CustomText(text: AppStrings.itemsCount3)),
                   ),
                 ],
               ),

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/otp_cubit.dart';
 import 'package:aura_maison_e_commerce/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,7 @@ class _OtpScreenState extends State<OtpScreen> {
     final code = _controllers.map((c) => c.text).join();
     if (code.length != 6) {
       _showMessage(
-        'Please enter all 6 digits of the security code.',
+        AppStrings.enterAll6DigitsSecurityCode,
         isError: true,
       );
       return;
@@ -146,7 +147,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   );
 
                   if (!context.mounted) return;
-                  _showMessage('Account verified. Welcome to Aura Maison.');
+                  _showMessage(AppStrings.accountVerifiedWelcome);
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (_) => const MainScreen()),
@@ -154,7 +155,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   );
                 } else {
                   _showMessage(
-                    'Security code confirmed. Proceeding to set new seal...',
+                    AppStrings.securityCodeConfirmed,
                   );
                   Navigator.push(
                     context,
@@ -178,17 +179,16 @@ class _OtpScreenState extends State<OtpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AuthTopBar(
-                      title: 'Otp Verification',
+                      title: AppStrings.otpVerificationTitle,
                       onBack: () => Navigator.pop(context),
                       backIcon: Icons.arrow_back,
                     ),
                     const SizedBox(height: 24),
                     AuraMedallionHeader(
                       icon: Icons.lock,
-                      tag: 'CONCIERGE PROTOCOL',
-                      title: 'Private Security Code',
-                      subtitle:
-                          'An exclusive six-digit confirmation\ncode has been sent to',
+                      tag: AppStrings.conciergeProtocol,
+                      title: AppStrings.privateSecurityCode,
+                      subtitle: AppStrings.otpSentSubtitle,
                       extraChild: Text(
                         widget.email,
                         textAlign: TextAlign.center,
@@ -288,7 +288,7 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
               const SizedBox(width: 7),
               Text(
-                'Expires in 00:${_seconds.toString().padLeft(2, '0')}',
+                '${AppStrings.expiresInPrefix}${_seconds.toString().padLeft(2, '0')}',
                 style: const TextStyle(
                   color: AppColors.ivoryMuted,
                   fontSize: 12,
@@ -312,12 +312,10 @@ class _OtpScreenState extends State<OtpScreen> {
           else
             TextButton(
               onPressed: canResend ? () => _resend(context) : null,
-              child: Text(
-                'ISSUE A NEW CODE',
+              child: const Text(
+                AppStrings.issueNewCode,
                 style: TextStyle(
-                  color: canResend
-                      ? AppColors.gold
-                      : AppColors.obsidianBorder,
+                  color: AppColors.gold,
                   letterSpacing: 1.1,
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
@@ -346,7 +344,7 @@ class _OtpScreenState extends State<OtpScreen> {
               )
             : const Icon(Icons.arrow_forward, size: 17),
         label: Text(
-          isVerifying ? 'AUTHENTICATING...' : 'VERIFY AURA ACCESS',
+          isVerifying ? AppStrings.authenticating : AppStrings.verifyAuraAccess,
           style: const TextStyle(
             letterSpacing: 1.2,
             fontWeight: FontWeight.w800,
@@ -373,7 +371,7 @@ class _OtpScreenState extends State<OtpScreen> {
         onPressed: () => Navigator.pop(context),
         icon: const Icon(Icons.arrow_back, size: 16),
         label: const Text(
-          'CHANGE AUTHENTICATION',
+          AppStrings.changeAuthentication,
           style: TextStyle(
             letterSpacing: 1.1,
             fontSize: 11,
@@ -401,18 +399,18 @@ class _OtpScreenState extends State<OtpScreen> {
       child: const Column(
         children: [
           AuthInfoRow(
-            label: 'ASSIGNED WORKSPACE',
-            value: 'Paris Fine Watchmaking Salon',
+            label: AppStrings.assignedWorkspace,
+            value: AppStrings.assignedWorkspaceValue,
           ),
           SizedBox(height: 12),
           AuthInfoRow(
-            label: 'DELIVERY CHANNEL',
-            value: 'Secure Messaging Relay',
+            label: AppStrings.deliveryChannel,
+            value: AppStrings.deliveryChannelValue,
           ),
           SizedBox(height: 12),
           AuthInfoRow(
-            label: 'BATCH ID',
-            value: 'W.R. - 0021-CH',
+            label: AppStrings.batchId,
+            value: AppStrings.batchIdValue,
             valueColor: AppColors.gold,
           ),
         ],

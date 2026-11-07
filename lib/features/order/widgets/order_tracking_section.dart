@@ -1,5 +1,5 @@
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,7 +15,7 @@ class OrderTrackingSection extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         color: AppColors.tertiaryColor,
       ),
-      padding: EdgeInsets.all(7),
+      padding: const EdgeInsets.all(7),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,20 +26,20 @@ class OrderTrackingSection extends StatelessWidget {
                 width: 30,
                 height: 30,
               ),
-              CustomText(
-                text: '  Priority Courier',
+              const CustomText(
+                text: AppStrings.priorityCourier,
                 size: 16,
                 weight: FontWeight.w500,
               ),
-              Spacer(),
+              const Spacer(),
               Container(
-                padding: EdgeInsets.all(3),
+                padding: const EdgeInsets.all(3),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.white,
                 ),
-                child: CustomText(
-                  text: 'Standard Insured',
+                child: const CustomText(
+                  text: AppStrings.standardInsured,
                   color: Colors.green,
                   weight: FontWeight.w500,
                   size: 12,
@@ -47,22 +47,34 @@ class OrderTrackingSection extends StatelessWidget {
               ),
             ],
           ),
-          Gap(10),
+          const Gap(10),
           Image.asset('assets/images/Progress Stepper Track.png'),
-          Gap(10),
-          Row(
+          const Gap(10),
+          const Row(
             children: [
-              CustomText(text: 'Payment', size: 12, weight: FontWeight.w500),
-              Spacer(),
-              CustomText(text: 'Packaging', size: 12, weight: FontWeight.w500),
-              Spacer(),
               CustomText(
-                text: 'Out for delivery',
+                text: AppStrings.stepPayment,
                 size: 12,
                 weight: FontWeight.w500,
               ),
               Spacer(),
-              CustomText(text: 'Delivered', size: 12, weight: FontWeight.w500),
+              CustomText(
+                text: AppStrings.stepPackaging,
+                size: 12,
+                weight: FontWeight.w500,
+              ),
+              Spacer(),
+              CustomText(
+                text: AppStrings.stepOutForDelivery,
+                size: 12,
+                weight: FontWeight.w500,
+              ),
+              Spacer(),
+              CustomText(
+                text: AppStrings.orderStatusDelivered,
+                size: 12,
+                weight: FontWeight.w500,
+              ),
             ],
           ),
         ],

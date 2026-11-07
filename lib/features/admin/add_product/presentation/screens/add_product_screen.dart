@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/theme/dark_theme.dart';
+import '../../../../../core/utils/app_strings.dart';
 import '../../../../../features/products/products/presentation/cubit/products_cubit.dart';
 import '../../../../products/products/domain/entities/products_entity.dart';
 import '../widgets/add_product_app_bar.dart';
@@ -80,17 +81,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     listener: (context, state) {
                       if (state is AddProductSuccess) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Product Added Successfully!'), backgroundColor: Colors.green),
+                          const SnackBar(
+                            content: Text(AppStrings.addProductSuccess),
+                            backgroundColor: Colors.green,
+                          ),
                         );
                         Navigator.pop(context, true);
-                      }
-                      else if (state is AddProductFailure) {
+                      } else if (state is AddProductFailure) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(state.error), backgroundColor: Colors.red),
+                          SnackBar(
+                            content: Text(state.error),
+                            backgroundColor: Colors.red,
+                          ),
                         );
                       }
                     },
-
                     builder: (context, state) {
                       return SizedBox(
                         width: double.infinity,
@@ -99,33 +104,59 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             backgroundColor: DarkTheme.gold,
                             foregroundColor: DarkTheme.background,
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
                           ),
-                          onPressed: state is AddProductLoading ? null : () {
-                            final newProduct = ProductEntity(
-                              id: "",
-                              name: nameController.text.isNotEmpty ? nameController.text : "Test Watch",
-                              nameArabic: nameArabicController.text.isNotEmpty ? nameArabicController.text : "ساعة تجريبية",
-                              description: descriptionController.text.isNotEmpty ? descriptionController.text : "Test Description",
-                              descriptionArabic: "وصف تجريبي",
-                              coverPictureUrl: imageUrlController.text.isNotEmpty ? imageUrlController.text : "https://picsum.photos/200",
-                              price: double.tryParse(priceController.text) ?? 10.0,
-                              stock: int.tryParse(stockController.text) ?? 1,
-                              weight: 0.0,
-                              color: "Silver",
-                              discountPercentage: 0.0,
-                              categoryIds: [],
-                              productPictureUrls: [],
-                            );
+                          onPressed: state is AddProductLoading
+                              ? null
+                              : () {
+                                  final newProduct = ProductEntity(
+                                    id: "",
+                                    name: nameController.text.isNotEmpty
+                                        ? nameController.text
+                                        : AppStrings.defaultProductName,
+                                    nameArabic: nameArabicController.text.isNotEmpty
+                                        ? nameArabicController.text
+                                        : AppStrings.defaultProductArabicName,
+                                    description: descriptionController.text.isNotEmpty
+                                        ? descriptionController.text
+                                        : AppStrings.defaultProductDescription,
+                                    descriptionArabic:
+                                        AppStrings.defaultProductArabicDescription,
+                                    coverPictureUrl: imageUrlController.text.isNotEmpty
+                                        ? imageUrlController.text
+                                        : "https://picsum.photos/200",
+                                    price: double.tryParse(priceController.text) ?? 10.0,
+                                    stock: int.tryParse(stockController.text) ?? 1,
+                                    weight: 0.0,
+                                    color: "Silver",
+                                    discountPercentage: 0.0,
+                                    categoryIds: [],
+                                    productPictureUrls: [],
+                                  );
 
-                            context.read<ProductsCubit>().addProduct(newProduct);
-                          },
+                                  context.read<ProductsCubit>().addProduct(newProduct);
+                                },
                           icon: state is AddProductLoading
-                              ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                )
                               : const Icon(Icons.save_outlined, size: 18),
                           label: Text(
-                            state is AddProductLoading ? 'SAVING...' : 'SAVE TO SOVEREIGN REGISTER',
-                            style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1, fontFamily: 'Inter'),
+                            state is AddProductLoading
+                                ? AppStrings.saving
+                                : AppStrings.saveToSovereignRegister,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1,
+                              fontFamily: 'Inter',
+                            ),
                           ),
                         ),
                       );
@@ -136,7 +167,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     width: double.infinity,
                     child: TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('Cancel and return to inventory', style: TextStyle(color: DarkTheme.secondaryText, fontSize: 12, fontFamily: 'Inter')),
+                      child: const Text(
+                        AppStrings.cancelReturnToInventory,
+                        style: TextStyle(
+                          color: DarkTheme.secondaryText,
+                          fontSize: 12,
+                          fontFamily: 'Inter',
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 24),

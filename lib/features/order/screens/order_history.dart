@@ -1,4 +1,5 @@
 
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:aura_maison_e_commerce/features/order/widgets/order_category.dart';
@@ -26,7 +27,7 @@ class OrderHistory extends StatelessWidget {
         ),
         centerTitle: true,
         title: const CustomText(
-          text: 'Order History',
+          text: AppStrings.orderHistory,
           size: 25,
           weight: FontWeight.bold,
         ),
@@ -46,7 +47,7 @@ class OrderHistory extends StatelessWidget {
           children: [
             CustomText(
               text:
-                  'Review, track parcel journeys, or request boutique conciergeassistance.',
+                  AppStrings.orderHistorySubtitle,
               size: 13,
               maxLines: 2,
               weight: FontWeight.w400,
@@ -57,22 +58,22 @@ class OrderHistory extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 OrderCategory(
-                  text: 'All',
+                  text: AppStrings.categoryAll,
                   background: Colors.black,
                   textColor: Colors.white,
                 ),
                 OrderCategory(
-                  text: 'Processing',
+                  text: AppStrings.orderStatusProcessing,
                   background: AppColors.secondaryColor,
                   textColor: Colors.black,
                 ),
                 OrderCategory(
-                  text: 'Shipped',
+                  text: AppStrings.orderStatusShipped,
                   background: AppColors.secondaryColor,
                   textColor: Colors.black,
                 ),
                 OrderCategory(
-                  text: 'Delivered',
+                  text: AppStrings.orderStatusDelivered,
                   background: AppColors.secondaryColor,
                   textColor: Colors.black,
                 ),

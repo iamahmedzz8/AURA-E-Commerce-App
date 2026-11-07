@@ -16,7 +16,7 @@ class ResendOtpService {
 
   Future<void> resend(String email) async {
     try {
-      // TODO: غيّر الـ endpoint واسم الحقل حسب الـ Swagger
+      // TODO: Verify endpoint and payload field name against API Swagger
       await dio.post('/auth/resend-otp', data: {'email': email});
     } on DioException catch (e) {
       if (e.response != null) {

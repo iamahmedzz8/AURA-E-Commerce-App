@@ -1,5 +1,6 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/reset_password_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,7 +81,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         const SnackBar(
           backgroundColor: AppColors.obsidianElevated,
           content: Text(
-            'Your new passphrase must satisfy all four Fine Watchmaking security criteria.',
+            AppStrings.passphraseCriteriaRequirement,
             style: TextStyle(color: AppColors.ivory),
           ),
         ),
@@ -93,7 +94,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         const SnackBar(
           backgroundColor: AppColors.obsidianElevated,
           content: Text(
-            'Both passphrases must match exactly.',
+            AppStrings.passphrasesMustMatch,
             style: TextStyle(color: AppColors.ivory),
           ),
         ),
@@ -123,7 +124,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             Icon(Icons.verified_outlined, color: AppColors.gold, size: 24),
             SizedBox(width: 10),
             Text(
-              'Private Seal Updated',
+              AppStrings.privateSealUpdated,
               style: TextStyle(
                 fontFamily: 'serif',
                 color: AppColors.ivory,
@@ -133,7 +134,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ],
         ),
         content: const Text(
-          'Your new cryptographic cipher has been synchronised across all authorized salon nodes.',
+          AppStrings.privateSealUpdatedDesc,
           style: TextStyle(color: AppColors.luxuryMuted, fontSize: 13),
         ),
         actions: [
@@ -153,7 +154,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               );
             },
             child: const Text(
-              'RETURN TO SALON SIGN-IN',
+              AppStrings.returnToSalonSignInUpper,
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
@@ -176,7 +177,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           child: Column(
             children: [
               AuthTopBar(
-                title: 'Reset Password',
+                title: AppStrings.resetPasswordTitle,
                 onBack: () => Navigator.maybePop(context),
               ),
               Expanded(
@@ -209,10 +210,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           children: [
                             const AuraMedallionHeader(
                               icon: Icons.lock_reset,
-                              tag: 'FINE WATCHMAKING ENCRYPTION',
-                              title: 'Set a New Seal',
-                              subtitle:
-                                  'Your new passphrase must meet\nthe security criteria of Fine Watchmaking.',
+                              tag: AppStrings.fineWatchmakingEncryption,
+                              title: AppStrings.setANewSeal,
+                              subtitle: AppStrings.setANewSealSubtitle,
                             ),
                             const SizedBox(height: 22),
                             _buildNewPassphraseCard(),
@@ -262,7 +262,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'NEW PASSPHRASE',
+                AppStrings.newPassphrase,
                 style: TextStyle(
                   color: AppColors.luxuryMuted,
                   fontSize: 10.5,
@@ -283,7 +283,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                 ),
                 child: Text(
-                  _score == 4 ? 'Optimal Security' : 'Cipher Incomplete',
+                  _score == 4
+                      ? AppStrings.optimalSecurity
+                      : AppStrings.cipherIncomplete,
                   style: TextStyle(
                     color: _score == 4
                         ? AppColors.emerald
@@ -385,7 +387,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'CONFIRM PASSPHRASE',
+                AppStrings.confirmPassphrase,
                 style: TextStyle(
                   color: AppColors.luxuryMuted,
                   fontSize: 10.5,
@@ -413,7 +415,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       Icon(Icons.check, size: 10, color: AppColors.emerald),
                       SizedBox(width: 3),
                       Text(
-                        'EXACT MATCH',
+                        AppStrings.exactMatch,
                         style: TextStyle(
                           color: AppColors.emerald,
                           fontSize: 9.5,
@@ -514,7 +516,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'UPDATE PRIVATE SEAL',
+                    AppStrings.updatePrivateSeal,
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
@@ -537,14 +539,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             const SnackBar(
               backgroundColor: AppColors.obsidianElevated,
               content: Text(
-                'Connecting to assigned Vendôme Salon concierge liaison...',
+                AppStrings.connectingConciergeLiaison,
                 style: TextStyle(color: AppColors.ivory),
               ),
             ),
           );
         },
         child: const Text(
-          'Need a dedicated advisor?',
+          AppStrings.needDedicatedAdvisor,
           style: TextStyle(
             color: AppColors.luxuryMuted,
             fontSize: 12,

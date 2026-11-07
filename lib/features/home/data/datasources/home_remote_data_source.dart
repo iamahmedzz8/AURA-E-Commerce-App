@@ -6,6 +6,7 @@ import 'package:aura_maison_e_commerce/core/network/api_endpoints.dart';
 import 'package:aura_maison_e_commerce/core/network/dio_client.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/offer_model.dart';
+import 'package:aura_maison_e_commerce/features/home/data/models/product_model.dart';
 import 'package:dio/dio.dart';
 
 class HomeRemoteDataSource {
@@ -17,7 +18,13 @@ class HomeRemoteDataSource {
   /// Fetch all promotional offers from the API
   Future<List<OfferModel>> getOffers() async {
     try {
-      final response = await _dioClient.get(ApiEndpoints.offers);
+      final response = await _dioClient.get(
+        ApiEndpoints.offers,
+        data: {
+          'page': 1,
+          'pageSize': 10,
+        },
+      );
       final data = response.data;
 
       if (data is Map<String, dynamic>) {
@@ -94,6 +101,45 @@ class HomeRemoteDataSource {
       throw Exception(e.failure.message);
     } catch (e) {
       throw Exception('Failed to load categories: $e');
+    }
+  }
+
+  /// Fetch all products from the API
+  Future<List<ProductModel>> getProducts({
+    int page = 1,
+    int pageSize = 10,
+  }) async {
+    try {
+      final response = await _dioClient.get(
+        ApiEndpoints.products,
+        data: {
+          'page': page,
+          'pageSize': pageSize,
+        },
+      );
+      final data = response.data;
+
+      if (data is Map<String, dynamic>) {
+        if (data.containsKey('items') && data['items'] is List) {
+          return (data['items'] as List)
+              .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+              .toList();
+        } else if (data.containsKey('products') && data['products'] is List) {
+          return (data['products'] as List)
+              .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+              .toList();
+        }
+      } else if (data is List) {
+        return data
+            .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+            .toList();
+      }
+
+      return [];
+    } on ErrorHandler catch (e) {
+      throw Exception(e.failure.message);
+    } catch (e) {
+      throw Exception('Failed to load products: $e');
     }
   }
 

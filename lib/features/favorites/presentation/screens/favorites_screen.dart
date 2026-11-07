@@ -1,4 +1,5 @@
 
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/favorites/presentation/widgets/favorites_conciergeSection.dart';
 import 'package:aura_maison_e_commerce/features/favorites/presentation/widgets/favorites_manager.dart';
 import 'package:aura_maison_e_commerce/features/favorites/presentation/widgets/favotrite_notice.dart';
@@ -40,7 +41,7 @@ void initState() {
       favoriteProducts.removeAt(index);
     });
 
-    _showMessage('Removed from your favorites');
+    _showMessage(AppStrings.removedFromFavorites);
   }
 
   void moveToBag(int index) {
@@ -48,7 +49,7 @@ void initState() {
       favoriteProducts.removeAt(index);
     });
 
-    _showMessage('Product moved to bag');
+    _showMessage(AppStrings.productMovedToBag);
   }
 
   void transferAll() {
@@ -58,7 +59,7 @@ void initState() {
       favoriteProducts.clear();
     });
 
-    _showMessage('All products transferred');
+    _showMessage(AppStrings.allProductsTransferred);
   }
 
   void _showMessage(String message) {
@@ -94,19 +95,19 @@ void initState() {
   }
 
   void handleManage() {
-    _showMessage('Manage favorites');
+    _showMessage(AppStrings.manageFavorites);
   }
 
   void handleExplore() {
-    _showMessage('Explore workshop collections');
+    _showMessage(AppStrings.exploreWorkshopCollections);
   }
 
   void handleAllocations() {
-    _showMessage('View rare allocations');
+    _showMessage(AppStrings.viewRareAllocations);
   }
 
   void handleScheduleVisit() {
-    _showMessage('Private visit request');
+    _showMessage(AppStrings.privateVisitRequest);
   }
 
   Widget buildFavoritesContent(double width) {
@@ -197,7 +198,7 @@ void initState() {
         child: Column(
           children: [
             const AppHeader(
-              title: 'Vault Acquisitions',
+              title: AppStrings.vaultAcquisitions,
               showBrand: true,
               showSearch: true,
               showNotifications: true,

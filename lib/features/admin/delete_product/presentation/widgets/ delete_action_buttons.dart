@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/theme/dark_theme.dart';
+import '../../../../../core/utils/app_strings.dart';
 import '../../../../products/products/presentation/cubit/products_cubit.dart';
 
 class DeleteActionButtons extends StatelessWidget {
@@ -28,7 +29,7 @@ class DeleteActionButtons extends StatelessWidget {
             },
             icon: const Icon(Icons.delete_outline, size: 18),
             label: const Text(
-              'REMOVE PERMANENTLY FROM REGISTER',
+              AppStrings.removePermanently,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0.5,
@@ -53,7 +54,7 @@ class DeleteActionButtons extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.inventory_2_outlined, size: 18),
             label: const Text(
-              'KEEP PIECE IN INVENTORY',
+              AppStrings.keepPieceInInventory,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,

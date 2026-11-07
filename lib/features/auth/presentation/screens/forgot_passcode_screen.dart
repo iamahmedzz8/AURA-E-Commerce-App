@@ -1,5 +1,6 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/forgot_passcode_cubit.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/otp_cubit.dart';
 import 'package:flutter/material.dart';
@@ -38,22 +39,20 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
 
     if (value.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
+        SnackBar(
           backgroundColor: AppColors.obsidianElevated,
           content: Text(
-            // 'Please enter your member email or patron vault ID.',
-            // style: TextStyle(color: AppColors.ivory),
-            'Secure recovery dispatch sent to $value.',
+            '${AppStrings.secureRecoveryDispatchSent}$value.',
             style: const TextStyle(color: AppColors.ivory),
           ),
           action: SnackBarAction(
-            label: 'ENTER OTP',
+            label: AppStrings.enterOtp,
             textColor: AppColors.gold,
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) =>OtpScreen (
+                  builder: (_) => OtpScreen(
                     email: value,
                     purpose: OtpPurpose.resetPassword,
                   ),
@@ -79,7 +78,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
           child: Column(
             children: [
               AuthTopBar(
-                title: 'Forgot Password',
+                title: AppStrings.forgotPassword,
                 onBack: () => Navigator.maybePop(context),
               ),
               Expanded(
@@ -100,7 +99,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
                         SnackBar(
                           backgroundColor: AppColors.obsidianElevated,
                           content: Text(
-                            'Secure recovery dispatch sent to ${state.email}.',
+                            '${AppStrings.secureRecoveryDispatchSent}${state.email}.',
                             style: const TextStyle(color: AppColors.ivory),
                           ),
                         ),
@@ -130,18 +129,16 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
                           children: [
                             const AuraMedallionHeader(
                               icon: Icons.vpn_key_outlined,
-                              tag: 'HIGH-SECURITY PROTOCOL',
-                              title: 'Private Seal Recovery',
-                              subtitle:
-                                  'Enter your member email address\nor vault ID to reset your access key.',
+                              tag: AppStrings.highSecurityProtocol,
+                              title: AppStrings.privateSealRecovery,
+                              subtitle: AppStrings.privateSealRecoverySubtitle,
                             ),
                             const SizedBox(height: 24),
                             _buildInputVitrineCard(),
                             const SizedBox(height: 14),
                             const InstructionProtocolCard(
-                              title: 'ESCROW DURATION',
-                              description:
-                                  'A single-use link valid for 15 minutes will be sent via an encrypted protocol.',
+                              title: AppStrings.escrowDuration,
+                              description: AppStrings.escrowDurationDesc,
                             ),
                             const SizedBox(height: 20),
                             _buildActionButton(context, isLoading),
@@ -185,7 +182,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'PRIVATE EMAIL OR PATRON ID',
+                AppStrings.privateEmailOrPatronId,
                 style: TextStyle(
                   color: AppColors.luxuryMuted,
                   fontSize: 10.5,
@@ -204,7 +201,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
                   ),
                 ),
                 child: Text(
-                  'Vault 4096-bit',
+                  AppStrings.vault4096Bit,
                   style: TextStyle(
                     color: AppColors.gold.withValues(alpha: 0.8),
                     fontSize: 9.5,
@@ -225,7 +222,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
             ),
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-              hintText: 'patron@vendome-sanctuary.ch',
+              hintText: AppStrings.patronEmailPlaceholder,
               hintStyle: TextStyle(
                 color: AppColors.luxuryMuted.withValues(alpha: 0.6),
                 fontSize: 13.5,
@@ -291,7 +288,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'SEND RECOVERY LINK',
+                    AppStrings.sendRecoveryLink,
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
@@ -326,7 +323,7 @@ class _ForgotPasscodeScreenState extends State<ForgotPasscodeScreen> {
           color: AppColors.luxuryMuted,
         ),
         label: const Text(
-          'Return to Salon Sign-In',
+          AppStrings.returnToSalonSignIn,
           style: TextStyle(
             color: AppColors.luxuryMuted,
             fontSize: 13,

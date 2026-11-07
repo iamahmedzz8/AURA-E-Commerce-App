@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 /// Top header for Salon Launch / Splash view with progress line
@@ -51,7 +52,7 @@ class SalonHeader extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     const Text(
-                      'Member Authentication',
+                      AppStrings.memberAuthentication,
                       style: TextStyle(
                         fontFamily: 'serif',
                         color: AppColors.ivory,

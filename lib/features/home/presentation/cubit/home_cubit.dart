@@ -67,3 +67,27 @@ class CategoriesCubit extends Cubit<CategoriesState> {
     }
   }
 }
+
+//=============Products Cubit=======================
+class HomeProductsCubit extends Cubit<HomeProductsState> {
+  final HomeRemoteDataSource _homeRemoteDataSource;
+
+  HomeProductsCubit([HomeRemoteDataSource? homeRemoteDataSource])
+      : _homeRemoteDataSource = homeRemoteDataSource ?? HomeRemoteDataSource(),
+        super(HomeProductsInitialState());
+
+  Future<void> fetchProducts({int page = 1, int pageSize = 10}) async {
+    emit(HomeProductsLoadingState());
+    try {
+      final products = await _homeRemoteDataSource.getProducts(
+        page: page,
+        pageSize: pageSize,
+      );
+      emit(HomeProductsSuccessState(products: products));
+    } catch (e) {
+      emit(HomeProductsFailureState(
+        errorMessage: e.toString().replaceFirst('Exception: ', ''),
+      ));
+    }
+  }
+}
