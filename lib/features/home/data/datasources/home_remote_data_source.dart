@@ -4,6 +4,7 @@ import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/error/error_handler.dart';
 import 'package:aura_maison_e_commerce/core/network/api_endpoints.dart';
 import 'package:aura_maison_e_commerce/core/network/dio_client.dart';
+import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/offer_model.dart';
 import 'package:dio/dio.dart';
 
@@ -70,19 +71,25 @@ class HomeRemoteDataSource {
     }
   }
 
-  Future<List> getCategories() async {
+  /// Fetch all product categories from the API
+  Future<List<CategoryModel>> getCategories() async {
     try {
       final response = await _dioClient.get(ApiEndpoints.categories);
-      if (response.statusCode == 200) {
-        final data = response.data;
-        if (data is List) return data;
-        if (data is Map && data.containsKey('categories')) {
-          return data['categories'] as List;
+      final data = response.data;
+
+      if (data is Map<String, dynamic>) {
+        if (data.containsKey('categories') && data['categories'] is List) {
+          return (data['categories'] as List)
+              .map((e) => CategoryModel.fromJson(e as Map<String, dynamic>))
+              .toList();
         }
-        return [];
-      } else {
-        throw Exception('Failed to load categories');
+      } else if (data is List) {
+        return data
+            .map((e) => CategoryModel.fromJson(e as Map<String, dynamic>))
+            .toList();
       }
+
+      return [];
     } on ErrorHandler catch (e) {
       throw Exception(e.failure.message);
     } catch (e) {

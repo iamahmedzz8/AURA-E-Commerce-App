@@ -54,6 +54,16 @@ class CategoriesCubit extends Cubit<CategoriesState> {
   CategoriesCubit([HomeRemoteDataSource? homeRemoteDataSource])
       : _homeRemoteDataSource = homeRemoteDataSource ?? HomeRemoteDataSource(),
         super(CategoriesInitialState());
-}
 
-class CategoriesInitialState extends CategoriesState {}
+  Future<void> fetchCategories() async {
+    emit(CategoriesLoadingState());
+    try {
+      final categories = await _homeRemoteDataSource.getCategories();
+      emit(CategoriesSuccessState(categories: categories));
+    } catch (e) {
+      emit(CategoriesFailureState(
+        errorMessage: e.toString().replaceFirst('Exception: ', ''),
+      ));
+    }
+  }
+}

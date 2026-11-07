@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/offer_model.dart';
 
 class HomeState {
@@ -40,10 +41,12 @@ class OffersFailureState extends OffersState {
 //=============================Categories State=========================
 abstract class CategoriesState {}
 
+class CategoriesInitialState extends CategoriesState {}
+
 class CategoriesLoadingState extends CategoriesState {}
 
 class CategoriesSuccessState extends CategoriesState {
-  final List categories;
+  final List<CategoryModel> categories;
   CategoriesSuccessState({required this.categories});
 }
 

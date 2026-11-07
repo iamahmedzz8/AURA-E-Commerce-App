@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
+import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/offer_model.dart';
 import 'package:aura_maison_e_commerce/features/products/product_details/presentation/screens/product_details_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         BlocProvider<OffersCubit>(
           create: (_) => sl<OffersCubit>()..fetchOffers(),
+        ),
+        BlocProvider<CategoriesCubit>(
+          create: (_) => sl<CategoriesCubit>()..fetchCategories(),
         ),
       ],
       child: const _HomeScreenContent(),
@@ -843,6 +847,146 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
   }
 
   Widget disciplines() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        sectionHeader(
+          title: 'Curated Disciplines',
+          action: 'ARCHIVES',
+          onTap: openProducts,
+        ),
+        BlocBuilder<CategoriesCubit, CategoriesState>(
+          builder: (context, state) {
+            if (state is CategoriesLoadingState) {
+              return _buildDisciplinesLoading();
+            }
+
+            if (state is CategoriesSuccessState &&
+                state.categories.isNotEmpty) {
+              return SizedBox(
+                height: 100,
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: state.categories.length,
+                  separatorBuilder: (_, __) => const SizedBox(width: 10),
+                  itemBuilder: (context, index) {
+                    final category = state.categories[index];
+                    return _buildCategoryCard(category);
+                  },
+                ),
+              );
+            }
+
+            return _buildDefaultDisciplines();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCategoryCard(CategoryModel category) {
+    return GestureDetector(
+      onTap: openProducts,
+      child: Container(
+        width: 88,
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          color: surface,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            if (category.coverPictureUrl.isNotEmpty)
+              Image.network(
+                category.coverPictureUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) {
+                  return Container(
+                    color: darkSurface,
+                    child: const Center(
+                      child: Icon(
+                        Icons.category_outlined,
+                        color: Colors.white24,
+                        size: 28,
+                      ),
+                    ),
+                  );
+                },
+              )
+            else
+              Container(color: darkSurface),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withValues(alpha: .8),
+                  ],
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Text(
+                  category.name.toUpperCase(),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontFamily: 'Inter',
+                    color: Colors.white,
+                    fontSize: 8,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDisciplinesLoading() {
+    return SizedBox(
+      height: 100,
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        scrollDirection: Axis.horizontal,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: 4,
+        separatorBuilder: (_, __) => const SizedBox(width: 10),
+        itemBuilder: (context, index) {
+          return Container(
+            width: 88,
+            decoration: BoxDecoration(
+              color: surface,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Center(
+              child: SizedBox(
+                width: 16,
+                height: 16,
+                child: CircularProgressIndicator(
+                  strokeWidth: 1.5,
+                  color: gold.withValues(alpha: .5),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildDefaultDisciplines() {
     final items = [
       (
         'WATCHMAKING',
@@ -862,77 +1006,67 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       ),
     ];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        sectionHeader(
-          title: 'Curated Disciplines',
-          action: 'ARCHIVES',
-          onTap: openProducts,
-        ),
-        SizedBox(
-          height: 100,
-          child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            scrollDirection: Axis.horizontal,
-            itemCount: items.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 10),
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: openProducts,
-                child: Container(
-                  width: 88,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: surface,
-                    borderRadius: BorderRadius.circular(5),
+    return SizedBox(
+      height: 100,
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        scrollDirection: Axis.horizontal,
+        itemCount: items.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 10),
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: openProducts,
+            child: Container(
+              width: 88,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                color: surface,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.network(
+                    items[index].$2,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) {
+                      return Container(color: darkSurface);
+                    },
                   ),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Image.network(
-                        items[index].$2,
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) {
-                          return Container(color: darkSurface);
-                        },
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withValues(alpha: .8),
+                        ],
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.transparent,
-                              Colors.black.withValues(alpha: .8),
-                            ],
-                          ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        items[index].$1,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontFamily: 'Inter',
+                          color: Colors.white,
+                          fontSize: 8,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: Text(
-                            items[index].$1,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontFamily: 'Inter',
-                              color: Colors.white,
-                              fontSize: 8,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 
