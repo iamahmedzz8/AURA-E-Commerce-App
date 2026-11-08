@@ -1,5 +1,6 @@
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
+import 'package:aura_maison_e_commerce/features/cart/presentaion/cubit/cart_cubit.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/product_model.dart';
 import 'package:aura_maison_e_commerce/features/home/presentation/cubit/home_cubit.dart';
@@ -89,37 +90,47 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
     }).toList();
   }
 
-  void _openProductDetails(ProductModel product) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => BlocProvider<ProductDetailsCubit>(
-          create: (_) => ProductDetailsCubit()..getProductsDetails(product.id),
-          child: ProductDetailsScreen(
-            productId: product.id,
-            product: {
-              'id': product.id,
-              'name': product.name,
-              'category': product.categories.isNotEmpty
-                  ? product.categories.first.toUpperCase()
-                  : 'LUXURY CREATION',
-              'price': '${product.price.toInt()} EGP',
-              'description': product.description ?? '',
-              'rating': product.rating > 0
-                  ? product.rating.toStringAsFixed(1)
-                  : '5.0',
-              'image': product.coverPictureUrl,
-              'tag': product.color.isNotEmpty
-                  ? product.color.toUpperCase()
-                  : (product.discountPercentage > 0
-                      ? '${product.discountPercentage}% OFF'
-                      : 'EXCLUSIVE'),
-            },
+  
+void _openProductDetails(ProductModel product) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider<CartCubit>(
+            create: (_) => sl<CartCubit>(),
           ),
+          BlocProvider<ProductDetailsCubit>(
+            create: (_) =>
+                ProductDetailsCubit()..getProductsDetails(product.id),
+          ),
+        ],
+        child: ProductDetailsScreen(
+          productId: product.id,
+          product: {
+            'id': product.id,
+            'name': product.name,
+            'category': product.categories.isNotEmpty
+                ? product.categories.first.toUpperCase()
+                : 'LUXURY CREATION',
+            'price': '${product.price.toInt()} EGP',
+            'description': product.description ?? '',
+            'rating': product.rating > 0
+                ? product.rating.toStringAsFixed(1)
+                : '5.0',
+            'image': product.coverPictureUrl,
+            'tag': product.color.isNotEmpty
+                ? product.color.toUpperCase()
+                : (product.discountPercentage > 0
+                    ? '${product.discountPercentage}% OFF'
+                    : 'EXCLUSIVE'),
+          },
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {
