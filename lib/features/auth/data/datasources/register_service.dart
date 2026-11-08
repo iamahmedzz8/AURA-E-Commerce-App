@@ -15,7 +15,7 @@ class RegisterService {
     ),
   );
 
-  Future<Response> register(RegisterModel model) async {
+  Future<Response> signUp(RegisterModel model) async {
     try {
       return await dio.post('/auth/register', data: model.toJson());
     } on DioException catch (e) {

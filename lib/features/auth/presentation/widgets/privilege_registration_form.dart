@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
@@ -14,8 +13,7 @@ class PasswordRules {
 
   static bool hasDigit(String p) => RegExp(r'\d').hasMatch(p);
 
-  static bool hasSpecial(String p) =>
-      RegExp(r'[^A-Za-z0-9\s]').hasMatch(p);
+  static bool hasSpecial(String p) => RegExp(r'[^A-Za-z0-9\s]').hasMatch(p);
 
   static int score(String p) => [
     hasMinLength(p),
@@ -48,8 +46,7 @@ class PrivilegeRegistrationForm extends StatefulWidget {
       _PrivilegeRegistrationFormState();
 }
 
-class _PrivilegeRegistrationFormState
-    extends State<PrivilegeRegistrationForm> {
+class _PrivilegeRegistrationFormState extends State<PrivilegeRegistrationForm> {
   static const String _firstNameLabel = 'FIRST NAME';
   static const String _lastNameLabel = 'LAST NAME';
 
@@ -70,17 +67,13 @@ class _PrivilegeRegistrationFormState
     _firstNameController =
         widget.firstNameController ?? TextEditingController();
 
-    _lastNameController =
-        widget.lastNameController ?? TextEditingController();
+    _lastNameController = widget.lastNameController ?? TextEditingController();
 
-    _emailController =
-        widget.emailController ?? TextEditingController();
+    _emailController = widget.emailController ?? TextEditingController();
 
-    _phoneController =
-        widget.phoneController ?? TextEditingController();
+    _phoneController = widget.phoneController ?? TextEditingController();
 
-    _passwordController =
-        widget.passwordController ?? TextEditingController();
+    _passwordController = widget.passwordController ?? TextEditingController();
 
     _passwordController.addListener(_onPasswordChanged);
   }
@@ -203,60 +196,6 @@ class _PrivilegeRegistrationFormState
 
           SizedBox(height: 20),
 
-          // PHONE LABEL
-          Text(
-            AppStrings.mobilePhoneLabel,
-            style: AppStyles.formFieldLabel.copyWith(
-              color: AppColors.goldAccent,
-            ),
-          ),
-
-          SizedBox(height: 6),
-
-          // PHONE INPUT + COUNTRY CODE
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildInputContainer(
-                width: 112,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        _selectedCountryCode,
-                        style: AppStyles.formInputText.copyWith(
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
-                      Icon(
-                        Icons.keyboard_arrow_down,
-                        size: 16,
-                        color: AppColors.goldAccent,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              SizedBox(width: 8),
-
-              Expanded(
-                child: _buildValidatedInput(
-                  controller: _phoneController,
-                  validator: (phone) {
-                    return Validator.validatePhoneNumber(phone.toString());
-                  },
-                  keyboardType: TextInputType.phone,
-                  hint: AppStrings.mobilePhonePlaceholder,
-                ),
-              ),
-            ],
-          ),
-
-          SizedBox(height: 20),
-
           // PASSWORD LABEL
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -298,9 +237,7 @@ class _PrivilegeRegistrationFormState
                       ),
                       hintText: AppStrings.securePasswordPlaceholder,
                       hintStyle: AppStyles.formInputText.copyWith(
-                        color: AppColors.textSecondary.withValues(
-                          alpha: 0.5,
-                        ),
+                        color: AppColors.textSecondary.withValues(alpha: 0.5),
                       ),
                     ),
                   ),
@@ -331,14 +268,12 @@ class _PrivilegeRegistrationFormState
             children: [
               for (int i = 0; i < 4; i++) ...[
                 if (i > 0) SizedBox(width: 6),
-                _buildStrengthSegment(
-                  active: i < strengthScore,
-                ),
+                _buildStrengthSegment(active: i < strengthScore),
               ],
             ],
           ),
 
-          SizedBox(height: 8),
+          SizedBox(height: 20),
 
           // PASSWORD CRITERIA
           Container(
@@ -346,10 +281,7 @@ class _PrivilegeRegistrationFormState
             decoration: BoxDecoration(
               color: AppColors.cardInactive,
               borderRadius: BorderRadius.circular(4),
-              border: Border.all(
-                color: AppColors.chipBorder,
-                width: 0.5,
-              ),
+              border: Border.all(color: AppColors.chipBorder, width: 0.5),
             ),
             child: Column(
               children: [
@@ -405,9 +337,7 @@ class _PrivilegeRegistrationFormState
       children: [
         Text(
           label,
-          style: AppStyles.formFieldLabel.copyWith(
-            color: AppColors.goldAccent,
-          ),
+          style: AppStyles.formFieldLabel.copyWith(color: AppColors.goldAccent),
         ),
         SizedBox(height: 6),
         _buildInputContainer(
@@ -437,101 +367,87 @@ class _PrivilegeRegistrationFormState
   }
 
   // VALIDATED INPUT
-  
-Widget _buildValidatedInput({
-  required TextEditingController controller,
-  required String? Function(String?) validator,
-  required TextInputType keyboardType,
-  required String hint,
-  Widget? suffixIcon,
-}) {
-  return FormField<String>(
-    initialValue: controller.text,
-    validator: validator,
-    autovalidateMode: AutovalidateMode.onUserInteraction,
-    builder: (field) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            height: 48,
-            decoration: BoxDecoration(
-              color: AppColors.cardInactive,
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(
-                color: AppColors.chipBorder,
-                width: 0.5,
+
+  Widget _buildValidatedInput({
+    required TextEditingController controller,
+    required String? Function(String?) validator,
+    required TextInputType keyboardType,
+    required String hint,
+    Widget? suffixIcon,
+  }) {
+    return FormField<String>(
+      initialValue: controller.text,
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      builder: (field) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 48,
+              decoration: BoxDecoration(
+                color: AppColors.cardInactive,
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: AppColors.chipBorder, width: 0.5),
               ),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: controller,
-                    keyboardType: keyboardType,
-                    style: AppStyles.formInputText.copyWith(
-                      color: AppColors.textPrimary,
-                    ),
-                    onChanged: (value) {
-                      field.didChange(value);
-                    },
-                    decoration: InputDecoration(
-                      isDense: true,
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 13,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: controller,
+                      keyboardType: keyboardType,
+                      style: AppStyles.formInputText.copyWith(
+                        color: AppColors.textPrimary,
                       ),
-                      hintText: hint,
-                      hintStyle: AppStyles.formInputText.copyWith(
-                        color: AppColors.textSecondary.withValues(
-                          alpha: 0.5,
+                      onChanged: (value) {
+                        field.didChange(value);
+                      },
+                      decoration: InputDecoration(
+                        isDense: true,
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 13,
+                        ),
+                        hintText: hint,
+                        hintStyle: AppStyles.formInputText.copyWith(
+                          color: AppColors.textSecondary.withValues(alpha: 0.5),
                         ),
                       ),
                     ),
                   ),
-                ),
-                if (suffixIcon != null)
-                  Padding(
-                    padding: EdgeInsets.only(right: 16),
-                    child: suffixIcon,
-                  ),
-              ],
-            ),
-          ),
-
-          if (field.hasError) ...[
-            SizedBox(height: 5),
-            Text(
-              field.errorText!,
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 12,
+                  if (suffixIcon != null)
+                    Padding(
+                      padding: EdgeInsets.only(right: 16),
+                      child: suffixIcon,
+                    ),
+                ],
               ),
             ),
+
+            if (field.hasError) ...[
+              SizedBox(height: 5),
+              Text(
+                field.errorText!,
+                style: TextStyle(color: Colors.red, fontSize: 12),
+              ),
+            ],
           ],
-        ],
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 
   // INPUT CONTAINER
-  Widget _buildInputContainer({
-    required Widget child,
-    double? width,
-  }) {
+  Widget _buildInputContainer({required Widget child, double? width}) {
     return Container(
       width: width,
       height: 48,
       decoration: BoxDecoration(
         color: AppColors.cardInactive,
         borderRadius: BorderRadius.circular(4),
-        border: Border.all(
-          color: AppColors.chipBorder,
-          width: 0.5,
-        ),
+        border: Border.all(color: AppColors.chipBorder, width: 0.5),
       ),
       child: child,
     );
@@ -543,9 +459,7 @@ Widget _buildValidatedInput({
       child: Container(
         height: 4,
         decoration: BoxDecoration(
-          color: active
-              ? AppColors.goldAccent
-              : AppColors.statusReservedBg,
+          color: active ? AppColors.goldAccent : AppColors.statusReservedBg,
           borderRadius: BorderRadius.circular(12),
         ),
       ),
@@ -560,9 +474,7 @@ Widget _buildValidatedInput({
         Icon(
           met ? Icons.check_circle : Icons.radio_button_unchecked,
           size: 14,
-          color: met
-              ? AppColors.statusGreen
-              : AppColors.textSecondary,
+          color: met ? AppColors.statusGreen : AppColors.textSecondary,
         ),
         SizedBox(width: 6),
         Flexible(
