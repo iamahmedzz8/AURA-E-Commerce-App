@@ -1,9 +1,9 @@
+
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
-import 'package:aura_maison_e_commerce/core/widgets/app_bottom_nav_bar.dart';
-import 'package:aura_maison_e_commerce/core/widgets/app_header.dart';
-import 'package:aura_maison_e_commerce/features/auth/data/datasources/register_service.dart';
 import 'package:aura_maison_e_commerce/features/auth/data/models/register_model.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/register_cubit.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/register_state.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/screens/otp_screen.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/screens/vip_member_sign_in_screen.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/widgets/discretion_guarantee_section.dart';
@@ -13,6 +13,7 @@ import 'package:aura_maison_e_commerce/features/auth/presentation/widgets/salon_
 import 'package:aura_maison_e_commerce/features/auth/presentation/widgets/vintage_allocation_card.dart';
 import 'package:aura_maison_e_commerce/features/support/support/presentation/screens/police_privacy.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -28,11 +29,15 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  final RegisterService _registerService = RegisterService();
+  late RegisterCubit _registerCubit;
 
   static final RegExp _emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
 
-  bool _isLoading = false;
+  @override
+  void initState() {
+    super.initState();
+    _registerCubit = RegisterCubit();
+  }
 
   @override
   void dispose() {
@@ -41,19 +46,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     _emailController.dispose();
     _phoneController.dispose();
     _passwordController.dispose();
+    _registerCubit.close();
+
     super.dispose();
   }
 
   void _showMessage(String message) {
     if (!mounted) return;
+
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text(message)));
   }
 
   Future<void> _onCreateAccount() async {
-    if (_isLoading) return;
-
     FocusScope.of(context).unfocus();
 
     final firstName = _firstNameController.text.trim();
@@ -76,7 +82,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       return;
     }
 
-    // 3) Password rules (same rules shown in the criteria card)
+    // 3) Password rules
     if (!PasswordRules.isValid(password)) {
       _showMessage(AppStrings.passwordRulesPrompt);
       return;
@@ -89,25 +95,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       lastName: lastName,
     );
 
-    setState(() => _isLoading = true);
-
-    try {
-      await _registerService.register(registerModel);
-
-      if (!mounted) return;
-
-      _showMessage(AppStrings.accountCreatedSuccess);
-
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder: (_) => OtpScreen(email: email, purpose: OtpPurpose.signup),
-        ),
-      );
-    } catch (e) {
-      _showMessage(e.toString().replaceFirst('Exception: ', ''));
-    } finally {
-      if (mounted) setState(() => _isLoading = false);
-    }
+    _registerCubit.register(registerModel);
   }
 
   void _onSignInTap() {
@@ -115,95 +103,127 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       Navigator.of(context).pop();
     } else {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute<void>(builder: (_) => VipMemberSignInScreen()),
+        MaterialPageRoute<void>(
+          builder: (_) => VipMemberSignInScreen(),
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final bool canGoBack = Navigator.of(context).canPop();
+    return BlocProvider.value(
+      value: _registerCubit,
+      child: BlocConsumer<RegisterCubit, RegisterState>(
+        listener: (context, state) {
+          if (state is RegisterSuccess) {
+            _showMessage(AppStrings.accountCreatedSuccess);
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: SafeArea(
-        bottom: false,
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                // Fixed App Header
-                // AppHeader(
-                //   title: AppStrings.createAccountScreenTitle,
-                //   showBackButton: canGoBack,
-                // ),
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => OtpScreen(
+                  email: state.email,
+                  purpose: OtpPurpose.signup,
+                ),
+              ),
+            );
+          }
 
-                // Scrollable Salon Membership Content
-                Expanded(
-                  child: CustomScrollView(
-                    slivers: [
-                      // Element 1: Application Header
-                      SliverToBoxAdapter(child: SalonMembershipHeader()),
+          if (state is RegisterFailure) {
+            _showMessage(state.msg);
+          }
+        },
+        builder: (context, state) {
+          final bool isLoading = state is RegisterLoading;
 
-                      // Element 2: Vintage Allocation Card
-                      SliverToBoxAdapter(child: VintageAllocationCard()),
+          return Scaffold(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            body: SafeArea(
+              bottom: false,
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      // Fixed App Header
+                      // AppHeader(
+                      //   title: AppStrings.createAccountScreenTitle,
+                      //   showBackButton: canGoBack,
+                      // ),
 
-                      // Element 3: Registration Form
-                      SliverToBoxAdapter(
-                        child: PrivilegeRegistrationForm(
-                          firstNameController: _firstNameController,
-                          lastNameController: _lastNameController,
-                          emailController: _emailController,
-                          phoneController: _phoneController,
-                          passwordController: _passwordController,
-                        ),
-                      ),
+                      // Scrollable Salon Membership Content
+                      Expanded(
+                        child: CustomScrollView(
+                          slivers: [
+                            // Element 1: Application Header
+                            SliverToBoxAdapter(
+                              child: SalonMembershipHeader(),
+                            ),
 
-                      // Element 4: Legal Consent & Registration Button
-                      SliverToBoxAdapter(
-                        child: SalonLegalConsentAction(
-                          onCreateAccountTap: _onCreateAccount,
-                          onPrivacyPolicyTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PrivacyPolicyScreen(),
+                            // Element 2: Vintage Allocation Card
+                            SliverToBoxAdapter(
+                              child: VintageAllocationCard(),
+                            ),
+
+                            // Element 3: Registration Form
+                            SliverToBoxAdapter(
+                              child: PrivilegeRegistrationForm(
+                                firstNameController: _firstNameController,
+                                lastNameController: _lastNameController,
+                                emailController: _emailController,
+                                phoneController: _phoneController,
+                                passwordController: _passwordController,
                               ),
-                            );
-                          },
-                        ),
-                      ),
+                            ),
 
-                      // Element 5: Sign In & Discretion Guarantee
-                      SliverToBoxAdapter(
-                        child: DiscretionGuaranteeSection(
-                          onSignInTap: _onSignInTap,
+                            // Element 4: Legal Consent & Registration Button
+                            SliverToBoxAdapter(
+                              child: SalonLegalConsentAction(
+                                onCreateAccountTap: _onCreateAccount,
+                                onPrivacyPolicyTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          PrivacyPolicyScreen(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+
+                            // Element 5: Sign In & Discretion Guarantee
+                            SliverToBoxAdapter(
+                              child: DiscretionGuaranteeSection(
+                                onSignInTap: _onSignInTap,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
 
-            // Loading overlay (blocks taps while the request is running)
-            if (_isLoading)
-              Positioned.fill(
-                child: AbsorbPointer(
-                  child: Container(
-                    color: Colors.black54,
-                    child: const Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.goldAccent,
+                  // Loading overlay
+                  if (isLoading)
+                    Positioned.fill(
+                      child: AbsorbPointer(
+                        child: Container(
+                          color: Colors.black54,
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.goldAccent,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                ],
               ),
-          ],
-        ),
+            ),
+            // bottomNavigationBar: AppBottomNavBar(currentIndex: 4),
+          );
+        },
       ),
-      // bottomNavigationBar: AppBottomNavBar(currentIndex: 4),
     );
   }
 }
