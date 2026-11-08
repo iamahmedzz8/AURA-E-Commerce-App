@@ -4,11 +4,11 @@ import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/offer_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/product_model.dart';
+import 'package:aura_maison_e_commerce/features/products/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:aura_maison_e_commerce/features/products/product_details/presentation/screens/product_details_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
-import 'package:aura_maison_e_commerce/core/widgets/app_bottom_nav_bar.dart';
 import '../../../products/products/presentation/screens/products_screen.dart';
 import 'package:aura_maison_e_commerce/core/theme/theme_cubit.dart';
 
@@ -1299,10 +1299,26 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
   }
 
   void openProductDetails(Map<String, String> item) {
+    final productId = item['id'] ?? '';
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ProductDetailsScreen(product: item),
+        builder: (context) => BlocProvider<ProductDetailsCubit>(
+          create: (_) => ProductDetailsCubit()..getProductsDetails(productId),
+          child: ProductDetailsScreen(
+            productId: productId,
+            product: {
+              'id': productId,
+              'name': item['name'] ?? 'Royal Tourbillon',
+              'category': item['category'] ?? 'LUXURY CREATION',
+              'price': item['price'] ?? '\$124,500',
+              'description': item['description'] ?? '',
+              'rating': item['rating'] ?? '5.0',
+              'image': item['image'] ?? '',
+              'tag': item['tag'] ?? 'EXCLUSIVE',
+            },
+          ),
+        ),
       ),
     );
   }
@@ -1682,21 +1698,25 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ProductDetailsScreen(
-          product: {
-            'id': item.id,
-            'name': item.name,
-            'category': item.categories.isNotEmpty
-                ? item.categories.first.toUpperCase()
-                : 'LUXURY CREATION',
-            'price': formattedPrice,
-            'description': item.description ?? '',
-            'rating': item.rating > 0 ? item.rating.toStringAsFixed(1) : '—',
-            'image': item.coverPictureUrl,
-            'tag': item.color.isNotEmpty
-                ? item.color.toUpperCase()
-                : 'EXCLUSIVE',
-          },
+        builder: (context) => BlocProvider<ProductDetailsCubit>(
+          create: (_) => ProductDetailsCubit()..getProductsDetails(item.id),
+          child: ProductDetailsScreen(
+            productId: item.id,
+            product: {
+              'id': item.id,
+              'name': item.name,
+              'category': item.categories.isNotEmpty
+                  ? item.categories.first.toUpperCase()
+                  : 'LUXURY CREATION',
+              'price': formattedPrice,
+              'description': item.description ?? '',
+              'rating': item.rating > 0 ? item.rating.toStringAsFixed(1) : '—',
+              'image': item.coverPictureUrl,
+              'tag': item.color.isNotEmpty
+                  ? item.color.toUpperCase()
+                  : 'EXCLUSIVE',
+            },
+          ),
         ),
       ),
     );

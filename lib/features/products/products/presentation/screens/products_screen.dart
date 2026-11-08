@@ -3,6 +3,7 @@ import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/product_model.dart';
 import 'package:aura_maison_e_commerce/features/home/presentation/cubit/home_cubit.dart';
+import 'package:aura_maison_e_commerce/features/products/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:aura_maison_e_commerce/features/products/product_details/presentation/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,25 +93,29 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ProductDetailsScreen(
-          product: {
-            'id': product.id,
-            'name': product.name,
-            'category': product.categories.isNotEmpty
-                ? product.categories.first.toUpperCase()
-                : 'LUXURY CREATION',
-            'price': '${product.price.toInt()} EGP',
-            'description': product.description ?? '',
-            'rating': product.rating > 0
-                ? product.rating.toStringAsFixed(1)
-                : '5.0',
-            'image': product.coverPictureUrl,
-            'tag': product.color.isNotEmpty
-                ? product.color.toUpperCase()
-                : (product.discountPercentage > 0
-                    ? '${product.discountPercentage}% OFF'
-                    : 'EXCLUSIVE'),
-          },
+        builder: (context) => BlocProvider<ProductDetailsCubit>(
+          create: (_) => ProductDetailsCubit()..getProductsDetails(product.id),
+          child: ProductDetailsScreen(
+            productId: product.id,
+            product: {
+              'id': product.id,
+              'name': product.name,
+              'category': product.categories.isNotEmpty
+                  ? product.categories.first.toUpperCase()
+                  : 'LUXURY CREATION',
+              'price': '${product.price.toInt()} EGP',
+              'description': product.description ?? '',
+              'rating': product.rating > 0
+                  ? product.rating.toStringAsFixed(1)
+                  : '5.0',
+              'image': product.coverPictureUrl,
+              'tag': product.color.isNotEmpty
+                  ? product.color.toUpperCase()
+                  : (product.discountPercentage > 0
+                      ? '${product.discountPercentage}% OFF'
+                      : 'EXCLUSIVE'),
+            },
+          ),
         ),
       ),
     );

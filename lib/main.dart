@@ -3,6 +3,7 @@ import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
 import 'package:aura_maison_e_commerce/core/theme/theme_cubit.dart';
 import 'package:aura_maison_e_commerce/core/theme/aura_theme.dart';
 import 'package:aura_maison_e_commerce/features/splash/presentation/screens/splash_salon_screen.dart';
+import 'package:aura_maison_e_commerce/features/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/addresses_cubit.dart';
@@ -33,7 +34,10 @@ class AuraMaisonApp extends StatelessWidget {
             theme: AuraTheme.lightTheme,
             darkTheme: AuraTheme.darkTheme,
             themeMode: themeMode,
-            home: const SplashSalonScreen(),
+            home:  AppSplashScreen(
+              nextBuilder: (_) =>
+                  SplashSalonScreen(), // أو الـ onboarding/login حسب الفلو
+            ),
           );
         },
       ),
