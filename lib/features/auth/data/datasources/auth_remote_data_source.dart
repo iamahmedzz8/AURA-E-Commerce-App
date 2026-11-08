@@ -30,6 +30,7 @@ abstract class AuthRemoteDataSource {
   });
 
   Future<void> changePassword({required ChangePasswordRequestModel request});
+  Future<void> logout();
 }
 
 /// Concrete implementation of [AuthRemoteDataSource] consuming [DioClient].
@@ -101,5 +102,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required ChangePasswordRequestModel request,
   }) async {
     await _dioClient.post(ApiEndpoints.changePassword, data: request.toJson());
+  }
+  @override
+  Future<void> logout() async {
+    await _dioClient.post(ApiEndpoints.logout);
   }
 }

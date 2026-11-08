@@ -11,4 +11,6 @@ abstract class AuthRepository {
     required String newPassword,
     required String confirmNewPassword,
   });
+
+  Future<void> logout();
 }

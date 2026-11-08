@@ -3,6 +3,9 @@ import 'package:aura_maison_e_commerce/core/network/api_interceptors.dart';
 import 'package:aura_maison_e_commerce/core/network/dio_client.dart';
 import 'package:aura_maison_e_commerce/core/network/network_info.dart';
 import 'package:aura_maison_e_commerce/core/services/token_storage_service.dart';
+import 'package:aura_maison_e_commerce/features/auth/domain/usecases/logout_usecase.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:aura_maison_e_commerce/features/cart/presentaion/cubit/cart_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -39,6 +42,11 @@ import '../../features/products/products/domain/repositories/products_repository
 import '../../features/products/products/domain/usecases/add_product_usecase.dart';
 import '../../features/products/products/domain/usecases/delete_product_usecase.dart';
 import '../../features/products/products/presentation/cubit/products_cubit.dart';
+import 'package:aura_maison_e_commerce/features/cart/data/datasources/cart_remote_data_source.dart';
+import 'package:aura_maison_e_commerce/features/cart/data/repositories/cart_repository_impl.dart';
+import 'package:aura_maison_e_commerce/features/cart/domain/repositories/cart_repository.dart';
+import 'package:aura_maison_e_commerce/features/cart/domain/usecases/add_to_cart_usecase.dart';
+import 'package:aura_maison_e_commerce/features/cart/domain/usecases/get_cart_usecase.dart';
 
 /// Global service locator instance
 final GetIt sl = GetIt.instance;
@@ -143,6 +151,9 @@ Future<void> initServiceLocator() async {
       localDataSource: sl<AuthLocalDataSource>(),
     ),
   );
+  sl.registerLazySingleton<LogoutUseCase>(
+  () => LogoutUseCase(sl<AuthRepository>()),
+);
 
   // ── 8. Auth UseCase ─────────────────────────────────────────
   sl.registerLazySingleton<GetAuthUseCase>(
@@ -157,6 +168,11 @@ Future<void> initServiceLocator() async {
       getAuthUseCase: sl<GetAuthUseCase>(),
     ),
   );
+  sl.registerFactory<AuthCubit>(
+  () => AuthCubit(
+    logoutUseCase: sl<LogoutUseCase>(),
+  ),
+);
 
   // ── 10. Change Password UseCase ────────────────────────────
   sl.registerLazySingleton<ChangePasswordUseCase>(
@@ -281,7 +297,36 @@ Future<void> initServiceLocator() async {
     () => CategoriesCubit(sl<HomeRemoteDataSource>()),
   );
 
-  sl.registerFactory<HomeProductsCubit>(
+    sl.registerFactory<HomeProductsCubit>(
     () => HomeProductsCubit(sl<HomeRemoteDataSource>()),
+  );
+
+  // ── Cart Feature ─────────────────────────────
+
+  sl.registerLazySingleton<CartRemoteDataSource>(
+    () => CartRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
+
+  sl.registerLazySingleton<CartRepository>(
+    () => CartRepositoryImpl(
+      remoteDataSource: sl<CartRemoteDataSource>(),
+    ),
+  );
+
+  sl.registerLazySingleton<AddToCartUseCase>(
+    () => AddToCartUseCase(sl<CartRepository>()),
+  );
+
+  sl.registerLazySingleton<GetCartUseCase>(
+    () => GetCartUseCase(sl<CartRepository>()),
+  );
+
+  sl.registerFactory<CartCubit>(
+    () => CartCubit(
+      addToCartUseCase: sl<AddToCartUseCase>(),
+      getCartUseCase: sl<GetCartUseCase>(),
+    ),
   );
 }

@@ -1,15 +1,27 @@
+
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
+import 'package:aura_maison_e_commerce/features/cart/data/models/cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class CartSummary extends StatelessWidget {
-  const CartSummary({super.key});
+  final CartModel cart;
+
+  const CartSummary({
+    super.key,
+    required this.cart,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final subtotal = cart.cartItems.fold<double>(
+      0,
+      (sum, item) => sum + item.totalPrice,
+    );
+
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -18,8 +30,13 @@ class CartSummary extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(text: AppStrings.cartSummary, weight: FontWeight.w800, size: 20),
-          Gap(10),
+          CustomText(
+            text: AppStrings.cartSummary,
+            weight: FontWeight.w800,
+            size: 20,
+          ),
+          const Gap(10),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -29,10 +46,16 @@ class CartSummary extends StatelessWidget {
                 size: 16,
                 color: Colors.grey.shade600,
               ),
-              CustomText(text: 'EGP 2080', weight: FontWeight.w600, size: 16),
+              CustomText(
+                text: 'EGP ${subtotal.toStringAsFixed(2)}',
+                weight: FontWeight.w600,
+                size: 16,
+              ),
             ],
           ),
-          Gap(5),
+
+          const Gap(5),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -42,16 +65,17 @@ class CartSummary extends StatelessWidget {
                 size: 18,
                 color: Colors.green,
               ),
-              CustomText(
-                text: '-EGP 200',
+              const CustomText(
+                text: 'EGP 0.00',
                 weight: FontWeight.w900,
                 size: 18,
                 color: Colors.green,
-                
               ),
             ],
           ),
-          Gap(5),
+
+          const Gap(5),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -61,17 +85,31 @@ class CartSummary extends StatelessWidget {
                 size: 16,
                 color: Colors.grey.shade600,
               ),
-              CustomText(text: 'EGP 30', weight: FontWeight.w600, size: 16),
+              const CustomText(
+                text: 'EGP 0.00',
+                weight: FontWeight.w600,
+                size: 16,
+              ),
             ],
           ),
-          Gap(5),
-          Divider(),
-          Gap(5),
+
+          const Gap(5),
+          const Divider(),
+          const Gap(5),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomText(text: AppStrings.total, weight: FontWeight.w800, size: 20),
-              CustomText(text: 'EGP 1900', weight: FontWeight.w800, size: 20),
+              CustomText(
+                text: AppStrings.total,
+                weight: FontWeight.w800,
+                size: 20,
+              ),
+              CustomText(
+                text: 'EGP ${subtotal.toStringAsFixed(2)}',
+                weight: FontWeight.w800,
+                size: 20,
+              ),
             ],
           ),
         ],

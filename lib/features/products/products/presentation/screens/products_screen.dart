@@ -1,5 +1,6 @@
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
+import 'package:aura_maison_e_commerce/features/cart/presentaion/cubit/cart_cubit.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/product_model.dart';
 import 'package:aura_maison_e_commerce/features/home/presentation/cubit/home_cubit.dart';
@@ -92,8 +93,10 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ProductDetailsScreen(
-          product: {
+        builder: (context) => BlocProvider(
+  create: (_) => sl<CartCubit>(),
+  child: ProductDetailsScreen(
+    product: {
             'id': product.id,
             'name': product.name,
             'category': product.categories.isNotEmpty
@@ -113,6 +116,7 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
           },
         ),
       ),
+      )
     );
   }
 
