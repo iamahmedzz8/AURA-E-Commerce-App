@@ -4,6 +4,7 @@ import 'package:aura_maison_e_commerce/features/cart/presentaion/cubit/cart_cubi
 import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
 import 'package:aura_maison_e_commerce/features/home/data/models/product_model.dart';
 import 'package:aura_maison_e_commerce/features/home/presentation/cubit/home_cubit.dart';
+import 'package:aura_maison_e_commerce/features/products/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:aura_maison_e_commerce/features/products/product_details/presentation/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -89,14 +90,24 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
     }).toList();
   }
 
-  void _openProductDetails(ProductModel product) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => BlocProvider(
-  create: (_) => sl<CartCubit>(),
-  child: ProductDetailsScreen(
-    product: {
+  
+void _openProductDetails(ProductModel product) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider<CartCubit>(
+            create: (_) => sl<CartCubit>(),
+          ),
+          BlocProvider<ProductDetailsCubit>(
+            create: (_) =>
+                ProductDetailsCubit()..getProductsDetails(product.id),
+          ),
+        ],
+        child: ProductDetailsScreen(
+          productId: product.id,
+          product: {
             'id': product.id,
             'name': product.name,
             'category': product.categories.isNotEmpty
@@ -116,9 +127,10 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
           },
         ),
       ),
-      )
-    );
-  }
+    ),
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {
