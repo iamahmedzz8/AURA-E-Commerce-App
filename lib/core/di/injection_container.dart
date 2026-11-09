@@ -1,3 +1,5 @@
+import 'package:aura_maison_e_commerce/features/categories/data/datasources/categories_remote_data_source.dart';
+import 'package:aura_maison_e_commerce/features/categories/presentation/cubit/categories_cubit.dart';
 import 'package:aura_maison_e_commerce/core/network/api_endpoints.dart';
 import 'package:aura_maison_e_commerce/core/network/api_interceptors.dart';
 import 'package:aura_maison_e_commerce/core/network/dio_client.dart';
@@ -299,6 +301,17 @@ Future<void> initServiceLocator() async {
 
     sl.registerFactory<HomeProductsCubit>(
     () => HomeProductsCubit(sl<HomeRemoteDataSource>()),
+  );
+
+  // ── Categories Feature ───────────────────────
+  sl.registerLazySingleton<CategoriesRemoteDataSource>(
+    () => CategoriesRemoteDataSource(dioClient: sl<DioClient>()),
+  );
+
+  sl.registerFactory<CategoriesScreenCubit>(
+    () => CategoriesScreenCubit(
+      categoriesRemoteDataSource: sl<CategoriesRemoteDataSource>(),
+    ),
   );
 
   // ── Cart Feature ─────────────────────────────

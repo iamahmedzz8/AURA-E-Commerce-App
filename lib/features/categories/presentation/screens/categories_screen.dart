@@ -1,15 +1,31 @@
-import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
+import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_header.dart';
+import 'package:aura_maison_e_commerce/features/categories/presentation/cubit/categories_cubit.dart';
 import 'package:aura_maison_e_commerce/features/categories/presentation/widgets/bespoke_card.dart';
 import 'package:aura_maison_e_commerce/features/categories/presentation/widgets/curated_section.dart';
 import 'package:aura_maison_e_commerce/features/categories/presentation/widgets/filter_delegate.dart';
 import 'package:aura_maison_e_commerce/features/categories/presentation/widgets/filter_section.dart';
 import 'package:aura_maison_e_commerce/features/categories/presentation/widgets/products_list_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  final String? initialCategory;
+  const CategoriesScreen({super.key, this.initialCategory});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<CategoriesScreenCubit>(
+      create: (_) => sl<CategoriesScreenCubit>()
+        ..loadCategoriesAndProducts(initialCategoryName: initialCategory),
+      child: const _CategoriesScreenContent(),
+    );
+  }
+}
+
+class _CategoriesScreenContent extends StatelessWidget {
+  const _CategoriesScreenContent();
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +47,17 @@ class CategoriesScreen extends StatelessWidget {
                   ),
                   SliverPersistentHeader(
                     pinned: true,
-                    delegate: FilterDelegate(child: const FilterSection()),
+                    delegate: FilterDelegate(
+                      child: FilterSection(
+                        onClearAll: () {
+                          context
+                              .read<CategoriesScreenCubit>()
+                              .clearCategorySelection();
+                        },
+                      ),
+                    ),
                   ),
-                  SliverToBoxAdapter(child: ProductsListSection()),
+                  const SliverToBoxAdapter(child: ProductsListSection()),
                   SliverToBoxAdapter(
                     child: BespokeCard(onSpecialOrderTap: () {}),
                   ),

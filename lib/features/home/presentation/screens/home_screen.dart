@@ -194,10 +194,12 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
     );
   }
 
-  void openProducts() {
+  void openProducts({String? category}) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const ProductsScreen()),
+      MaterialPageRoute(
+        builder: (context) => ProductsScreen(initialCategory: category),
+      ),
     );
   }
 
@@ -896,7 +898,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
 
   Widget _buildCategoryCard(CategoryModel category) {
     return GestureDetector(
-      onTap: openProducts,
+      onTap: () => openProducts(category: category.name),
       child: Container(
         width: 88,
         clipBehavior: Clip.antiAlias,
@@ -1023,7 +1025,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
         separatorBuilder: (_, __) => const SizedBox(width: 10),
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: openProducts,
+            onTap: () => openProducts(category: items[index].$1),
             child: Container(
               width: 88,
               clipBehavior: Clip.antiAlias,
