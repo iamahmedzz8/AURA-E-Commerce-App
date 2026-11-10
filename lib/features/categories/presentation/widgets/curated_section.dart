@@ -1,9 +1,19 @@
+import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
-import 'package:aura_maison_e_commerce/features/categories/data/models/workshop_item.dart';
+import 'package:aura_maison_e_commerce/features/categories/presentation/cubit/category_products_cubit.dart';
+import 'package:aura_maison_e_commerce/features/categories/presentation/screens/category_products_screen.dart';
+import 'package:aura_maison_e_commerce/features/home/data/models/category_model.dart';
+import 'package:aura_maison_e_commerce/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// A horizontally scrolling carousel of category cards.
+///
+/// When a card is tapped the user navigates to [CategoryProductsScreen] which
+/// fetches products for that category from the real API using
+/// [CategoryProductsCubit] → [HomeRemoteDataSource.getProductsByCategory].
 class CuratedSection extends StatefulWidget {
   const CuratedSection({super.key});
 
@@ -14,43 +24,49 @@ class CuratedSection extends StatefulWidget {
 class _CuratedSectionState extends State<CuratedSection> {
   int selectedIndex = 0;
 
-  final List<WorkshopItem> workshops = const [
-    WorkshopItem(
-      tag: AppStrings.watchmakingTag,
-      title: AppStrings.watchmakingTitle,
-      subtitle: AppStrings.watchmakingSubtitle,
-      pieceCount: AppStrings.watchmakingPieces,
-      imageUrl:
-          'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=600',
-    ),
-    WorkshopItem(
-      tag: AppStrings.jewelryTag,
-      title: AppStrings.jewelryTitle,
-      subtitle: AppStrings.jewelrySubtitle,
-      pieceCount: AppStrings.jewelryPieces,
-      imageUrl:
-          'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=600',
-    ),
-    WorkshopItem(
-      tag: AppStrings.leatherTag,
-      title: AppStrings.leatherTitle,
-      subtitle: AppStrings.leatherSubtitle,
-      pieceCount: AppStrings.leatherPieces,
-      imageUrl:
-          'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=600',
-    ),
-    WorkshopItem(
-      tag: AppStrings.accessoriesTag,
-      title: AppStrings.accessoriesTitle,
-      subtitle: AppStrings.accessoriesSubtitle,
-      pieceCount: AppStrings.accessoriesPieces,
-      imageUrl:
-          'https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=600',
-    ),
-  ];
+  void _onCategoryTap(BuildContext context, CategoryModel category, int index) {
+    setState(() => selectedIndex = index);
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => BlocProvider<CategoryProductsCubit>(
+          create: (_) => CategoryProductsCubit(
+            remoteDataSource: sl(),
+          )..fetchByCategory(categoryName: category.name),
+          child: CategoryProductsScreen(
+            categoryName: category.name,
+            categoryId: category.id,
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<CategoriesCubit, CategoriesState>(
+      builder: (context, state) {
+        if (state is CategoriesLoadingState) {
+          return _buildLoadingCarousel();
+        }
+
+        if (state is CategoriesSuccessState && state.categories.isNotEmpty) {
+          return _buildCarousel(context, state.categories);
+        }
+
+        if (state is CategoriesFailureState) {
+          return _buildErrorState(state.errorMessage, context);
+        }
+
+        // Initial / empty state – show placeholder
+        return _buildLoadingCarousel();
+      },
+    );
+  }
+
+  // ── Carousel with real categories ─────────────────────────────────────────
+
+  Widget _buildCarousel(BuildContext context, List<CategoryModel> categories) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -82,7 +98,7 @@ class _CuratedSectionState extends State<CuratedSection> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(
-                  AppStrings.rarePiecesCount,
+                  '${categories.length} collections',
                   style: AppStyles.sectionCount.copyWith(
                     color: AppColors.textSecondary,
                   ),
@@ -97,13 +113,13 @@ class _CuratedSectionState extends State<CuratedSection> {
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             scrollDirection: Axis.horizontal,
-            itemCount: workshops.length,
-            separatorBuilder: (_, _) => const SizedBox(width: 12),
+            itemCount: categories.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 12),
             itemBuilder: (context, index) {
-              final item = workshops[index];
+              final category = categories[index];
               final isSelected = index == selectedIndex;
               return GestureDetector(
-                onTap: () => setState(() => selectedIndex = index),
+                onTap: () => _onCategoryTap(context, category, index),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   width: 256,
@@ -117,7 +133,7 @@ class _CuratedSectionState extends State<CuratedSection> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Top Image Area with Badge & Gradient
+                      // Top Image Area
                       ClipRRect(
                         borderRadius: const BorderRadius.vertical(
                           top: Radius.circular(8),
@@ -128,18 +144,15 @@ class _CuratedSectionState extends State<CuratedSection> {
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
-                              Image.network(
-                                item.imageUrl,
-                                fit: BoxFit.cover,
-                                errorBuilder: (_, _, _) => Container(
-                                  color: AppColors.cardInactive,
-                                  child: const Icon(
-                                    Icons.image_outlined,
-                                    color: AppColors.textSecondary,
-                                  ),
-                                ),
-                              ),
-                              // Subtle bottom vignette gradient
+                              category.coverPictureUrl.isNotEmpty
+                                  ? Image.network(
+                                      category.coverPictureUrl,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (_, __, ___) =>
+                                          _placeholderImage(),
+                                    )
+                                  : _placeholderImage(),
+                              // Bottom vignette gradient
                               DecoratedBox(
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
@@ -155,26 +168,15 @@ class _CuratedSectionState extends State<CuratedSection> {
                                   ),
                                 ),
                               ),
-                              // Piece Count Badge
-                              Positioned(
-                                top: 8,
-                                right: 8,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 2,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.badgeBackground,
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: Text(
-                                    item.pieceCount,
-                                    style: AppStyles.badgeText.copyWith(
-                                      color: isSelected
-                                          ? AppColors.goldAccent
-                                          : AppColors.textSecondary,
-                                    ),
+                              // Tap indicator overlay
+                              Positioned.fill(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: () =>
+                                        _onCategoryTap(context, category, index),
+                                    splashColor: AppColors.goldAccent
+                                        .withValues(alpha: 0.1),
                                   ),
                                 ),
                               ),
@@ -204,7 +206,7 @@ class _CuratedSectionState extends State<CuratedSection> {
                                   ),
                                 ],
                                 Text(
-                                  item.tag,
+                                  category.name.toUpperCase(),
                                   style: AppStyles.cardTag.copyWith(
                                     color: isSelected
                                         ? AppColors.goldAccent
@@ -214,9 +216,9 @@ class _CuratedSectionState extends State<CuratedSection> {
                               ],
                             ),
                             const SizedBox(height: 4),
-                            // Workshop Title
+                            // Category name as heading
                             Text(
-                              item.title,
+                              category.name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: AppStyles.cardHeading.copyWith(
@@ -224,9 +226,10 @@ class _CuratedSectionState extends State<CuratedSection> {
                               ),
                             ),
                             const SizedBox(height: 4),
-                            // Subtitle
+                            // Description or fallback
                             Text(
-                              item.subtitle,
+                              category.description ??
+                                  'Explore the collection →',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: AppStyles.cardSubtitle.copyWith(
@@ -244,6 +247,107 @@ class _CuratedSectionState extends State<CuratedSection> {
           ),
         ),
       ],
+    );
+  }
+
+  // ── Placeholder / Loading States ──────────────────────────────────────────
+
+  Widget _placeholderImage() {
+    return Container(
+      color: AppColors.cardInactive,
+      child: const Icon(
+        Icons.image_outlined,
+        color: AppColors.textSecondary,
+      ),
+    );
+  }
+
+  Widget _buildLoadingCarousel() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppStrings.curatedDepartments,
+                style: AppStyles.sectionEyebrow.copyWith(
+                  color: AppColors.goldAccent,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                AppStrings.privateWorkshops,
+                style: AppStyles.sectionHeading.copyWith(
+                  color: AppColors.textPrimary,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 265,
+          child: ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            scrollDirection: Axis.horizontal,
+            itemCount: 3,
+            separatorBuilder: (_, __) => const SizedBox(width: 12),
+            itemBuilder: (_, __) => Container(
+              width: 256,
+              height: 265,
+              decoration: BoxDecoration(
+                color: AppColors.cardInactive,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Center(
+                child: SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: AppColors.goldAccent,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildErrorState(String message, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppStrings.curatedDepartments,
+            style: AppStyles.sectionEyebrow.copyWith(
+              color: AppColors.goldAccent,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            message.isNotEmpty ? message : 'Unable to load collections.',
+            style: AppStyles.cardSubtitle.copyWith(
+              color: AppColors.textSecondary,
+            ),
+          ),
+          const SizedBox(height: 10),
+          GestureDetector(
+            onTap: () =>
+                context.read<CategoriesCubit>().fetchCategories(),
+            child: Text(
+              'Retry',
+              style: AppStyles.cardTag.copyWith(color: AppColors.goldAccent),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
