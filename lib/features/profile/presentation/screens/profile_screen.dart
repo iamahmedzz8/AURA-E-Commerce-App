@@ -1,6 +1,7 @@
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/addresses_cubit.dart';
 import 'package:aura_maison_e_commerce/features/admin/admin_dashdoard/presentation/screens/admin_dashboard_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/vip_member_sign_in_screen.dart';
 import 'package:aura_maison_e_commerce/features/profile/data/models/profile_model.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/screens/edit_profile.dart';
 import 'package:aura_maison_e_commerce/features/support/contact/presentation/screens/concierge_contactform.dart';
@@ -10,6 +11,7 @@ import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/pro
 import 'package:aura_maison_e_commerce/features/auth/presentation/screens/change_password_screen.dart';
 import 'package:aura_maison_e_commerce/features/addresses/presentation/screens/user_addresses_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -150,16 +152,38 @@ class ProfileScreen extends StatelessWidget {
                   Expanded(
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: AppColors.cardBorder),
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        AppStrings.salonCrypt,
-                        style: TextStyle(
-                          color: AppColors.textMuted,
-                          fontSize: 11,
+                        side: const BorderSide(color: AppColors.primaryGold),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 12,
                         ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AdminDashboardScreen(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.admin_panel_settings_outlined,
+                            color: AppColors.primaryGold,
+                            size: 17,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            AppStrings.adminAccess,
+                            style: TextStyle(
+                              color: AppColors.primaryGold,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -184,9 +208,7 @@ class ProfileScreen extends StatelessWidget {
               Center(
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(
-                      color: AppColors.primaryGold,
-                    ),
+                    side: const BorderSide(color: AppColors.primaryGold),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
                       vertical: 12,
@@ -220,41 +242,76 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 10),
               Center(
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: AppColors.primaryGold),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
+                child: SizedBox(
+                  width: 150,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: Colors.red),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AdminDashboardScreen(),
-                      ),
-                    );
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.admin_panel_settings_outlined,
-                        color: AppColors.primaryGold,
-                        size: 17,
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        AppStrings.adminAccess,
-                        style: TextStyle(
-                          color: AppColors.primaryGold,
-                          fontSize: 11,
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            backgroundColor: AppColors.cardBg,
+                            title: const Text(
+                              'LOG OUT',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.primaryGold,
+                              ),
+                            ),
+                            content: const Text(
+                              'Are you sure you want to log out?',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  'Cancel',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          VipMemberSignInScreen(),
+                                    ),
+                                    (route) => false,
+                                  );
+                                },
+                                child: const Text(
+                                  'Confirm',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: .center,
+                      children: [
+                        Icon(Icons.logout_rounded, color: Colors.red, size: 17),
+                        SizedBox(width: 8),
+                        const Text(
+                          'LOG OUT',
+                          style: TextStyle(color: Colors.red, fontSize: 11),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
