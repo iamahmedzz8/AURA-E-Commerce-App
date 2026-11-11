@@ -4,5 +4,7 @@ class Endpoints {
   static const String reviews = '/api/reviews';
   static const String orders = '/api/orders';
   static const String checkout = '/api/orders/checkout';
+  static const String notifications = '/api/notifications';
+  
   static String orderHistory(dynamic orderId) => '/api/orders/history/$orderId';
 }

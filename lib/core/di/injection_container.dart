@@ -35,6 +35,7 @@ import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/get_us
 import 'package:aura_maison_e_commerce/features/addresses/domain/usecases/delete_address_use_case.dart';
 import 'package:aura_maison_e_commerce/features/home/data/datasources/home_remote_data_source.dart';
 import 'package:aura_maison_e_commerce/features/home/presentation/cubit/home_cubit.dart';
+import 'package:aura_maison_e_commerce/features/categories/presentation/cubit/category_products_cubit.dart';
 
 import '../../features/products/products/data/datasources/products_remote_data_source.dart';
 import '../../features/products/products/data/repositories/products_repository_impl.dart';
@@ -328,5 +329,11 @@ Future<void> initServiceLocator() async {
       addToCartUseCase: sl<AddToCartUseCase>(),
       getCartUseCase: sl<GetCartUseCase>(),
     ),
+  );
+  // ── 23. Category Products Feature ─────────────────────────
+  /// [CategoryProductsCubit] fetches products for a given category from
+  /// [ApiEndpoints.productsByCategoryName] via [HomeRemoteDataSource].
+  sl.registerFactory<CategoryProductsCubit>(
+    () => CategoryProductsCubit(remoteDataSource: sl<HomeRemoteDataSource>()),
   );
 }

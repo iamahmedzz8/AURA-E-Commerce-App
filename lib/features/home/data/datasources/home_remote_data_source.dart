@@ -143,6 +143,52 @@ class HomeRemoteDataSource {
     }
   }
 
+  /// Fetch products filtered by [categoryName].
+  ///
+  /// Calls [ApiEndpoints.productsByCategoryName] which maps to
+  /// `GET /api/products?category=<categoryName>`.
+  Future<List<ProductModel>> getProductsByCategory({
+    required String categoryName,
+    int page = 1,
+    int pageSize = 20,
+  }) async {
+    try {
+      final response = await _dioClient.get(
+        ApiEndpoints.productsByCategoryName(categoryName),
+        queryParameters: {
+          'category': categoryName,
+          'page': page,
+          'pageSize': pageSize,
+        },
+      );
+      final data = response.data;
+
+      if (data is Map<String, dynamic>) {
+        if (data.containsKey('items') && data['items'] is List) {
+          return (data['items'] as List)
+              .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+              .toList();
+        } else if (data.containsKey('products') && data['products'] is List) {
+          return (data['products'] as List)
+              .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+              .toList();
+        }
+      } else if (data is List) {
+        return data
+            .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+            .toList();
+      }
+
+      return [];
+    } on ErrorHandler catch (e) {
+      throw Exception(e.failure.message);
+    } catch (e) {
+      throw Exception(
+        'Failed to load products for category "$categoryName": $e',
+      );
+    }
+  }
+
   void postCategory(
     String name,
     String description,

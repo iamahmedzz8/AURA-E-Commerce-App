@@ -34,6 +34,10 @@ class ApiEndpoints {
   static const String products = '/api/products';
   static String productById(dynamic id) => '/api/products/$id';
 
+  /// Products filtered by category name (query-param: ?category=<name>).
+  /// Used by [CategoryProductsCubit] when a category card is tapped.
+  static String productsByCategoryName(String categoryName) => products;
+
   // ── Categories Endpoints ─────────────────────────────────────
   static const String categories = '/api/categories';
   static String categoryById(dynamic id) => '/api/categories/$id';

@@ -13,6 +13,7 @@ import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/pro
 import 'package:aura_maison_e_commerce/features/auth/presentation/screens/change_password_screen.dart';
 import 'package:aura_maison_e_commerce/features/addresses/presentation/screens/user_addresses_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -153,16 +154,38 @@ class ProfileScreen extends StatelessWidget {
                   Expanded(
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: AppColors.cardBorder),
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        AppStrings.salonCrypt,
-                        style: TextStyle(
-                          color: AppColors.textMuted,
-                          fontSize: 11,
+                        side: const BorderSide(color: AppColors.primaryGold),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 12,
                         ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AdminDashboardScreen(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.admin_panel_settings_outlined,
+                            color: AppColors.primaryGold,
+                            size: 17,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            AppStrings.adminAccess,
+                            style: TextStyle(
+                              color: AppColors.primaryGold,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -187,9 +210,7 @@ class ProfileScreen extends StatelessWidget {
               Center(
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(
-                      color: AppColors.primaryGold,
-                    ),
+                    side: const BorderSide(color: AppColors.primaryGold),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
                       vertical: 12,
@@ -223,46 +244,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Center(
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: AppColors.primaryGold),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AdminDashboardScreen(),
-                      ),
-                    );
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.admin_panel_settings_outlined,
-                        color: AppColors.primaryGold,
-                        size: 17,
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        AppStrings.adminAccess,
-                        style: TextStyle(
-                          color: AppColors.primaryGold,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ],
-
-                  ),
-                ),
-              ),
-              const SizedBox(height: 24),
+              
 
 
 SizedBox(
@@ -320,11 +302,13 @@ SizedBox(
     label: const Text('LOG OUT'),
   ),
 ),
-
-            ],
-          ),
+        
+            ]
+        
+      
         ),
       ),
+    )
     );
   }
 }
