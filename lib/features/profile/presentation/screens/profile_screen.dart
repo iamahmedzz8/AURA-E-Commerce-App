@@ -3,6 +3,7 @@ import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/addresses_cubit.dart';
 import 'package:aura_maison_e_commerce/features/admin/admin_dashdoard/presentation/screens/admin_dashboard_screen.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/screens/vip_member_sign_in_screen.dart';
 import 'package:aura_maison_e_commerce/features/profile/data/models/profile_model.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/screens/edit_profile.dart';
 import 'package:aura_maison_e_commerce/features/support/contact/presentation/screens/concierge_contactform.dart';
@@ -263,6 +264,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
+
 SizedBox(
   width: double.infinity,
   child: OutlinedButton.icon(
@@ -300,10 +302,11 @@ SizedBox(
 
         if (!context.mounted) return;
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Logged out successfully'),
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (_) => const VipMemberSignInScreen(),
           ),
+          (route) => false,
         );
       } catch (e) {
         if (!context.mounted) return;
@@ -317,6 +320,7 @@ SizedBox(
     label: const Text('LOG OUT'),
   ),
 ),
+
             ],
           ),
         ),

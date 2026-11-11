@@ -55,8 +55,12 @@ class AuthRepositoryImpl implements domain.AuthRepository {
     );
   }
   @override
-  Future<void> logout() async {
+  @override
+Future<void> logout() async {
+  try {
     await remoteDataSource.logout();
+  } finally {
     await localDataSource.clearTokens();
   }
+}
 }

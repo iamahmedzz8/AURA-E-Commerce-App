@@ -18,12 +18,14 @@ class AuthCubit {
     );
   }
   Future<void> logout({bool clearRememberedEmail = false}) async {
+  try {
     await logoutUseCase.call();
-
+  } finally {
     await PrefsService.logout(
       clearRememberedEmail: clearRememberedEmail,
     );
   }
+}
 }
 
 class AuthState {}
