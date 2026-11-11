@@ -1,3 +1,4 @@
+import 'package:aura_maison_e_commerce/features/cart/presentaion/cubit/cart_cubit.dart';
 import 'package:aura_maison_e_commerce/core/widgets/navigation.dart';
 import 'package:aura_maison_e_commerce/features/notification/presentation/cubit/notification_cubot.dart';
 import 'package:aura_maison_e_commerce/features/notification/presentation/screens/notfication_screen.dart';
@@ -1312,9 +1313,16 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => BlocProvider<ProductDetailsCubit>(
-          create: (_) => ProductDetailsCubit()..getProductsDetails(productId),
-          child: ProductDetailsScreen(
+        builder: (context) => MultiBlocProvider(
+  providers: [
+    BlocProvider<CartCubit>(
+      create: (_) => sl<CartCubit>(),
+    ),
+    BlocProvider<ProductDetailsCubit>(
+      create: (_) => ProductDetailsCubit()..getProductsDetails(productId),
+    ),
+  ],
+  child: ProductDetailsScreen(
             productId: productId,
             product: {
               'id': productId,
@@ -1332,7 +1340,21 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
     );
   }
 
-  void showAddedToBag(Map<String, String> item) {
+  Future<void> showAddedToBag(Map<String, String> item) async {
+  try {
+    final productId = item['id'];
+
+    if (productId == null || productId.isEmpty) {
+      throw Exception('Product ID is missing');
+    }
+
+    await sl<CartCubit>().addToCart(
+      productId: productId,
+      quantity: 1,
+    );
+
+    if (!mounted) return;
+
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
@@ -1342,7 +1364,17 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
           duration: const Duration(seconds: 2),
         ),
       );
+  } catch (e) {
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Could not add product: $e'),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
   }
+}
 
   Widget _buildDefaultProductsGrid() {
     return SliverPadding(
@@ -1678,6 +1710,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                           ),
                           child: IconButton(
                             onPressed: () => showAddedToBag({
+                              'id': item.id,
                               'name': item.name,
                               'price': formattedPrice,
                             }),
@@ -1707,9 +1740,16 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => BlocProvider<ProductDetailsCubit>(
-          create: (_) => ProductDetailsCubit()..getProductsDetails(item.id),
-          child: ProductDetailsScreen(
+        builder: (context) => MultiBlocProvider(
+  providers: [
+    BlocProvider<CartCubit>(
+      create: (_) => sl<CartCubit>(),
+    ),
+    BlocProvider<ProductDetailsCubit>(
+      create: (_) => ProductDetailsCubit()..getProductsDetails(item.id),
+    ),
+  ],
+  child: ProductDetailsScreen(
             productId: item.id,
             product: {
               'id': item.id,

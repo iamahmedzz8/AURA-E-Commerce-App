@@ -1,6 +1,8 @@
+import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/addresses_cubit.dart';
 import 'package:aura_maison_e_commerce/features/admin/admin_dashdoard/presentation/screens/admin_dashboard_screen.dart';
+import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/screens/vip_member_sign_in_screen.dart';
 import 'package:aura_maison_e_commerce/features/profile/data/models/profile_model.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/screens/edit_profile.dart';
@@ -242,83 +244,71 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
-              Center(
-                child: SizedBox(
-                  width: 150,
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.red),
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            backgroundColor: AppColors.cardBg,
-                            title: const Text(
-                              'LOG OUT',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primaryGold,
-                              ),
-                            ),
-                            content: const Text(
-                              'Are you sure you want to log out?',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text(
-                                  'Cancel',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
+              
 
-                                  Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          VipMemberSignInScreen(),
-                                    ),
-                                    (route) => false,
-                                  );
-                                },
-                                child: const Text(
-                                  'Confirm',
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    child: Row(
-                      mainAxisAlignment: .center,
-                      children: [
-                        Icon(Icons.logout_rounded, color: Colors.red, size: 17),
-                        SizedBox(width: 8),
-                        const Text(
-                          'LOG OUT',
-                          style: TextStyle(color: Colors.red, fontSize: 11),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+
+SizedBox(
+  width: double.infinity,
+  child: OutlinedButton.icon(
+    style: OutlinedButton.styleFrom(
+      foregroundColor: Colors.redAccent,
+      side: const BorderSide(color: Colors.redAccent),
+      padding: const EdgeInsets.symmetric(vertical: 16),
+    ),
+    onPressed: () async {
+      final confirm = await showDialog<bool>(
+        context: context,
+        builder: (dialogContext) => AlertDialog(
+          title: const Text('Logout'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, false),
+              child: const Text('CANCEL'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, true),
+              child: const Text(
+                'LOG OUT',
+                style: TextStyle(color: Colors.redAccent),
               ),
-            ],
+            ),
+          ],
+        ),
+      );
+
+      if (confirm != true) return;
+
+      try {
+        await sl<AuthCubit>().logout();
+
+        if (!context.mounted) return;
+
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (_) => const VipMemberSignInScreen(),
           ),
+          (route) => false,
+        );
+      } catch (e) {
+        if (!context.mounted) return;
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Logout failed: $e')),
+        );
+      }
+    },
+    icon: const Icon(Icons.logout),
+    label: const Text('LOG OUT'),
+  ),
+),
+        
+            ]
+        
+      
         ),
       ),
+    )
     );
   }
 }

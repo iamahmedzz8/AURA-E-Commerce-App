@@ -1,5 +1,7 @@
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/theme/theme_cubit.dart';
+import 'package:aura_maison_e_commerce/features/cart/presentaion/cubit/cart_cubit.dart';
+import 'package:aura_maison_e_commerce/features/cart/presentaion/cubit/cart_state.dart';
 import 'package:aura_maison_e_commerce/features/home/presentation/cubit/home_cubit.dart';
 import 'package:aura_maison_e_commerce/features/products/product_details/presentation/cubit/product_details_cubit.dart';
 import 'package:aura_maison_e_commerce/features/products/product_details/presentation/cubit/product_details_state.dart';
@@ -1151,22 +1153,50 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           const SizedBox(width: 10),
           Expanded(
             child: ElevatedButton.icon(
-              onPressed: () {
-                setState(() {
-                  _addedToBag = true;
-                });
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        'Added to bag • Quantity: $_quantity • ${productVariants[_selectedVariant]['name']}',
-                      ),
-                      behavior: SnackBarBehavior.floating,
-                      backgroundColor: gold,
-                    ),
-                  );
-              },
+              onPressed: () async {
+  final String? productId = widget.product['id'];
+
+if (productId == null || productId.isEmpty) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text('Product ID is missing')),
+  );
+  return;
+}
+
+await context.read<CartCubit>().addToCart(
+  productId: productId,
+  quantity: _quantity,
+);
+
+  if (!mounted) return;
+
+  final state = context.read<CartCubit>().state;
+
+  if (state is CartSuccess) {
+    setState(() {
+      _addedToBag = true;
+    });
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            'Added to bag • Quantity: $_quantity • ${productVariants[_selectedVariant]['name']}',
+          ),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: gold,
+        ),
+      );
+  } else if (state is CartError) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(state.message),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+},
               icon: Icon(
                 _addedToBag ? Icons.check_rounded : Icons.shopping_bag_outlined,
                 size: 15,

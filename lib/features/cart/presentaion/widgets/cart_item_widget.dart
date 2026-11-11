@@ -1,16 +1,22 @@
-import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
+
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
+import 'package:aura_maison_e_commerce/features/cart/data/models/cart_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class CartItemWidget extends StatelessWidget {
-  const CartItemWidget({super.key});
+  final CartItemModel item;
+
+  const CartItemWidget({
+    super.key,
+    required this.item,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 16, left: 8, right: 8),
+      padding: const EdgeInsets.only(top: 16, left: 8, right: 8),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -24,7 +30,6 @@ class CartItemWidget extends StatelessWidget {
           ),
         ],
       ),
-
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,23 +38,35 @@ class CartItemWidget extends StatelessWidget {
             flex: 1,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.asset('assets/images/watch.jpg'),
+              child: Image.network(
+                item.productCoverUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    'assets/images/watch.jpg',
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
             ),
           ),
-          Gap(15),
+          const Gap(15),
           Expanded(
             flex: 1,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: AppStrings.royalTourbillonSquelette,
+                  text: item.productName,
                   size: 18,
                   weight: FontWeight.w500,
                   color: AppColors.primaryColor,
                   maxLines: 1,
                 ),
-                CustomText(text: '400 EGP', weight: FontWeight.w500),
+                CustomText(
+                  text: '${item.finalPricePerUnit.toStringAsFixed(2)} EGP',
+                  weight: FontWeight.w500,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -57,31 +74,37 @@ class CartItemWidget extends StatelessWidget {
                       height: 35,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: Color(0xffECE6DA),
+                        color: const Color(0xffECE6DA),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.remove),
+                            icon: const Icon(Icons.remove),
                           ),
                           CustomText(
-                            text: '1',
+                            text: item.quantity.toString(),
                             size: 16,
                             weight: FontWeight.w500,
                           ),
-                          IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.add),
+                          ),
                         ],
                       ),
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.delete_outlined, color: Colors.red),
+                      icon: const Icon(
+                        Icons.delete_outlined,
+                        color: Colors.red,
+                      ),
                     ),
                   ],
                 ),
-                Gap(15),
+                const Gap(15),
               ],
             ),
           ),

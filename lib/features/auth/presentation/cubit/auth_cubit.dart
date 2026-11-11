@@ -1,8 +1,11 @@
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
+import 'package:aura_maison_e_commerce/features/auth/domain/usecases/logout_usecase.dart';
 
-/// Lightweight auth session helper backed by SharedPreferences.
-/// Replace with Cubit + API when the backend layer is ready.
 class AuthCubit {
+  final LogoutUseCase logoutUseCase;
+
+  AuthCubit({required this.logoutUseCase});
+
   bool get isAuthenticated => PrefsService.isLoggedIn;
 
   Future<void> persistLogin({
@@ -14,13 +17,15 @@ class AuthCubit {
       rememberMe: rememberMe,
     );
   }
-
-  Future<void> logout({bool clearRememberedEmail = false}) {
-    return PrefsService.logout(clearRememberedEmail: clearRememberedEmail);
+  Future<void> logout({bool clearRememberedEmail = false}) async {
+  try {
+    await logoutUseCase.call();
+  } finally {
+    await PrefsService.logout(
+      clearRememberedEmail: clearRememberedEmail,
+    );
   }
 }
-
-/// Placeholder State for [AuthCubit].
-class AuthState {
-  // e.g. AuthInitial, AuthAuthenticated, AuthUnauthenticated
 }
+
+class AuthState {}

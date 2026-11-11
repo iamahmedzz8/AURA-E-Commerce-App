@@ -3,6 +3,8 @@ import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
+import 'package:aura_maison_e_commerce/features/cart/presentaion/cubit/cart_cubit.dart';
+import 'package:aura_maison_e_commerce/features/cart/presentaion/cubit/cart_state.dart';
 import 'package:aura_maison_e_commerce/features/cart/presentaion/widgets/cart_summary.dart';
 import 'package:aura_maison_e_commerce/features/checkout/presentation/widgets/address_container.dart';
 import 'package:aura_maison_e_commerce/features/checkout/presentation/widgets/button_and_privacy_section.dart';
@@ -178,7 +180,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               Gap(20),
               PromoCodeSection(),
               Gap(20),
-              CartSummary(),
+              BlocProvider(
+  create: (_) => sl<CartCubit>()..getCart(),
+  child: BlocBuilder<CartCubit, CartState>(
+    builder: (context, state) {
+      if (state is CartLoading || state is CartInitial) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+
+      if (state is CartSuccess) {
+        return CartSummary(cart: state.cart);
+      }
+
+      if (state is CartError) {
+        return Center(
+          child: Text(state.message),
+        );
+      }
+
+      return const SizedBox.shrink();
+    },
+  ),
+),
               Gap(20),
               ButtonAndPrivacySection(),
               Gap(20),
