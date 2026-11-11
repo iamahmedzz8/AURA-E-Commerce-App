@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/network/api_endpoints.dart';
 import 'package:aura_maison_e_commerce/core/network/dio_client.dart';
 import 'package:aura_maison_e_commerce/features/cart/data/models/cart_model.dart';
@@ -10,6 +9,15 @@ abstract class CartRemoteDataSource {
   });
 
   Future<CartModel> getCart();
+
+  Future<void> decrementCartItem({
+    required String itemId,
+    required int quantity,
+  });
+
+  Future<void> deleteCartItem({
+    required String itemId,
+  });
 }
 
 class CartRemoteDataSourceImpl implements CartRemoteDataSource {
@@ -41,6 +49,32 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
     return CartModel.fromJson(
       Map<String, dynamic>.from(response.data as Map),
+    );
+  }
+
+  @override
+  Future<void> decrementCartItem({
+    required String itemId,
+    required int quantity,
+  }) async {
+    await dioClient.post(
+      ApiEndpoints.cartDecrement,
+      data: {
+        'itemId': itemId,
+        'quantity': quantity,
+      },
+    );
+  }
+
+  @override
+  Future<void> deleteCartItem({
+    required String itemId,
+  }) async {
+    await dioClient.delete(
+      ApiEndpoints.cartItemById(itemId),
+      data: {
+        'id': itemId,
+      },
     );
   }
 }

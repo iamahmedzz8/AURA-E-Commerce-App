@@ -47,6 +47,8 @@ import 'package:aura_maison_e_commerce/features/cart/data/datasources/cart_remot
 import 'package:aura_maison_e_commerce/features/cart/data/repositories/cart_repository_impl.dart';
 import 'package:aura_maison_e_commerce/features/cart/domain/repositories/cart_repository.dart';
 import 'package:aura_maison_e_commerce/features/cart/domain/usecases/add_to_cart_usecase.dart';
+import 'package:aura_maison_e_commerce/features/cart/domain/usecases/decrement_cart_item_usecase.dart';
+import 'package:aura_maison_e_commerce/features/cart/domain/usecases/delete_cart_item_usecase.dart';
 import 'package:aura_maison_e_commerce/features/cart/domain/usecases/get_cart_usecase.dart';
 
 /// Global service locator instance
@@ -324,9 +326,19 @@ Future<void> initServiceLocator() async {
     () => GetCartUseCase(sl<CartRepository>()),
   );
 
+  sl.registerLazySingleton<DecrementCartItemUseCase>(
+    () => DecrementCartItemUseCase(sl<CartRepository>()),
+  );
+
+  sl.registerLazySingleton<DeleteCartItemUseCase>(
+    () => DeleteCartItemUseCase(sl<CartRepository>()),
+  );
+
   sl.registerFactory<CartCubit>(
     () => CartCubit(
       addToCartUseCase: sl<AddToCartUseCase>(),
+      decrementCartItemUseCase: sl<DecrementCartItemUseCase>(),
+      deleteCartItemUseCase: sl<DeleteCartItemUseCase>(),
       getCartUseCase: sl<GetCartUseCase>(),
     ),
   );

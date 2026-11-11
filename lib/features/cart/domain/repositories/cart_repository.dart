@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/features/cart/data/models/cart_model.dart';
 
 abstract class CartRepository {
@@ -8,4 +7,13 @@ abstract class CartRepository {
   });
 
   Future<CartModel> getCart();
+
+  Future<void> decrementCartItem({
+    required String itemId,
+    required int quantity,
+  });
+
+  Future<void> deleteCartItem({
+    required String itemId,
+  });
 }

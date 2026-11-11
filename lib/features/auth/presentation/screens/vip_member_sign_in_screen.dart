@@ -1,7 +1,5 @@
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
-import 'package:aura_maison_e_commerce/core/widgets/app_bottom_nav_bar.dart';
-import 'package:aura_maison_e_commerce/core/widgets/app_header.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/screens/create_account_screen.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/screens/forgot_passcode_screen.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/widgets/biometric_access_section.dart';
@@ -68,9 +66,7 @@ class _VipMemberSignInScreenState extends State<VipMemberSignInScreen> {
 
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text(AppStrings.biometricsVerifiedWelcome),
-      ),
+      const SnackBar(content: Text(AppStrings.biometricsVerifiedWelcome)),
     );
 
     Navigator.of(context).pushAndRemoveUntil(

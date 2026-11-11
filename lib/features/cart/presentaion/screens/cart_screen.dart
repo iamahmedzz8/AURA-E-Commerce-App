@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
@@ -43,7 +42,20 @@ class CartView extends StatelessWidget {
             horizontal: 16,
             vertical: 4,
           ),
-          child: BlocBuilder<CartCubit, CartState>(
+          child: BlocConsumer<CartCubit, CartState>(
+            listener: (context, state) {
+              if (state is CartActionError) {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    SnackBar(
+                      content: Text(state.errorMessage),
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.redAccent,
+                    ),
+                  );
+              }
+            },
             builder: (context, state) {
               if (state is CartLoading || state is CartInitial) {
                 return const Center(
@@ -78,8 +90,32 @@ class CartView extends StatelessWidget {
                 );
 
                 if (cartItems.isEmpty) {
-                  return const Center(
-                    child: Text('Your shopping bag is empty'),
+                  return RefreshIndicator(
+                    onRefresh: () => context.read<CartCubit>().getCart(),
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        child: Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.shopping_bag_outlined,
+                                size: 80,
+                                color: Colors.grey.shade400,
+                              ),
+                              const Gap(16),
+                              const CustomText(
+                                text: 'Your shopping bag is empty',
+                                size: 18,
+                                weight: FontWeight.w600,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   );
                 }
 
@@ -110,22 +146,28 @@ class CartView extends StatelessWidget {
                     ),
                     const Gap(20),
                     Expanded(
-                      child: ListView.separated(
-                        itemCount: cartItems.length,
-                        separatorBuilder: (context, index) =>
-                            const Gap(12),
-                        itemBuilder: (context, index) {
-                          return CartItemWidget(
-                            item: cartItems[index],
-                          );
-                        },
+                      child: RefreshIndicator(
+                        onRefresh: () => context.read<CartCubit>().getCart(),
+                        child: ListView.separated(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: cartItems.length,
+                          separatorBuilder: (context, index) =>
+                              const Gap(12),
+                          itemBuilder: (context, index) {
+                            final item = cartItems[index];
+                            return CartItemWidget(
+                              item: item,
+                              isUpdating: state.updatingItemId == item.itemId,
+                            );
+                          },
+                        ),
                       ),
                     ),
                     const Gap(10),
-                    CartCuponWidget(),
+                    const CartCuponWidget(),
                     const Gap(10),
                     CartSummary(cart: state.cart),
-                    CheckoutButton(),
+                    const CheckoutButton(),
                   ],
                 );
               }
