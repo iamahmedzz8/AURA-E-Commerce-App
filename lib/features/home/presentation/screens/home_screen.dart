@@ -1,3 +1,6 @@
+import 'package:aura_maison_e_commerce/core/widgets/navigation.dart';
+import 'package:aura_maison_e_commerce/features/notification/presentation/cubit/notification_cubot.dart';
+import 'package:aura_maison_e_commerce/features/notification/presentation/screens/notfication_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
@@ -69,10 +72,8 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
 
   Color get background => isDark ? darkBackground : lightBackground;
   Color get surface => isDark ? darkSurface : lightSurface;
-  Color get foreground =>
-      isDark ? Colors.white : const Color(0xFF171717);
-  Color get muted =>
-      isDark ? const Color(0xFF8A8F98) : const Color(0xFF777777);
+  Color get foreground => isDark ? Colors.white : const Color(0xFF171717);
+  Color get muted => isDark ? const Color(0xFF8A8F98) : const Color(0xFF777777);
 
   static const List<Map<String, String>> products = [
     // {
@@ -248,7 +249,15 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      NavigateTo(
+                        context: context,
+                        screen: BlocProvider(
+                        create: (context) => NotificationCubit()..getNotifications(),
+                          child: NotficationScreen(),
+                        ),
+                      );
+                    },
                     visualDensity: VisualDensity.compact,
                     icon: const Icon(
                       Icons.notifications_none_rounded,

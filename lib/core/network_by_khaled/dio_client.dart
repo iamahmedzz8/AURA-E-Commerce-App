@@ -7,8 +7,8 @@ class DioClient {
   DioClient() {
     _dio = Dio(
       BaseOptions(
-        connectTimeout: const Duration(minutes: 1),
-        receiveTimeout: const Duration(minutes: 1),
+        connectTimeout: const Duration(seconds: 20),
+        receiveTimeout: const Duration(seconds: 20),
         baseUrl: 'https://accessories-eshop.runasp.net',
         receiveDataWhenStatusError: true,
       ),
