@@ -163,7 +163,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 12,
                                 mainAxisSpacing: 14,
-                                childAspectRatio: .62,
+                                childAspectRatio: .52,
                               ),
                         ),
                       );
@@ -1221,7 +1221,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
             Expanded(
               flex: 5,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 9),
+                padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -1251,7 +1251,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                     const SizedBox(height: 4),
                     Text(
                       item['description']!,
-                      maxLines: 2,
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontFamily: 'Inter',
@@ -1289,6 +1289,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                           child: IconButton(
                             onPressed: () => showAddedToBag(item),
                             padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
                             icon: Icon(
                               Icons.shopping_bag_outlined,
                               color: foreground,
@@ -1388,7 +1389,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
           crossAxisCount: 2,
           crossAxisSpacing: 12,
           mainAxisSpacing: 14,
-          childAspectRatio: .62,
+          childAspectRatio: .52,
         ),
       ),
     );
@@ -1433,7 +1434,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                 Expanded(
                   flex: 5,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 9),
+                    padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1482,7 +1483,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
           crossAxisCount: 2,
           crossAxisSpacing: 12,
           mainAxisSpacing: 14,
-          childAspectRatio: .62,
+          childAspectRatio: .52,
         ),
       ),
     );
@@ -1643,7 +1644,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
             Expanded(
               flex: 5,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 9),
+                padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -1673,7 +1674,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                     const SizedBox(height: 4),
                     Text(
                       item.description ?? '',
-                      maxLines: 2,
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontFamily: 'Inter',
@@ -1715,6 +1716,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                               'price': formattedPrice,
                             }),
                             padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
                             icon: Icon(
                               Icons.shopping_bag_outlined,
                               color: foreground,

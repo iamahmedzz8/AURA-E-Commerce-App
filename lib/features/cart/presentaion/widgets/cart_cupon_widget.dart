@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
@@ -13,8 +12,12 @@ class CartCuponWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(text: AppStrings.haveACoupon, weight: FontWeight.w800, size: 20),
-        Gap(10),
+        CustomText(
+          text: AppStrings.haveACoupon,
+          weight: FontWeight.w800,
+          size: 20,
+        ),
+        const Gap(10),
         Row(
           children: [
             Expanded(
@@ -22,9 +25,15 @@ class CartCuponWidget extends StatelessWidget {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  prefixIcon: Icon(Icons.local_offer_outlined,color:  AppColors.primaryColor,),
-                  hint: CustomText(text: AppStrings.couponPlaceholder),
-
+                  prefixIcon: Icon(
+                    Icons.local_offer_outlined,
+                    color: AppColors.primaryColor,
+                  ),
+                  hintText: AppStrings.couponPlaceholder,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 14,
+                  ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(12),
@@ -32,15 +41,15 @@ class CartCuponWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Gap(10),
+            const Gap(10),
             Container(
               height: 50,
-              width: 100,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 color: AppColors.primaryColor,
               ),
-              child: Center(
+              child: const Center(
                 child: CustomText(
                   text: AppStrings.applyCoupon,
                   color: Colors.white,

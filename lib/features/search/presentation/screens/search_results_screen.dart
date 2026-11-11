@@ -1,4 +1,3 @@
-import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_bottom_nav_bar.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_header.dart';
@@ -19,16 +18,12 @@ class SearchResultsScreen extends StatelessWidget {
     if (trimmed.isEmpty) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (_) => const NoResultsScreen(query: ""),
-        ),
+        MaterialPageRoute(builder: (_) => const NoResultsScreen(query: "")),
       );
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (_) => SearchResultsScreen(query: trimmed),
-        ),
+        MaterialPageRoute(builder: (_) => SearchResultsScreen(query: trimmed)),
       );
     }
   }
@@ -51,21 +46,14 @@ class SearchResultsScreen extends StatelessWidget {
                   SliverToBoxAdapter(
                     child: SearchResultsQueryBar(
                       initialQuery: query,
-                      onSubmitted: (newQuery) => _handleSearch(context, newQuery),
+                      onSubmitted: (newQuery) =>
+                          _handleSearch(context, newQuery),
                     ),
                   ),
-                  const SliverToBoxAdapter(
-                    child: InteractiveRefinementChips(),
-                  ),
-                  const SliverToBoxAdapter(
-                    child: HauteHorlogerieGrid(),
-                  ),
-                  const SliverToBoxAdapter(
-                    child: SalonConciergeVitrineBar(),
-                  ),
-                  const SliverToBoxAdapter(
-                    child: SizedBox(height: 16),
-                  ),
+                  const SliverToBoxAdapter(child: InteractiveRefinementChips()),
+                  const SliverToBoxAdapter(child: HauteHorlogerieGrid()),
+                  const SliverToBoxAdapter(child: SalonConciergeVitrineBar()),
+                  const SliverToBoxAdapter(child: SizedBox(height: 16)),
                 ],
               ),
             ),

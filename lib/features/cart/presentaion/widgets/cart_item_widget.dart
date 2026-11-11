@@ -104,26 +104,26 @@ class CartItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 16, left: 8, right: 8),
+      padding: const EdgeInsets.all(12),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.3),
+            color: Colors.grey.withValues(alpha: 0.2),
             spreadRadius: 1,
-            blurRadius: 3,
-            offset: const Offset(1, 3),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
-            flex: 1,
+          SizedBox(
+            width: 90,
+            height: 90,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
@@ -138,41 +138,44 @@ class CartItemWidget extends StatelessWidget {
               ),
             ),
           ),
-          const Gap(15),
+          const Gap(12),
           Expanded(
-            flex: 1,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 CustomText(
                   text: item.productName,
-                  size: 18,
-                  weight: FontWeight.w500,
+                  size: 16,
+                  weight: FontWeight.w600,
                   color: AppColors.primaryColor,
                   maxLines: 1,
                 ),
+                const Gap(4),
                 CustomText(
                   text: '${item.finalPricePerUnit.toStringAsFixed(2)} EGP',
                   weight: FontWeight.w500,
+                  size: 14,
                 ),
+                const Gap(8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      height: 35,
+                      height: 34,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(10),
                         color: const Color(0xffECE6DA),
                       ),
                       child: isUpdating
                           ? const Padding(
                               padding: EdgeInsets.symmetric(
-                                horizontal: 24,
+                                horizontal: 20,
                                 vertical: 8,
                               ),
                               child: SizedBox(
-                                width: 16,
-                                height: 16,
+                                width: 14,
+                                height: 14,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
                                   valueColor: AlwaysStoppedAnimation<Color>(
@@ -187,38 +190,40 @@ class CartItemWidget extends StatelessWidget {
                                 IconButton(
                                   padding: EdgeInsets.zero,
                                   constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
+                                    minWidth: 30,
+                                    minHeight: 30,
                                   ),
                                   onPressed: isUpdating
                                       ? null
                                       : () => _onDecrement(context),
-                                  icon: const Icon(Icons.remove, size: 18),
+                                  icon: const Icon(Icons.remove, size: 16),
                                 ),
                                 Padding(
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 4),
                                   child: CustomText(
                                     text: item.quantity.toString(),
-                                    size: 16,
-                                    weight: FontWeight.w500,
+                                    size: 15,
+                                    weight: FontWeight.w600,
                                   ),
                                 ),
                                 IconButton(
                                   padding: EdgeInsets.zero,
                                   constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
+                                    minWidth: 30,
+                                    minHeight: 30,
                                   ),
                                   onPressed: isUpdating
                                       ? null
                                       : () => _onIncrement(context),
-                                  icon: const Icon(Icons.add, size: 18),
+                                  icon: const Icon(Icons.add, size: 16),
                                 ),
                               ],
                             ),
                     ),
                     IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
                       onPressed: isUpdating ? null : () => _onDelete(context),
                       icon: isUpdating
                           ? const SizedBox(
@@ -233,11 +238,11 @@ class CartItemWidget extends StatelessWidget {
                           : const Icon(
                               Icons.delete_outlined,
                               color: Colors.red,
+                              size: 22,
                             ),
                     ),
                   ],
                 ),
-                const Gap(15),
               ],
             ),
           ),

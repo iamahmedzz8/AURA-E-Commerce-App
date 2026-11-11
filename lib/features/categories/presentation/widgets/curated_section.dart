@@ -77,24 +77,29 @@ class _CuratedSectionState extends State<CuratedSection> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppStrings.curatedDepartments,
-                    style: AppStyles.sectionEyebrow.copyWith(
-                      color: AppColors.goldAccent,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      AppStrings.curatedDepartments,
+                      style: AppStyles.sectionEyebrow.copyWith(
+                        color: AppColors.goldAccent,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    AppStrings.privateWorkshops,
-                    style: AppStyles.sectionHeading.copyWith(
-                      color: AppColors.textPrimary,
+                    const SizedBox(height: 2),
+                    Text(
+                      AppStrings.privateWorkshops,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppStyles.sectionHeading.copyWith(
+                        color: AppColors.textPrimary,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(

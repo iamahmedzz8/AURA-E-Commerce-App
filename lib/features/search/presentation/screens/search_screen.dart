@@ -1,4 +1,3 @@
-import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_bottom_nav_bar.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_header.dart';
@@ -18,16 +17,12 @@ class SearchScreen extends StatelessWidget {
     if (trimmed.isEmpty) {
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (_) => const NoResultsScreen(query: ""),
-        ),
+        MaterialPageRoute(builder: (_) => const NoResultsScreen(query: "")),
       );
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (_) => SearchResultsScreen(query: trimmed),
-        ),
+        MaterialPageRoute(builder: (_) => SearchResultsScreen(query: trimmed)),
       );
     }
   }
@@ -57,9 +52,7 @@ class SearchScreen extends StatelessWidget {
                       onItemSelected: (item) => _handleSearch(context, item),
                     ),
                   ),
-                  const SliverToBoxAdapter(
-                    child: SignatureCollectionsGrid(),
-                  ),
+                  const SliverToBoxAdapter(child: SignatureCollectionsGrid()),
                   SliverToBoxAdapter(
                     child: CuratorSuggestionsSection(
                       onItemTap: (item) => _handleSearch(context, item.title),

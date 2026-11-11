@@ -1,4 +1,3 @@
-import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_bottom_nav_bar.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_header.dart';
@@ -20,9 +19,7 @@ class NoResultsScreen extends StatelessWidget {
     if (trimmed.isNotEmpty) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (_) => SearchResultsScreen(query: trimmed),
-        ),
+        MaterialPageRoute(builder: (_) => SearchResultsScreen(query: trimmed)),
       );
     }
   }
@@ -45,7 +42,8 @@ class NoResultsScreen extends StatelessWidget {
                   SliverToBoxAdapter(
                     child: NoResultsQueryBar(
                       initialQuery: query,
-                      onSubmitted: (newQuery) => _handleSearch(context, newQuery),
+                      onSubmitted: (newQuery) =>
+                          _handleSearch(context, newQuery),
                     ),
                   ),
                   SliverToBoxAdapter(
@@ -61,9 +59,7 @@ class NoResultsScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  const SliverToBoxAdapter(
-                    child: VaultShowcaseSection(),
-                  ),
+                  const SliverToBoxAdapter(child: VaultShowcaseSection()),
                   const SliverToBoxAdapter(
                     child: ConciergeConsultationBanner(),
                   ),

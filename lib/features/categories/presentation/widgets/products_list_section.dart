@@ -122,22 +122,29 @@ class ProductsListSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.auto_awesome_outlined,
-                      size: 15,
-                      color: AppColors.goldAccent,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      AppStrings.streamHeading,
-                      style: AppStyles.streamSectionTitle.copyWith(
-                        color: AppColors.textPrimary,
+                Expanded(
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.auto_awesome_outlined,
+                        size: 15,
+                        color: AppColors.goldAccent,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          AppStrings.streamHeading,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppStyles.streamSectionTitle.copyWith(
+                            color: AppColors.textPrimary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(width: 8),
                 Text(
                   AppStrings.streamPagination,
                   style: AppStyles.streamPagination.copyWith(
