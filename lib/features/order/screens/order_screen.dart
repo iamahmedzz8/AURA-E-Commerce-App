@@ -1,12 +1,11 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
-import 'package:aura_maison_e_commerce/features/home/presentation/screens/home_screen.dart';
 import 'package:aura_maison_e_commerce/features/order/screens/order_history.dart';
 import 'package:aura_maison_e_commerce/features/order/widgets/custom_button.dart';
 import 'package:aura_maison_e_commerce/features/order/widgets/order_placed_section.dart';
 import 'package:aura_maison_e_commerce/features/order/widgets/order_summary.dart';
 import 'package:aura_maison_e_commerce/features/order/widgets/order_tracking_section.dart';
+import 'package:aura_maison_e_commerce/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -39,7 +38,7 @@ class OrderScreen extends StatelessWidget {
                 OrderSummary(),
                 Gap(10),
                 CustomButton(
-                  widget: const HomeScreen(),
+                  widget: MainScreen(),
                   buttonText: AppStrings.continueShopping,
                   buttonColor: AppColors.primaryColor,
                   textColor: Colors.white,

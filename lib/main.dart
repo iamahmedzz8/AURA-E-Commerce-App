@@ -36,9 +36,7 @@ class AuraMaisonApp extends StatelessWidget {
             theme: AuraTheme.lightTheme,
             darkTheme: AuraTheme.darkTheme,
             themeMode: themeMode,
-            home: AppSplashScreen(
-  nextBuilder: (_) => SplashSalonScreen(),
-),
+            home: AppSplashScreen(nextBuilder: (_) => MainScreen()),
           );
         },
       ),
