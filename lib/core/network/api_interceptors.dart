@@ -9,11 +9,7 @@ class AuthInterceptor extends QueuedInterceptor {
   final TokenStorageService _tokenStorage;
   final Dio _dio;
 
-  AuthInterceptor({
-    required TokenStorageService tokenStorage,
-    required Dio dio,
-  })  : _tokenStorage = tokenStorage,
-        _dio = dio;
+  AuthInterceptor({required this._tokenStorage, required Dio dio}) : _dio = dio;
 
   @override
   Future<void> onRequest(
@@ -21,7 +17,8 @@ class AuthInterceptor extends QueuedInterceptor {
     RequestInterceptorHandler handler,
   ) async {
     // Avoid attaching Bearer token to login or refresh endpoints
-    final isAuthEndpoint = options.path.contains('/api/auth/login') ||
+    final isAuthEndpoint =
+        options.path.contains('/api/auth/login') ||
         options.path.contains('/api/auth/refresh-token') ||
         options.path.contains('/api/auth/register');
 
@@ -47,10 +44,12 @@ class AuthInterceptor extends QueuedInterceptor {
     ErrorInterceptorHandler handler,
   ) async {
     final statusCode = err.response?.statusCode;
-    final isRefreshEndpoint =
-        err.requestOptions.path.contains(ApiEndpoints.refreshToken);
-    final isLoginEndpoint =
-        err.requestOptions.path.contains(ApiEndpoints.login);
+    final isRefreshEndpoint = err.requestOptions.path.contains(
+      ApiEndpoints.refreshToken,
+    );
+    final isLoginEndpoint = err.requestOptions.path.contains(
+      ApiEndpoints.login,
+    );
 
     if (isRefreshEndpoint && statusCode != null && statusCode >= 400) {
       await _tokenStorage.clearTokens();
@@ -77,10 +76,7 @@ class AuthInterceptor extends QueuedInterceptor {
 
           final refreshResponse = await refreshDio.post(
             ApiEndpoints.refreshToken,
-            data: {
-              'refreshToken': refreshToken,
-              'useCookies': false,
-            },
+            data: {'refreshToken': refreshToken, 'useCookies': false},
           );
 
           if (refreshResponse.statusCode == 200 &&
@@ -90,8 +86,9 @@ class AuthInterceptor extends QueuedInterceptor {
             final newRefreshToken =
                 data['refreshToken'] as String? ?? refreshToken;
             final expiresAtStr = data['expiresAtUtc'] as String?;
-            final expiresAt =
-                expiresAtStr != null ? DateTime.tryParse(expiresAtStr) : null;
+            final expiresAt = expiresAtStr != null
+                ? DateTime.tryParse(expiresAtStr)
+                : null;
 
             if (newAccessToken != null) {
               await _tokenStorage.saveTokens(
@@ -127,11 +124,7 @@ class ApiException implements Exception {
   final int? statusCode;
   final dynamic data;
 
-  const ApiException({
-    required this.message,
-    this.statusCode,
-    this.data,
-  });
+  const ApiException({required this.message, this.statusCode, this.data});
 
   @override
   String toString() =>
@@ -143,7 +136,8 @@ class ApiException implements Exception {
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
         return const ApiException(
-          message: 'Connection timed out. Please check your internet connection.',
+          message:
+              'Connection timed out. Please check your internet connection.',
           statusCode: 408,
         );
 
@@ -175,13 +169,16 @@ class ApiException implements Exception {
             );
           case 403:
             return ApiException(
-              message: 'Access forbidden. You do not have permission for this resource.',
+              message:
+                  'Access forbidden. You do not have permission for this resource.',
               statusCode: 403,
               data: responseData,
             );
           case 404:
             return ApiException(
-              message: errorMessage.isNotEmpty ? errorMessage : 'Requested resource not found.',
+              message: errorMessage.isNotEmpty
+                  ? errorMessage
+                  : 'Requested resource not found.',
               statusCode: 404,
               data: responseData,
             );
@@ -202,13 +199,12 @@ class ApiException implements Exception {
 
       case DioExceptionType.connectionError:
         return const ApiException(
-          message: 'Unable to connect to the server. Please check your network.',
+          message:
+              'Unable to connect to the server. Please check your network.',
         );
 
       case DioExceptionType.cancel:
-        return const ApiException(
-          message: 'Request was cancelled.',
-        );
+        return const ApiException(message: 'Request was cancelled.');
 
       case DioExceptionType.badCertificate:
         return const ApiException(

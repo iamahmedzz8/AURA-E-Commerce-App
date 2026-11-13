@@ -16,10 +16,7 @@ class ReviewsRepo {
     try {
       final dynamic response = await apiService.getData(
         '${Endpoints.reviews}/$productId',
-        queryParameters: {
-          'page': page,
-          'pageSize': pageSize,
-        },
+        queryParameters: {'page': page, 'pageSize': pageSize},
       );
       log('getReviews response: $response');
 
@@ -58,11 +55,7 @@ class ReviewsRepo {
     try {
       final dynamic response = await apiService.postData(
         '${Endpoints.reviews}/$productId',
-        {
-          'productId': productId,
-          'comment': comment,
-          'rating': rating,
-        },
+        {'productId': productId, 'comment': comment, 'rating': rating},
       );
       log('addReview response: $response');
     } on ApiError catch (e) {

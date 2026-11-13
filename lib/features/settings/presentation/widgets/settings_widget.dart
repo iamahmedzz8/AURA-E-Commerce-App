@@ -52,7 +52,11 @@ class SettingsEnclaveCard extends StatelessWidget {
               ],
             ),
           ),
-          const Icon(Icons.shield_outlined, color: AppColors.primaryGold, size: 28),
+          const Icon(
+            Icons.shield_outlined,
+            color: AppColors.primaryGold,
+            size: 28,
+          ),
         ],
       ),
     );
@@ -151,7 +155,11 @@ class SettingsCustomTile extends StatelessWidget {
           ?trailing,
           if (hasArrow) ...[
             const SizedBox(width: 8),
-            const Icon(Icons.chevron_right, color: AppColors.textMuted, size: 18),
+            const Icon(
+              Icons.chevron_right,
+              color: AppColors.textMuted,
+              size: 18,
+            ),
           ],
         ],
       ),
@@ -278,7 +286,9 @@ class SettingsActionTile extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: isActive ? AppColors.primaryGold.withValues(alpha: 0.2) : AppColors.cardBorder,
+              color: isActive
+                  ? AppColors.primaryGold.withValues(alpha: 0.2)
+                  : AppColors.cardBorder,
               borderRadius: BorderRadius.circular(4),
               border: Border.all(
                 color: isActive ? AppColors.primaryGold : Colors.transparent,

@@ -1,4 +1,3 @@
-
 class CartItemModel {
   final String itemId;
   final String productId;
@@ -37,10 +36,8 @@ class CartItemModel {
       quantity: (json['quantity'] as num?)?.toInt() ?? 0,
       discountPercentage:
           (json['discountPercentage'] as num?)?.toDouble() ?? 0.0,
-      basePricePerUnit:
-          (json['basePricePerUnit'] as num?)?.toDouble() ?? 0.0,
-      finalPricePerUnit:
-          (json['finalPricePerUnit'] as num?)?.toDouble() ?? 0.0,
+      basePricePerUnit: (json['basePricePerUnit'] as num?)?.toDouble() ?? 0.0,
+      finalPricePerUnit: (json['finalPricePerUnit'] as num?)?.toDouble() ?? 0.0,
       totalPrice: (json['totalPrice'] as num?)?.toDouble() ?? 0.0,
     );
   }

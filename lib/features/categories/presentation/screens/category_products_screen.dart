@@ -188,7 +188,7 @@ class _ProductCardState extends State<_ProductCard> {
                 Image.network(
                   p.coverPictureUrl,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
+                  errorBuilder: (_, _, _) => Container(
                     color: const Color(0xFF191C21),
                     child: const Icon(
                       Icons.image_outlined,
@@ -322,7 +322,7 @@ class _LoadingGrid extends StatelessWidget {
         childAspectRatio: 0.62,
       ),
       itemCount: 6,
-      itemBuilder: (_, __) => Container(
+      itemBuilder: (_, _) => Container(
         decoration: BoxDecoration(
           color: AppColors.cardInactive,
           borderRadius: BorderRadius.circular(6),

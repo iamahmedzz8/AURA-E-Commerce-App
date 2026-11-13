@@ -11,10 +11,7 @@ class NotficationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Notification'),
-      ),
+      appBar: AppBar(centerTitle: true, title: const Text('Notification')),
       body: BlocBuilder<NotificationCubit, NotificationStates>(
         builder: (context, state) {
           if (state is NotificationLoadingState) {

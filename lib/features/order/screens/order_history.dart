@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
@@ -46,8 +45,7 @@ class OrderHistory extends StatelessWidget {
         child: Column(
           children: [
             CustomText(
-              text:
-                  AppStrings.orderHistorySubtitle,
+              text: AppStrings.orderHistorySubtitle,
               size: 13,
               maxLines: 2,
               weight: FontWeight.w400,

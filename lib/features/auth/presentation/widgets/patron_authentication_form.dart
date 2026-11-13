@@ -34,9 +34,11 @@ class _PatronAuthenticationFormState extends State<PatronAuthenticationForm> {
   @override
   void initState() {
     super.initState();
-    _idController = widget.idController ??
+    _idController =
+        widget.idController ??
         TextEditingController(text: AppStrings.patronIdPlaceholder);
-    _passphraseController = widget.passphraseController ??
+    _passphraseController =
+        widget.passphraseController ??
         TextEditingController(text: AppStrings.passphrasePlaceholder);
   }
 
@@ -80,10 +82,7 @@ class _PatronAuthenticationFormState extends State<PatronAuthenticationForm> {
             decoration: BoxDecoration(
               color: AppColors.cardInactive,
               borderRadius: BorderRadius.circular(4),
-              border: Border.all(
-                color: AppColors.chipBorder,
-                width: 0.5,
-              ),
+              border: Border.all(color: AppColors.chipBorder, width: 0.5),
             ),
             child: Row(
               children: [
@@ -137,10 +136,7 @@ class _PatronAuthenticationFormState extends State<PatronAuthenticationForm> {
             decoration: BoxDecoration(
               color: AppColors.cardInactive,
               borderRadius: BorderRadius.circular(4),
-              border: Border.all(
-                color: AppColors.chipBorder,
-                width: 0.5,
-              ),
+              border: Border.all(color: AppColors.chipBorder, width: 0.5),
             ),
             child: Row(
               children: [
@@ -297,30 +293,30 @@ class _PatronAuthenticationFormState extends State<PatronAuthenticationForm> {
               child: Center(
                 child: widget.isLoading
                     ? const SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: AppColors.iconDark,
-                  ),
-                )
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColors.iconDark,
+                        ),
+                      )
                     : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppStrings.enterPrivateSalonAction,
-                      style: AppStyles.vipEnterSalonButton.copyWith(
-                        color: AppColors.iconDark,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppStrings.enterPrivateSalonAction,
+                            style: AppStyles.vipEnterSalonButton.copyWith(
+                              color: AppColors.iconDark,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          const Icon(
+                            Icons.lock_open_rounded,
+                            size: 14,
+                            color: AppColors.iconDark,
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    const Icon(
-                      Icons.lock_open_rounded,
-                      size: 14,
-                      color: AppColors.iconDark,
-                    ),
-                  ],
-                ),
               ),
             ),
           ),

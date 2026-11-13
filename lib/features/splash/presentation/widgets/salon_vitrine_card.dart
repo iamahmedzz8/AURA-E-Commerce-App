@@ -1,5 +1,6 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+
 /// Vitrine Card showcasing complications / atelier crafts
 class SalonVitrineCard extends StatelessWidget {
   final String code;
@@ -41,7 +42,9 @@ class SalonVitrineCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.obsidianDark,
                 borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: AppColors.gold.withValues(alpha: 0.15)),
+                border: Border.all(
+                  color: AppColors.gold.withValues(alpha: 0.15),
+                ),
               ),
               child: Center(
                 child: image != null

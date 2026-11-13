@@ -39,9 +39,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         appBar: AppBar(
           backgroundColor: const Color(0xFF080B10),
           elevation: 0,
-          iconTheme: const IconThemeData(
-            color: Color(0xFFC5A059),
-          ),
+          iconTheme: const IconThemeData(color: Color(0xFFC5A059)),
           title: const Text(
             AppStrings.changePasswordTitle,
             style: TextStyle(
@@ -62,9 +60,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               );
               Navigator.pop(context);
             } else if (state is ChangePasswordFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.message)));
             }
           },
           builder: (context, state) {
@@ -95,10 +93,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     const SizedBox(height: 8),
                     const Text(
                       AppStrings.enterCurrentAndNewPassword,
-                      style: TextStyle(
-                        color: Color(0xFF8A8F98),
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(color: Color(0xFF8A8F98), fontSize: 14),
                     ),
                     const SizedBox(height: 32),
 
@@ -167,30 +162,30 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         onPressed: isLoading
                             ? null
                             : () {
-                          if (_formKey.currentState!.validate()) {
-                            context
-                                .read<ChangePasswordCubit>()
-                                .changePassword(
-                              currentPassword:
-                              _currentPasswordController.text,
-                              newPassword:
-                              _newPasswordController.text,
-                              confirmNewPassword:
-                              _confirmPasswordController.text,
-                            );
-                          }
-                        },
+                                if (_formKey.currentState!.validate()) {
+                                  context
+                                      .read<ChangePasswordCubit>()
+                                      .changePassword(
+                                        currentPassword:
+                                            _currentPasswordController.text,
+                                        newPassword:
+                                            _newPasswordController.text,
+                                        confirmNewPassword:
+                                            _confirmPasswordController.text,
+                                      );
+                                }
+                              },
                         child: isLoading
                             ? const CircularProgressIndicator(
-                          color: Color(0xFF080B10),
-                        )
+                                color: Color(0xFF080B10),
+                              )
                             : const Text(
-                          AppStrings.updatePasswordUpper,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 1,
-                          ),
-                        ),
+                                AppStrings.updatePasswordUpper,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 1,
+                                ),
+                              ),
                       ),
                     ),
                   ],
@@ -213,22 +208,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
-      validator: validator ??
-              (value) {
+      validator:
+          validator ??
+          (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter $label';
             }
             return null;
           },
-      style: const TextStyle(
-        color: Color(0xFFFBF9F5),
-        fontSize: 14,
-      ),
+      style: const TextStyle(color: Color(0xFFFBF9F5), fontSize: 14),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(
-          color: Color(0xFF8A8F98),
-        ),
+        labelStyle: const TextStyle(color: Color(0xFF8A8F98)),
         filled: true,
         fillColor: const Color(0xFF101319),
         suffixIcon: IconButton(
@@ -240,27 +231,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: Color(0xFF252A33),
-          ),
+          borderSide: const BorderSide(color: Color(0xFF252A33)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: Color(0xFFC5A059),
-          ),
+          borderSide: const BorderSide(color: Color(0xFFC5A059)),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: Color(0xFFBE123C),
-          ),
+          borderSide: const BorderSide(color: Color(0xFFBE123C)),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: Color(0xFFBE123C),
-          ),
+          borderSide: const BorderSide(color: Color(0xFFBE123C)),
         ),
       ),
     );

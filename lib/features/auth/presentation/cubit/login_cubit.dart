@@ -7,14 +7,9 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   final GetAuthUseCase getAuthUseCase;
 
-  LoginCubit({
-    required this.getAuthUseCase,
-  }) : super(LoginInitial());
+  LoginCubit({required this.getAuthUseCase}) : super(LoginInitial());
 
-  Future<void> login({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> login({required String email, required String password}) async {
     emit(LoginLoading());
 
     try {
@@ -28,11 +23,7 @@ class LoginCubit extends Cubit<LoginState> {
       if (e is Failure) {
         emit(LoginFailure(e.message));
       } else {
-        emit(
-          LoginFailure(
-            'Something went wrong. Please try again.',
-          ),
-        );
+        emit(LoginFailure('Something went wrong. Please try again.'));
       }
     }
   }

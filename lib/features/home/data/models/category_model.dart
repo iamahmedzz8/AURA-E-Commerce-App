@@ -17,7 +17,8 @@ class CategoryModel {
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       description: json['description'] as String?,
-      coverPictureUrl: json['coverPictureUrl'] as String? ??
+      coverPictureUrl:
+          json['coverPictureUrl'] as String? ??
           json['coverUrl'] as String? ??
           json['categoryCoverUrl'] as String? ??
           '',

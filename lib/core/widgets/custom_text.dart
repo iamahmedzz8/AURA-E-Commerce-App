@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
   final String text;
-  final double ?size,space;
+  final double? size, space;
   final Color? color;
   final FontWeight? weight;
   final TextAlign? align;
@@ -12,12 +12,13 @@ class CustomText extends StatelessWidget {
   const CustomText({
     super.key,
     required this.text,
-    this.size ,
-    this.color ,
-    this.weight ,
+    this.size,
+    this.color,
+    this.weight,
     this.align,
-    this.family ,
-    this.maxLines, this.space,
+    this.family,
+    this.maxLines,
+    this.space,
   });
 
   @override
@@ -25,18 +26,17 @@ class CustomText extends StatelessWidget {
     return Text(
       text,
       maxLines: maxLines,
-      
+
       overflow: TextOverflow.ellipsis,
       textAlign: align,
-      
+
       style: TextStyle(
-        letterSpacing: space??1,
-        fontSize: size??16,
-        fontFamily: family?? '',
+        letterSpacing: space ?? 1,
+        fontSize: size ?? 16,
+        fontFamily: family ?? '',
         color: color,
         fontWeight: weight,
       ),
-      
     );
   }
 }

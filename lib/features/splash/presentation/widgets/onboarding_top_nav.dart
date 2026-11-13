@@ -38,7 +38,7 @@ class OnboardingTopNav extends StatelessWidget {
                           BoxShadow(
                             color: AppColors.gold.withValues(alpha: 0.5),
                             blurRadius: 6,
-                          )
+                          ),
                         ]
                       : null,
                 ),
@@ -50,7 +50,10 @@ class OnboardingTopNav extends StatelessWidget {
               onPressed: onSkip,
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.gold,
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
               ),
               child: const Text(
                 'SKIP INTRODUCTION',

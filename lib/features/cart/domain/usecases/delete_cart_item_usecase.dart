@@ -5,11 +5,7 @@ class DeleteCartItemUseCase {
 
   DeleteCartItemUseCase(this.repository);
 
-  Future<void> call({
-    required String itemId,
-  }) async {
-    return await repository.deleteCartItem(
-      itemId: itemId,
-    );
+  Future<void> call({required String itemId}) async {
+    return await repository.deleteCartItem(itemId: itemId);
   }
 }

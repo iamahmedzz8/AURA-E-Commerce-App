@@ -37,8 +37,7 @@ abstract class AuthRemoteDataSource {
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final DioClient _dioClient;
 
-  AuthRemoteDataSourceImpl({required DioClient dioClient})
-    : _dioClient = dioClient;
+  AuthRemoteDataSourceImpl({required this._dioClient});
 
   @override
   Future<void> forgotPassword(String email) async {
@@ -103,6 +102,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }) async {
     await _dioClient.post(ApiEndpoints.changePassword, data: request.toJson());
   }
+
   @override
   Future<void> logout() async {
     await _dioClient.post(ApiEndpoints.logout);

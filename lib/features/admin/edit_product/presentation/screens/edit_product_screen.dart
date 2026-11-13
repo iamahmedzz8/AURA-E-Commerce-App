@@ -30,7 +30,10 @@ class EditProductScreen extends StatelessWidget {
               title: const EditAppBar(),
             ),
             SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 16.0,
+              ),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
                   const RestorationNotesCard(),

@@ -157,7 +157,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final apiProduct = state is ProductDetailsSuccessState
         ? state.productDetailsModel
         : null;
-    final productId = (widget.productId ?? widget.product['id'] ?? '').toString();
+    final productId = (widget.productId ?? widget.product['id'] ?? '')
+        .toString();
 
     final isLoading = state is ProductDetailsLoadingState;
     final productName =
@@ -180,7 +181,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ].where((image) => image.isNotEmpty).toSet().toList();
 
     return BlocProvider(
-      create: (_) => ReviewsCubit()..getReviews(productId.isEmpty ? '0' : productId),
+      create: (_) =>
+          ReviewsCubit()..getReviews(productId.isEmpty ? '0' : productId),
       child: Builder(
         builder: (context) {
           final reviewsCubit = context.read<ReviewsCubit>();
@@ -974,21 +976,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final apiProduct = state is ProductDetailsSuccessState
         ? state.productDetailsModel
         : null;
-    final productId = (widget.productId ?? widget.product['id'] ?? '').toString();
+    final productId = (widget.productId ?? widget.product['id'] ?? '')
+        .toString();
     final productName = widget.product['name'] ?? 'Royal Tourbillon';
     final productImage = apiProduct != null
         ? (apiProduct.coverImage.trim().isNotEmpty
-            ? apiProduct.coverImage
-            : (apiProduct.productImage.isNotEmpty
-                ? apiProduct.productImage.first.toString()
-                : ''))
+              ? apiProduct.coverImage
+              : (apiProduct.productImage.isNotEmpty
+                    ? apiProduct.productImage.first.toString()
+                    : ''))
         : ((widget.product['image'] ?? widget.product['coverPictureUrl'] ?? '')
+                  .toString()
+                  .trim()
+                  .isNotEmpty
+              ? (widget.product['image'] ?? widget.product['coverPictureUrl'])
                     .toString()
-                    .trim()
-                    .isNotEmpty
-                ? (widget.product['image'] ?? widget.product['coverPictureUrl'])
-                    .toString()
-                : (widget.product['images'] is List &&
+              : (widget.product['images'] is List &&
                         (widget.product['images'] as List).isNotEmpty
                     ? (widget.product['images'] as List).first.toString()
                     : ''));
@@ -1154,49 +1157,49 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           Expanded(
             child: ElevatedButton.icon(
               onPressed: () async {
-  final String? productId = widget.product['id'];
+                final String? productId = widget.product['id'];
 
-if (productId == null || productId.isEmpty) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text('Product ID is missing')),
-  );
-  return;
-}
+                if (productId == null || productId.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Product ID is missing')),
+                  );
+                  return;
+                }
 
-await context.read<CartCubit>().addToCart(
-  productId: productId,
-  quantity: _quantity,
-);
+                await context.read<CartCubit>().addToCart(
+                  productId: productId,
+                  quantity: _quantity,
+                );
 
-  if (!mounted) return;
+                if (!mounted) return;
 
-  final state = context.read<CartCubit>().state;
+                final state = context.read<CartCubit>().state;
 
-  if (state is CartSuccess) {
-    setState(() {
-      _addedToBag = true;
-    });
+                if (state is CartSuccess) {
+                  setState(() {
+                    _addedToBag = true;
+                  });
 
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            'Added to bag • Quantity: $_quantity • ${productVariants[_selectedVariant]['name']}',
-          ),
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: gold,
-        ),
-      );
-  } else if (state is CartError) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(state.message),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-  }
-},
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Added to bag • Quantity: $_quantity • ${productVariants[_selectedVariant]['name']}',
+                        ),
+                        behavior: SnackBarBehavior.floating,
+                        backgroundColor: gold,
+                      ),
+                    );
+                } else if (state is CartError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
+              },
               icon: Icon(
                 _addedToBag ? Icons.check_rounded : Icons.shopping_bag_outlined,
                 size: 15,

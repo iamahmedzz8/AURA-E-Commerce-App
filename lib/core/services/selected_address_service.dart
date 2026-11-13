@@ -3,9 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SelectedAddressService {
   final SharedPreferences preferences;
 
-  SelectedAddressService({
-    required this.preferences,
-  });
+  SelectedAddressService({required this.preferences});
 
   static const String _addressIdKey = 'selected_address_id';
 

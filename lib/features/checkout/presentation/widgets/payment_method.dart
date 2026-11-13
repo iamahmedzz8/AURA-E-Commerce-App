@@ -13,7 +13,11 @@ class PaymentMethod extends StatelessWidget {
       children: [
         SvgPicture.asset('assets/images/cash.svg'),
         Gap(5),
-        CustomText(text: AppStrings.paymentMethod, size: 18, weight: FontWeight.bold),
+        CustomText(
+          text: AppStrings.paymentMethod,
+          size: 18,
+          weight: FontWeight.bold,
+        ),
         Spacer(),
         CustomText(text: AppStrings.instantConfirmation),
       ],

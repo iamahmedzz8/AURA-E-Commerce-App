@@ -1,4 +1,3 @@
-
 class ProfileModel {
   final String name;
   final String initials;

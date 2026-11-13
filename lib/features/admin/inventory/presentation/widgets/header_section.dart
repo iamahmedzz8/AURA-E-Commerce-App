@@ -7,16 +7,18 @@ class HeaderSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          IconButton(onPressed: (){
-            Navigator.pop(context);
-          },
-            icon: Icon(Icons.arrow_back, color: DarkTheme.gold, size: 20),),
-           SizedBox(width: 8),
-           Flexible(
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back, color: DarkTheme.gold, size: 20),
+          ),
+          SizedBox(width: 8),
+          Flexible(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -64,10 +66,14 @@ class HeaderSection extends StatelessWidget {
             ),
           ),
 
-           SizedBox(width: 8),
-           Icon(Icons.assignment_outlined, color: DarkTheme.secondaryText, size: 20),
-           SizedBox(width: 8),
-           CircleAvatar(
+          SizedBox(width: 8),
+          Icon(
+            Icons.assignment_outlined,
+            color: DarkTheme.secondaryText,
+            size: 20,
+          ),
+          SizedBox(width: 8),
+          CircleAvatar(
             radius: 14,
             backgroundColor: DarkTheme.gold,
             child: Icon(Icons.person, size: 16, color: DarkTheme.background),
@@ -84,13 +90,13 @@ class _VendorBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:  EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       decoration: BoxDecoration(
         color: DarkTheme.surface,
         borderRadius: BorderRadius.circular(3),
         border: Border.all(color: DarkTheme.border),
       ),
-      child:  Text(
+      child: Text(
         'VENDÔME',
         style: TextStyle(
           color: DarkTheme.gold,

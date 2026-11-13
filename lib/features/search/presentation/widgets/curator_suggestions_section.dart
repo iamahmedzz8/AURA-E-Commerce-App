@@ -139,10 +139,7 @@ class _TrendingItemCard extends StatelessWidget {
   final CuratorTrendingItem item;
   final VoidCallback? onTap;
 
-  const _TrendingItemCard({
-    required this.item,
-    this.onTap,
-  });
+  const _TrendingItemCard({required this.item, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -382,10 +379,7 @@ class _ConciergeBanner extends StatelessWidget {
           GestureDetector(
             onTap: onContactTap,
             child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 14,
-                vertical: 8,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
                 color: AppColors.goldAccent,
                 borderRadius: BorderRadius.circular(2),

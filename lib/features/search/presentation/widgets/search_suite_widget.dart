@@ -116,10 +116,7 @@ class _SearchSuiteWidgetState extends State<SearchSuiteWidget> {
                     minWidth: 40,
                     minHeight: 40,
                   ),
-                  icon: const Icon(
-                    Icons.close,
-                    color: AppColors.textSecondary,
-                  ),
+                  icon: const Icon(Icons.close, color: AppColors.textSecondary),
                   onPressed: () {
                     _controller.clear();
                     widget.onClear?.call();

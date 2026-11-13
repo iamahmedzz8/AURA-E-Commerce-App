@@ -5,19 +5,14 @@ import 'package:aura_maison_e_commerce/features/cart/domain/repositories/cart_re
 class CartRepositoryImpl implements CartRepository {
   final CartRemoteDataSource remoteDataSource;
 
-  CartRepositoryImpl({
-    required this.remoteDataSource,
-  });
+  CartRepositoryImpl({required this.remoteDataSource});
 
   @override
   Future<void> addToCart({
     required String productId,
     required int quantity,
   }) async {
-    await remoteDataSource.addToCart(
-      productId: productId,
-      quantity: quantity,
-    );
+    await remoteDataSource.addToCart(productId: productId, quantity: quantity);
   }
 
   @override
@@ -37,11 +32,7 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  Future<void> deleteCartItem({
-    required String itemId,
-  }) async {
-    await remoteDataSource.deleteCartItem(
-      itemId: itemId,
-    );
+  Future<void> deleteCartItem({required String itemId}) async {
+    await remoteDataSource.deleteCartItem(itemId: itemId);
   }
 }

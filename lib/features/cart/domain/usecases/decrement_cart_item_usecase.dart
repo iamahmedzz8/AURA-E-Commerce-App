@@ -5,10 +5,7 @@ class DecrementCartItemUseCase {
 
   DecrementCartItemUseCase(this.repository);
 
-  Future<void> call({
-    required String itemId,
-    required int quantity,
-  }) async {
+  Future<void> call({required String itemId, required int quantity}) async {
     return await repository.decrementCartItem(
       itemId: itemId,
       quantity: quantity,

@@ -43,10 +43,7 @@ class VipAmbientHeader extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.specsStripBackground,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: AppColors.chipBorder,
-                    width: 1,
-                  ),
+                  border: Border.all(color: AppColors.chipBorder, width: 1),
                   boxShadow: const [
                     BoxShadow(
                       color: Color(0x33000000),

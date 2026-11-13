@@ -17,22 +17,23 @@ class ProductItemModel {
   final String actionLabel;
   final IconData secondaryActionIcon;
 
-  ProductItemModel(
-      {required this.imageUrl,
-      required this.badge1,
-      required this.badge2,
-      required this.workshop,
-      required this.specsSummary,
-      required this.status,
-      required this.statusColor,
-      required this.category,
-      required this.title,
-      required this.priceLabel,
-      required this.price,
-      required this.description,
-      required this.specs,
-      required this.actionLabel,
-      required this.secondaryActionIcon});
+  ProductItemModel({
+    required this.imageUrl,
+    required this.badge1,
+    required this.badge2,
+    required this.workshop,
+    required this.specsSummary,
+    required this.status,
+    required this.statusColor,
+    required this.category,
+    required this.title,
+    required this.priceLabel,
+    required this.price,
+    required this.description,
+    required this.specs,
+    required this.actionLabel,
+    required this.secondaryActionIcon,
+  });
 }
 
 class SpecItem {

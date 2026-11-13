@@ -41,8 +41,11 @@ class ProductDetailsModel {
       quantity: (json['stock'] as num?)?.toInt() ?? 0,
       categories: (json['categories'] as List<dynamic>?) ?? [],
       nameArabic:
-          json['nameArabic']?.toString() ?? json['arabicName']?.toString() ?? '',
-      descriptionArabic: json['descriptionArabic']?.toString() ??
+          json['nameArabic']?.toString() ??
+          json['arabicName']?.toString() ??
+          '',
+      descriptionArabic:
+          json['descriptionArabic']?.toString() ??
           json['arabicDescription']?.toString() ??
           '',
       productImage: (json['productPictures'] as List<dynamic>?) ?? [],

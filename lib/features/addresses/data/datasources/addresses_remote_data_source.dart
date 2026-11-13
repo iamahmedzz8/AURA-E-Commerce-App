@@ -23,13 +23,10 @@ abstract class AddressesRemoteDataSource {
   Future<void> deleteAddress(String id);
 }
 
-class AddressesRemoteDataSourceImpl
-    implements AddressesRemoteDataSource {
+class AddressesRemoteDataSourceImpl implements AddressesRemoteDataSource {
   final DioClient dioClient;
 
-  AddressesRemoteDataSourceImpl({
-    required this.dioClient,
-  });
+  AddressesRemoteDataSourceImpl({required this.dioClient});
 
   @override
   Future<AddressModel> createAddress({
@@ -45,24 +42,18 @@ class AddressesRemoteDataSourceImpl
 
   @override
   Future<AddressModel> getAddressById(String id) async {
-    final response = await dioClient.get(
-      ApiEndpoints.addressById(id),
-    );
+    final response = await dioClient.get(ApiEndpoints.addressById(id));
 
     return AddressModel.fromJson(response.data);
   }
 
   @override
   Future<List<AddressModel>> getUserAddresses() async {
-    final response = await dioClient.get(
-      ApiEndpoints.addresses,
-    );
+    final response = await dioClient.get(ApiEndpoints.addresses);
 
     final List<dynamic> data = response.data;
 
-    return data
-        .map((json) => AddressModel.fromJson(json))
-        .toList();
+    return data.map((json) => AddressModel.fromJson(json)).toList();
   }
 
   @override
@@ -80,8 +71,6 @@ class AddressesRemoteDataSourceImpl
 
   @override
   Future<void> deleteAddress(String id) async {
-    await dioClient.delete(
-      ApiEndpoints.addressById(id),
-    );
+    await dioClient.delete(ApiEndpoints.addressById(id));
   }
 }

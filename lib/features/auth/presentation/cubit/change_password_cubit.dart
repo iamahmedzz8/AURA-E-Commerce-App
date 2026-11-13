@@ -6,9 +6,8 @@ part 'change_password_state.dart';
 class ChangePasswordCubit extends Cubit<ChangePasswordState> {
   final ChangePasswordUseCase changePasswordUseCase;
 
-  ChangePasswordCubit({
-    required this.changePasswordUseCase,
-  }) : super(ChangePasswordInitial());
+  ChangePasswordCubit({required this.changePasswordUseCase})
+    : super(ChangePasswordInitial());
 
   Future<void> changePassword({
     required String currentPassword,
@@ -29,11 +28,7 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
       if (e is Failure) {
         emit(ChangePasswordFailure(e.message));
       } else {
-        emit(
-          ChangePasswordFailure(
-            'Something went wrong. Please try again.',
-          ),
-        );
+        emit(ChangePasswordFailure('Something went wrong. Please try again.'));
       }
     }
   }

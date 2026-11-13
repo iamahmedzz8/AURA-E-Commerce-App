@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +26,7 @@ class EditProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            const SectionHeader(
-              title: AppStrings.honorificTitle,
-            ),
+            const SectionHeader(title: AppStrings.honorificTitle),
 
             _buildTitleChips(),
 
@@ -73,10 +70,7 @@ class EditProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            PrimaryButton(
-              text: AppStrings.saveChanges,
-              onPressed: () {},
-            ),
+            PrimaryButton(text: AppStrings.saveChanges, onPressed: () {}),
 
             const SizedBox(height: 12),
 
@@ -87,10 +81,7 @@ class EditProfileScreen extends StatelessWidget {
                 },
                 child: const Text(
                   AppStrings.cancelChanges,
-                  style: TextStyle(
-                    color: AppColors.textMuted,
-                    fontSize: 11,
-                  ),
+                  style: TextStyle(color: AppColors.textMuted, fontSize: 11),
                 ),
               ),
             ),
@@ -113,10 +104,7 @@ class EditProfileScreen extends StatelessWidget {
                 height: 80,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: AppColors.primaryGold,
-                    width: 1.5,
-                  ),
+                  border: Border.all(color: AppColors.primaryGold, width: 1.5),
                   image: const DecorationImage(
                     image: AssetImage('assets/images/edit_image.png'),
                     fit: BoxFit.cover,
@@ -147,10 +135,7 @@ class EditProfileScreen extends StatelessWidget {
 
           const Text(
             AppStrings.distinguishedMember,
-            style: TextStyle(
-              color: AppColors.textMuted,
-              fontSize: 11,
-            ),
+            style: TextStyle(color: AppColors.textMuted, fontSize: 11),
           ),
         ],
       ),
@@ -176,10 +161,7 @@ class EditProfileScreen extends StatelessWidget {
 
         Text(
           AppStrings.biometricRegnalSubtitle,
-          style: TextStyle(
-            color: AppColors.textMuted,
-            fontSize: 11,
-          ),
+          style: TextStyle(color: AppColors.textMuted, fontSize: 11),
         ),
       ],
     );
@@ -203,36 +185,22 @@ class EditProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildChip(
-    String label, {
-    bool isSelected = false,
-  }) {
+  Widget _buildChip(String label, {bool isSelected = false}) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 8,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: isSelected
-            ? AppColors.primaryGold
-            : AppColors.inputBg,
+        color: isSelected ? AppColors.primaryGold : AppColors.inputBg,
         borderRadius: BorderRadius.circular(4),
         border: Border.all(
-          color: isSelected
-              ? AppColors.primaryGold
-              : AppColors.cardBorder,
+          color: isSelected ? AppColors.primaryGold : AppColors.cardBorder,
         ),
       ),
       child: Text(
         label,
         style: TextStyle(
-          color: isSelected
-              ? AppColors.background
-              : AppColors.textWhite,
+          color: isSelected ? AppColors.background : AppColors.textWhite,
           fontSize: 12,
-          fontWeight: isSelected
-              ? FontWeight.bold
-              : FontWeight.normal,
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
         ),
       ),
     );
@@ -252,10 +220,7 @@ class EditProfileScreen extends StatelessWidget {
 
         TextFormField(
           initialValue: initialValue,
-          style: const TextStyle(
-            color: AppColors.textWhite,
-            fontSize: 13,
-          ),
+          style: const TextStyle(color: AppColors.textWhite, fontSize: 13),
           decoration: InputDecoration(
             filled: true,
             fillColor: AppColors.inputBg,
@@ -266,18 +231,12 @@ class EditProfileScreen extends StatelessWidget {
             ),
 
             suffixIcon: icon != null
-                ? Icon(
-                    icon,
-                    color: AppColors.primaryGold,
-                    size: 16,
-                  )
+                ? Icon(icon, color: AppColors.primaryGold, size: 16)
                 : null,
 
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(4),
-              borderSide: const BorderSide(
-                color: AppColors.cardBorder,
-              ),
+              borderSide: const BorderSide(color: AppColors.cardBorder),
             ),
 
             focusedBorder: OutlineInputBorder(
@@ -290,9 +249,7 @@ class EditProfileScreen extends StatelessWidget {
 
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(4),
-              borderSide: const BorderSide(
-                color: AppColors.cardBorder,
-              ),
+              borderSide: const BorderSide(color: AppColors.cardBorder),
             ),
           ),
         ),
@@ -302,26 +259,18 @@ class EditProfileScreen extends StatelessWidget {
 
   // Dropdown Field
 
-  Widget _buildDropdownField({
-    required String label,
-    required String value,
-  }) {
+  Widget _buildDropdownField({required String label, required String value}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionHeader(title: label),
 
         Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 12,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           decoration: BoxDecoration(
             color: AppColors.inputBg,
             borderRadius: BorderRadius.circular(4),
-            border: Border.all(
-              color: AppColors.cardBorder,
-            ),
+            border: Border.all(color: AppColors.cardBorder),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -336,10 +285,7 @@ class EditProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              const Icon(
-                Icons.keyboard_arrow_down,
-                color: AppColors.textMuted,
-              ),
+              const Icon(Icons.keyboard_arrow_down, color: AppColors.textMuted),
             ],
           ),
         ),

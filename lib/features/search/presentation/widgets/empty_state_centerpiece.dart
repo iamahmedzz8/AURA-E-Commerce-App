@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class EmptyStateCenterpiece extends StatelessWidget {
   final VoidCallback? onClearSearch;
 
-  const EmptyStateCenterpiece({
-    super.key,
-    this.onClearSearch,
-  });
+  const EmptyStateCenterpiece({super.key, this.onClearSearch});
 
   @override
   Widget build(BuildContext context) {
@@ -147,10 +144,7 @@ class EmptyStateCenterpiece extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.cardInactive,
                     borderRadius: BorderRadius.circular(4),
-                    border: Border.all(
-                      color: AppColors.chipBorder,
-                      width: 1,
-                    ),
+                    border: Border.all(color: AppColors.chipBorder, width: 1),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,

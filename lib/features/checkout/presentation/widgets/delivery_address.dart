@@ -7,19 +7,13 @@ import 'package:gap/gap.dart';
 class DeliveryAddress extends StatelessWidget {
   final VoidCallback onChange;
 
-  const DeliveryAddress({
-    super.key,
-    required this.onChange,
-  });
+  const DeliveryAddress({super.key, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(
-          Icons.location_on_outlined,
-          color: AppColors.primaryColor,
-        ),
+        Icon(Icons.location_on_outlined, color: AppColors.primaryColor),
         const Gap(10),
         const CustomText(
           text: AppStrings.deliveryAddress,

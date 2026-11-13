@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
@@ -21,6 +20,7 @@ import 'package:aura_maison_e_commerce/features/addresses/presentation/screens/a
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/addresses_cubit.dart';
 import 'package:aura_maison_e_commerce/features/addresses/presentation/cubit/addresses_state.dart';
+
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
 
@@ -29,8 +29,6 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
-
-
   AddressEntity? selectedAddress;
 
   @override
@@ -88,15 +86,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               Gap(10),
               DeliveryAddress(
                 onChange: () async {
-                  final AddressEntity? newAddress = await Navigator.push<AddressEntity>(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => BlocProvider(
-                        create: (_) => sl<AddressesCubit>(),
-                        child: const AddAddressScreen(),
-                      ),
-                    ),
-                  );
+                  final AddressEntity? newAddress =
+                      await Navigator.push<AddressEntity>(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider(
+                            create: (_) => sl<AddressesCubit>(),
+                            child: const AddAddressScreen(),
+                          ),
+                        ),
+                      );
 
                   if (newAddress != null && mounted) {
                     setState(() {
@@ -113,17 +112,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       address: selectedAddress!,
                       onEdit: () async {
                         final AddressEntity? updatedAddress =
-                        await Navigator.push<AddressEntity>(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => BlocProvider(
-                              create: (_) => sl<AddressesCubit>(),
-                              child: AddAddressScreen(
-                                address: selectedAddress!,
+                            await Navigator.push<AddressEntity>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => BlocProvider(
+                                  create: (_) => sl<AddressesCubit>(),
+                                  child: AddAddressScreen(
+                                    address: selectedAddress!,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        );
+                            );
 
                         if (updatedAddress != null && mounted) {
                           setState(() {
@@ -135,9 +134,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   }
 
                   if (state is AddressesLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const Center(child: CircularProgressIndicator());
                   }
 
                   if (state is AddressLoaded) {
@@ -145,17 +142,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       address: state.address,
                       onEdit: () async {
                         final AddressEntity? updatedAddress =
-                        await Navigator.push<AddressEntity>(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => BlocProvider(
-                              create: (_) => sl<AddressesCubit>(),
-                              child: AddAddressScreen(
-                                address: state.address,
+                            await Navigator.push<AddressEntity>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => BlocProvider(
+                                  create: (_) => sl<AddressesCubit>(),
+                                  child: AddAddressScreen(
+                                    address: state.address,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        );
+                            );
 
                         if (updatedAddress != null && mounted) {
                           setState(() {
@@ -181,29 +178,25 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               PromoCodeSection(),
               Gap(20),
               BlocProvider(
-  create: (_) => sl<CartCubit>()..getCart(),
-  child: BlocBuilder<CartCubit, CartState>(
-    builder: (context, state) {
-      if (state is CartLoading || state is CartInitial) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
+                create: (_) => sl<CartCubit>()..getCart(),
+                child: BlocBuilder<CartCubit, CartState>(
+                  builder: (context, state) {
+                    if (state is CartLoading || state is CartInitial) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
 
-      if (state is CartSuccess) {
-        return CartSummary(cart: state.cart);
-      }
+                    if (state is CartSuccess) {
+                      return CartSummary(cart: state.cart);
+                    }
 
-      if (state is CartError) {
-        return Center(
-          child: Text(state.message),
-        );
-      }
+                    if (state is CartError) {
+                      return Center(child: Text(state.message));
+                    }
 
-      return const SizedBox.shrink();
-    },
-  ),
-),
+                    return const SizedBox.shrink();
+                  },
+                ),
+              ),
               Gap(20),
               ButtonAndPrivacySection(),
               Gap(20),

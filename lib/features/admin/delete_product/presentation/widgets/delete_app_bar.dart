@@ -10,7 +10,11 @@ class DeleteAppBar extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios_new, color: DarkTheme.gold, size: 18),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: DarkTheme.gold,
+            size: 18,
+          ),
           padding: EdgeInsets.zero,
           constraints: const BoxConstraints(),
         ),
@@ -24,7 +28,14 @@ class DeleteAppBar extends StatelessWidget {
                 children: [
                   Text(
                     'WORKSHOP\nREGISTER',
-                    style: TextStyle(color: DarkTheme.gold, fontSize: 9, height: 1.1, letterSpacing: 0.5, fontFamily: 'Inter', fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                      color: DarkTheme.gold,
+                      fontSize: 9,
+                      height: 1.1,
+                      letterSpacing: 0.5,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   SizedBox(width: 8),
                   _ConfidentialBadge(),
@@ -33,12 +44,22 @@ class DeleteAppBar extends StatelessWidget {
               SizedBox(height: 2),
               Text(
                 'Bespoke Commission Review',
-                style: TextStyle(color: DarkTheme.primaryText, fontSize: 18, fontFamily: 'EB Garamond', fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  color: DarkTheme.primaryText,
+                  fontSize: 18,
+                  fontFamily: 'EB Garamond',
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               SizedBox(height: 2),
               Text(
                 'ROLE: WORKSHOP MANAGER • VENDÔME',
-                style: TextStyle(color: DarkTheme.secondaryText, fontSize: 8, letterSpacing: 0.5, fontFamily: 'Inter'),
+                style: TextStyle(
+                  color: DarkTheme.secondaryText,
+                  fontSize: 8,
+                  letterSpacing: 0.5,
+                  fontFamily: 'Inter',
+                ),
               ),
             ],
           ),
@@ -47,12 +68,27 @@ class DeleteAppBar extends StatelessWidget {
         Stack(
           alignment: Alignment.center,
           children: const [
-            Icon(Icons.shield_outlined, color: DarkTheme.secondaryText, size: 20),
-            Padding(padding: EdgeInsets.only(top: 2), child: Icon(Icons.check, color: DarkTheme.secondaryText, size: 10)),
+            Icon(
+              Icons.shield_outlined,
+              color: DarkTheme.secondaryText,
+              size: 20,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 2),
+              child: Icon(
+                Icons.check,
+                color: DarkTheme.secondaryText,
+                size: 10,
+              ),
+            ),
           ],
         ),
         const SizedBox(width: 12),
-        const CircleAvatar(radius: 16, backgroundColor: DarkTheme.gold, child: Icon(Icons.person, size: 18, color: DarkTheme.background)),
+        const CircleAvatar(
+          radius: 16,
+          backgroundColor: DarkTheme.gold,
+          child: Icon(Icons.person, size: 18, color: DarkTheme.background),
+        ),
       ],
     );
   }
@@ -65,8 +101,21 @@ class _ConfidentialBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      decoration: BoxDecoration(color: DarkTheme.surface, borderRadius: BorderRadius.circular(3), border: Border.all(color: DarkTheme.border)),
-      child: const Text('CONFIDENTIAL', style: TextStyle(color: DarkTheme.secondaryText, fontSize: 7, letterSpacing: 0.5, fontFamily: 'Inter', fontWeight: FontWeight.w600)),
+      decoration: BoxDecoration(
+        color: DarkTheme.surface,
+        borderRadius: BorderRadius.circular(3),
+        border: Border.all(color: DarkTheme.border),
+      ),
+      child: const Text(
+        'CONFIDENTIAL',
+        style: TextStyle(
+          color: DarkTheme.secondaryText,
+          fontSize: 7,
+          letterSpacing: 0.5,
+          fontFamily: 'Inter',
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 }

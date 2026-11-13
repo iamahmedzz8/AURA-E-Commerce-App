@@ -20,9 +20,9 @@ class NotificationModel {
       );
 
   NotificationModel copyWith({bool? isRead}) => NotificationModel(
-        id: id,
-        notificationText: notificationText,
-        createdAt: createdAt,
-        isRead: isRead ?? this.isRead,
-      );
+    id: id,
+    notificationText: notificationText,
+    createdAt: createdAt,
+    isRead: isRead ?? this.isRead,
+  );
 }

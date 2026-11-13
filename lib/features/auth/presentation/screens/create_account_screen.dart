@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/auth/data/models/register_model.dart';
@@ -103,9 +102,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       Navigator.of(context).pop();
     } else {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute<void>(
-          builder: (_) => VipMemberSignInScreen(),
-        ),
+        MaterialPageRoute<void>(builder: (_) => VipMemberSignInScreen()),
       );
     }
   }
@@ -123,6 +120,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               MaterialPageRoute<void>(
                 builder: (_) => OtpScreen(
                   email: state.email,
+                  password: _passwordController.text,
                   purpose: OtpPurpose.signup,
                 ),
               ),
@@ -155,14 +153,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         child: CustomScrollView(
                           slivers: [
                             // Element 1: Application Header
-                            SliverToBoxAdapter(
-                              child: SalonMembershipHeader(),
-                            ),
+                            SliverToBoxAdapter(child: SalonMembershipHeader()),
 
                             // Element 2: Vintage Allocation Card
-                            SliverToBoxAdapter(
-                              child: VintageAllocationCard(),
-                            ),
+                            SliverToBoxAdapter(child: VintageAllocationCard()),
 
                             // Element 3: Registration Form
                             SliverToBoxAdapter(

@@ -15,8 +15,8 @@ class CategoryProductsCubit extends Cubit<CategoryProductsState> {
   final HomeRemoteDataSource _remoteDataSource;
 
   CategoryProductsCubit({HomeRemoteDataSource? remoteDataSource})
-      : _remoteDataSource = remoteDataSource ?? HomeRemoteDataSource(),
-        super(CategoryProductsInitial());
+    : _remoteDataSource = remoteDataSource ?? HomeRemoteDataSource(),
+      super(CategoryProductsInitial());
 
   /// Fetches products from the API filtered by [categoryName].
   ///
@@ -39,15 +39,19 @@ class CategoryProductsCubit extends Cubit<CategoryProductsState> {
       if (products.isEmpty) {
         emit(CategoryProductsEmpty(categoryName: categoryName));
       } else {
-        emit(CategoryProductsSuccess(
-          products: products,
-          categoryName: categoryName,
-        ));
+        emit(
+          CategoryProductsSuccess(
+            products: products,
+            categoryName: categoryName,
+          ),
+        );
       }
     } catch (e) {
-      emit(CategoryProductsFailure(
-        errorMessage: e.toString().replaceFirst('Exception: ', ''),
-      ));
+      emit(
+        CategoryProductsFailure(
+          errorMessage: e.toString().replaceFirst('Exception: ', ''),
+        ),
+      );
     }
   }
 }

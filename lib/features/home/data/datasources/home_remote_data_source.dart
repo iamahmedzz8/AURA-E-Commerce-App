@@ -13,17 +13,14 @@ class HomeRemoteDataSource {
   final DioClient _dioClient;
 
   HomeRemoteDataSource({DioClient? dioClient})
-      : _dioClient = dioClient ?? sl<DioClient>();
+    : _dioClient = dioClient ?? sl<DioClient>();
 
   /// Fetch all promotional offers from the API
   Future<List<OfferModel>> getOffers() async {
     try {
       final response = await _dioClient.get(
         ApiEndpoints.offers,
-        queryParameters: {
-          'page': 1,
-          'pageSize': 10,
-        },
+        queryParameters: {'page': 1, 'pageSize': 10},
       );
       final data = response.data;
 
@@ -112,10 +109,7 @@ class HomeRemoteDataSource {
     try {
       final response = await _dioClient.get(
         ApiEndpoints.products,
-        queryParameters: {
-          'page': page,
-          'pageSize': pageSize,
-        },
+        queryParameters: {'page': page, 'pageSize': pageSize},
       );
       final data = response.data;
 

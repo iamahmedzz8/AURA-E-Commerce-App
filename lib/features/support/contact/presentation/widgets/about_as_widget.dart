@@ -6,11 +6,7 @@ class ChapterHeader extends StatelessWidget {
   final String chapter;
   final String title;
 
-  const ChapterHeader({
-    super.key,
-    required this.chapter,
-    required this.title,
-  });
+  const ChapterHeader({super.key, required this.chapter, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +67,10 @@ class ArtisanCard extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Colors.transparent, AppColors.background.withValues(alpha: 0.9)],
+                      colors: [
+                        Colors.transparent,
+                        AppColors.background.withValues(alpha: 0.9),
+                      ],
                     ),
                   ),
                 ),
@@ -216,22 +215,29 @@ class PillarCard extends StatelessWidget {
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: pillar.tags.map((tag) => Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: AppColors.inputBg,
-                borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: AppColors.cardBorder),
-              ),
-              child: Text(
-                tag,
-                style: const TextStyle(
-                  color: AppColors.primaryGold,
-                  fontSize: 9,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )).toList(),
+            children: pillar.tags
+                .map(
+                  (tag) => Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.inputBg,
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: AppColors.cardBorder),
+                    ),
+                    child: Text(
+                      tag,
+                      style: const TextStyle(
+                        color: AppColors.primaryGold,
+                        fontSize: 9,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
           ),
         ],
       ),
@@ -269,7 +275,10 @@ class VendomeSalonCard extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Colors.transparent, AppColors.background.withValues(alpha: 0.9)],
+                      colors: [
+                        Colors.transparent,
+                        AppColors.background.withValues(alpha: 0.9),
+                      ],
                     ),
                   ),
                 ),
@@ -285,7 +294,11 @@ class VendomeSalonCard extends StatelessWidget {
                           color: AppColors.primaryGold,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.location_on, color: AppColors.background, size: 14),
+                        child: const Icon(
+                          Icons.location_on,
+                          color: AppColors.background,
+                          size: 14,
+                        ),
                       ),
                       const SizedBox(width: 8),
                       Expanded(
@@ -312,14 +325,20 @@ class VendomeSalonCard extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.background.withValues(alpha: 0.8),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: const Text(
                           'BY APPOINTMENT',
-                          style: TextStyle(color: AppColors.textMuted, fontSize: 8),
+                          style: TextStyle(
+                            color: AppColors.textMuted,
+                            fontSize: 8,
+                          ),
                         ),
                       ),
                     ],

@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class BiometricAccessSection extends StatelessWidget {
   final VoidCallback? onBiometricTap;
 
-  const BiometricAccessSection({
-    super.key,
-    this.onBiometricTap,
-  });
+  const BiometricAccessSection({super.key, this.onBiometricTap});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +21,7 @@ class BiometricAccessSection extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Container(
-                  height: 1,
-                  color: AppColors.cardActive,
-                ),
+                Container(height: 1, color: AppColors.cardActive),
                 Container(
                   color: AppColors.background,
                   padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -49,10 +43,7 @@ class BiometricAccessSection extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.badgeBackground,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: AppColors.chipBorder,
-                width: 0.5,
-              ),
+              border: Border.all(color: AppColors.chipBorder, width: 0.5),
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -75,10 +66,7 @@ class BiometricAccessSection extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: AppColors.cardInactive,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: AppColors.chipBorder,
-                        width: 1,
-                      ),
+                      border: Border.all(color: AppColors.chipBorder, width: 1),
                       boxShadow: const [
                         BoxShadow(
                           color: Color(0x33000000),
@@ -97,7 +85,9 @@ class BiometricAccessSection extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: AppColors.goldAccent.withValues(alpha: 0.35),
+                              color: AppColors.goldAccent.withValues(
+                                alpha: 0.35,
+                              ),
                               width: 1,
                             ),
                           ),
@@ -109,7 +99,9 @@ class BiometricAccessSection extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: AppColors.goldAccent.withValues(alpha: 0.20),
+                              color: AppColors.goldAccent.withValues(
+                                alpha: 0.20,
+                              ),
                               width: 1,
                             ),
                           ),

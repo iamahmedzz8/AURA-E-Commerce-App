@@ -7,11 +7,7 @@ class AppBottomNavBar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int>? onTap;
 
-  const AppBottomNavBar({
-    super.key,
-    this.currentIndex = 1,
-    this.onTap,
-  });
+  const AppBottomNavBar({super.key, this.currentIndex = 1, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +20,12 @@ class AppBottomNavBar extends StatelessWidget {
         onTap: (index) {
           onTap?.call(index);
         },
-        style: (isDark
-            ? IOS26NavThemeData.dark()
-            : IOS26NavThemeData.light())
+        style: (isDark ? IOS26NavThemeData.dark() : IOS26NavThemeData.light())
             .copyWith(
-          activeColor: AppColors.goldBright,
-          blurSigmaX: 5,
-          blurSigmaY: 5
-        ),
+              activeColor: AppColors.goldBright,
+              blurSigmaX: 5,
+              blurSigmaY: 5,
+            ),
         items: [
           IOS26NavItem.icon(
             icon: Icons.home_outlined,

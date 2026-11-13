@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:aura_maison_e_commerce/features/support/contact/data/models/contact_model.dart';
@@ -25,28 +24,20 @@ class _ContactScreenState extends State<ContactScreen> {
   late final ContactModel _genevaSalon;
 
   @override
-void initState() {
-  super.initState();
+  void initState() {
+    super.initState();
 
-  _parisSalon = ContactModel.paris();
-  _genevaSalon = ContactModel.geneva();
+    _parisSalon = ContactModel.paris();
+    _genevaSalon = ContactModel.geneva();
 
-  _parisPhoneController = TextEditingController(
-    text: _parisSalon.phone,
-  );
+    _parisPhoneController = TextEditingController(text: _parisSalon.phone);
 
-  _parisEmailController = TextEditingController(
-    text: _parisSalon.email,
-  );
+    _parisEmailController = TextEditingController(text: _parisSalon.email);
 
-  _genevaPhoneController = TextEditingController(
-    text: _genevaSalon.phone,
-  );
+    _genevaPhoneController = TextEditingController(text: _genevaSalon.phone);
 
-  _genevaEmailController = TextEditingController(
-    text: _genevaSalon.email,
-  );
-}
+    _genevaEmailController = TextEditingController(text: _genevaSalon.email);
+  }
 
   @override
   void dispose() {
@@ -65,9 +56,7 @@ void initState() {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
-      appBar: CustomAppBar(
-        title: AppStrings.privateConciergeSupport,
-      ),
+      appBar: CustomAppBar(title: AppStrings.privateConciergeSupport),
 
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -75,11 +64,7 @@ void initState() {
           // Screen introduction.
           Row(
             children: [
-              Icon(
-                Icons.circle,
-                color: AppColors.primaryGold,
-                size: 6,
-              ),
+              Icon(Icons.circle, color: AppColors.primaryGold, size: 6),
               const SizedBox(width: 6),
               Text(
                 AppStrings.privateSalonNetwork,

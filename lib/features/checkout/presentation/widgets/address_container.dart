@@ -8,11 +8,7 @@ class AddressContainer extends StatelessWidget {
   final AddressEntity address;
   final VoidCallback? onEdit;
 
-  const AddressContainer({
-    super.key,
-    required this.address,
-    this.onEdit,
-  });
+  const AddressContainer({super.key, required this.address, this.onEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +32,7 @@ class AddressContainer extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            'assets/images/Gold accent highlight marker.png',
-          ),
+          Image.asset('assets/images/Gold accent highlight marker.png'),
           const Gap(10),
           Expanded(
             child: Column(
@@ -62,10 +56,7 @@ class AddressContainer extends StatelessWidget {
                         horizontal: 8,
                         vertical: 2,
                       ),
-                      child: const CustomText(
-                        text: 'Primary',
-                        size: 14,
-                      ),
+                      child: const CustomText(text: 'Primary', size: 14),
                     ),
                     const Spacer(),
                     const Padding(
@@ -73,11 +64,7 @@ class AddressContainer extends StatelessWidget {
                       child: CircleAvatar(
                         radius: 10,
                         backgroundColor: AppColors.primaryColor,
-                        child: Icon(
-                          Icons.check,
-                          size: 15,
-                          color: Colors.white,
-                        ),
+                        child: Icon(Icons.check, size: 15, color: Colors.white),
                       ),
                     ),
                   ],
@@ -96,10 +83,7 @@ class AddressContainer extends StatelessWidget {
                       color: AppColors.primaryColor,
                     ),
                     const Gap(5),
-                    CustomText(
-                      text: address.phoneNumber,
-                      family: '',
-                    ),
+                    CustomText(text: address.phoneNumber, family: ''),
                   ],
                 ),
 
@@ -121,7 +105,6 @@ class AddressContainer extends StatelessWidget {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),

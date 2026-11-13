@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/custom_text.dart';
 import 'package:aura_maison_e_commerce/features/cart/data/models/cart_model.dart';
@@ -8,10 +7,7 @@ import 'package:gap/gap.dart';
 class CartSummary extends StatelessWidget {
   final CartModel cart;
 
-  const CartSummary({
-    super.key,
-    required this.cart,
-  });
+  const CartSummary({super.key, required this.cart});
 
   @override
   Widget build(BuildContext context) {

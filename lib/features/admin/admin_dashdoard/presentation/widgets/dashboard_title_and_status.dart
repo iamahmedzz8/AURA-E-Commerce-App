@@ -4,10 +4,7 @@ import '../../../../../core/theme/dark_theme.dart';
 class DashboardTitleAndStatus extends StatelessWidget {
   final String totalValue;
 
-  const DashboardTitleAndStatus({
-    super.key,
-    required this.totalValue,
-  });
+  const DashboardTitleAndStatus({super.key, required this.totalValue});
 
   @override
   Widget build(BuildContext context) {
@@ -16,18 +13,38 @@ class DashboardTitleAndStatus extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(color: DarkTheme.surface, borderRadius: BorderRadius.circular(20), border: Border.all(color: DarkTheme.border)),
+          decoration: BoxDecoration(
+            color: DarkTheme.surface,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: DarkTheme.border),
+          ),
           child: const Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.circle, color: DarkTheme.gold, size: 8),
               SizedBox(width: 6),
-              Text('LEVEL IV ACCREDITATION • VENDÔME & MEYRIN', style: TextStyle(color: DarkTheme.gold, fontSize: 9, letterSpacing: 1, fontFamily: 'Inter')),
+              Text(
+                'LEVEL IV ACCREDITATION • VENDÔME & MEYRIN',
+                style: TextStyle(
+                  color: DarkTheme.gold,
+                  fontSize: 9,
+                  letterSpacing: 1,
+                  fontFamily: 'Inter',
+                ),
+              ),
             ],
           ),
         ),
         const SizedBox(height: 16),
-        Text('CENTRAL FINE WATCHMAKING\nREGISTER', style: TextStyle(color: DarkTheme.secondaryText, fontSize: 10, letterSpacing: 1.5, fontFamily: 'Inter')),
+        Text(
+          'CENTRAL FINE WATCHMAKING\nREGISTER',
+          style: TextStyle(
+            color: DarkTheme.secondaryText,
+            fontSize: 10,
+            letterSpacing: 1.5,
+            fontFamily: 'Inter',
+          ),
+        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -36,21 +53,40 @@ class DashboardTitleAndStatus extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 4),
-                  Text('Workshop Management', style: TextStyle(color: DarkTheme.primaryText, fontSize: 28, fontFamily: 'EB Garamond', fontWeight: FontWeight.w600)),
+                  Text(
+                    'Workshop Management',
+                    style: TextStyle(
+                      color: DarkTheme.primaryText,
+                      fontSize: 28,
+                      fontFamily: 'EB Garamond',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ],
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              decoration: BoxDecoration(color: DarkTheme.surface, borderRadius: BorderRadius.circular(4), border: Border.all(color: DarkTheme.border)),
+              decoration: BoxDecoration(
+                color: DarkTheme.surface,
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: DarkTheme.border),
+              ),
               child: const Row(
                 children: [
                   Icon(Icons.lock_outline, color: DarkTheme.gold, size: 14),
                   SizedBox(width: 4),
-                  Text('SHA-\n256', style: TextStyle(color: DarkTheme.gold, fontSize: 9, fontFamily: 'Inter')),
+                  Text(
+                    'SHA-\n256',
+                    style: TextStyle(
+                      color: DarkTheme.gold,
+                      fontSize: 9,
+                      fontFamily: 'Inter',
+                    ),
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
         const SizedBox(height: 20),
@@ -65,24 +101,48 @@ class DashboardTitleAndStatus extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: DarkTheme.background, borderRadius: BorderRadius.circular(4), border: Border.all(color: DarkTheme.border)),
-                child: const Icon(Icons.security, color: DarkTheme.gold, size: 24),
+                decoration: BoxDecoration(
+                  color: DarkTheme.background,
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: DarkTheme.border),
+                ),
+                child: const Icon(
+                  Icons.security,
+                  color: DarkTheme.gold,
+                  size: 24,
+                ),
               ),
               const SizedBox(width: 16),
               const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('RESTRICTED ADMINISTRATION CONSOLE', style: TextStyle(color: DarkTheme.gold, fontSize: 11, fontWeight: FontWeight.bold, fontFamily: 'Inter', letterSpacing: 1)),
+                    Text(
+                      'RESTRICTED ADMINISTRATION CONSOLE',
+                      style: TextStyle(
+                        color: DarkTheme.gold,
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Inter',
+                        letterSpacing: 1,
+                      ),
+                    ),
                     SizedBox(height: 4),
-                    Text('Workshop Management Mode Active • Meyrin & Vendôme', style: TextStyle(color: DarkTheme.secondaryText, fontSize: 10, fontFamily: 'Inter')),
+                    Text(
+                      'Workshop Management Mode Active • Meyrin & Vendôme',
+                      style: TextStyle(
+                        color: DarkTheme.secondaryText,
+                        fontSize: 10,
+                        fontFamily: 'Inter',
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
         ),
-        SizedBox(height: 20,),
+        SizedBox(height: 20),
         Container(
           width: double.infinity,
           height: 160,
@@ -90,7 +150,7 @@ class DashboardTitleAndStatus extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: DarkTheme.border),
             image: const DecorationImage(
-              image:  AssetImage('assets/images/vintage_allocation_bg.png'),
+              image: AssetImage('assets/images/vintage_allocation_bg.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -117,9 +177,24 @@ class DashboardTitleAndStatus extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Container(width: 8, height: 8, decoration:  BoxDecoration(color: Colors.greenAccent, shape: BoxShape.circle)),
+                        Container(
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: Colors.greenAccent,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
                         const SizedBox(width: 8),
-                        const Text('VENDÔME VAULT • LOCK ACTIVE', style: TextStyle(color: Colors.white, fontSize: 10, letterSpacing: 1, fontFamily: 'Inter', fontWeight: FontWeight.bold)
+                        const Text(
+                          'VENDÔME VAULT • LOCK ACTIVE',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            letterSpacing: 1,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
@@ -128,8 +203,22 @@ class DashboardTitleAndStatus extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const Text('Estimated Total Inventory', style: TextStyle(color: DarkTheme.secondaryText, fontSize: 11, fontFamily: 'Inter')),
-                        Text(totalValue, style:  TextStyle(color: DarkTheme.gold, fontSize: 28, fontFamily: 'EB Garamond', fontWeight: FontWeight.bold)
+                        const Text(
+                          'Estimated Total Inventory',
+                          style: TextStyle(
+                            color: DarkTheme.secondaryText,
+                            fontSize: 11,
+                            fontFamily: 'Inter',
+                          ),
+                        ),
+                        Text(
+                          totalValue,
+                          style: TextStyle(
+                            color: DarkTheme.gold,
+                            fontSize: 28,
+                            fontFamily: 'EB Garamond',
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),

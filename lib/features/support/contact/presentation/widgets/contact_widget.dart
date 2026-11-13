@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:aura_maison_e_commerce/features/support/contact/data/models/contact_model.dart';
 import 'package:flutter/material.dart';
@@ -34,9 +33,7 @@ class ConciergeSalonCard extends StatelessWidget {
         children: [
           // Salon image and title.
           ClipRRect(
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(8),
-            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
             child: Stack(
               children: [
                 Image.asset(
@@ -121,10 +118,7 @@ class ConciergeSalonCard extends StatelessWidget {
                 // Show additional information only when available.
                 if (salon.vaultExpertise != null &&
                     salon.accreditation != null) ...[
-                  _buildInfoRow(
-                    'VAULTS & EXPERTISE',
-                    salon.vaultExpertise!,
-                  ),
+                  _buildInfoRow('VAULTS & EXPERTISE', salon.vaultExpertise!),
                   const SizedBox(height: 6),
                   _buildInfoRow(
                     'ACCREDITATION',
@@ -134,10 +128,7 @@ class ConciergeSalonCard extends StatelessWidget {
                   const SizedBox(height: 12),
                 ],
 
-                _buildInfoRow(
-                  salon.hoursLabel,
-                  salon.hoursValue,
-                ),
+                _buildInfoRow(salon.hoursLabel, salon.hoursValue),
 
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 12),
@@ -176,10 +167,7 @@ class ConciergeSalonCard extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
-            color: AppColors.textMuted,
-            fontSize: 11,
-          ),
+          style: const TextStyle(color: AppColors.textMuted, fontSize: 11),
         ),
         Flexible(
           child: Text(
@@ -214,10 +202,7 @@ class ContactInputRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 2,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
       decoration: BoxDecoration(
         color: AppColors.inputBg,
         borderRadius: BorderRadius.circular(6),
@@ -225,18 +210,11 @@ class ContactInputRow extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(
-            icon,
-            color: AppColors.primaryGold,
-            size: 16,
-          ),
+          Icon(icon, color: AppColors.primaryGold, size: 16),
           const SizedBox(width: 8),
           Text(
             label,
-            style: const TextStyle(
-              color: AppColors.textMuted,
-              fontSize: 10,
-            ),
+            style: const TextStyle(color: AppColors.textMuted, fontSize: 10),
           ),
           const SizedBox(width: 8),
           Expanded(
@@ -253,9 +231,7 @@ class ContactInputRow extends StatelessWidget {
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: AppColors.primaryGold,
-                  ),
+                  borderSide: BorderSide(color: AppColors.primaryGold),
                 ),
                 contentPadding: EdgeInsets.symmetric(vertical: 8),
               ),
@@ -288,11 +264,7 @@ class StrategicRadarCard extends StatelessWidget {
             children: const [
               Row(
                 children: [
-                  Icon(
-                    Icons.radar,
-                    color: AppColors.primaryGold,
-                    size: 16,
-                  ),
+                  Icon(Icons.radar, color: AppColors.primaryGold, size: 16),
                   SizedBox(width: 8),
                   Text(
                     'STRATEGIC COORDINATES',
@@ -307,10 +279,7 @@ class StrategicRadarCard extends StatelessWidget {
               ),
               Text(
                 '48.8671° N, 2.3294° E',
-                style: TextStyle(
-                  color: AppColors.textMuted,
-                  fontSize: 9,
-                ),
+                style: TextStyle(color: AppColors.textMuted, fontSize: 9),
               ),
             ],
           ),
@@ -343,9 +312,7 @@ class StrategicRadarCard extends StatelessWidget {
                   height: 120,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(
-                      color: AppColors.cardBorder,
-                    ),
+                    border: Border.all(color: AppColors.cardBorder),
                   ),
                 ),
                 const Positioned(
@@ -365,10 +332,7 @@ class StrategicRadarCard extends StatelessWidget {
                   right: 90,
                   child: Text(
                     'GENÈVE 12',
-                    style: TextStyle(
-                      color: AppColors.textMuted,
-                      fontSize: 9,
-                    ),
+                    style: TextStyle(color: AppColors.textMuted, fontSize: 9),
                   ),
                 ),
                 Positioned(
@@ -385,10 +349,7 @@ class StrategicRadarCard extends StatelessWidget {
                     ),
                     child: const Text(
                       'AES-256 ENCRYPTED NETWORK',
-                      style: TextStyle(
-                        color: AppColors.textMuted,
-                        fontSize: 8,
-                      ),
+                      style: TextStyle(color: AppColors.textMuted, fontSize: 8),
                     ),
                   ),
                 ),
@@ -427,11 +388,7 @@ class HighDiscretionProtocolCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(
-            Icons.security,
-            color: AppColors.primaryGold,
-            size: 24,
-          ),
+          const Icon(Icons.security, color: AppColors.primaryGold, size: 24),
           const SizedBox(width: 14),
           Expanded(
             child: Column(

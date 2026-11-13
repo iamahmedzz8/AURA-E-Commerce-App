@@ -20,10 +20,7 @@ class SignatureCollectionItem {
 class SignatureCollectionsGrid extends StatelessWidget {
   final ValueChanged<SignatureCollectionItem>? onCardTap;
 
-  const SignatureCollectionsGrid({
-    super.key,
-    this.onCardTap,
-  });
+  const SignatureCollectionsGrid({super.key, this.onCardTap});
 
   static const List<SignatureCollectionItem> items = [
     SignatureCollectionItem(
@@ -133,10 +130,7 @@ class _BentoCard extends StatelessWidget {
   final SignatureCollectionItem item;
   final VoidCallback? onTap;
 
-  const _BentoCard({
-    required this.item,
-    this.onTap,
-  });
+  const _BentoCard({required this.item, this.onTap});
 
   @override
   Widget build(BuildContext context) {

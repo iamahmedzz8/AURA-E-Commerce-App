@@ -26,9 +26,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
   Future<void> _openAddAddress() async {
     await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => const AddAddressScreen(),
-      ),
+      MaterialPageRoute(builder: (_) => const AddAddressScreen()),
     );
 
     if (!mounted) return;
@@ -38,16 +36,12 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
   Future<void> _openEditAddress(AddressEntity address) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => AddAddressScreen(address: address),
-      ),
+      MaterialPageRoute(builder: (_) => AddAddressScreen(address: address)),
     );
 
     if (!mounted) return;
     context.read<AddressesCubit>().getUserAddresses();
   }
-
-
 
   Future<void> _confirmDeleteAddress(AddressEntity address) async {
     final confirmed = await showDialog<bool>(
@@ -55,9 +49,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
       builder: (dialogContext) {
         return AlertDialog(
           title: const Text(AppStrings.deleteAddress),
-          content: const Text(
-            AppStrings.deleteAddressConfirmation,
-          ),
+          content: const Text(AppStrings.deleteAddressConfirmation),
           actions: [
             TextButton(
               onPressed: () {
@@ -69,9 +61,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
               onPressed: () {
                 Navigator.pop(dialogContext, true);
               },
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.red,
-              ),
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
               child: const Text(AppStrings.delete),
             ),
           ],
@@ -91,9 +81,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.grey.withValues(alpha: 0.25),
-        ),
+        border: Border.all(color: Colors.grey.withValues(alpha: 0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,10 +124,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
           ),
           if (address.notes.trim().isNotEmpty) ...[
             const Gap(6),
-            Text(
-              address.notes,
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
+            Text(address.notes, style: Theme.of(context).textTheme.bodySmall),
           ],
         ],
       ),
@@ -150,9 +135,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
     return BlocBuilder<AddressesCubit, AddressesState>(
       builder: (context, state) {
         if (state is AddressesLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (state is AddressesError) {
@@ -162,16 +145,9 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(
-                    Icons.error_outline,
-                    size: 48,
-                    color: Colors.red,
-                  ),
+                  const Icon(Icons.error_outline, size: 48, color: Colors.red),
                   const Gap(12),
-                  Text(
-                    state.message,
-                    textAlign: TextAlign.center,
-                  ),
+                  Text(state.message, textAlign: TextAlign.center),
                   const Gap(16),
                   ElevatedButton(
                     onPressed: () {
@@ -191,10 +167,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(
-                    Icons.location_off_outlined,
-                    size: 56,
-                  ),
+                  const Icon(Icons.location_off_outlined, size: 56),
                   const Gap(12),
                   const Text(
                     AppStrings.noAddressesYet,
@@ -224,9 +197,7 @@ class _UserAddressesScreenState extends State<UserAddressesScreen> {
           );
         }
 
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
+        return const Center(child: CircularProgressIndicator());
       },
     );
   }

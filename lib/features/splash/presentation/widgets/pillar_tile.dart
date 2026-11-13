@@ -59,7 +59,10 @@ class PillarTile extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.obsidianDark,
               borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: AppColors.gold.withValues(alpha: 0.25), width: 0.8),
+              border: Border.all(
+                color: AppColors.gold.withValues(alpha: 0.25),
+                width: 0.8,
+              ),
             ),
             child: Text(
               badge,

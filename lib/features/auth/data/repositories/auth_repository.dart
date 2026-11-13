@@ -3,6 +3,7 @@ import '../../domain/repositories/auth_repository.dart' as domain;
 import '../datasources/auth_local_data_source.dart';
 import '../datasources/auth_remote_data_source.dart';
 import 'package:aura_maison_e_commerce/features/auth/data/models/change_password_request_model.dart';
+
 class AuthRepositoryImpl implements domain.AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
   final AuthLocalDataSource localDataSource;
@@ -25,9 +26,7 @@ class AuthRepositoryImpl implements domain.AuthRepository {
     final auth = AuthEntity(
       accessToken: response['accessToken'] as String,
       refreshToken: response['refreshToken'] as String,
-      expiresAtUtc: DateTime.parse(
-        response['expiresAtUtc'] as String,
-      ).toUtc(),
+      expiresAtUtc: DateTime.parse(response['expiresAtUtc'] as String).toUtc(),
     );
 
     await localDataSource.saveTokens(
@@ -38,6 +37,7 @@ class AuthRepositoryImpl implements domain.AuthRepository {
 
     return auth;
   }
+
   @override
   Future<void> changePassword({
     required String currentPassword,
@@ -50,17 +50,16 @@ class AuthRepositoryImpl implements domain.AuthRepository {
       confirmNewPassword: confirmNewPassword,
     );
 
-    await remoteDataSource.changePassword(
-      request: request,
-    );
+    await remoteDataSource.changePassword(request: request);
   }
+
   @override
   @override
-Future<void> logout() async {
-  try {
-    await remoteDataSource.logout();
-  } finally {
-    await localDataSource.clearTokens();
+  Future<void> logout() async {
+    try {
+      await remoteDataSource.logout();
+    } finally {
+      await localDataSource.clearTokens();
+    }
   }
-}
 }

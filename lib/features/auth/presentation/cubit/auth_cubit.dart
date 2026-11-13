@@ -8,24 +8,17 @@ class AuthCubit {
 
   bool get isAuthenticated => PrefsService.isLoggedIn;
 
-  Future<void> persistLogin({
-    required String email,
-    required bool rememberMe,
-  }) {
-    return PrefsService.saveLoginSession(
-      email: email,
-      rememberMe: rememberMe,
-    );
+  Future<void> persistLogin({required String email, required bool rememberMe}) {
+    return PrefsService.saveLoginSession(email: email, rememberMe: rememberMe);
   }
+
   Future<void> logout({bool clearRememberedEmail = false}) async {
-  try {
-    await logoutUseCase.call();
-  } finally {
-    await PrefsService.logout(
-      clearRememberedEmail: clearRememberedEmail,
-    );
+    try {
+      await logoutUseCase.call();
+    } finally {
+      await PrefsService.logout(clearRememberedEmail: clearRememberedEmail);
+    }
   }
-}
 }
 
 class AuthState {}

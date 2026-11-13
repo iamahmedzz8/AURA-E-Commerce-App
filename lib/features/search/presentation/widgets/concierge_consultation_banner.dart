@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class ConciergeConsultationBanner extends StatelessWidget {
   final VoidCallback? onContactTap;
 
-  const ConciergeConsultationBanner({
-    super.key,
-    this.onContactTap,
-  });
+  const ConciergeConsultationBanner({super.key, this.onContactTap});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +20,7 @@ class ConciergeConsultationBanner extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.cardActive,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: AppColors.chipBorder,
-                width: 1,
-              ),
+              border: Border.all(color: AppColors.chipBorder, width: 1),
               boxShadow: const [
                 BoxShadow(
                   color: Color(0x33000000),
@@ -46,10 +40,7 @@ class ConciergeConsultationBanner extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.specsStripBackground,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: AppColors.chipBorder,
-                      width: 1,
-                    ),
+                    border: Border.all(color: AppColors.chipBorder, width: 1),
                   ),
                   alignment: Alignment.center,
                   child: const Icon(

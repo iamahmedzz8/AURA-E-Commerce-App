@@ -7,9 +7,7 @@ class CreateAddressUseCase {
 
   CreateAddressUseCase(this.repository);
 
-  Future<AddressEntity> call({
-    required CreateAddressRequestModel request,
-  }) {
+  Future<AddressEntity> call({required CreateAddressRequestModel request}) {
     return repository.createAddress(request: request);
   }
 }

@@ -1,6 +1,7 @@
 /// Splash Feature Module — barrel export
 /// Covers: Splash, Onboarding (3 steps), Private Concierge (filterable)
 /// Internal models, data, and widgets live here and only talk to each other.
+library;
 // library;
 
 // export 'screens/splash_salon_screen.dart';
@@ -91,8 +92,8 @@ class _AppSplashScreenState extends State<AppSplashScreen>
     Navigator.of(context).pushReplacement(
       PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 600),
-        pageBuilder: (context, _, __) => widget.nextBuilder(context),
-        transitionsBuilder: (_, animation, __, child) =>
+        pageBuilder: (context, _, _) => widget.nextBuilder(context),
+        transitionsBuilder: (_, animation, _, child) =>
             FadeTransition(opacity: animation, child: child),
       ),
     );

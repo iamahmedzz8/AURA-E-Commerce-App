@@ -1,4 +1,3 @@
-
 class FaqModel {
   final String category;
   final String question;

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 
@@ -21,23 +20,13 @@ class FavoritesManageBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.obsidianCard,
         border: Border.symmetric(
-          horizontal: BorderSide(
-            color: AppColors.obsidianBorder,
-            width: 0.7,
-          ),
+          horizontal: BorderSide(color: AppColors.obsidianBorder, width: 0.7),
         ),
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 13,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
       child: Row(
         children: [
-          const Icon(
-            Icons.lock_outline,
-            color: AppColors.goldAccent,
-            size: 16,
-          ),
+          const Icon(Icons.lock_outline, color: AppColors.goldAccent, size: 16),
           const SizedBox(width: 9),
 
           Expanded(
@@ -84,10 +73,7 @@ class FavoritesManageBar extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(4),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 5,
-          vertical: 8,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

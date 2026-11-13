@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 
@@ -19,10 +18,7 @@ class FavoritesConciergeSection extends StatelessWidget {
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
         color: AppColors.obsidianCard,
-        border: Border.all(
-          color: AppColors.obsidianBorder,
-          width: 1,
-        ),
+        border: Border.all(color: AppColors.obsidianBorder, width: 1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -78,10 +74,7 @@ class FavoritesConciergeSection extends StatelessWidget {
           const SizedBox(height: 22),
 
           // Divider
-          Container(
-            height: 1,
-            color: AppColors.obsidianBorder,
-          ),
+          Container(height: 1, color: AppColors.obsidianBorder),
 
           const SizedBox(height: 20),
 
@@ -119,10 +112,7 @@ class FavoritesConciergeSection extends StatelessWidget {
               onPressed: onScheduleVisit,
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.goldAccent,
-                side: const BorderSide(
-                  color: AppColors.goldAccent,
-                  width: 1,
-                ),
+                side: const BorderSide(color: AppColors.goldAccent, width: 1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                 ),
@@ -130,10 +120,7 @@ class FavoritesConciergeSection extends StatelessWidget {
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.calendar_month_outlined,
-                    size: 16,
-                  ),
+                  Icon(Icons.calendar_month_outlined, size: 16),
                   SizedBox(width: 10),
                   Text(
                     'SCHEDULE A PRIVATE VISIT',

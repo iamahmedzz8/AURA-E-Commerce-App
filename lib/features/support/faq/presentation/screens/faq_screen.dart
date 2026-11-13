@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/widgets/app_header.dart';
 import 'package:aura_maison_e_commerce/features/support/faq/data/models/faq_model.dart';
@@ -20,8 +19,7 @@ class FaqScreen extends StatefulWidget {
 }
 
 class _FaqScreenState extends State<FaqScreen> {
-  final TextEditingController _searchController =
-      TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   int selectedCategory = 0;
   int? expandedIndex;
@@ -38,8 +36,7 @@ class _FaqScreenState extends State<FaqScreen> {
   final List<FaqModel> questions = [
     FaqModel(
       category: 'ORDERS & CONVOYS',
-      question:
-          'How is personal handover under diplomatic escort arranged?',
+      question: 'How is personal handover under diplomatic escort arranged?',
       answer:
           'Your timepiece is transported in sealed trunks by our sworn couriers. '
           'You may arrange delivery to a private salon, hotel suite, or your residence. '
@@ -47,8 +44,7 @@ class _FaqScreenState extends State<FaqScreen> {
     ),
     FaqModel(
       category: 'AUTHENTICITY',
-      question:
-          'What guarantees the authenticity of my acquisition?',
+      question: 'What guarantees the authenticity of my acquisition?',
       answer:
           'Every masterpiece is accompanied by its official documentation and '
           'certificate of authenticity. Our curators can provide further details '
@@ -56,8 +52,7 @@ class _FaqScreenState extends State<FaqScreen> {
     ),
     FaqModel(
       category: 'ORDERS & CONVOYS',
-      question:
-          'How long does a private delivery usually take?',
+      question: 'How long does a private delivery usually take?',
       answer:
           'Delivery arrangements depend on the destination and the availability '
           'of the selected piece. Your dedicated curator will coordinate the '
@@ -65,8 +60,7 @@ class _FaqScreenState extends State<FaqScreen> {
     ),
     FaqModel(
       category: 'PRIVATE SALON',
-      question:
-          'Can I deposit my timepiece in the Genève bonded vault?',
+      question: 'Can I deposit my timepiece in the Genève bonded vault?',
       answer:
           'Yes. Selected timepieces may be deposited in our Genève bonded vault. '
           'Contact your private curator to discuss availability and the required '
@@ -74,8 +68,7 @@ class _FaqScreenState extends State<FaqScreen> {
     ),
     FaqModel(
       category: 'PAYMENTS',
-      question:
-          'Which confidential payment methods are accepted?',
+      question: 'Which confidential payment methods are accepted?',
       answer:
           'Our private team will discuss the available confidential payment '
           'arrangements with you. Please contact your curator for details '
@@ -83,8 +76,7 @@ class _FaqScreenState extends State<FaqScreen> {
     ),
     FaqModel(
       category: 'PRIVATE SALON',
-      question:
-          'May I arrange a private tour of the Meyrin workshops?',
+      question: 'May I arrange a private tour of the Meyrin workshops?',
       answer:
           'Private workshop visits can be arranged by appointment, subject to '
           'availability. Your curator will help coordinate a suitable date '
@@ -92,8 +84,7 @@ class _FaqScreenState extends State<FaqScreen> {
     ),
     FaqModel(
       category: 'ORDERS & CONVOYS',
-      question:
-          'Can I change my delivery destination?',
+      question: 'Can I change my delivery destination?',
       answer:
           'Please contact your curator before dispatch. Any change to the '
           'destination must be reviewed and confirmed according to the '
@@ -101,8 +92,7 @@ class _FaqScreenState extends State<FaqScreen> {
     ),
     FaqModel(
       category: 'AUTHENTICITY',
-      question:
-          'Will I receive documentation with my timepiece?',
+      question: 'Will I receive documentation with my timepiece?',
       answer:
           'The documentation provided depends on the individual piece. '
           'Your curator can confirm the accompanying certificates and '
@@ -128,8 +118,8 @@ class _FaqScreenState extends State<FaqScreen> {
           item.question.toLowerCase().contains(query) ||
           item.answer.toLowerCase().contains(query);
 
-      final matchesCategory = selectedFilter == null ||
-          item.category == selectedFilter;
+      final matchesCategory =
+          selectedFilter == null || item.category == selectedFilter;
 
       return matchesSearch && matchesCategory;
     }).toList();
@@ -150,8 +140,7 @@ class _FaqScreenState extends State<FaqScreen> {
 
   void _onQuestionTapped(int index) {
     setState(() {
-      expandedIndex =
-          expandedIndex == index ? null : index;
+      expandedIndex = expandedIndex == index ? null : index;
     });
   }
 
@@ -170,9 +159,7 @@ class _FaqScreenState extends State<FaqScreen> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-              child: _buildHeader(),
-            ),
+            SliverToBoxAdapter(child: _buildHeader()),
 
             SliverToBoxAdapter(
               child: Padding(
@@ -184,9 +171,7 @@ class _FaqScreenState extends State<FaqScreen> {
               ),
             ),
 
-            SliverToBoxAdapter(
-              child: _buildProtocolHeader(),
-            ),
+            SliverToBoxAdapter(child: _buildProtocolHeader()),
 
             SliverToBoxAdapter(
               child: FaqCategoryTabs(
@@ -197,14 +182,10 @@ class _FaqScreenState extends State<FaqScreen> {
             ),
 
             SliverToBoxAdapter(
-              child: _buildQuestionsHeader(
-                displayedQuestions.length,
-              ),
+              child: _buildQuestionsHeader(displayedQuestions.length),
             ),
 
-            SliverToBoxAdapter(
-              child: _buildQuestionsList(displayedQuestions),
-            ),
+            SliverToBoxAdapter(child: _buildQuestionsList(displayedQuestions)),
 
             SliverToBoxAdapter(
               child: FaqContactSection(
@@ -214,9 +195,7 @@ class _FaqScreenState extends State<FaqScreen> {
               ),
             ),
 
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 30),
-            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 30)),
           ],
         ),
       ),
@@ -224,13 +203,12 @@ class _FaqScreenState extends State<FaqScreen> {
   }
 
   Widget _buildHeader() {
-  return const AppHeader(
-    title: AppStrings.privateConciergeSupport,
-    isConcierge: true,
-  );
-}
+    return const AppHeader(
+      title: AppStrings.privateConciergeSupport,
+      isConcierge: true,
+    );
+  }
 
-  
   Widget _buildProtocolHeader() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(22, 25, 22, 20),
@@ -277,10 +255,7 @@ class _FaqScreenState extends State<FaqScreen> {
 
           const SizedBox(height: 22),
 
-          Container(
-            height: 1,
-            color: AppColors.headerDivider,
-          ),
+          Container(height: 1, color: AppColors.headerDivider),
         ],
       ),
     );
@@ -303,9 +278,7 @@ class _FaqScreenState extends State<FaqScreen> {
 
           Text(
             '$count ${AppStrings.articlesUpper}',
-            style: AppStyles.sectionCount.copyWith(
-              color: AppColors.goldAccent,
-            ),
+            style: AppStyles.sectionCount.copyWith(color: AppColors.goldAccent),
           ),
         ],
       ),

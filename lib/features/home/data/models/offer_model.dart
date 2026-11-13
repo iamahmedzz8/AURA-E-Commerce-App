@@ -19,7 +19,8 @@ class OfferModel {
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       description: json['description'] as String?,
-      coverUrl: json['coverUrl'] as String? ??
+      coverUrl:
+          json['coverUrl'] as String? ??
           json['offerCoverUrl'] as String? ??
           json['offerCoverPicture'] as String? ??
           '',

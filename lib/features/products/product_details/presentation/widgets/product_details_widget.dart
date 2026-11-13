@@ -21,9 +21,7 @@ class ProductDetailsInfoRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 14),
       decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: dividerColor),
-        ),
+        border: Border(bottom: BorderSide(color: dividerColor)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

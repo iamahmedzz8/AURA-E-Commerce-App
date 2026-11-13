@@ -45,10 +45,7 @@ class _SalonLegalConsentActionState extends State<SalonLegalConsentAction> {
               decoration: BoxDecoration(
                 color: AppColors.cardInactive,
                 borderRadius: BorderRadius.circular(4),
-                border: Border.all(
-                  color: AppColors.chipBorder,
-                  width: 0.5,
-                ),
+                border: Border.all(color: AppColors.chipBorder, width: 0.5),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

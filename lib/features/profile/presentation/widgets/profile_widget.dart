@@ -279,8 +279,14 @@ class ProfileCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ProfileStatItem(label: AppStrings.commissionsUpper, value: commissions),
-              ProfileStatItem(label: AppStrings.vaultHoldingsUpper, value: vaultHoldings),
+              ProfileStatItem(
+                label: AppStrings.commissionsUpper,
+                value: commissions,
+              ),
+              ProfileStatItem(
+                label: AppStrings.vaultHoldingsUpper,
+                value: vaultHoldings,
+              ),
               ProfileStatItem(label: AppStrings.statusUpper, value: status),
             ],
           ),
@@ -320,11 +326,7 @@ class ProfileMenuTile extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              Icon(
-                icon,
-                color: AppColors.primaryGold,
-                size: 20,
-              ),
+              Icon(icon, color: AppColors.primaryGold, size: 20),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
