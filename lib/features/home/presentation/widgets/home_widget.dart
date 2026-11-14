@@ -20,8 +20,7 @@ class HomeProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final foreground =
-    isDark ? Colors.white : const Color(0xFF171717);
+    final foreground = isDark ? Colors.white : const Color(0xFF171717);
 
     return Container(
       clipBehavior: Clip.antiAlias,
@@ -39,8 +38,8 @@ class HomeProductCard extends StatelessWidget {
                 Image.network(
                   product['image']!,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) =>
-                  const ColoredBox(color: Color(0xFF191C21)),
+                  errorBuilder: (_, _, _) =>
+                      const ColoredBox(color: Color(0xFF191C21)),
                 ),
                 Positioned(
                   top: 7,
@@ -48,9 +47,7 @@ class HomeProductCard extends StatelessWidget {
                   child: IconButton(
                     onPressed: onFavorite,
                     icon: Icon(
-                      isFavorite
-                          ? Icons.bookmark
-                          : Icons.bookmark_border,
+                      isFavorite ? Icons.bookmark : Icons.bookmark_border,
                       color: isFavorite ? gold : foreground,
                     ),
                   ),
@@ -67,20 +64,14 @@ class HomeProductCard extends StatelessWidget {
                   product['category']!,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: gold,
-                    fontSize: 8,
-                  ),
+                  style: const TextStyle(color: gold, fontSize: 8),
                 ),
                 const SizedBox(height: 5),
                 Text(
                   product['name']!,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: foreground,
-                    fontSize: 16,
-                  ),
+                  style: TextStyle(color: foreground, fontSize: 16),
                 ),
                 const SizedBox(height: 6),
                 Text(
@@ -100,10 +91,7 @@ class HomeProductCard extends StatelessWidget {
                       foregroundColor: foreground,
                       side: const BorderSide(color: gold),
                     ),
-                    child: const Text(
-                      'RESERVE',
-                      style: TextStyle(fontSize: 9),
-                    ),
+                    child: const Text('RESERVE', style: TextStyle(fontSize: 9)),
                   ),
                 ),
               ],

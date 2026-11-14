@@ -17,10 +17,7 @@ class VintageAllocationCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.cardInactive,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: AppColors.chipBorder,
-            width: 0.5,
-          ),
+          border: Border.all(color: AppColors.chipBorder, width: 0.5),
           boxShadow: const [
             BoxShadow(
               color: Colors.black26,

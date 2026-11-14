@@ -23,18 +23,24 @@ class MetricsGridSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('STRATEGIC METRICS',
-                style: TextStyle(
-                    color: DarkTheme.primaryText,
-                    fontSize: 11,
-                    letterSpacing: 1.5,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.bold)),
-            Text('Continuous sync',
-                style: TextStyle(
-                    color: DarkTheme.gold.withValues(alpha: 0.8),
-                    fontSize: 15,
-                    fontFamily: 'Inter')),
+            const Text(
+              'STRATEGIC METRICS',
+              style: TextStyle(
+                color: DarkTheme.primaryText,
+                fontSize: 11,
+                letterSpacing: 1.5,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'Continuous sync',
+              style: TextStyle(
+                color: DarkTheme.gold.withValues(alpha: 0.8),
+                fontSize: 15,
+                fontFamily: 'Inter',
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 16),
@@ -138,45 +144,60 @@ class _MetricGridCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(label,
-                  style: const TextStyle(
-                      color: DarkTheme.secondaryText,
-                      fontSize: 10,
-                      letterSpacing: 1,
-                      fontFamily: 'Inter')),
+              Text(
+                label,
+                style: const TextStyle(
+                  color: DarkTheme.secondaryText,
+                  fontSize: 10,
+                  letterSpacing: 1,
+                  fontFamily: 'Inter',
+                ),
+              ),
               Icon(icon, color: iconColor, size: 16),
             ],
           ),
           const SizedBox(height: 12),
-          Text(value,
-              style: const TextStyle(
-                  color: DarkTheme.primaryText,
-                  fontSize: 28,
-                  fontFamily: 'EB Garamond',
-                  fontWeight: FontWeight.bold)),
+          Text(
+            value,
+            style: const TextStyle(
+              color: DarkTheme.primaryText,
+              fontSize: 28,
+              fontFamily: 'EB Garamond',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           const SizedBox(height: 4),
-          Text(subtitle,
-              style: TextStyle(
-                  color: subtitleColor ?? DarkTheme.gold,
-                  fontSize: 11,
-                  fontFamily: 'Inter')),
+          Text(
+            subtitle,
+            style: TextStyle(
+              color: subtitleColor ?? DarkTheme.gold,
+              fontSize: 11,
+              fontFamily: 'Inter',
+            ),
+          ),
           const SizedBox(height: 16),
           const Divider(color: DarkTheme.border, height: 1),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(footerLabel,
-                  style: const TextStyle(
-                      color: DarkTheme.secondaryText,
-                      fontSize: 10,
-                      fontFamily: 'Inter')),
-              Text(footerValue,
-                  style: TextStyle(
-                      color: footerValueColor ?? DarkTheme.primaryText,
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Inter')),
+              Text(
+                footerLabel,
+                style: const TextStyle(
+                  color: DarkTheme.secondaryText,
+                  fontSize: 10,
+                  fontFamily: 'Inter',
+                ),
+              ),
+              Text(
+                footerValue,
+                style: TextStyle(
+                  color: footerValueColor ?? DarkTheme.primaryText,
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Inter',
+                ),
+              ),
             ],
           ),
         ],

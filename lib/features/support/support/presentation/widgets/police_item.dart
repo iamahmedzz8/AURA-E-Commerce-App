@@ -19,7 +19,11 @@ class PrivacyConfidentialityCard extends StatelessWidget {
         children: [
           Row(
             children: const [
-              Icon(Icons.verified_user_outlined, color: AppColors.primaryGold, size: 20),
+              Icon(
+                Icons.verified_user_outlined,
+                color: AppColors.primaryGold,
+                size: 20,
+              ),
               SizedBox(width: 8),
               Text(
                 'PRIVATE SALON CONFIDENTIALITY',
@@ -54,7 +58,11 @@ class PrivacyConfidentialityCard extends StatelessWidget {
               ),
               Text(
                 'Genève • Paris',
-                style: TextStyle(color: AppColors.primaryGold, fontSize: 10, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: AppColors.primaryGold,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -67,10 +75,7 @@ class PrivacyConfidentialityCard extends StatelessWidget {
 class PrivacyExpansionTileCard extends StatelessWidget {
   final PrivacySectionModel section;
 
-  const PrivacyExpansionTileCard({
-    super.key,
-    required this.section,
-  });
+  const PrivacyExpansionTileCard({super.key, required this.section});
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +117,11 @@ class PrivacyExpansionTileCard extends StatelessWidget {
         children: [
           Text(
             section.details,
-            style: const TextStyle(color: AppColors.textMuted, fontSize: 11, height: 1.4),
+            style: const TextStyle(
+              color: AppColors.textMuted,
+              fontSize: 11,
+              height: 1.4,
+            ),
           ),
         ],
       ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
@@ -22,10 +21,7 @@ class FaqSearchBar extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.searchBarBackground,
           borderRadius: BorderRadius.circular(5),
-          border: Border.all(
-            color: AppColors.chipBorder,
-            width: 0.8,
-          ),
+          border: Border.all(color: AppColors.chipBorder, width: 0.8),
         ),
         child: TextField(
           controller: controller,

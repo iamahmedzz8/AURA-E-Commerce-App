@@ -4,10 +4,7 @@ import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 class FavoritesHeaderSection extends StatelessWidget {
   final int itemCount;
 
-  const FavoritesHeaderSection({
-    super.key,
-    required this.itemCount,
-  });
+  const FavoritesHeaderSection({super.key, required this.itemCount});
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +53,7 @@ class FavoritesHeaderSection extends StatelessWidget {
 
           const Text(
             'A private collection of pieces selected for you.',
-            style: TextStyle(
-              color: Color(0xFF8A8F98),
-              fontSize: 12,
-            ),
+            style: TextStyle(color: Color(0xFF8A8F98), fontSize: 12),
           ),
         ],
       ),

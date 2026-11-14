@@ -3,6 +3,7 @@ import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/di/injection_container.dart';
 import 'package:aura_maison_e_commerce/core/services/prefs_service.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
+import 'package:aura_maison_e_commerce/features/auth/domain/usecases/get_auth_usecase.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/otp_cubit.dart';
 import 'package:aura_maison_e_commerce/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,12 @@ export '../cubit/otp_cubit.dart' show OtpPurpose;
 
 class OtpScreen extends StatefulWidget {
   final String email;
+  final String? password;
   final OtpPurpose purpose;
 
   const OtpScreen({
     super.key,
+    this.password,
     required this.email,
     this.purpose = OtpPurpose.resetPassword,
   });
@@ -103,19 +106,16 @@ class _OtpScreenState extends State<OtpScreen> {
   void _verify(BuildContext context) {
     final code = _controllers.map((c) => c.text).join();
     if (code.length != 6) {
-      _showMessage(
-        AppStrings.enterAll6DigitsSecurityCode,
-        isError: true,
-      );
+      _showMessage(AppStrings.enterAll6DigitsSecurityCode, isError: true);
       return;
     }
 
     FocusScope.of(context).unfocus();
     context.read<OtpCubit>().verifyOtp(
-          email: widget.email,
-          otp: code,
-          purpose: widget.purpose,
-        );
+      email: widget.email,
+      otp: code,
+      purpose: widget.purpose,
+    );
   }
 
   @override
@@ -140,23 +140,42 @@ class _OtpScreenState extends State<OtpScreen> {
                 _showMessage(state.message);
               } else if (state is OtpSuccess) {
                 if (state.purpose == OtpPurpose.signup) {
-                  await PrefsService.setOnboardingCompleted(true);
-                  await PrefsService.saveLoginSession(
-                    email: state.email,
-                    rememberMe: true,
-                  );
+                  try {
+                    // 1. Automatic Login
+                    final auth = await sl<GetAuthUseCase>()(
+                      email: state.email,
+                      password: widget.password!,
+                    );
 
-                  if (!context.mounted) return;
-                  _showMessage(AppStrings.accountVerifiedWelcome);
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (_) => const MainScreen()),
-                    (_) => false,
-                  );
+                    // 2. Save Session
+                    await PrefsService.setOnboardingCompleted(true);
+
+                    await PrefsService.saveLoginSession(
+                      email: state.email,
+                      rememberMe: true,
+                    );
+
+                    if (!context.mounted) return;
+
+                    // 3. Navigate to MainScreen
+                    _showMessage(AppStrings.accountVerifiedWelcome);
+
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => const MainScreen()),
+                      (_) => false,
+                    );
+                  } catch (e) {
+                    if (!context.mounted) return;
+
+                    _showMessage(
+                      e.toString().replaceFirst('Exception: ', ''),
+                      isError: true,
+                    );
+                  }
                 } else {
-                  _showMessage(
-                    AppStrings.securityCodeConfirmed,
-                  );
+                  _showMessage(AppStrings.securityCodeConfirmed);
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -355,8 +374,9 @@ class _OtpScreenState extends State<OtpScreen> {
           backgroundColor: AppColors.gold,
           foregroundColor: AppColors.obsidianDark,
           disabledBackgroundColor: AppColors.gold.withValues(alpha: 0.5),
-          disabledForegroundColor:
-              AppColors.obsidianDark.withValues(alpha: 0.7),
+          disabledForegroundColor: AppColors.obsidianDark.withValues(
+            alpha: 0.7,
+          ),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         ),
       ),

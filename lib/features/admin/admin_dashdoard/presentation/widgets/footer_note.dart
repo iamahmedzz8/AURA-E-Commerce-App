@@ -22,29 +22,36 @@ class FooterNote extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('NOTARIZED INTEGRITY REGISTER',
-                    style: TextStyle(
-                        color: DarkTheme.primaryText,
-                        fontSize: 10,
-                        letterSpacing: 1,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.bold)),
+                Text(
+                  'NOTARIZED INTEGRITY REGISTER',
+                  style: TextStyle(
+                    color: DarkTheme.primaryText,
+                    fontSize: 10,
+                    letterSpacing: 1,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 SizedBox(height: 4),
                 Text(
                   'Tamper-proof SHA-256 cryptographic audit log. Any physical or software alteration to the caliber register is sealed under notarized mandate with the House Master Watchmaker.',
                   style: TextStyle(
-                      color: DarkTheme.secondaryText,
-                      fontSize: 9,
-                      height: 1.5,
-                      fontFamily: 'Inter'),
+                    color: DarkTheme.secondaryText,
+                    fontSize: 9,
+                    height: 1.5,
+                    fontFamily: 'Inter',
+                  ),
                 ),
                 SizedBox(height: 6),
-                Text('NODE VSM-04 · STATUS: IMMUTABLE',
-                    style: TextStyle(
-                        color: DarkTheme.gold,
-                        fontSize: 8,
-                        letterSpacing: 1,
-                        fontFamily: 'Inter')),
+                Text(
+                  'NODE VSM-04 · STATUS: IMMUTABLE',
+                  style: TextStyle(
+                    color: DarkTheme.gold,
+                    fontSize: 8,
+                    letterSpacing: 1,
+                    fontFamily: 'Inter',
+                  ),
+                ),
               ],
             ),
           ),

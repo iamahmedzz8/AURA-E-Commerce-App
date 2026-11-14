@@ -3,9 +3,7 @@ import '../repositories/auth_repository.dart';
 class ChangePasswordUseCase {
   final AuthRepository repository;
 
-  ChangePasswordUseCase({
-    required this.repository,
-  });
+  ChangePasswordUseCase({required this.repository});
 
   Future<void> call({
     required String currentPassword,

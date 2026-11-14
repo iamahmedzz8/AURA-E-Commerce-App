@@ -1,6 +1,7 @@
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+
 /// Top header for Salon Launch / Splash view with progress line
 class SalonHeader extends StatelessWidget {
   final VoidCallback? onBack;
@@ -17,7 +18,11 @@ class SalonHeader extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: onBack ?? () => Navigator.maybePop(context),
-                icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppColors.gold),
+                icon: const Icon(
+                  Icons.arrow_back_ios_new,
+                  size: 18,
+                  color: AppColors.gold,
+                ),
                 splashRadius: 20,
               ),
               Expanded(
@@ -34,7 +39,11 @@ class SalonHeader extends StatelessWidget {
                             border: Border.all(color: AppColors.gold, width: 1),
                           ),
                           child: const Center(
-                            child: Icon(Icons.circle, size: 4, color: AppColors.gold),
+                            child: Icon(
+                              Icons.circle,
+                              size: 4,
+                              color: AppColors.gold,
+                            ),
                           ),
                         ),
                         const SizedBox(width: 6),
@@ -71,23 +80,31 @@ class SalonHeader extends StatelessWidget {
                   color: AppColors.gold,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.person, color: AppColors.obsidianDark, size: 18),
+                child: const Icon(
+                  Icons.person,
+                  color: AppColors.obsidianDark,
+                  size: 18,
+                ),
               ),
             ],
           ),
           const SizedBox(height: 10),
           Row(
             children: [
+              Expanded(child: Container(height: 2, color: AppColors.gold)),
+              const SizedBox(width: 6),
               Expanded(
-                child: Container(height: 2, color: AppColors.gold),
+                child: Container(
+                  height: 2,
+                  color: AppColors.gold.withValues(alpha: 0.35),
+                ),
               ),
               const SizedBox(width: 6),
               Expanded(
-                child: Container(height: 2, color: AppColors.gold.withValues(alpha: 0.35)),
-              ),
-              const SizedBox(width: 6),
-              Expanded(
-                child: Container(height: 2, color: AppColors.gold.withValues(alpha: 0.35)),
+                child: Container(
+                  height: 2,
+                  color: AppColors.gold.withValues(alpha: 0.35),
+                ),
               ),
             ],
           ),

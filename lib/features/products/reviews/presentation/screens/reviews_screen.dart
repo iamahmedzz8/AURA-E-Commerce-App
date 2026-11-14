@@ -64,7 +64,9 @@ class _ReviewsScreenBody extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final foreground = isDark ? Colors.white : const Color(0xFF171717);
     final muted = isDark ? const Color(0xFF8A8F98) : const Color(0xFF777777);
-    final background = isDark ? const Color(0xFF080B10) : const Color(0xFFFBF9F5);
+    final background = isDark
+        ? const Color(0xFF080B10)
+        : const Color(0xFFFBF9F5);
     final surface = isDark ? const Color(0xFF191C21) : Colors.white;
     const orange = Color(0xFFFF5A1F);
 
@@ -100,7 +102,8 @@ class _ReviewsScreenBody extends StatelessWidget {
 
             return RefreshIndicator(
               color: orange,
-              onRefresh: () => context.read<ReviewsCubit>().getReviews(productId),
+              onRefresh: () =>
+                  context.read<ReviewsCubit>().getReviews(productId),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 20),
                 child: Column(
@@ -143,7 +146,9 @@ class _ReviewsScreenBody extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                averageRating > 0 ? averageRating.toStringAsFixed(1) : '0.0',
+                                averageRating > 0
+                                    ? averageRating.toStringAsFixed(1)
+                                    : '0.0',
                                 style: TextStyle(
                                   color: foreground,
                                   fontSize: 32,
@@ -176,12 +181,16 @@ class _ReviewsScreenBody extends StatelessWidget {
                               Text(
                                 state.error,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(color: Colors.red.shade400, fontSize: 13),
+                                style: TextStyle(
+                                  color: Colors.red.shade400,
+                                  fontSize: 13,
+                                ),
                               ),
                               const SizedBox(height: 12),
                               ElevatedButton(
-                                onPressed: () =>
-                                    context.read<ReviewsCubit>().getReviews(productId),
+                                onPressed: () => context
+                                    .read<ReviewsCubit>()
+                                    .getReviews(productId),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: orange,
                                   foregroundColor: Colors.white,
@@ -198,7 +207,11 @@ class _ReviewsScreenBody extends StatelessWidget {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.star_outline_rounded, size: 48, color: muted.withValues(alpha: 0.5)),
+                              Icon(
+                                Icons.star_outline_rounded,
+                                size: 48,
+                                color: muted.withValues(alpha: 0.5),
+                              ),
                               const SizedBox(height: 12),
                               Text(
                                 'No reviews yet for this product.',
@@ -232,7 +245,8 @@ class _ReviewsScreenBody extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           physics: const AlwaysScrollableScrollPhysics(),
                           itemCount: reviews.length,
-                          separatorBuilder: (context, index) => const SizedBox(height: 14),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: 14),
                           itemBuilder: (context, index) {
                             final item = reviews[index];
                             return ReviewItemWidget(

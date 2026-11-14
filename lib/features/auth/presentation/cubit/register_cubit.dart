@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/features/auth/data/datasources/register_service.dart';
 import 'package:aura_maison_e_commerce/features/auth/data/models/register_model.dart';
 import 'package:aura_maison_e_commerce/features/auth/presentation/cubit/register_state.dart';
@@ -19,11 +18,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
       emit(RegisterSuccess(email: registerModel.email));
     } catch (e) {
-      emit(
-        RegisterFailure(
-          msg: e.toString().replaceFirst('Exception: ', ''),
-        ),
-      );
+      emit(RegisterFailure(msg: e.toString().replaceFirst('Exception: ', '')));
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+
 /// Editorial header for Concierge services (Pillar III: Bespoke Service)
 class ConciergeEditorialHeader extends StatelessWidget {
   final String tag;
@@ -24,7 +25,10 @@ class ConciergeEditorialHeader extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.obsidianCard,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.gold.withValues(alpha: 0.3), width: 0.8),
+            border: Border.all(
+              color: AppColors.gold.withValues(alpha: 0.3),
+              width: 0.8,
+            ),
           ),
           child: Text(
             tag,

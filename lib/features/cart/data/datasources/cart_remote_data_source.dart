@@ -3,10 +3,7 @@ import 'package:aura_maison_e_commerce/core/network/dio_client.dart';
 import 'package:aura_maison_e_commerce/features/cart/data/models/cart_model.dart';
 
 abstract class CartRemoteDataSource {
-  Future<void> addToCart({
-    required String productId,
-    required int quantity,
-  });
+  Future<void> addToCart({required String productId, required int quantity});
 
   Future<CartModel> getCart();
 
@@ -15,17 +12,13 @@ abstract class CartRemoteDataSource {
     required int quantity,
   });
 
-  Future<void> deleteCartItem({
-    required String itemId,
-  });
+  Future<void> deleteCartItem({required String itemId});
 }
 
 class CartRemoteDataSourceImpl implements CartRemoteDataSource {
   final DioClient dioClient;
 
-  CartRemoteDataSourceImpl({
-    required this.dioClient,
-  });
+  CartRemoteDataSourceImpl({required this.dioClient});
 
   @override
   Future<void> addToCart({
@@ -34,22 +27,15 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
   }) async {
     await dioClient.post(
       ApiEndpoints.cartItems,
-      data: {
-        'productId': productId,
-        'quantity': quantity,
-      },
+      data: {'productId': productId, 'quantity': quantity},
     );
   }
 
   @override
   Future<CartModel> getCart() async {
-    final response = await dioClient.get(
-      ApiEndpoints.cart,
-    );
+    final response = await dioClient.get(ApiEndpoints.cart);
 
-    return CartModel.fromJson(
-      Map<String, dynamic>.from(response.data as Map),
-    );
+    return CartModel.fromJson(Map<String, dynamic>.from(response.data as Map));
   }
 
   @override
@@ -59,22 +45,15 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
   }) async {
     await dioClient.post(
       ApiEndpoints.cartDecrement,
-      data: {
-        'itemId': itemId,
-        'quantity': quantity,
-      },
+      data: {'itemId': itemId, 'quantity': quantity},
     );
   }
 
   @override
-  Future<void> deleteCartItem({
-    required String itemId,
-  }) async {
+  Future<void> deleteCartItem({required String itemId}) async {
     await dioClient.delete(
       ApiEndpoints.cartItemById(itemId),
-      data: {
-        'id': itemId,
-      },
+      data: {'id': itemId},
     );
   }
 }

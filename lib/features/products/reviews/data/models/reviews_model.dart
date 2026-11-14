@@ -18,8 +18,12 @@ class ReviewModel {
       comment: json['comment']?.toString().trim() ?? '',
       rating: _parseRating(json['rating']),
       createdAt: json['createdAt']?.toString().trim() ?? '',
-      userName: _parseUserName(json['userName'] ?? json['user']?['userName'] ?? json['user']?['name']),
-      userPicture: json['userPicture']?.toString() ?? json['user']?['picture']?.toString(),
+      userName: _parseUserName(
+        json['userName'] ?? json['user']?['userName'] ?? json['user']?['name'],
+      ),
+      userPicture:
+          json['userPicture']?.toString() ??
+          json['user']?['picture']?.toString(),
     );
   }
 
@@ -42,10 +46,15 @@ class ReviewModel {
   String get initials {
     final trimmed = userName.trim();
     if (trimmed.isEmpty) return 'P';
-    final parts = trimmed.split(RegExp(r'\s+')).where((p) => p.isNotEmpty).toList();
+    final parts = trimmed
+        .split(RegExp(r'\s+'))
+        .where((p) => p.isNotEmpty)
+        .toList();
     if (parts.isEmpty) return 'P';
     if (parts.length == 1) {
-      return parts.first.substring(0, parts.first.length.clamp(1, 2)).toUpperCase();
+      return parts.first
+          .substring(0, parts.first.length.clamp(1, 2))
+          .toUpperCase();
     }
     return '${parts.first[0]}${parts[1][0]}'.toUpperCase();
   }
@@ -55,8 +64,18 @@ class ReviewModel {
     final dt = DateTime.tryParse(createdAt);
     if (dt == null) return createdAt;
     const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     final day = dt.day.toString().padLeft(2, '0');
     final month = months[(dt.month - 1).clamp(0, 11)];
@@ -76,17 +95,18 @@ class ReviewsResponseModel {
     double? averageRating,
     int? reviewsCount,
     required this.reviews,
-  })  : reviewsCount = (reviewsCount != null && reviewsCount >= reviews.length)
-            ? reviewsCount
-            : reviews.length,
-        averageRating = (averageRating != null && averageRating > 0)
-            ? double.parse(averageRating.toStringAsFixed(1))
-            : (reviews.isNotEmpty
-                ? double.parse(
-                    (reviews.fold<int>(0, (acc, r) => acc + r.rating) / reviews.length)
-                        .toStringAsFixed(1),
-                  )
-                : 0.0);
+  }) : reviewsCount = (reviewsCount != null && reviewsCount >= reviews.length)
+           ? reviewsCount
+           : reviews.length,
+       averageRating = (averageRating != null && averageRating > 0)
+           ? double.parse(averageRating.toStringAsFixed(1))
+           : (reviews.isNotEmpty
+                 ? double.parse(
+                     (reviews.fold<int>(0, (acc, r) => acc + r.rating) /
+                             reviews.length)
+                         .toStringAsFixed(1),
+                   )
+                 : 0.0);
 
   factory ReviewsResponseModel.fromJson(Map<String, dynamic> json) {
     final reviewsMap = json['reviews'];
@@ -104,7 +124,8 @@ class ReviewsResponseModel {
       items = reviewsMap;
     } else if (json['items'] is List) {
       items = json['items'] as List;
-    } else if (json['data'] is Map<String, dynamic> && json['data']['items'] is List) {
+    } else if (json['data'] is Map<String, dynamic> &&
+        json['data']['items'] is List) {
       items = json['data']['items'] as List;
       if (json['data']['totalCount'] is num) {
         totalCountFromPaging = (json['data']['totalCount'] as num).toInt();
@@ -118,15 +139,18 @@ class ReviewsResponseModel {
         .map((e) => ReviewModel.fromJson(e))
         .toList();
 
-    final explicitCount = (json['reviewsCount'] as num?)?.toInt() ??
+    final explicitCount =
+        (json['reviewsCount'] as num?)?.toInt() ??
         (json['totalCount'] as num?)?.toInt() ??
         totalCountFromPaging;
 
-    final resolvedCount = (explicitCount != null && explicitCount >= parsedReviews.length)
+    final resolvedCount =
+        (explicitCount != null && explicitCount >= parsedReviews.length)
         ? explicitCount
         : parsedReviews.length;
 
-    final rawAverage = (json['averageRating'] as num?)?.toDouble() ??
+    final rawAverage =
+        (json['averageRating'] as num?)?.toDouble() ??
         (json['rating'] as num?)?.toDouble() ??
         (json['avgRating'] as num?)?.toDouble();
 
@@ -135,7 +159,9 @@ class ReviewsResponseModel {
       resolvedAverage = double.parse(rawAverage.toStringAsFixed(1));
     } else if (parsedReviews.isNotEmpty) {
       final sum = parsedReviews.fold<int>(0, (acc, r) => acc + r.rating);
-      resolvedAverage = double.parse((sum / parsedReviews.length).toStringAsFixed(1));
+      resolvedAverage = double.parse(
+        (sum / parsedReviews.length).toStringAsFixed(1),
+      );
     } else {
       resolvedAverage = 0.0;
     }
@@ -159,20 +185,20 @@ class ReviewsResponseModel {
   }
 
   Map<int, int> get starCounts => {
-        5: getCountForStar(5),
-        4: getCountForStar(4),
-        3: getCountForStar(3),
-        2: getCountForStar(2),
-        1: getCountForStar(1),
-      };
+    5: getCountForStar(5),
+    4: getCountForStar(4),
+    3: getCountForStar(3),
+    2: getCountForStar(2),
+    1: getCountForStar(1),
+  };
 
   Map<int, double> get starPercentages => {
-        5: getPercentageForStar(5),
-        4: getPercentageForStar(4),
-        3: getPercentageForStar(3),
-        2: getPercentageForStar(2),
-        1: getPercentageForStar(1),
-      };
+    5: getPercentageForStar(5),
+    4: getPercentageForStar(4),
+    3: getPercentageForStar(3),
+    2: getPercentageForStar(2),
+    1: getPercentageForStar(1),
+  };
 
   String get formattedAverageRating =>
       averageRating > 0 ? averageRating.toStringAsFixed(1) : '0.0';

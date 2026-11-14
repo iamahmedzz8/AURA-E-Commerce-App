@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +38,10 @@ class SalonCentralSanctuary extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: AppColors.obsidianDark,
-                  border: Border.all(color: AppColors.gold.withValues(alpha: 0.8), width: 1.5),
+                  border: Border.all(
+                    color: AppColors.gold.withValues(alpha: 0.8),
+                    width: 1.5,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.6),
@@ -53,7 +55,10 @@ class SalonCentralSanctuary extends StatelessWidget {
                     height: 90,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.gold.withValues(alpha: 0.3), width: 1),
+                      border: Border.all(
+                        color: AppColors.gold.withValues(alpha: 0.3),
+                        width: 1,
+                      ),
                     ),
                     child: const Center(
                       child: Text(
@@ -73,16 +78,26 @@ class SalonCentralSanctuary extends StatelessWidget {
               Positioned(
                 bottom: 0,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 3,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.obsidianCard,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.gold.withValues(alpha: 0.4), width: 0.8),
+                    border: Border.all(
+                      color: AppColors.gold.withValues(alpha: 0.4),
+                      width: 0.8,
+                    ),
                   ),
                   child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.verified_outlined, size: 10, color: AppColors.gold),
+                      Icon(
+                        Icons.verified_outlined,
+                        size: 10,
+                        color: AppColors.gold,
+                      ),
                       SizedBox(width: 4),
                       Text(
                         AppStrings.certifiedUpper,
@@ -125,7 +140,11 @@ class SalonCentralSanctuary extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(width: 18, height: 1, color: AppColors.gold.withValues(alpha: 0.4)),
+              Container(
+                width: 18,
+                height: 1,
+                color: AppColors.gold.withValues(alpha: 0.4),
+              ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
@@ -137,14 +156,22 @@ class SalonCentralSanctuary extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(width: 18, height: 1, color: AppColors.gold.withValues(alpha: 0.4)),
+              Container(
+                width: 18,
+                height: 1,
+                color: AppColors.gold.withValues(alpha: 0.4),
+              ),
             ],
           ),
           const SizedBox(height: 10),
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.shield_outlined, size: 12, color: AppColors.luxuryMuted),
+              Icon(
+                Icons.shield_outlined,
+                size: 12,
+                color: AppColors.luxuryMuted,
+              ),
               SizedBox(width: 6),
               Text(
                 AppStrings.privatePatronExperience,

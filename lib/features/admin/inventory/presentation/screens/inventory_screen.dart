@@ -66,14 +66,12 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   title: const HeaderSection(),
                 ),
                 const SliverToBoxAdapter(child: StatsSection()),
-                 SliverToBoxAdapter(child: ActionButtons(onAdd: _refresh)),
+                SliverToBoxAdapter(child: ActionButtons(onAdd: _refresh)),
                 const SliverToBoxAdapter(child: SearchFilter()),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
-                        (context, index) => InventoryCard(
-                      item: items[index],
-                      onDelete: _refresh,
-                    ),
+                    (context, index) =>
+                        InventoryCard(item: items[index], onDelete: _refresh),
                     childCount: items.length,
                   ),
                 ),
@@ -85,7 +83,9 @@ class _InventoryScreenState extends State<InventoryScreen> {
                         Text(
                           'Showing ${items.length} of 48 listed masterpieces',
                           style: TextStyle(
-                            color: Theme.of(context).textTheme.bodyMedium?.color,
+                            color: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.color,
                             fontSize: 12,
                           ),
                         ),
@@ -96,13 +96,17 @@ class _InventoryScreenState extends State<InventoryScreen> {
                             Icon(
                               Icons.copy,
                               size: 14,
-                              color: Theme.of(context).textTheme.bodyMedium?.color,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium?.color,
                             ),
                             const SizedBox(width: 4),
                             Text(
                               'SIMULATE EMPTY INVENTORY STATE',
                               style: TextStyle(
-                                color: Theme.of(context).textTheme.bodyMedium?.color,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.bodyMedium?.color,
                                 fontSize: 10,
                                 letterSpacing: 1,
                               ),

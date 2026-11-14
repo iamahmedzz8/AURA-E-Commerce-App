@@ -244,71 +244,72 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              
 
+              SizedBox(height: 8),
 
-SizedBox(
-  width: double.infinity,
-  child: OutlinedButton.icon(
-    style: OutlinedButton.styleFrom(
-      foregroundColor: Colors.redAccent,
-      side: const BorderSide(color: Colors.redAccent),
-      padding: const EdgeInsets.symmetric(vertical: 16),
-    ),
-    onPressed: () async {
-      final confirm = await showDialog<bool>(
-        context: context,
-        builder: (dialogContext) => AlertDialog(
-          title: const Text('Logout'),
-          content: const Text('Are you sure you want to log out?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext, false),
-              child: const Text('CANCEL'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext, true),
-              child: const Text(
-                'LOG OUT',
-                style: TextStyle(color: Colors.redAccent),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.redAccent,
+                    side: const BorderSide(color: Colors.redAccent),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  onPressed: () async {
+                    final confirm = await showDialog<bool>(
+                      context: context,
+                      builder: (dialogContext) => AlertDialog(
+                        backgroundColor: AppColors.cardBg,
+                        title: const Text('Logout'),
+                        content: const Text(
+                          'Are you sure you want to log out?',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.pop(dialogContext, false),
+                            child: const Text('CANCEL'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.pop(dialogContext, true),
+                            child: const Text(
+                              'LOG OUT',
+                              style: TextStyle(color: Colors.redAccent),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+
+                    if (confirm != true) return;
+
+                    try {
+                      await sl<AuthCubit>().logout();
+
+                      if (!context.mounted) return;
+
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (_) => const VipMemberSignInScreen(),
+                        ),
+                        (route) => false,
+                      );
+                    } catch (e) {
+                      if (!context.mounted) return;
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Logout failed: $e')),
+                      );
+                    }
+                  },
+                  icon: const Icon(Icons.logout),
+                  label: const Text('LOG OUT'),
+                ),
               ),
-            ),
-          ],
-        ),
-      );
-
-      if (confirm != true) return;
-
-      try {
-        await sl<AuthCubit>().logout();
-
-        if (!context.mounted) return;
-
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (_) => const VipMemberSignInScreen(),
+            ],
           ),
-          (route) => false,
-        );
-      } catch (e) {
-        if (!context.mounted) return;
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Logout failed: $e')),
-        );
-      }
-    },
-    icon: const Icon(Icons.logout),
-    label: const Text('LOG OUT'),
-  ),
-),
-        
-            ]
-        
-      
         ),
       ),
-    )
     );
   }
 }

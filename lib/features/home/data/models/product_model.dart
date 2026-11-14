@@ -47,16 +47,21 @@ class ProductModel {
       arabicName: json['arabicName'] as String?,
       description: json['description'] as String?,
       arabicDescription: json['arabicDescription'] as String?,
-      coverPictureUrl: json['coverPictureUrl'] as String? ??
+      coverPictureUrl:
+          json['coverPictureUrl'] as String? ??
           json['coverUrl'] as String? ??
           json['pictureUrl'] as String? ??
           '',
-      productPictures: (json['productPictures'] as List?)
+      productPictures:
+          (json['productPictures'] as List?)
               ?.map((e) => e.toString())
               .toList() ??
           (json['pictures'] as List?)
-              ?.map((e) =>
-                  e is Map ? (e['pictureUrl']?.toString() ?? '') : e.toString())
+              ?.map(
+                (e) => e is Map
+                    ? (e['pictureUrl']?.toString() ?? '')
+                    : e.toString(),
+              )
               .toList() ??
           const [],
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
@@ -67,9 +72,11 @@ class ProductModel {
       reviewsCount: (json['reviewsCount'] as num?)?.toInt() ?? 0,
       discountPercentage: (json['discountPercentage'] as num?)?.toInt() ?? 0,
       sellerId: json['sellerId'] as String?,
-      categories: (json['categories'] as List?)
-              ?.map((e) =>
-                  e is Map ? (e['name']?.toString() ?? '') : e.toString())
+      categories:
+          (json['categories'] as List?)
+              ?.map(
+                (e) => e is Map ? (e['name']?.toString() ?? '') : e.toString(),
+              )
               .toList() ??
           const [],
     );

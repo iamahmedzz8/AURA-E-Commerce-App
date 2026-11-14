@@ -98,10 +98,7 @@ class PrefsService {
     }
 
     if (accessToken != null && refreshToken != null) {
-      await saveTokens(
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-      );
+      await saveTokens(accessToken: accessToken, refreshToken: refreshToken);
     }
   }
 

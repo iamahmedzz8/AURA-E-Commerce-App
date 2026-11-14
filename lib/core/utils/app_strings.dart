@@ -387,8 +387,7 @@ class AppStrings {
   // Add Product: AppBar & Title
   static const String workshopRegister = 'WORKSHOP\nREGISTER';
   static const String calibreInspectionDossier = 'Calibre Inspection Dossier';
-  static const String roleWorkshopManager =
-      'ROLE: WORKSHOP MANAGER • VENDÔME';
+  static const String roleWorkshopManager = 'ROLE: WORKSHOP MANAGER • VENDÔME';
   static const String confidentialProtocol = 'CONFIDENTIAL PROTOCOL';
   static const String registerNewHorologicalWork =
       'Register New\nHorological Work';
@@ -400,8 +399,7 @@ class AppStrings {
   static const String pieceName = 'PIECE NAME';
   static const String pieceNamePlaceholder = 'Royal Mysterious Tourbillon';
   static const String description = 'DESCRIPTION';
-  static const String descriptionPlaceholder =
-      'Enter product description...';
+  static const String descriptionPlaceholder = 'Enter product description...';
   static const String workshopReferenceSku = 'WORKSHOP REFERENCE (SKU)';
   static const String sealed = 'Sealed';
   static const String skuPlaceholder = '#TS-990-PT';
@@ -463,8 +461,7 @@ class AppStrings {
   static const String verifyAuraAccess = 'VERIFY AURA ACCESS';
   static const String changeAuthentication = 'CHANGE AUTHENTICATION';
   static const String assignedWorkspace = 'ASSIGNED WORKSPACE';
-  static const String assignedWorkspaceValue =
-      'Paris Fine Watchmaking Salon';
+  static const String assignedWorkspaceValue = 'Paris Fine Watchmaking Salon';
   static const String deliveryChannel = 'DELIVERY CHANNEL';
   static const String deliveryChannelValue = 'Secure Messaging Relay';
   static const String batchId = 'BATCH ID';
@@ -497,8 +494,7 @@ class AppStrings {
 
   // ── Auth: Reset Password Screen ──────────────────────────────
   static const String resetPasswordTitle = 'Reset Password';
-  static const String fineWatchmakingEncryption =
-      'FINE WATCHMAKING ENCRYPTION';
+  static const String fineWatchmakingEncryption = 'FINE WATCHMAKING ENCRYPTION';
   static const String setANewSeal = 'Set a New Seal';
   static const String setANewSealSubtitle =
       'Your new passphrase must meet\nthe security criteria of Fine Watchmaking.';
@@ -688,8 +684,7 @@ class AppStrings {
   // ── Addresses Screens ────────────────────────────────────────
   static const String editAddress = 'Edit Address';
   static const String addNewAddress = 'Add New Address';
-  static const String addressSavedSuccessfully =
-      'Address saved successfully';
+  static const String addressSavedSuccessfully = 'Address saved successfully';
   static const String addressUpdatedSuccessfully =
       'Address updated successfully';
   static const String stateLabel = 'State';
@@ -706,8 +701,7 @@ class AppStrings {
   static const String cancel = 'Cancel';
   static const String delete = 'Delete';
   static const String tryAgain = 'Try Again';
-  static const String noAddressesYet =
-      'You haven’t added any addresses yet';
+  static const String noAddressesYet = 'You haven’t added any addresses yet';
   static const String addAddress = 'Add Address';
   static const String myAddresses = 'My Addresses';
   static const String editAddressTooltip = 'Edit address';
@@ -762,8 +756,7 @@ class AppStrings {
   static const String heuresCelestes = 'Celestial Hours Tourbillon No. 04';
   static const String assignedPrivateAdvisor = 'ASSIGNED PRIVATE ADVISOR';
   static const String auraMaisonWorkshop = 'AURA MAISON WORKSHOP';
-  static const String distinguishedMember =
-      'Distinguished Member No. 048-AURA';
+  static const String distinguishedMember = 'Distinguished Member No. 048-AURA';
 
   // ── Settings Screens ─────────────────────────────────────────
   static const String cryptographicEnclave = 'CRYPTOGRAPHIC ENCLAVE';

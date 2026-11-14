@@ -103,10 +103,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     }
 
     context.read<ResetPasswordCubit>().resetPassword(
-          email: widget.email,
-          otp: widget.otp,
-          newPassword: _newPassphraseController.text,
-        );
+      email: widget.email,
+      otp: widget.otp,
+      newPassword: _newPassphraseController.text,
+    );
   }
 
   void _showSuccessDialog(BuildContext context) {

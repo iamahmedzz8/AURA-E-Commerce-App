@@ -55,7 +55,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
               title: const AddProductAppBar(),
             ),
             SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 16.0,
+              ),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
                   const AddProductTitleSection(),
@@ -116,19 +119,25 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                     name: nameController.text.isNotEmpty
                                         ? nameController.text
                                         : AppStrings.defaultProductName,
-                                    nameArabic: nameArabicController.text.isNotEmpty
+                                    nameArabic:
+                                        nameArabicController.text.isNotEmpty
                                         ? nameArabicController.text
                                         : AppStrings.defaultProductArabicName,
-                                    description: descriptionController.text.isNotEmpty
+                                    description:
+                                        descriptionController.text.isNotEmpty
                                         ? descriptionController.text
                                         : AppStrings.defaultProductDescription,
-                                    descriptionArabic:
-                                        AppStrings.defaultProductArabicDescription,
-                                    coverPictureUrl: imageUrlController.text.isNotEmpty
+                                    descriptionArabic: AppStrings
+                                        .defaultProductArabicDescription,
+                                    coverPictureUrl:
+                                        imageUrlController.text.isNotEmpty
                                         ? imageUrlController.text
                                         : "https://picsum.photos/200",
-                                    price: double.tryParse(priceController.text) ?? 10.0,
-                                    stock: int.tryParse(stockController.text) ?? 1,
+                                    price:
+                                        double.tryParse(priceController.text) ??
+                                        10.0,
+                                    stock:
+                                        int.tryParse(stockController.text) ?? 1,
                                     weight: 0.0,
                                     color: "Silver",
                                     discountPercentage: 0.0,
@@ -136,7 +145,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                     productPictureUrls: [],
                                   );
 
-                                  context.read<ProductsCubit>().addProduct(newProduct);
+                                  context.read<ProductsCubit>().addProduct(
+                                    newProduct,
+                                  );
                                 },
                           icon: state is AddProductLoading
                               ? const SizedBox(

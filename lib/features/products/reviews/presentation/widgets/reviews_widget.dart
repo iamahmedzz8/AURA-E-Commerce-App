@@ -88,7 +88,9 @@ class ReviewsSummaryCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        averageRating > 0 ? averageRating.toStringAsFixed(1) : '0.0',
+                        averageRating > 0
+                            ? averageRating.toStringAsFixed(1)
+                            : '0.0',
                         style: TextStyle(
                           color: foreground,
                           fontSize: 34,
@@ -96,10 +98,15 @@ class ReviewsSummaryCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 4),
-                      buildRatingStars(averageRating > 0 ? averageRating : 0, size: 13),
+                      buildRatingStars(
+                        averageRating > 0 ? averageRating : 0,
+                        size: 13,
+                      ),
                       const SizedBox(height: 5),
                       Text(
-                        reviewsCount == 1 ? '1 REVIEW' : '$reviewsCount REVIEWS',
+                        reviewsCount == 1
+                            ? '1 REVIEW'
+                            : '$reviewsCount REVIEWS',
                         style: TextStyle(
                           color: muted,
                           fontSize: 8,
@@ -116,31 +123,36 @@ class ReviewsSummaryCard extends StatelessWidget {
                         _ratingBar(
                           context,
                           stars: 5,
-                          percentage: successState?.getPercentageForStar(5) ?? 0.0,
+                          percentage:
+                              successState?.getPercentageForStar(5) ?? 0.0,
                           count: successState?.getCountForStar(5) ?? 0,
                         ),
                         _ratingBar(
                           context,
                           stars: 4,
-                          percentage: successState?.getPercentageForStar(4) ?? 0.0,
+                          percentage:
+                              successState?.getPercentageForStar(4) ?? 0.0,
                           count: successState?.getCountForStar(4) ?? 0,
                         ),
                         _ratingBar(
                           context,
                           stars: 3,
-                          percentage: successState?.getPercentageForStar(3) ?? 0.0,
+                          percentage:
+                              successState?.getPercentageForStar(3) ?? 0.0,
                           count: successState?.getCountForStar(3) ?? 0,
                         ),
                         _ratingBar(
                           context,
                           stars: 2,
-                          percentage: successState?.getPercentageForStar(2) ?? 0.0,
+                          percentage:
+                              successState?.getPercentageForStar(2) ?? 0.0,
                           count: successState?.getCountForStar(2) ?? 0,
                         ),
                         _ratingBar(
                           context,
                           stars: 1,
-                          percentage: successState?.getPercentageForStar(1) ?? 0.0,
+                          percentage:
+                              successState?.getPercentageForStar(1) ?? 0.0,
                           count: successState?.getCountForStar(1) ?? 0,
                         ),
                       ],
@@ -149,7 +161,10 @@ class ReviewsSummaryCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 18),
-              Divider(color: isDark ? Colors.white12 : Colors.black12, height: 1),
+              Divider(
+                color: isDark ? Colors.white12 : Colors.black12,
+                height: 1,
+              ),
               const SizedBox(height: 14),
               if (state is GetReviewLoadingState)
                 Center(
@@ -254,7 +269,9 @@ class ReviewsSummaryCard extends StatelessWidget {
                 value: percentage.clamp(0.0, 1.0),
                 minHeight: 5,
                 backgroundColor: isDark ? Colors.white10 : Colors.black12,
-                valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFC5A059)),
+                valueColor: const AlwaysStoppedAnimation<Color>(
+                  Color(0xFFC5A059),
+                ),
               ),
             ),
           ),
@@ -265,7 +282,9 @@ class ReviewsSummaryCard extends StatelessWidget {
               '$count',
               textAlign: TextAlign.end,
               style: TextStyle(
-                color: isDark ? const Color(0xFF8A8F98) : const Color(0xFF9E9E9E),
+                color: isDark
+                    ? const Color(0xFF8A8F98)
+                    : const Color(0xFF9E9E9E),
                 fontSize: 8,
                 fontWeight: FontWeight.w500,
               ),
@@ -284,11 +303,23 @@ class ReviewsSummaryCard extends StatelessWidget {
       children: List.generate(5, (index) {
         final starIndex = index + 1;
         if (clamped >= starIndex - 0.25) {
-          return Icon(Icons.star_rounded, color: const Color(0xFFC5A059), size: size);
+          return Icon(
+            Icons.star_rounded,
+            color: const Color(0xFFC5A059),
+            size: size,
+          );
         } else if (clamped >= starIndex - 0.75) {
-          return Icon(Icons.star_half_rounded, color: const Color(0xFFC5A059), size: size);
+          return Icon(
+            Icons.star_half_rounded,
+            color: const Color(0xFFC5A059),
+            size: size,
+          );
         } else {
-          return Icon(Icons.star_outline_rounded, color: const Color(0xFFC5A059), size: size);
+          return Icon(
+            Icons.star_outline_rounded,
+            color: const Color(0xFFC5A059),
+            size: size,
+          );
         }
       }),
     );
@@ -392,7 +423,9 @@ class ReviewItemWidget extends StatelessWidget {
               children: List.generate(
                 5,
                 (index) => Icon(
-                  index < rating.clamp(0, 5) ? Icons.star_rounded : Icons.star_outline_rounded,
+                  index < rating.clamp(0, 5)
+                      ? Icons.star_rounded
+                      : Icons.star_outline_rounded,
                   color: gold,
                   size: 11,
                 ),

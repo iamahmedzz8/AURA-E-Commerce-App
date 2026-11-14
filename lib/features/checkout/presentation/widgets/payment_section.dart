@@ -56,10 +56,7 @@ class PaymentSection extends StatelessWidget {
                       ],
                     ),
                     Gap(7),
-                    CustomText(
-                      text: AppStrings.payOnlineSubtitle,
-                      size: 12,
-                    ),
+                    CustomText(text: AppStrings.payOnlineSubtitle, size: 12),
                   ],
                 ),
               ),

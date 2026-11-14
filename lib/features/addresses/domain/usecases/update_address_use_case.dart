@@ -11,9 +11,6 @@ class UpdateAddressUseCase {
     required String id,
     required UpdateAddressRequestModel request,
   }) {
-    return repository.updateAddress(
-      id: id,
-      request: request,
-    );
+    return repository.updateAddress(id: id, request: request);
   }
 }

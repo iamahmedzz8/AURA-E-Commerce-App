@@ -31,8 +31,8 @@ class OffersCubit extends Cubit<OffersState> {
   final HomeRemoteDataSource _homeRemoteDataSource;
 
   OffersCubit([HomeRemoteDataSource? homeRemoteDataSource])
-      : _homeRemoteDataSource = homeRemoteDataSource ?? HomeRemoteDataSource(),
-        super(OffersInitialState());
+    : _homeRemoteDataSource = homeRemoteDataSource ?? HomeRemoteDataSource(),
+      super(OffersInitialState());
 
   Future<void> fetchOffers() async {
     emit(OffersLoadingState());
@@ -40,9 +40,11 @@ class OffersCubit extends Cubit<OffersState> {
       final offers = await _homeRemoteDataSource.getOffers();
       emit(OffersSuccessState(offers: offers));
     } catch (e) {
-      emit(OffersFailureState(
-        errorMessage: e.toString().replaceFirst('Exception: ', ''),
-      ));
+      emit(
+        OffersFailureState(
+          errorMessage: e.toString().replaceFirst('Exception: ', ''),
+        ),
+      );
     }
   }
 }
@@ -52,8 +54,8 @@ class CategoriesCubit extends Cubit<CategoriesState> {
   final HomeRemoteDataSource _homeRemoteDataSource;
 
   CategoriesCubit([HomeRemoteDataSource? homeRemoteDataSource])
-      : _homeRemoteDataSource = homeRemoteDataSource ?? HomeRemoteDataSource(),
-        super(CategoriesInitialState());
+    : _homeRemoteDataSource = homeRemoteDataSource ?? HomeRemoteDataSource(),
+      super(CategoriesInitialState());
 
   Future<void> fetchCategories() async {
     emit(CategoriesLoadingState());
@@ -61,9 +63,11 @@ class CategoriesCubit extends Cubit<CategoriesState> {
       final categories = await _homeRemoteDataSource.getCategories();
       emit(CategoriesSuccessState(categories: categories));
     } catch (e) {
-      emit(CategoriesFailureState(
-        errorMessage: e.toString().replaceFirst('Exception: ', ''),
-      ));
+      emit(
+        CategoriesFailureState(
+          errorMessage: e.toString().replaceFirst('Exception: ', ''),
+        ),
+      );
     }
   }
 }
@@ -73,8 +77,8 @@ class HomeProductsCubit extends Cubit<HomeProductsState> {
   final HomeRemoteDataSource _homeRemoteDataSource;
 
   HomeProductsCubit([HomeRemoteDataSource? homeRemoteDataSource])
-      : _homeRemoteDataSource = homeRemoteDataSource ?? HomeRemoteDataSource(),
-        super(HomeProductsInitialState());
+    : _homeRemoteDataSource = homeRemoteDataSource ?? HomeRemoteDataSource(),
+      super(HomeProductsInitialState());
 
   Future<void> fetchProducts({int page = 1, int pageSize = 10}) async {
     emit(HomeProductsLoadingState());
@@ -85,9 +89,11 @@ class HomeProductsCubit extends Cubit<HomeProductsState> {
       );
       emit(HomeProductsSuccessState(products: products));
     } catch (e) {
-      emit(HomeProductsFailureState(
-        errorMessage: e.toString().replaceFirst('Exception: ', ''),
-      ));
+      emit(
+        HomeProductsFailureState(
+          errorMessage: e.toString().replaceFirst('Exception: ', ''),
+        ),
+      );
     }
   }
 }

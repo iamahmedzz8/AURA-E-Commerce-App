@@ -1,5 +1,6 @@
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+
 /// Single service privilege item tile
 class OnboardingServiceItem extends StatelessWidget {
   final String title;

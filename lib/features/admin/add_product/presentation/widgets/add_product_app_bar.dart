@@ -7,17 +7,21 @@ class AddProductAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal:2),
+      padding: EdgeInsets.symmetric(horizontal: 2),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back_ios_new, color: DarkTheme.gold, size: 18),
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              color: DarkTheme.gold,
+              size: 18,
+            ),
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
-           SizedBox(width: 5),
+          SizedBox(width: 5),
           const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +41,7 @@ class AddProductAppBar extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(width: 30,),
+                    SizedBox(width: 30),
                     _ConfidentialBadge(),
                   ],
                 ),
@@ -69,10 +73,18 @@ class AddProductAppBar extends StatelessWidget {
           Stack(
             alignment: Alignment.center,
             children: const [
-              Icon(Icons.shield_outlined, color: DarkTheme.secondaryText, size: 22),
+              Icon(
+                Icons.shield_outlined,
+                color: DarkTheme.secondaryText,
+                size: 22,
+              ),
               Padding(
                 padding: EdgeInsets.only(top: 1),
-                child: Icon(Icons.check, color: DarkTheme.secondaryText, size: 10),
+                child: Icon(
+                  Icons.check,
+                  color: DarkTheme.secondaryText,
+                  size: 10,
+                ),
               ),
             ],
           ),

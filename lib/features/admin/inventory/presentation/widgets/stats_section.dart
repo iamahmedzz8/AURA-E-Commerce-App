@@ -6,7 +6,7 @@ class StatsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 16.0),
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         children: [
           Expanded(
@@ -17,7 +17,7 @@ class StatsSection extends StatelessWidget {
               icon: Icons.lock_outline,
             ),
           ),
-           SizedBox(width: 12),
+          SizedBox(width: 12),
           Expanded(
             child: _StatCard(
               label: 'ALLOCATION RATE',
@@ -55,20 +55,30 @@ class _StatCard extends StatelessWidget {
 
     return Card(
       child: Padding(
-        padding:  EdgeInsets.all(12),
+        padding: EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(label, style: textTheme.labelLarge?.copyWith(color: textTheme.bodyMedium?.color, fontSize: 10)),
-                Icon(icon, size: 14, color: iconColor ?? textTheme.bodyMedium?.color),
+                Text(
+                  label,
+                  style: textTheme.labelLarge?.copyWith(
+                    color: textTheme.bodyMedium?.color,
+                    fontSize: 10,
+                  ),
+                ),
+                Icon(
+                  icon,
+                  size: 14,
+                  color: iconColor ?? textTheme.bodyMedium?.color,
+                ),
               ],
             ),
-             SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(value, style: textTheme.titleLarge?.copyWith(fontSize: 18)),
-             SizedBox(height: 4),
+            SizedBox(height: 4),
             Text(subValue, style: textTheme.bodyMedium?.copyWith(fontSize: 10)),
           ],
         ),

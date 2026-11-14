@@ -24,22 +24,22 @@ class CheckoutButton extends StatelessWidget {
           ),
         );
       },
-                child: Container(
-                  height: 50,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppColors.primaryColor,
-                  ),
-                  child: Center(
-                    child: CustomText(
-                      size: 20,
-                      text: AppStrings.checkout,
-                      color: Colors.white,
-                      weight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              );
+      child: Container(
+        height: 50,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: AppColors.primaryColor,
+        ),
+        child: Center(
+          child: CustomText(
+            size: 20,
+            text: AppStrings.checkout,
+            color: Colors.white,
+            weight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -1,6 +1,6 @@
-
 import 'package:aura_maison_e_commerce/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+
 /// Assigned advisor credential card with diplomatic seal and security level
 class AssignedAdvisorCard extends StatelessWidget {
   final String name;
@@ -27,7 +27,10 @@ class AssignedAdvisorCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.obsidianCard,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.gold.withValues(alpha: 0.35), width: 1),
+        border: Border.all(
+          color: AppColors.gold.withValues(alpha: 0.35),
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.5),

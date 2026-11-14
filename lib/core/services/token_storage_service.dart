@@ -12,19 +12,15 @@ class TokenStorageService {
   static const String _kRefreshToken = 'aura_refresh_token';
   static const String _kExpiresAt = 'aura_expires_at';
 
-  TokenStorageService({
-    FlutterSecureStorage? secureStorage,
-    SharedPreferences? prefs,
-  })  : _secureStorage = secureStorage ??
-            const FlutterSecureStorage(
-              aOptions: AndroidOptions(
-                resetOnError: true,
-              ),
-              iOptions: IOSOptions(
-                accessibility: KeychainAccessibility.first_unlock,
-              ),
+  TokenStorageService({FlutterSecureStorage? secureStorage, this._prefs})
+    : _secureStorage =
+          secureStorage ??
+          const FlutterSecureStorage(
+            aOptions: AndroidOptions(resetOnError: true),
+            iOptions: IOSOptions(
+              accessibility: KeychainAccessibility.first_unlock,
             ),
-        _prefs = prefs;
+          );
 
   /// Retrieve current access token securely
   Future<String?> getAccessToken() async {

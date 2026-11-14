@@ -59,9 +59,7 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
         if (state is AddReviewErrorState) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text(state.error)),
-            );
+            ..showSnackBar(SnackBar(content: Text(state.error)));
         }
       },
       child: Scaffold(
@@ -183,7 +181,14 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  ['', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent'][_rating],
+                  [
+                    '',
+                    'Poor',
+                    'Fair',
+                    'Good',
+                    'Very Good',
+                    'Excellent',
+                  ][_rating],
                   style: const TextStyle(
                     color: gold,
                     fontSize: 12,

@@ -36,7 +36,9 @@ class CartCubit extends Cubit<CartState> {
     required int quantity,
     String? itemId,
   }) async {
-    final currentCart = state is CartSuccess ? (state as CartSuccess).cart : null;
+    final currentCart = state is CartSuccess
+        ? (state as CartSuccess).cart
+        : null;
     if (currentCart != null && itemId != null) {
       emit(CartSuccess(currentCart, updatingItemId: itemId));
     } else {
@@ -44,10 +46,7 @@ class CartCubit extends Cubit<CartState> {
     }
 
     try {
-      await addToCartUseCase.call(
-        productId: productId,
-        quantity: quantity,
-      );
+      await addToCartUseCase.call(productId: productId, quantity: quantity);
 
       final cart = await getCartUseCase.call();
       emit(CartSuccess(cart));
@@ -64,7 +63,9 @@ class CartCubit extends Cubit<CartState> {
     required String itemId,
     int quantity = 1,
   }) async {
-    final currentCart = state is CartSuccess ? (state as CartSuccess).cart : null;
+    final currentCart = state is CartSuccess
+        ? (state as CartSuccess).cart
+        : null;
     if (currentCart != null) {
       emit(CartSuccess(currentCart, updatingItemId: itemId));
     } else {
@@ -72,10 +73,7 @@ class CartCubit extends Cubit<CartState> {
     }
 
     try {
-      await decrementCartItemUseCase.call(
-        itemId: itemId,
-        quantity: quantity,
-      );
+      await decrementCartItemUseCase.call(itemId: itemId, quantity: quantity);
 
       final cart = await getCartUseCase.call();
       emit(CartSuccess(cart));
@@ -88,10 +86,10 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  Future<void> deleteCartItem({
-    required String itemId,
-  }) async {
-    final currentCart = state is CartSuccess ? (state as CartSuccess).cart : null;
+  Future<void> deleteCartItem({required String itemId}) async {
+    final currentCart = state is CartSuccess
+        ? (state as CartSuccess).cart
+        : null;
     if (currentCart != null) {
       emit(CartSuccess(currentCart, updatingItemId: itemId));
     } else {
@@ -99,9 +97,7 @@ class CartCubit extends Cubit<CartState> {
     }
 
     try {
-      await deleteCartItemUseCase.call(
-        itemId: itemId,
-      );
+      await deleteCartItemUseCase.call(itemId: itemId);
 
       final cart = await getCartUseCase.call();
       emit(CartSuccess(cart));

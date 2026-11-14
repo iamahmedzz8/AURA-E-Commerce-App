@@ -11,10 +11,7 @@ import 'package:gap/gap.dart';
 class AddAddressScreen extends StatefulWidget {
   final AddressEntity? address;
 
-  const AddAddressScreen({
-    super.key,
-    this.address,
-  });
+  const AddAddressScreen({super.key, this.address});
 
   bool get isEditMode => address != null;
 
@@ -46,6 +43,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
       _notesController.text = address.notes;
     }
   }
+
   @override
   void dispose() {
     _stateController.dispose();
@@ -67,11 +65,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(
-          text: label,
-          size: 15,
-          weight: FontWeight.w600,
-        ),
+        CustomText(text: label, size: 15, weight: FontWeight.w600),
         const Gap(8),
         TextFormField(
           controller: controller,
@@ -86,14 +80,10 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
           decoration: InputDecoration(
             filled: true,
             fillColor: Theme.of(context).cardColor,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Colors.grey.withValues(alpha: 0.3),
-              ),
+              borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.3)),
             ),
           ),
         ),
@@ -133,7 +123,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     return Scaffold(
       appBar: AppBar(
         title: CustomText(
-          text: widget.isEditMode ? AppStrings.editAddress : AppStrings.addNewAddress,
+          text: widget.isEditMode
+              ? AppStrings.editAddress
+              : AppStrings.addNewAddress,
           size: 22,
           weight: FontWeight.bold,
         ),
@@ -161,11 +153,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
           }
 
           if (state is AddressesError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-              ),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         child: SingleChildScrollView(
@@ -225,15 +215,18 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         ),
                         child: isLoading
                             ? const CircularProgressIndicator(
-                          color: Colors.white,
-                        )
-                        : Text(widget.isEditMode ? AppStrings.updateAddress : AppStrings.saveAddress,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                                color: Colors.white,
+                              )
+                            : Text(
+                                widget.isEditMode
+                                    ? AppStrings.updateAddress
+                                    : AppStrings.saveAddress,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                       ),
                     );
                   },

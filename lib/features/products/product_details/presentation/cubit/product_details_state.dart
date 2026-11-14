@@ -22,11 +22,11 @@
 //   }
 // }
 
-
 import 'package:aura_maison_e_commerce/features/products/product_details/data/models/product_details_model.dart';
 
 abstract class ProductDetailsStates {}
-class ProductDetailsInitialState extends ProductDetailsStates{}
+
+class ProductDetailsInitialState extends ProductDetailsStates {}
 
 class ProductDetailsLoadingState extends ProductDetailsStates {}
 

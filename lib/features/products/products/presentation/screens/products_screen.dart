@@ -49,8 +49,7 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
 
   Color get foreground => isDark ? Colors.white : const Color(0xFF171717);
 
-  Color get muted =>
-      isDark ? const Color(0xFF8A8F98) : const Color(0xFF777777);
+  Color get muted => isDark ? const Color(0xFF8A8F98) : const Color(0xFF777777);
 
   final TextEditingController searchController = TextEditingController();
   late String selectedCategory;
@@ -71,7 +70,8 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
 
   List<ProductModel> _filterProducts(List<ProductModel> products) {
     return products.where((product) {
-      final matchesCategory = selectedCategory == AppStrings.categoryAll ||
+      final matchesCategory =
+          selectedCategory == AppStrings.categoryAll ||
           product.categories.any((c) {
             final cTrimmed = c.trim().toLowerCase();
             final selTrimmed = selectedCategory.trim().toLowerCase();
@@ -81,7 +81,8 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
           });
 
       final query = searchController.text.trim().toLowerCase();
-      final matchesSearch = query.isEmpty ||
+      final matchesSearch =
+          query.isEmpty ||
           product.name.toLowerCase().contains(query) ||
           (product.description?.toLowerCase().contains(query) ?? false) ||
           (product.arabicName?.toLowerCase().contains(query) ?? false);
@@ -90,47 +91,43 @@ class _ProductsScreenContentState extends State<_ProductsScreenContent> {
     }).toList();
   }
 
-  
-void _openProductDetails(ProductModel product) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => MultiBlocProvider(
-        providers: [
-          BlocProvider<CartCubit>(
-            create: (_) => sl<CartCubit>(),
+  void _openProductDetails(ProductModel product) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider<CartCubit>(create: (_) => sl<CartCubit>()),
+            BlocProvider<ProductDetailsCubit>(
+              create: (_) =>
+                  ProductDetailsCubit()..getProductsDetails(product.id),
+            ),
+          ],
+          child: ProductDetailsScreen(
+            productId: product.id,
+            product: {
+              'id': product.id,
+              'name': product.name,
+              'category': product.categories.isNotEmpty
+                  ? product.categories.first.toUpperCase()
+                  : 'LUXURY CREATION',
+              'price': '${product.price.toInt()} EGP',
+              'description': product.description ?? '',
+              'rating': product.rating > 0
+                  ? product.rating.toStringAsFixed(1)
+                  : '5.0',
+              'image': product.coverPictureUrl,
+              'tag': product.color.isNotEmpty
+                  ? product.color.toUpperCase()
+                  : (product.discountPercentage > 0
+                        ? '${product.discountPercentage}% OFF'
+                        : 'EXCLUSIVE'),
+            },
           ),
-          BlocProvider<ProductDetailsCubit>(
-            create: (_) =>
-                ProductDetailsCubit()..getProductsDetails(product.id),
-          ),
-        ],
-        child: ProductDetailsScreen(
-          productId: product.id,
-          product: {
-            'id': product.id,
-            'name': product.name,
-            'category': product.categories.isNotEmpty
-                ? product.categories.first.toUpperCase()
-                : 'LUXURY CREATION',
-            'price': '${product.price.toInt()} EGP',
-            'description': product.description ?? '',
-            'rating': product.rating > 0
-                ? product.rating.toStringAsFixed(1)
-                : '5.0',
-            'image': product.coverPictureUrl,
-            'tag': product.color.isNotEmpty
-                ? product.color.toUpperCase()
-                : (product.discountPercentage > 0
-                    ? '${product.discountPercentage}% OFF'
-                    : 'EXCLUSIVE'),
-          },
         ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -258,7 +255,7 @@ void _openProductDetails(ProductModel product) {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             scrollDirection: Axis.horizontal,
             itemCount: categories.length + 1,
-            separatorBuilder: (_, __) => const SizedBox(width: 10),
+            separatorBuilder: (_, _) => const SizedBox(width: 10),
             itemBuilder: (context, index) {
               if (index == 0) {
                 final isSelected = selectedCategory == AppStrings.categoryAll;
@@ -275,7 +272,8 @@ void _openProductDetails(ProductModel product) {
               }
 
               final category = categories[index - 1];
-              final isSelected = selectedCategory == category.name ||
+              final isSelected =
+                  selectedCategory == category.name ||
                   (selectedCategoryId != null &&
                       selectedCategoryId == category.id);
 
@@ -334,7 +332,7 @@ void _openProductDetails(ProductModel product) {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         scrollDirection: Axis.horizontal,
         itemCount: 5,
-        separatorBuilder: (_, __) => const SizedBox(width: 10),
+        separatorBuilder: (_, _) => const SizedBox(width: 10),
         itemBuilder: (context, index) {
           if (index == 0) {
             return _buildCategoryChip(
@@ -471,7 +469,7 @@ void _openProductDetails(ProductModel product) {
                           Image.network(
                             product.coverPictureUrl,
                             fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => _buildFallbackImage(),
+                            errorBuilder: (_, _, _) => _buildFallbackImage(),
                           )
                         else
                           _buildFallbackImage(),
@@ -559,13 +557,7 @@ void _openProductDetails(ProductModel product) {
   Widget _buildFallbackImage() {
     return const ColoredBox(
       color: Color(0xFF24272D),
-      child: Center(
-        child: Icon(
-          Icons.watch_outlined,
-          color: gold,
-          size: 42,
-        ),
-      ),
+      child: Center(child: Icon(Icons.watch_outlined, color: gold, size: 42)),
     );
   }
 
@@ -591,8 +583,9 @@ void _openProductDetails(ProductModel product) {
             children: [
               Expanded(
                 child: Container(
-                  color:
-                  isDark ? const Color(0xFF24272D) : Colors.grey.shade200,
+                  color: isDark
+                      ? const Color(0xFF24272D)
+                      : Colors.grey.shade200,
                   child: const Center(
                     child: Icon(
                       Icons.watch_outlined,

@@ -9,7 +9,6 @@ import 'addresses_state.dart';
 import '../../domain/usecases/get_user_addresses_use_case.dart';
 import '../../domain/usecases/delete_address_use_case.dart';
 
-
 class AddressesCubit extends Cubit<AddressesState> {
   final GetAddressByIdUseCase getAddressByIdUseCase;
   final CreateAddressUseCase createAddressUseCase;
@@ -78,6 +77,7 @@ class AddressesCubit extends Cubit<AddressesState> {
       emit(AddressesError(e.toString()));
     }
   }
+
   Future<void> updateAddress({
     required String id,
     required String state,

@@ -30,9 +30,9 @@ class _CuratedSectionState extends State<CuratedSection> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => BlocProvider<CategoryProductsCubit>(
-          create: (_) => CategoryProductsCubit(
-            remoteDataSource: sl(),
-          )..fetchByCategory(categoryName: category.name),
+          create: (_) =>
+              CategoryProductsCubit(remoteDataSource: sl())
+                ..fetchByCategory(categoryName: category.name),
           child: CategoryProductsScreen(
             categoryName: category.name,
             categoryId: category.id,
@@ -119,7 +119,7 @@ class _CuratedSectionState extends State<CuratedSection> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             scrollDirection: Axis.horizontal,
             itemCount: categories.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 12),
+            separatorBuilder: (_, _) => const SizedBox(width: 12),
             itemBuilder: (context, index) {
               final category = categories[index];
               final isSelected = index == selectedIndex;
@@ -153,7 +153,7 @@ class _CuratedSectionState extends State<CuratedSection> {
                                   ? Image.network(
                                       category.coverPictureUrl,
                                       fit: BoxFit.cover,
-                                      errorBuilder: (_, __, ___) =>
+                                      errorBuilder: (_, _, _) =>
                                           _placeholderImage(),
                                     )
                                   : _placeholderImage(),
@@ -178,8 +178,11 @@ class _CuratedSectionState extends State<CuratedSection> {
                                 child: Material(
                                   color: Colors.transparent,
                                   child: InkWell(
-                                    onTap: () =>
-                                        _onCategoryTap(context, category, index),
+                                    onTap: () => _onCategoryTap(
+                                      context,
+                                      category,
+                                      index,
+                                    ),
                                     splashColor: AppColors.goldAccent
                                         .withValues(alpha: 0.1),
                                   ),
@@ -260,10 +263,7 @@ class _CuratedSectionState extends State<CuratedSection> {
   Widget _placeholderImage() {
     return Container(
       color: AppColors.cardInactive,
-      child: const Icon(
-        Icons.image_outlined,
-        color: AppColors.textSecondary,
-      ),
+      child: const Icon(Icons.image_outlined, color: AppColors.textSecondary),
     );
   }
 
@@ -298,8 +298,8 @@ class _CuratedSectionState extends State<CuratedSection> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             scrollDirection: Axis.horizontal,
             itemCount: 3,
-            separatorBuilder: (_, __) => const SizedBox(width: 12),
-            itemBuilder: (_, __) => Container(
+            separatorBuilder: (_, _) => const SizedBox(width: 12),
+            itemBuilder: (_, _) => Container(
               width: 256,
               height: 265,
               decoration: BoxDecoration(
@@ -344,8 +344,7 @@ class _CuratedSectionState extends State<CuratedSection> {
           ),
           const SizedBox(height: 10),
           GestureDetector(
-            onTap: () =>
-                context.read<CategoriesCubit>().fetchCategories(),
+            onTap: () => context.read<CategoriesCubit>().fetchCategories(),
             child: Text(
               'Retry',
               style: AppStyles.cardTag.copyWith(color: AppColors.goldAccent),

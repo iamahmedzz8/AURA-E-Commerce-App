@@ -39,11 +39,16 @@ class CenterpieceCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.obsidianDark,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.gold.withValues(alpha: 0.3)),
+                  border: Border.all(
+                    color: AppColors.gold.withValues(alpha: 0.3),
+                  ),
                 ),
                 child: Text(
                   workshopTag,
@@ -55,7 +60,11 @@ class CenterpieceCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Icon(icon, size: 24, color: AppColors.gold.withValues(alpha: 0.6)),
+              Icon(
+                icon,
+                size: 24,
+                color: AppColors.gold.withValues(alpha: 0.6),
+              ),
             ],
           ),
           const SizedBox(height: 18),

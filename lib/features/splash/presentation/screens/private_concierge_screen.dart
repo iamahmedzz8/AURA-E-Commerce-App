@@ -372,7 +372,9 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
                     Navigator.pop(ctx);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const CreateAccountScreen()),
+                      MaterialPageRoute(
+                        builder: (_) => const CreateAccountScreen(),
+                      ),
                     );
                   },
                   child: const Text(
@@ -438,7 +440,9 @@ class _PrivateConciergeScreenState extends State<PrivateConciergeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const VipMemberSignInScreen()),
+                MaterialPageRoute(
+                  builder: (_) => const VipMemberSignInScreen(),
+                ),
               );
             },
             child: const Text(

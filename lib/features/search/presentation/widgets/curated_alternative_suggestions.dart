@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class CuratedAlternativeSuggestions extends StatelessWidget {
   final ValueChanged<String>? onSuggestionTap;
 
-  const CuratedAlternativeSuggestions({
-    super.key,
-    this.onSuggestionTap,
-  });
+  const CuratedAlternativeSuggestions({super.key, this.onSuggestionTap});
 
   static const List<String> suggestions = [
     AppStrings.suggestedChip1,

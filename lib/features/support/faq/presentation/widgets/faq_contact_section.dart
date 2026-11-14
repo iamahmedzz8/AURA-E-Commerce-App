@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_colors.dart';
 import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
@@ -6,10 +5,7 @@ import 'package:aura_maison_e_commerce/core/utils/app_styles.dart';
 class FaqContactSection extends StatelessWidget {
   final VoidCallback onContactPressed;
 
-  const FaqContactSection({
-    super.key,
-    required this.onContactPressed,
-  });
+  const FaqContactSection({super.key, required this.onContactPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +15,7 @@ class FaqContactSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.conciergeBannerBackground,
         borderRadius: BorderRadius.circular(5),
-        border: Border.all(
-          color: AppColors.chipBorder,
-          width: 0.8,
-        ),
+        border: Border.all(color: AppColors.chipBorder, width: 0.8),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

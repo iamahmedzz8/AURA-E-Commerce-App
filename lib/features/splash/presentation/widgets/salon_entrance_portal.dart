@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class SalonEntrancePortal extends StatelessWidget {
   final VoidCallback onEnter;
 
-  const SalonEntrancePortal({
-    super.key,
-    required this.onEnter,
-  });
+  const SalonEntrancePortal({super.key, required this.onEnter});
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +22,20 @@ class SalonEntrancePortal extends StatelessWidget {
                 backgroundColor: AppColors.gold,
                 foregroundColor: AppColors.obsidianDark,
                 elevation: 6,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
+                ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
               ),
               onPressed: onEnter,
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.fingerprint, size: 18, color: AppColors.obsidianDark),
+                  Icon(
+                    Icons.fingerprint,
+                    size: 18,
+                    color: AppColors.obsidianDark,
+                  ),
                   SizedBox(width: 10),
                   Text(
                     AppStrings.touchToEnterSalon,
@@ -43,7 +46,11 @@ class SalonEntrancePortal extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 10),
-                  Icon(Icons.arrow_forward, size: 15, color: AppColors.obsidianDark),
+                  Icon(
+                    Icons.arrow_forward,
+                    size: 15,
+                    color: AppColors.obsidianDark,
+                  ),
                 ],
               ),
             ),
@@ -118,7 +125,11 @@ class SalonEntrancePortal extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [AppColors.goldDark, AppColors.goldLight, AppColors.gold],
+                        colors: [
+                          AppColors.goldDark,
+                          AppColors.goldLight,
+                          AppColors.gold,
+                        ],
                       ),
                       borderRadius: BorderRadius.circular(2),
                     ),

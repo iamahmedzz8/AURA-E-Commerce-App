@@ -21,9 +21,7 @@ class SplashSalonScreen extends StatelessWidget {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (_) => const OnboardingScreen(),
-        ),
+        MaterialPageRoute(builder: (_) => const OnboardingScreen()),
       );
       return;
     }
@@ -39,10 +37,7 @@ class SplashSalonScreen extends StatelessWidget {
         ? const MainScreen()
         : const VipMemberSignInScreen();
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => next),
-    );
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => next));
   }
 
   @override

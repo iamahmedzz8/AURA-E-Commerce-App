@@ -37,10 +37,7 @@ class _SegmentedAccessModeSwitchState extends State<SegmentedAccessModeSwitch> {
         decoration: BoxDecoration(
           color: AppColors.badgeBackground,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: AppColors.chipBorder,
-            width: 0.5,
-          ),
+          border: Border.all(color: AppColors.chipBorder, width: 0.5),
         ),
         child: Row(
           children: [

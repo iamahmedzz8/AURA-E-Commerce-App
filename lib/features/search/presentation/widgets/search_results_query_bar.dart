@@ -120,10 +120,7 @@ class _SearchResultsQueryBarState extends State<SearchResultsQueryBar> {
                     minWidth: 32,
                     minHeight: 32,
                   ),
-                  icon: const Icon(
-                    Icons.close,
-                    color: AppColors.textSecondary,
-                  ),
+                  icon: const Icon(Icons.close, color: AppColors.textSecondary),
                   onPressed: () {
                     _controller.clear();
                     widget.onClearTap?.call();

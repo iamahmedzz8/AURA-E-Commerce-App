@@ -57,7 +57,8 @@ class ApiException {
     }
     if (code == 502 || code == 503 || code == 504) {
       return ApiError(
-        message: 'The server is temporarily unavailable. Please try again later.',
+        message:
+            'The server is temporarily unavailable. Please try again later.',
         statusCode: code,
       );
     }

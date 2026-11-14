@@ -13,9 +13,7 @@ abstract class AuthLocalDataSource {
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   final TokenStorageService tokenStorageService;
 
-  AuthLocalDataSourceImpl({
-    required this.tokenStorageService,
-  });
+  AuthLocalDataSourceImpl({required this.tokenStorageService});
 
   @override
   Future<void> saveTokens({

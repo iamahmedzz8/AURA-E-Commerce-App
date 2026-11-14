@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class SalonConciergeVitrineBar extends StatelessWidget {
   final VoidCallback? onCommissionTap;
 
-  const SalonConciergeVitrineBar({
-    super.key,
-    this.onCommissionTap,
-  });
+  const SalonConciergeVitrineBar({super.key, this.onCommissionTap});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +17,7 @@ class SalonConciergeVitrineBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.floatingVitrineBackground,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.chipBorder,
-          width: 1,
-        ),
+        border: Border.all(color: AppColors.chipBorder, width: 1),
         boxShadow: const [
           BoxShadow(
             color: Color(0x59000000),

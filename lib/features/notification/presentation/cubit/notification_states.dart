@@ -7,9 +7,9 @@ class NotificationInitialState extends NotificationStates {}
 class NotificationLoadingState extends NotificationStates {}
 
 class NotificationSuccessState extends NotificationStates {
-  List<NotificationModel>items;
+  List<NotificationModel> items;
 
-NotificationSuccessState({required this.items});
+  NotificationSuccessState({required this.items});
 }
 
 class NotificationErrorState extends NotificationStates {
@@ -17,4 +17,3 @@ class NotificationErrorState extends NotificationStates {
 
   NotificationErrorState(this.error);
 }
-

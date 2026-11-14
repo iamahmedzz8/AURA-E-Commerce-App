@@ -254,7 +254,8 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                       NavigateTo(
                         context: context,
                         screen: BlocProvider(
-                        create: (context) => NotificationCubit()..getNotifications(),
+                          create: (context) =>
+                              NotificationCubit()..getNotifications(),
                           child: NotficationScreen(),
                         ),
                       );
@@ -888,7 +889,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                   scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),
                   itemCount: state.categories.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 10),
+                  separatorBuilder: (_, _) => const SizedBox(width: 10),
                   itemBuilder: (context, index) {
                     final category = state.categories[index];
                     return _buildCategoryCard(category);
@@ -921,7 +922,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
               Image.network(
                 category.coverPictureUrl,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) {
+                errorBuilder: (_, _, _) {
                   return Container(
                     color: darkSurface,
                     child: const Center(
@@ -980,7 +981,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
         scrollDirection: Axis.horizontal,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 4,
-        separatorBuilder: (_, __) => const SizedBox(width: 10),
+        separatorBuilder: (_, _) => const SizedBox(width: 10),
         itemBuilder: (context, index) {
           return Container(
             width: 88,
@@ -1030,7 +1031,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         scrollDirection: Axis.horizontal,
         itemCount: items.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 10),
+        separatorBuilder: (_, _) => const SizedBox(width: 10),
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: openProducts,
@@ -1047,7 +1048,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                   Image.network(
                     items[index].$2,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) {
+                    errorBuilder: (_, _, _) {
                       return Container(color: darkSurface);
                     },
                   ),
@@ -1156,7 +1157,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                   Image.network(
                     item['image']!,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
+                    errorBuilder: (_, _, _) => Container(
                       color: darkSurface,
                       child: const Icon(
                         Icons.watch_outlined,
@@ -1315,15 +1316,14 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       context,
       MaterialPageRoute(
         builder: (context) => MultiBlocProvider(
-  providers: [
-    BlocProvider<CartCubit>(
-      create: (_) => sl<CartCubit>(),
-    ),
-    BlocProvider<ProductDetailsCubit>(
-      create: (_) => ProductDetailsCubit()..getProductsDetails(productId),
-    ),
-  ],
-  child: ProductDetailsScreen(
+          providers: [
+            BlocProvider<CartCubit>(create: (_) => sl<CartCubit>()),
+            BlocProvider<ProductDetailsCubit>(
+              create: (_) =>
+                  ProductDetailsCubit()..getProductsDetails(productId),
+            ),
+          ],
+          child: ProductDetailsScreen(
             productId: productId,
             product: {
               'id': productId,
@@ -1342,40 +1342,37 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
   }
 
   Future<void> showAddedToBag(Map<String, String> item) async {
-  try {
-    final productId = item['id'];
+    try {
+      final productId = item['id'];
 
-    if (productId == null || productId.isEmpty) {
-      throw Exception('Product ID is missing');
-    }
+      if (productId == null || productId.isEmpty) {
+        throw Exception('Product ID is missing');
+      }
 
-    await sl<CartCubit>().addToCart(
-      productId: productId,
-      quantity: 1,
-    );
+      await sl<CartCubit>().addToCart(productId: productId, quantity: 1);
 
-    if (!mounted) return;
+      if (!mounted) return;
 
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text('${item['name']} added to bag'),
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+    } catch (e) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('${item['name']} added to bag'),
+          content: Text('Could not add product: $e'),
           behavior: SnackBarBehavior.floating,
-          duration: const Duration(seconds: 2),
         ),
       );
-  } catch (e) {
-    if (!mounted) return;
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Could not add product: $e'),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
+    }
   }
-}
 
   Widget _buildDefaultProductsGrid() {
     return SliverPadding(
@@ -1570,7 +1567,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
                     Image.network(
                       item.coverPictureUrl,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Container(
+                      errorBuilder: (_, _, _) => Container(
                         color: darkSurface,
                         child: const Icon(
                           Icons.watch_outlined,
@@ -1743,15 +1740,13 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
       context,
       MaterialPageRoute(
         builder: (context) => MultiBlocProvider(
-  providers: [
-    BlocProvider<CartCubit>(
-      create: (_) => sl<CartCubit>(),
-    ),
-    BlocProvider<ProductDetailsCubit>(
-      create: (_) => ProductDetailsCubit()..getProductsDetails(item.id),
-    ),
-  ],
-  child: ProductDetailsScreen(
+          providers: [
+            BlocProvider<CartCubit>(create: (_) => sl<CartCubit>()),
+            BlocProvider<ProductDetailsCubit>(
+              create: (_) => ProductDetailsCubit()..getProductsDetails(item.id),
+            ),
+          ],
+          child: ProductDetailsScreen(
             productId: item.id,
             product: {
               'id': item.id,
@@ -1785,7 +1780,7 @@ class _HomeScreenContentState extends State<_HomeScreenContent> {
           Image.network(
             'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=1200',
             fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) {
+            errorBuilder: (_, _, _) {
               return Container(color: darkSurface);
             },
           ),

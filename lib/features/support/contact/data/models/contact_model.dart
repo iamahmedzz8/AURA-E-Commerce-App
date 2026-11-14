@@ -1,4 +1,3 @@
-
 class ContactModel {
   final String imagePath;
   final String salonCategory;

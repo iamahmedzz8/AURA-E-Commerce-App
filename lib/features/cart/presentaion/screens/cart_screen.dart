@@ -54,9 +54,7 @@ class CartView extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is CartLoading || state is CartInitial) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (state is CartError) {
@@ -160,8 +158,7 @@ class CartView extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: cartItems.length,
-                        separatorBuilder: (context, index) =>
-                            const Gap(12),
+                        separatorBuilder: (context, index) => const Gap(12),
                         itemBuilder: (context, index) {
                           final item = cartItems[index];
                           return CartItemWidget(

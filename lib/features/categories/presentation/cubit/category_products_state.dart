@@ -11,10 +11,7 @@ class CategoryProductsSuccess extends CategoryProductsState {
   final List<ProductModel> products;
   final String categoryName;
 
-  CategoryProductsSuccess({
-    required this.products,
-    required this.categoryName,
-  });
+  CategoryProductsSuccess({required this.products, required this.categoryName});
 }
 
 class CategoryProductsEmpty extends CategoryProductsState {

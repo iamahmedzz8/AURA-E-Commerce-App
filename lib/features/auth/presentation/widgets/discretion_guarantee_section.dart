@@ -8,10 +8,7 @@ import 'package:flutter/material.dart';
 class DiscretionGuaranteeSection extends StatelessWidget {
   final VoidCallback? onSignInTap;
 
-  const DiscretionGuaranteeSection({
-    super.key,
-    this.onSignInTap,
-  });
+  const DiscretionGuaranteeSection({super.key, this.onSignInTap});
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +61,7 @@ class DiscretionGuaranteeSection extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.cardInactive,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: AppColors.chipBorder,
-                width: 0.5,
-              ),
+              border: Border.all(color: AppColors.chipBorder, width: 0.5),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,10 +73,7 @@ class DiscretionGuaranteeSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.badgeBackground,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: AppColors.chipBorder,
-                      width: 0.5,
-                    ),
+                    border: Border.all(color: AppColors.chipBorder, width: 0.5),
                   ),
                   alignment: Alignment.center,
                   child: const Icon(

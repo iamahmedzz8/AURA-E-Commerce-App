@@ -1,4 +1,3 @@
-
 import 'package:aura_maison_e_commerce/core/utils/app_strings.dart';
 import 'package:aura_maison_e_commerce/features/favorites/presentation/widgets/favorites_conciergeSection.dart';
 import 'package:aura_maison_e_commerce/features/favorites/presentation/widgets/favorites_manager.dart';
@@ -28,13 +27,13 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   @override
   @override
-void initState() {
-  super.initState();
+  void initState() {
+    super.initState();
 
-  favoriteProducts = List<ProductItemModel>.from(
-    ProductsListSection().sampleProducts,
-  );
-}
+    favoriteProducts = List<ProductItemModel>.from(
+      ProductsListSection().sampleProducts,
+    );
+  }
 
   void removeFavorite(int index) {
     setState(() {
@@ -76,20 +75,14 @@ void initState() {
     double total = 0;
 
     for (final product in favoriteProducts) {
-      final cleanPrice = product.price.replaceAll(
-        RegExp(r'[^0-9.]'),
-        '',
-      );
+      final cleanPrice = product.price.replaceAll(RegExp(r'[^0-9.]'), '');
 
       total += double.tryParse(cleanPrice) ?? 0;
     }
 
     final formatted = total
         .toStringAsFixed(0)
-        .replaceAllMapped(
-          RegExp(r'\B(?=(\d{3})+(?!\d))'),
-          (match) => ',',
-        );
+        .replaceAllMapped(RegExp(r'\B(?=(\d{3})+(?!\d))'), (match) => ',');
 
     return '$formatted €';
   }
@@ -116,9 +109,7 @@ void initState() {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
-          child: FavoritesHeaderSection(
-            itemCount: favoriteProducts.length,
-          ),
+          child: FavoritesHeaderSection(itemCount: favoriteProducts.length),
         ),
 
         SliverToBoxAdapter(
@@ -129,26 +120,20 @@ void initState() {
           ),
         ),
 
-        const SliverToBoxAdapter(
-          child: FavoritesNotice(),
-        ),
+        const SliverToBoxAdapter(child: FavoritesNotice()),
 
         if (isTablet)
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             sliver: SliverGrid(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return FavoriteProductCard(
-                    product: favoriteProducts[index],
-                    onRemove: () => removeFavorite(index),
-                    onMoveToBag: () => moveToBag(index),
-                  );
-                },
-                childCount: favoriteProducts.length,
-              ),
-              gridDelegate:
-                  const SliverGridDelegateWithFixedCrossAxisCount(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return FavoriteProductCard(
+                  product: favoriteProducts[index],
+                  onRemove: () => removeFavorite(index),
+                  onMoveToBag: () => moveToBag(index),
+                );
+              }, childCount: favoriteProducts.length),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 20,
@@ -160,19 +145,16 @@ void initState() {
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: FavoriteProductCard(
-                      product: favoriteProducts[index],
-                      onRemove: () => removeFavorite(index),
-                      onMoveToBag: () => moveToBag(index),
-                    ),
-                  );
-                },
-                childCount: favoriteProducts.length,
-              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: FavoriteProductCard(
+                    product: favoriteProducts[index],
+                    onRemove: () => removeFavorite(index),
+                    onMoveToBag: () => moveToBag(index),
+                  ),
+                );
+              }, childCount: favoriteProducts.length),
             ),
           ),
 
@@ -183,9 +165,7 @@ void initState() {
           ),
         ),
 
-        const SliverToBoxAdapter(
-          child: SizedBox(height: 20),
-        ),
+        const SliverToBoxAdapter(child: SizedBox(height: 20)),
       ],
     );
   }
@@ -214,9 +194,7 @@ void initState() {
                     );
                   }
 
-                  return buildFavoritesContent(
-                    constraints.maxWidth,
-                  );
+                  return buildFavoritesContent(constraints.maxWidth);
                 },
               ),
             ),

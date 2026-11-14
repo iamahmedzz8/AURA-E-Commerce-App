@@ -20,9 +20,7 @@ class CartItemWidget extends StatelessWidget {
     final result = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text('Remove from cart'),
         content: Text(
           'Are you sure you want to remove "${item.productName}" from your cart?',
@@ -34,9 +32,7 @@ class CartItemWidget extends StatelessWidget {
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.red,
-            ),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
             child: const Text(
               'Remove',
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -66,10 +62,10 @@ class CartItemWidget extends StatelessWidget {
     }
 
     context.read<CartCubit>().addToCart(
-          productId: item.productId,
-          quantity: 1,
-          itemId: item.itemId,
-        );
+      productId: item.productId,
+      quantity: 1,
+      itemId: item.itemId,
+    );
   }
 
   Future<void> _onDecrement(BuildContext context) async {
@@ -77,15 +73,13 @@ class CartItemWidget extends StatelessWidget {
 
     if (item.quantity > 1) {
       context.read<CartCubit>().decrementCartItem(
-            itemId: item.itemId,
-            quantity: 1,
-          );
+        itemId: item.itemId,
+        quantity: 1,
+      );
     } else {
       final confirmed = await _confirmDelete(context);
       if (confirmed && context.mounted) {
-        context.read<CartCubit>().deleteCartItem(
-              itemId: item.itemId,
-            );
+        context.read<CartCubit>().deleteCartItem(itemId: item.itemId);
       }
     }
   }
@@ -95,9 +89,7 @@ class CartItemWidget extends StatelessWidget {
 
     final confirmed = await _confirmDelete(context);
     if (confirmed && context.mounted) {
-      context.read<CartCubit>().deleteCartItem(
-            itemId: item.itemId,
-          );
+      context.read<CartCubit>().deleteCartItem(itemId: item.itemId);
     }
   }
 
@@ -199,8 +191,9 @@ class CartItemWidget extends StatelessWidget {
                                   icon: const Icon(Icons.remove, size: 16),
                                 ),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 4),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 4,
+                                  ),
                                   child: CustomText(
                                     text: item.quantity.toString(),
                                     size: 15,
@@ -231,8 +224,9 @@ class CartItemWidget extends StatelessWidget {
                               height: 18,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(Colors.red),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.red,
+                                ),
                               ),
                             )
                           : const Icon(

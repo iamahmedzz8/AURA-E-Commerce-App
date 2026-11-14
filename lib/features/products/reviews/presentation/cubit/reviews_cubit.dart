@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReviewsCubit extends Cubit<ReviewStates> {
   ReviewsCubit({ReviewsRepo? repo})
-      : _repo = repo ?? ReviewsRepo(),
-        super(ReviewInitialState());
+    : _repo = repo ?? ReviewsRepo(),
+      super(ReviewInitialState());
 
   final ReviewsRepo _repo;
 
@@ -17,12 +17,14 @@ class ReviewsCubit extends Cubit<ReviewStates> {
     try {
       final response = await _repo.getReviews(productId);
       if (isClosed) return;
-      emit(GetReviewSuccessState(
-        reviews: response.reviews,
-        averageRating: response.averageRating,
-        reviewsCount: response.reviewsCount,
-        responseModel: response,
-      ));
+      emit(
+        GetReviewSuccessState(
+          reviews: response.reviews,
+          averageRating: response.averageRating,
+          reviewsCount: response.reviewsCount,
+          responseModel: response,
+        ),
+      );
     } on ApiError catch (e) {
       log('getReviews ApiError: ${e.message}');
       if (isClosed) return;

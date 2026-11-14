@@ -13,7 +13,7 @@ class NotificationCubit extends Cubit<NotificationStates> {
     try {
       final items = await repo.getNotifications();
       log('Api Run Success');
-      emit(NotificationSuccessState(items:items));
+      emit(NotificationSuccessState(items: items));
     } catch (err) {
       log('Api Run Error');
       emit(NotificationErrorState(err.toString()));

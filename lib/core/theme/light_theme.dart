@@ -83,10 +83,7 @@ class LightTheme {
         ),
       ),
 
-      iconTheme: const IconThemeData(
-        color: gold,
-        size: 22,
-      ),
+      iconTheme: const IconThemeData(color: gold, size: 22),
 
       cardTheme: CardThemeData(
         color: surface,
@@ -98,10 +95,7 @@ class LightTheme {
         ),
       ),
 
-      dividerTheme: const DividerThemeData(
-        color: border,
-        thickness: 1,
-      ),
+      dividerTheme: const DividerThemeData(color: border, thickness: 1),
 
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -114,9 +108,7 @@ class LightTheme {
             fontWeight: FontWeight.w600,
             letterSpacing: 0.8,
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(3),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
         ),
       ),
 
@@ -129,9 +121,7 @@ class LightTheme {
             fontSize: 12,
             fontWeight: FontWeight.w600,
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(3),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
         ),
       ),
 
@@ -167,10 +157,7 @@ class LightTheme {
           fontSize: 10,
           fontWeight: FontWeight.w600,
         ),
-        unselectedLabelStyle: TextStyle(
-          fontFamily: 'Inter',
-          fontSize: 10,
-        ),
+        unselectedLabelStyle: TextStyle(fontFamily: 'Inter', fontSize: 10),
       ),
     );
   }

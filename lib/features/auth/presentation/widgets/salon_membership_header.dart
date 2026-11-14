@@ -19,11 +19,7 @@ class SalonMembershipHeader extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
-                Icons.star,
-                size: 12,
-                color: AppColors.goldAccent,
-              ),
+              const Icon(Icons.star, size: 12, color: AppColors.goldAccent),
               const SizedBox(width: 8),
               Text(
                 AppStrings.patronsCircleEyebrow,
